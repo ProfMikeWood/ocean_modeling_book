@@ -1,12 +1,12 @@
 # File Layout
 
 
-The files for a typical MITgcm model configuration are divided into five main directories.
+The files for a typical MITgcm model configuration are divided into five main directories -- two directories used at compile time and three directories used at run time.
 
 
 ## Compile Time Directories
 
-## code
+### code
 
 The code directory is used to store compile-time files that modify the default code in MITgcm. These files fall into three main types
 - packages.conf
@@ -19,6 +19,8 @@ The code directory is used to store compile-time files that modify the default c
 ### build
 
 The build directory is used to store all of the compiled code that will be run for the configuration. No files need to be manually added to this directory - when the model code is compiled with the genmake2 tool, this directory will be filled in. When the model code is compiled in the build directory, the model will generate an mitgcmuv file - this key file is the executable for the model run.
+
+## Run Time Directories
 
 ### namelist
 

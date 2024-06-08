@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Installing Python and Jupyter &#8212; Numerical Ocean Modeling</title>
+    <title>Defining the Model Grid &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -60,10 +60,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/setting_up_python_and_jupyter';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/defining_the_grid';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Numerical Ocean Modeling" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -155,8 +154,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installing Python and Jupyter</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
 </ul>
 
     </div>
@@ -228,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgetting_started/setting_up_python_and_jupyter.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmitgcm/defining_the_grid.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -258,7 +257,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/getting_started/setting_up_python_and_jupyter.md" target="_blank"
+      <li><a href="../_sources/mitgcm/defining_the_grid.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -340,7 +339,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Installing Python and Jupyter</h1>
+    <h1>Defining the Model Grid</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -350,8 +349,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-miniconda">Download Miniconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-up-a-conda-environment">Step up a conda environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rectangular-grids">Rectangular Grids</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-files-for-regular-grids">Compile time files for regular grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-files-for-regular-grids">Runtime files for regular grids</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evenly-spaced-grids">Evenly-spaced grids</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grids-with-exch2">Grids with exch2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-files-for-exch2">Compile time files for exch2</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -363,46 +372,42 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="installing-python-and-jupyter">
-<h1>Installing Python and Jupyter<a class="headerlink" href="#installing-python-and-jupyter" title="Permalink to this headline">#</a></h1>
-<section id="download-miniconda">
-<h2>Download Miniconda<a class="headerlink" href="#download-miniconda" title="Permalink to this headline">#</a></h2>
-<p>There are many ways to install python for use on your machine. One of the most popular ways is to use Anaconda - a distribution of Python designed for data science. Anaconda contains many programs that may not be applicable to your application. Miniconda, on the other hand, is a paired-down version of Anaconda that allows you to install new modules as you need them. As a result, it takes up far less storage on your machine. Miniconda will include Python (the programming language) and conda (the package manager).</p>
-<p>To download Miniconda, navigate to <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a> and choose a Conda Installer that pertains to your system. For Windows machines, the majority of machines are 64-bit. For MacOS, choose the pkg file which pertains to your chip (see <a class="reference external" href="https://support.apple.com/en-us/HT211814">HERE</a>).</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="defining-the-model-grid">
+<h1>Defining the Model Grid<a class="headerlink" href="#defining-the-model-grid" title="Permalink to this headline">#</a></h1>
+<p>To model grid for a simulation needs to be configured in be configured at both compile time and run time. There are two main options for configuring grids – regular grids and more complex grids using the exch2 package.</p>
+<section id="rectangular-grids">
+<h2>Rectangular Grids<a class="headerlink" href="#rectangular-grids" title="Permalink to this headline">#</a></h2>
+<p>The key compile time file for generating the model grid is the <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file. A custom <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file must be created for each model configuration otherwise the model will not compile.</p>
+<section id="compile-time-files-for-regular-grids">
+<h3>Compile time files for regular grids<a class="headerlink" href="#compile-time-files-for-regular-grids" title="Permalink to this headline">#</a></h3>
+<p>When using a rectangular grid, the total grid shape will be (Nr, Ny, Nx) where Nr is the number of depth cells, Ny is the number of rows in the model grid, and Nx is the number of columns. In the SIZE.h file, Nr is specified directly. However, Nx and Ny are a function of how the grid is paritioned for parallelization. If the model is only going to be run on one CPU, then set sNx = Nx and sNy = Ny in the SIZE.h file.</p>
+<p>When partitioning the grid to be run in parallel, the domain is divided into tiles of size (sNy, sNy) where sNy is the number of rows in the tile and sNx is the number of columns. Each tile will be run on a separate CPU with Px processors in the x direction and Py in the y direction. In this case, <code class="docutils literal notranslate"><span class="pre">Nx</span> <span class="pre">=</span> <span class="pre">sNx*Px</span></code> and <code class="docutils literal notranslate"><span class="pre">Ny</span> <span class="pre">=</span> <span class="pre">sNy*Py</span></code>. There is also an option for multi-threading but this is not commonly used, particularly on computing clusters when multiprocessing is used.</p>
 </section>
-<section id="step-up-a-conda-environment">
-<h2>Step up a conda environment<a class="headerlink" href="#step-up-a-conda-environment" title="Permalink to this headline">#</a></h2>
-<p>After you have downloaded miniconda, set up a conda environment. Begin by opening up a terminal of your choice. On Windows, you can open the “Anaconda Prompt” application by searching for it in the start menu. On Mac, you can open a standard Terminal in the Applications/Utilities directory.</p>
-<p>With your terminal open, create a conda environment called cs185c with Python version 3.11 using the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">cs185c</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.11</span>
+<section id="runtime-files-for-regular-grids">
+<h3>Runtime files for regular grids<a class="headerlink" href="#runtime-files-for-regular-grids" title="Permalink to this headline">#</a></h3>
+<p>There are several options for generating a regular model grid. Most options are specified in the <code class="docutils literal notranslate"><span class="pre">data</span></code> file.</p>
+<section id="evenly-spaced-grids">
+<h4>Evenly-spaced grids<a class="headerlink" href="#evenly-spaced-grids" title="Permalink to this headline">#</a></h4>
+<p>When using a simple evenly-spaced grid, …
+PARM04</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usingCartesianGrid</span><span class="o">=.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span>
+<span class="n">delX</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mf">20.E3</span><span class="p">,</span>
+<span class="n">delY</span><span class="o">=</span><span class="mi">62</span><span class="o">*</span><span class="mf">20.E3</span><span class="p">,</span>
+<span class="n">xgOrigin</span><span class="o">=-</span><span class="mf">20.E3</span><span class="p">,</span>
+<span class="n">ygOrigin</span><span class="o">=-</span><span class="mf">20.E3</span><span class="p">,</span>
 </pre></div>
 </div>
-<p>By default, conda will automatically activate a “base” environment on your machine. To disable this behavior, you may want to run the following:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">auto_activate_base</span> <span class="n">false</span>
-</pre></div>
-</div>
-<p>Now, activate your environment as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">cs185c</span>
-</pre></div>
-</div>
-<p>Every time you use your environment, you will need to activate it from the command line.</p>
-<p>Next, download the pertinent modules required for this course:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">numpy</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">matplotlib</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">netcdf4</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">xarray</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">jupyter</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">jupyterlab</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">ipykernel</span> 
-<span class="n">conda</span> <span class="n">install</span> <span class="n">cartopy</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">moviepy</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">git</span>
-</pre></div>
-</div>
-<p>Finally, configure your environment to use in a jupyter notebook:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">ipykernel</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">cs185c</span>
-</pre></div>
-</div>
+</section>
+</section>
+</section>
+<section id="grids-with-exch2">
+<h2>Grids with exch2<a class="headerlink" href="#grids-with-exch2" title="Permalink to this headline">#</a></h2>
+<section id="compile-time-files-for-exch2">
+<h3>Compile time files for exch2<a class="headerlink" href="#compile-time-files-for-exch2" title="Permalink to this headline">#</a></h3>
+<p>The exch2 package offers a more flexible way to construct model grids, allowing for the partitioning of a model grid into model “faces”. This option is commonly used for large global models, such as the Lat-Lon-Cap grid used in the ECCO State Estimates. One major upshot of the exch2 package is that it allows for the use of “blank tiles” - tiles that are in the model grid but should not be included in the procssing. This is most common when there are no wet cells in the particular tile.</p>
+<p>When using exch2, the tile sizes are specified in sNx and sNy just like the rectangular grid case. However, in the exch2 geometry, all of the tiles are stacked in the x-direction - Px is set as the number of non-blank tiles and Py is set to 1. Nr is still the number of vertical levels in the model.</p>
+<p>Note that when using the exch2 package, exch2 must be added to the list of packages in the packages.conf file.</p>
+</section>
 </section>
 </section>
 
@@ -419,7 +424,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./getting_started"
+            path: "./mitgcm"
         },
         predefinedOutput: true
     }
@@ -437,15 +442,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../intro.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Numerical Ocean Modeling</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
@@ -464,8 +460,18 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-miniconda">Download Miniconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-up-a-conda-environment">Step up a conda environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rectangular-grids">Rectangular Grids</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-files-for-regular-grids">Compile time files for regular grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-files-for-regular-grids">Runtime files for regular grids</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evenly-spaced-grids">Evenly-spaced grids</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grids-with-exch2">Grids with exch2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-files-for-exch2">Compile time files for exch2</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
