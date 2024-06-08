@@ -82,4 +82,4 @@ A job script typically has three components:
 
 #### Example job script for slurm
 
-
+## Assessing a job when its complete

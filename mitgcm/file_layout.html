@@ -63,8 +63,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/file_layout';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Choosing an optfile" href="choosing_an_optfile.html" />
-    <link rel="prev" title="Thermodynamics" href="../oceanography/thermodynamics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -155,15 +153,9 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">File Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
 </ul>
 
     </div>
@@ -357,9 +349,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-directories">Compile Time Directories</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-directories">Compile Time Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build">build</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-directories">Run Time Directories</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namelist">namelist</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input">input</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run">run</a></li>
@@ -378,12 +373,11 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="file-layout">
 <h1>File Layout<a class="headerlink" href="#file-layout" title="Permalink to this headline">#</a></h1>
-<p>The files for a typical MITgcm model configuration are divided into five main directories.</p>
+<p>The files for a typical MITgcm model configuration are divided into five main directories – two directories used at compile time and three directories used at run time.</p>
 <section id="compile-time-directories">
 <h2>Compile Time Directories<a class="headerlink" href="#compile-time-directories" title="Permalink to this headline">#</a></h2>
-</section>
 <section id="code">
-<h2>code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
+<h3>code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h3>
 <p>The code directory is used to store compile-time files that modify the default code in MITgcm. These files fall into three main types</p>
 <ul class="simple">
 <li><p>packages.conf</p>
@@ -402,10 +396,14 @@ document.write(`
 </ul>
 </li>
 </ul>
+</section>
 <section id="build">
 <h3>build<a class="headerlink" href="#build" title="Permalink to this headline">#</a></h3>
 <p>The build directory is used to store all of the compiled code that will be run for the configuration. No files need to be manually added to this directory - when the model code is compiled with the genmake2 tool, this directory will be filled in. When the model code is compiled in the build directory, the model will generate an mitgcmuv file - this key file is the executable for the model run.</p>
 </section>
+</section>
+<section id="run-time-directories">
+<h2>Run Time Directories<a class="headerlink" href="#run-time-directories" title="Permalink to this headline">#</a></h2>
 <section id="namelist">
 <h3>namelist<a class="headerlink" href="#namelist" title="Permalink to this headline">#</a></h3>
 <p>The namelist directory is used to store “data” files that define runtime parameters for the model run. These runtime files are as follows:</p>
@@ -480,24 +478,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../oceanography/thermodynamics.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Thermodynamics</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="choosing_an_optfile.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Choosing an optfile</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
@@ -516,9 +496,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-directories">Compile Time Directories</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-directories">Compile Time Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build">build</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-directories">Run Time Directories</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namelist">namelist</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input">input</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run">run</a></li>
