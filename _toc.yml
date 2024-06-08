@@ -1,0 +1,25 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts: 
+  - caption: Getting Started
+    chapters:
+    - file: getting_started/getting_started
+    - file: getting_started/setting_up_python_and_jupyter
+    - file: getting_started/installing_gfortran
+  - caption: Oceanography
+    chapters:
+    - file: oceanography/momentum
+    - file: oceanography/thermodynamics
+  - caption: MITgcm
+    chapters:
+    - file: mitgcm/file_layout
+    - file: mitgcm/choosing_an_optfile
+    - file: mitgcm/external_forcing
+  - caption: Model Analysis
+    chapters:
+    - file: analysis/volume_budgets
+    - file: analysis/heat_budgets
+    - file: analysis/salt_budgets
