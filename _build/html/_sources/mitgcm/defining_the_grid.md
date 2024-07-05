@@ -1,6 +1,6 @@
 # Defining the Model Grid
 
-To model grid for a simulation needs to be configured in be configured at both compile time and run time. There are two main options for configuring grids -- regular grids and more complex grids using the exch2 package.
+The model grid for a simulation needs to be configured at both compile time and run time. There are two main options for configuring grids -- regular grids and more complex grids using the exch2 package.
 
 ## Rectangular Grids
 

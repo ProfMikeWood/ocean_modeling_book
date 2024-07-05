@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>File Layout &#8212; Numerical Ocean Modeling</title>
+    <title>Salt Budgets &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -63,6 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'analysis/salt_budgets';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Heat Budgets" href="heat_budgets.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -156,6 +157,37 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/working_with_github.html">Working with Github</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="volume_budgets.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heat_budgets.html">Heat Budgets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Salt Budgets</a></li>
 </ul>
 
     </div>
@@ -326,9 +358,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -339,26 +369,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>File Layout</h1>
+    <h1>Salt Budgets</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-directories">Compile Time Directories</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build">build</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namelist">namelist</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input">input</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run">run</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -368,77 +383,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="file-layout">
-<h1>File Layout<a class="headerlink" href="#file-layout" title="Permalink to this headline">#</a></h1>
-<p>The files for a typical MITgcm model configuration are divided into five main directories.</p>
-<section id="compile-time-directories">
-<h2>Compile Time Directories<a class="headerlink" href="#compile-time-directories" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="code">
-<h2>code<a class="headerlink" href="#code" title="Permalink to this headline">#</a></h2>
-<p>The code directory is used to store compile-time files that modify the default code in MITgcm. These files fall into three main types</p>
-<ul class="simple">
-<li><p>packages.conf</p>
-<ul>
-<li><p>The packages.conf file stores a list of packages that will be loaded into MITgcm. Common packages in MITgcm include diagnostics, exf, etc.</p></li>
-</ul>
-</li>
-<li><p>header files</p>
-<ul>
-<li><p>Header files (with the extension .h) define data used across all model scripts. All MITgcm configurations MUST provide a SIZE.h file appropriate for the configuration. All other header files can be used be default although more are often included to define compile time options.</p></li>
-</ul>
-</li>
-<li><p>source files</p>
-<ul>
-<li><p>Source files (with extension .F) define the model code. There are hundreds of scripts that define how the model grids are constructed, how the equations of motions are integrated through time, etc. No source files are strictly required although specialized configurations often include new scripts that modify the source code in MITgcm.</p></li>
-</ul>
-</li>
-</ul>
-<section id="build">
-<h3>build<a class="headerlink" href="#build" title="Permalink to this headline">#</a></h3>
-<p>The build directory is used to store all of the compiled code that will be run for the configuration. No files need to be manually added to this directory - when the model code is compiled with the genmake2 tool, this directory will be filled in. When the model code is compiled in the build directory, the model will generate an mitgcmuv file - this key file is the executable for the model run.</p>
-</section>
-<section id="namelist">
-<h3>namelist<a class="headerlink" href="#namelist" title="Permalink to this headline">#</a></h3>
-<p>The namelist directory is used to store “data” files that define runtime parameters for the model run. These runtime files are as follows:</p>
-<ul class="simple">
-<li><p>data</p>
-<ul>
-<li><p>Every configuration must have a data file (no extension) that defines the model grid, time-stepping, etc.</p></li>
-</ul>
-</li>
-<li><p>data.pkg</p>
-<ul>
-<li><p>Each configuration also needs a data.pkg file that lists which packages which are used in the particular configuration (it’s not recommended, but you can compile a package but leave it inactivated).</p></li>
-</ul>
-</li>
-<li><p>eedata</p>
-<ul>
-<li><p>Each configurations needs an eedata file that informs the multi-threading for the division of model computations across cpus.</p></li>
-</ul>
-</li>
-<li><p>data.[package] files</p>
-<ul>
-<li><p>Each package that is activated in the data.pkg file requires a data.[package] file in the namelist directory to describe its runtime parameters. For exmaple, the diagnostics package requires a data.diagnostics file which describes which output variables are requested along with their output frequencies.</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="input">
-<h3>input<a class="headerlink" href="#input" title="Permalink to this headline">#</a></h3>
-<p>The input directory is used to store binary files which describe the model initialization and other peritent external information required during the model run. There are no strictly required input files but there most configurations have several input files. Some of the common files in this directory include:</p>
-<ul class="simple">
-<li><p>bathymetry</p></li>
-<li><p>initial conditions (either a hydrography file or a pickup file)</p></li>
-<li><p>external forcing conditions (e.g. wind speed, atmospheric temperature, etc)</p></li>
-<li><p>boundary conditions (in the case that the model is a regional model)</p></li>
-</ul>
-</section>
-<section id="run">
-<h3>run<a class="headerlink" href="#run" title="Permalink to this headline">#</a></h3>
-<p>The run directory is where the model will output files during the run. These files include descriptions of the model behavior, requested model output, and model checkpoints. The run directory requires all of the files in the namelist and input directories as well as the mitgcmuv from the compiled code in the bulid directory.</p>
-</section>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="salt-budgets">
+<h1>Salt Budgets<a class="headerlink" href="#salt-budgets" title="Permalink to this headline">#</a></h1>
+<p>This page will outline how to compute salt budgets in MITgcm.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -472,6 +419,15 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="heat_budgets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Heat Budgets</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
@@ -481,27 +437,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-directories">Compile Time Directories</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build">build</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#namelist">namelist</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input">input</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run">run</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

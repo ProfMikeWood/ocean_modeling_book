@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Volume Budgets &#8212; Numerical Ocean Modeling</title>
+    <title>Running jobs on an HPC &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -60,11 +60,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'analysis/volume_budgets';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'HPC/running_jobs_on_an_HPC';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Heat Budgets" href="heat_budgets.html" />
-    <link rel="prev" title="Running jobs on an HPC" href="../HPC/running_jobs_on_an_HPC.html" />
+    <link rel="next" title="Volume Budgets" href="../analysis/volume_budgets.html" />
+    <link rel="prev" title="Navigating an HPC" href="navigating_an_HPC.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -180,15 +182,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Running jobs on an HPC</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heat_budgets.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="salt_budgets.html">Salt Budgets</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budgets.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budgets.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budgets.html">Salt Budgets</a></li>
 </ul>
 
     </div>
@@ -260,7 +262,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fanalysis/volume_budgets.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FHPC/running_jobs_on_an_HPC.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +292,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/analysis/volume_budgets.md" target="_blank"
+      <li><a href="../_sources/HPC/running_jobs_on_an_HPC.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -359,7 +361,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -370,11 +374,33 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Volume Budgets</h1>
+    <h1>Running jobs on an HPC</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-commands">Common Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pbs-example">pbs Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-example">slurm Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-job-script">Creating a Job Script</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-number-of-cpus-and-nodes">Determining the number of CPUs and Nodes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#job-script-format">Job Script Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-job-script-for-pbs">Example job script for pbs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-job-script-for-slurm">Example job script for slurm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-a-job-when-its-complete">Assessing a job when its complete</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -384,9 +410,98 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="volume-budgets">
-<h1>Volume Budgets<a class="headerlink" href="#volume-budgets" title="Permalink to this headline">#</a></h1>
-<p>This page will outline how to compute volume budgets in MITgcm.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="running-jobs-on-an-hpc">
+<h1>Running jobs on an HPC<a class="headerlink" href="#running-jobs-on-an-hpc" title="Permalink to this headline">#</a></h1>
+<p>High performance computing clusters typically implement a job queue to manage computations submitted by different users. The two most common job managers for HPCs are slurm and pbs. Each is slightly different but the commands to submit and manage jobs work in essentially the same way.</p>
+<section id="common-commands">
+<h2>Common Commands<a class="headerlink" href="#common-commands" title="Permalink to this headline">#</a></h2>
+<p>The table below lists the common commands for pbs and slurm.
+|———-|———–|———–|
+| Action | pbs | slurm |
+| Check jobs currently in the queue | qstat | squeue |
+| Check jobs currently in the queue for a given user | qstat -u user | squeue -u user|
+| Submit a job script | qsub script_name | sbatch script_name |
+| Cancel a job | qdel job_id | scancel job_id |</p>
+<section id="pbs-example">
+<h3>pbs Example<a class="headerlink" href="#pbs-example" title="Permalink to this headline">#</a></h3>
+<p>Consider a user <code class="docutils literal notranslate"><span class="pre">mwood</span></code> looking to submit a job called <code class="docutils literal notranslate"><span class="pre">test_job</span></code> on a system managed by pbs.
+To submit the job, the user would enter the following from the scratch directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qsub</span> <span class="n">test_job</span>
+</pre></div>
+</div>
+<p>Then, to check the output, the <code class="docutils literal notranslate"><span class="pre">qstat</span> <span class="pre">-u</span></code> command could be used to check the status of the job running on the cluster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qstat</span> <span class="o">-</span><span class="n">u</span> <span class="n">mwood</span>
+<span class="n">Job</span> <span class="n">ID</span>
+</pre></div>
+</div>
+<p>In this output, we can see the following:</p>
+<ul class="simple">
+<li><p>the job ID name ()</p></li>
+<li><p>the user name ()</p></li>
+<li><p>the job status (R = Running)</p></li>
+<li><p>the total time elapse ()</p></li>
+<li><p>the number of nodes in user by the user ()</p></li>
+</ul>
+<p>If the user wanted to cancel the job due to an error noticed in the output, they could run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qdel</span> <span class="n">job_ID</span>
+</pre></div>
+</div>
+</section>
+<section id="slurm-example">
+<h3>slurm Example<a class="headerlink" href="#slurm-example" title="Permalink to this headline">#</a></h3>
+<p>This example is almost identical to the pbs example above, revised for slurm. A user <code class="docutils literal notranslate"><span class="pre">mwood</span></code> is looking to submit a job called <code class="docutils literal notranslate"><span class="pre">test_job</span></code> on a system managed by slurm.
+To submit the job, the user would enter the following from the scratch directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sbatch</span> <span class="n">test_job</span>
+</pre></div>
+</div>
+<p>Then, to check the output, the <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span></code> command could be used to check the status of the job running on the cluster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qstat</span> <span class="o">-</span><span class="n">u</span> <span class="n">mwood</span>
+<span class="n">Job</span> <span class="n">ID</span>
+</pre></div>
+</div>
+<p>In this output, we can see the following:</p>
+<ul class="simple">
+<li><p>the job ID name ()</p></li>
+<li><p>the user name ()</p></li>
+<li><p>the job status (R = Running)</p></li>
+<li><p>the total time elapse ()</p></li>
+<li><p>the number of nodes in user by the user ()</p></li>
+</ul>
+<p>If the user wanted to cancel the job due to an error noticed in the output, they could run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scancel</span> <span class="n">job_ID</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-a-job-script">
+<h2>Creating a Job Script<a class="headerlink" href="#creating-a-job-script" title="Permalink to this headline">#</a></h2>
+<p>In the section above, we saw that to submit a job, we’ll first need to generate a job script. A job script outlines the time and resources required to run the job and other pertinent parameters.</p>
+<section id="determining-the-number-of-cpus-and-nodes">
+<h3>Determining the number of CPUs and Nodes<a class="headerlink" href="#determining-the-number-of-cpus-and-nodes" title="Permalink to this headline">#</a></h3>
+<p>When requesting resources, we need to determine how many CPUs are required for the job. Typically, this is implemented in the construction of the code to be parallelized. In the case of MITgcm, the number of CPUs is the total number of processors identified in the SIZE.h file (nPx*nPy). After the CPUs have been determined, next you need to determine the nodes to request for the job - the key component of the job script. The number of nodes for a job is determined by how many CPUs are on each node - a specification which you will find in the documentation for your HPC. For example, a common configuration is to pair 2 Broadwell processors containing 14 CPUs each as a node, resulting in 28 CPUs per node. Then, the total nodes required for your job is given by
+$$<span class="math notranslate nohighlight">\(
+ceil(nunber of cpus/cpus per node)
+\)</span>$$</p>
+</section>
+<section id="job-script-format">
+<h3>Job Script Format<a class="headerlink" href="#job-script-format" title="Permalink to this headline">#</a></h3>
+<p>A job script typically has three components:</p>
+<ol class="arabic simple">
+<li><p>Header lines passed to the job management system (e.g. pbs or slurm)</p></li>
+<li><p>Pertinent set-up checks (e.g. purging/loading modules, checking files structures)</p></li>
+<li><p>Running the job executable</p></li>
+</ol>
+<section id="example-job-script-for-pbs">
+<h4>Example job script for pbs<a class="headerlink" href="#example-job-script-for-pbs" title="Permalink to this headline">#</a></h4>
+</section>
+<section id="example-job-script-for-slurm">
+<h4>Example job script for slurm<a class="headerlink" href="#example-job-script-for-slurm" title="Permalink to this headline">#</a></h4>
+</section>
+</section>
+</section>
+<section id="assessing-a-job-when-its-complete">
+<h2>Assessing a job when its complete<a class="headerlink" href="#assessing-a-job-when-its-complete" title="Permalink to this headline">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -402,7 +517,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./analysis"
+            path: "./HPC"
         },
         predefinedOutput: true
     }
@@ -421,20 +536,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../HPC/running_jobs_on_an_HPC.html"
+       href="navigating_an_HPC.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Running jobs on an HPC</p>
+        <p class="prev-next-title">Navigating an HPC</p>
       </div>
     </a>
     <a class="right-next"
-       href="heat_budgets.html"
+       href="../analysis/volume_budgets.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Heat Budgets</p>
+        <p class="prev-next-title">Volume Budgets</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -447,6 +562,34 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-commands">Common Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pbs-example">pbs Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-example">slurm Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-job-script">Creating a Job Script</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-number-of-cpus-and-nodes">Determining the number of CPUs and Nodes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#job-script-format">Job Script Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-job-script-for-pbs">Example job script for pbs</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-job-script-for-slurm">Example job script for slurm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-a-job-when-its-complete">Assessing a job when its complete</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
