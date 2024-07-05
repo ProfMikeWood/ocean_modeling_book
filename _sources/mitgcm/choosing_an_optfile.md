@@ -6,10 +6,10 @@ To compile the MITgcm source code, you'll need an optfile that defines paths to 
 ## Systems
 
 ### MacOS
-If you are using MacOS with gfortran (recommend), them use the darwin_amd_gfortran file
+If you are using MacOS with gfortran (recommend), then typically the darwin_amd_gfortran file works well.
 
 ### Windows with Cygwin
-If you are using Windows with a Cygwin installation, them use the [] file
+If you are using Windows with a Cygwin installation, then use the [] file.
 
 ### Copmuting Cluster
 The optfile used for compilation on a computing cluster will depend on your cluster's compiler. There are many options available and typically need to be paired with module loaded prior to compiling and running MITgcm.
