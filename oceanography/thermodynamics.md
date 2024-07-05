@@ -1,5 +1,5 @@
 # Thermodynamics
 
-In this section, you will make a new conda environment
+This section will detail thermodynamic equations.
 
 

@@ -12,7 +12,7 @@ There are three main ways to prescribe initial conditions in MITgcm:
 1. Reference Conditions
 2. Hydrography Conditions
 3. Pickup Files
-The first two options are used when the model is initied at `nIter=0`; otherwise, the third option must be used.
+The first two options are used when the model is initialized at `nIter=0`; otherwise, the third option must be used.
 
 ### Option 1: Reference Condition
 When `nIter=0` and no conditions are provided, the model will be initialized with the conditions specified as `tRef` and `sRef` provided in `&PARM01` namelist of the `data` file. `tRef` and `sRef` are a list of temperatures and salinities with length `Nr`, the number of the depth levels in the model. In this case, the model will initialize the velocity as zero and the sea surface height as 0.

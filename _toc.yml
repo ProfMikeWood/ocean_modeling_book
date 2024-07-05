@@ -6,20 +6,31 @@ root: intro
 parts: 
   - caption: Getting Started
     chapters:
-    # - file: getting_started/getting_started
     - file: getting_started/setting_up_python_and_jupyter
-    # - file: getting_started/installing_gfortran
-  # - caption: Oceanography
-  #   chapters:
-  #   - file: oceanography/momentum
-  #   - file: oceanography/thermodynamics
-  # - caption: MITgcm
-  #   chapters:
-  #   - file: mitgcm/file_layout
-  #   - file: mitgcm/choosing_an_optfile
-  #   - file: mitgcm/external_forcing
-  # - caption: Model Analysis
-  #   chapters:
-  #   - file: analysis/volume_budgets
-  #   - file: analysis/heat_budgets
-  #   - file: analysis/salt_budgets
+    - file: getting_started/installing_gfortran
+    - file: getting_started/working_with_github
+  - caption: Oceanography
+    chapters:
+    - file: oceanography/momentum
+    - file: oceanography/thermodynamics
+  - caption: Numerical Modeling
+    chapters:
+    - file: modeling/model_grids
+  - caption: MITgcm
+    chapters:
+    - file: mitgcm/getting_started_with_MITgcm
+    - file: mitgcm/file_layout
+    - file: mitgcm/choosing_an_optfile
+    - file: mitgcm/defining_the_grid
+    - file: mitgcm/initial_conditions
+    - file: mitgcm/external_forcing
+    - file: mitgcm/boundary_conditions
+  - caption: Computing Clusters
+    chapters:
+    - file: HPC/navigating_an_HPC
+    - file: HPC/running_jobs_on_an_HPC
+  - caption: Model Analysis
+    chapters:
+    - file: analysis/volume_budgets
+    - file: analysis/heat_budgets
+    - file: analysis/salt_budgets
