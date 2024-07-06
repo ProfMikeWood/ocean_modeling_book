@@ -11,6 +11,7 @@ parts:
     - file: getting_started/working_with_github
   - caption: Oceanography
     chapters:
+    - file: oceanography/equation_of_state
     - file: oceanography/momentum
     - file: oceanography/thermodynamics
   - caption: Numerical Modeling
