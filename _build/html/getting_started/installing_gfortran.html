@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Installing gfortran and MPI &#8212; Numerical Ocean Modeling</title>
+    <title>Installing gfortran and MPI on a Mac &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/installing_gfortran';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Momentum" href="../oceanography/momentum.html" />
+    <link rel="next" title="Working with Github" href="working_with_github.html" />
     <link rel="prev" title="Installing Python and Jupyter" href="setting_up_python_and_jupyter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -157,26 +157,44 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started with MITgcm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installing gfortran and MPI</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installing gfortran and MPI on a Mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_github.html">Working with Github</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budgets.html">Choosing an optfile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budgets.html">File Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budgets.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budgets.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budgets.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budgets.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
     </div>
@@ -360,7 +378,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Installing gfortran and MPI</h1>
+    <h1>Installing gfortran and MPI on a Mac</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -389,8 +407,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="installing-gfortran-and-mpi">
-<h1>Installing gfortran and MPI<a class="headerlink" href="#installing-gfortran-and-mpi" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="installing-gfortran-and-mpi-on-a-mac">
+<h1>Installing gfortran and MPI on a Mac<a class="headerlink" href="#installing-gfortran-and-mpi-on-a-mac" title="Permalink to this headline">#</a></h1>
 <p>To run MITgcm, we will need a FORTRAN compiler</p>
 <section id="installation-on-a-mac">
 <h2>Installation on a Mac<a class="headerlink" href="#installation-on-a-mac" title="Permalink to this headline">#</a></h2>
@@ -507,11 +525,11 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
       </div>
     </a>
     <a class="right-next"
-       href="../oceanography/momentum.html"
+       href="working_with_github.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Momentum</p>
+        <p class="prev-next-title">Working with Github</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

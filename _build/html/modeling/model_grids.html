@@ -160,6 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_gfortran.html">Installing gfortran and MPI on a Mac</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/working_with_github.html">Working with Github</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
@@ -192,6 +193,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budgets.html">Volume Budgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budgets.html">Heat Budgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budgets.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 
     </div>
@@ -400,7 +405,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="model-grids">
 <h1>Model Grids<a class="headerlink" href="#model-grids" title="Permalink to this headline">#</a></h1>
 <p>To simulate ocean circulation, one of the first steps is to define the model grid. There are several implementations of model grids that define where on each grid cell the tracer and velocity components are defined.</p>
-<p><span id="id1"></span> define five different grid configurations lettered A-E. Here, the “Arakawa-C” is defined because it is used in MITgcm.</p>
+<p><span id="id1">Arakawa and Lamb [<a class="reference internal" href="../references.html#id2" title="Akio Arakawa and Vivian R Lamb. Computational design of the basic dynamical processes of the ucla general circulation model. General circulation models of the atmosphere, 17(Supplement C):173–265, 1977.">1977</a>]</span> define five different grid configurations lettered A-E. Here, the “Arakawa-C” is defined because it is used in MITgcm.</p>
 <section id="arakawa-c-grid">
 <h2>Arakawa-C Grid<a class="headerlink" href="#arakawa-c-grid" title="Permalink to this headline">#</a></h2>
 <p>The C-grid defines the tracer components at the center of the grid cell and the <span class="math notranslate nohighlight">\(u\)</span>- and <span class="math notranslate nohighlight">\(v\)</span>- velocity components on the left and lower edges of the cell, respectively. With this definition, the stream function (<span class="math notranslate nohighlight">\(\psi\)</span>) and vorticity (<span class="math notranslate nohighlight">\(\zeta\)</span>) are defined on the lower left corner of each cell. We can visualize the grid as follows:</p>
