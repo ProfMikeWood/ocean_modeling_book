@@ -1,4 +1,4 @@
-# Installing gfortran and MPI
+# Installing gfortran and MPI on a Mac
 
 To run MITgcm, we will need a FORTRAN compiler 
 
