@@ -389,8 +389,18 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">Downloading MITgcm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-you-machine-to-compile-code">Prepping you machine to compile code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-model">Compiling and Running a Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-you-machine-to-compile-code">Prepping you machine to compile code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-test-with-a-verification-experiment">Compiling and Running: A test with a verification experiment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-without-mpi">Compiling and Running without MPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-without-mpi">Compiling without MPI</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-without-mpi">Running without MPI</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-with-mpi">Compiling and Running with MPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-with-mpi">Compiling with MPI</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-with-mpi">Running with MPI</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -408,20 +418,138 @@ document.write(`
 <h1>Getting Started with MITgcm<a class="headerlink" href="#getting-started-with-mitgcm" title="Permalink to this headline">#</a></h1>
 <section id="downloading-mitgcm">
 <h2>Downloading MITgcm<a class="headerlink" href="#downloading-mitgcm" title="Permalink to this headline">#</a></h2>
-<p>To use MITgcm, begin by cloning the repository from Github:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">mitgcm</span>
+<p>To use MITgcm, begin by opening up a terminal window and navigating to a location on your computer where you will keep a copy of the model. For example, <code class="docutils literal notranslate"><span class="pre">~/Documents/Projects/Ocean_Modeling</span></code>.</p>
+<p>Then, clone the MITgcm source code from the Github repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MITgcm</span><span class="o">/</span><span class="n">MITgcm</span>
 </pre></div>
 </div>
 </section>
 <section id="prepping-you-machine-to-compile-code">
 <h2>Prepping you machine to compile code<a class="headerlink" href="#prepping-you-machine-to-compile-code" title="Permalink to this headline">#</a></h2>
 <p>Once you have MITgcm on your machine, there’s a few steps required to get your machine set up.</p>
-<p>At the least, you’ll need to have a fortran compiler to compile the model code.</p>
-<p>In addition, you will likely want to install MPI to pralleloze your model across CPUs and a netcdf library for storing output into netCDF files.</p>
-<p>The set up for each of these components will depend on your system. Here, I’ve provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.</p>
-<p>Depending on your installation, youll need to select an optfile that passes information to your compiler.</p>
-<section id="compiling-and-running-a-model">
-<h3>Compiling and Running a Model<a class="headerlink" href="#compiling-and-running-a-model" title="Permalink to this headline">#</a></h3>
+<p>At the least, you’ll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_gfortran.html">HERE</a>, I’ve provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.</p>
+<p>Once your installations are complete, you’ll need to identify an “optfile” that passes information to your compiler. Details for selecting an optfile are available <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/mitgcm/choosing_an_optfile.html">HERE</a>. For example, on my system (MacOS with gfortran), I will use the <code class="docutils literal notranslate"><span class="pre">darwin_amd64_gfortran</span></code> optfile.</p>
+</section>
+<section id="compiling-and-running-a-test-with-a-verification-experiment">
+<h2>Compiling and Running: A test with a verification experiment<a class="headerlink" href="#compiling-and-running-a-test-with-a-verification-experiment" title="Permalink to this headline">#</a></h2>
+<p>MITgcm comes with a series of verification experiments that serve two purposes. On one hand, the experiments are used to test model codes on a nightly basis to ensure any new updates to the model source code maintain the expected functionality of the model. On the other, the verification experiments serve as a set of tutorials that can be used to familiarize yourself with various aspects of the model.</p>
+<p>Following the <a class="reference external" href="https://mitgcm.readthedocs.io/en/latest/">MITgcm documentation</a>, we’ll test the model using the Barotropic Gyre Tutorial. Extensive documentation is provided for this experiment on the <a class="reference external" href="https://mitgcm.readthedocs.io/en/latest/examples/barotropic_gyre/barotropic_gyre.html">Barotropic Gyre Tutorial</a> MITgcm documentation page so we won’t repeat all of the details here. Instead, we’ll focus on the steps to compile and run the model, with and without MPI.</p>
+<p>Begin by moving into the tutorial directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">MITgcm</span><span class="o">/</span><span class="n">verification</span><span class="o">/</span><span class="n">tutorial_barotropic_gyre</span>
+</pre></div>
+</div>
+<section id="compiling-and-running-without-mpi">
+<h3>Compiling and Running without MPI<a class="headerlink" href="#compiling-and-running-without-mpi" title="Permalink to this headline">#</a></h3>
+<section id="compiling-without-mpi">
+<h4>Compiling without MPI<a class="headerlink" href="#compiling-without-mpi" title="Permalink to this headline">#</a></h4>
+<p>By default, the experiment will be ready to compile on a single processor (i.e. without MPI). You can verify this in the <code class="docutils literal notranslate"><span class="pre">code/SIZE.h</span></code> file by examining the number of processors are both set to 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     <span class="o">&amp;</span>           <span class="n">sNx</span> <span class="o">=</span>  <span class="mi">62</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">sNy</span> <span class="o">=</span>  <span class="mi">62</span><span class="p">,</span>
+     <span class="o">...</span>
+     <span class="o">&amp;</span>           <span class="n">nPx</span> <span class="o">=</span>   <span class="mi">1</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">nPy</span> <span class="o">=</span>   <span class="mi">1</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>In this configuration, the entire size of the domain, 62 rows and 62 columns, is used for the processing tile.</p>
+<p>To compile the experiment, move into the build directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>Next, we’ll run the three steps common to compilation: 1) running the <code class="docutils literal notranslate"><span class="pre">genmake2</span></code> program, 2) creating a list of dependencies, and 3) compiling the code. These are completed with the following steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">genmake2</span> <span class="o">-</span><span class="n">of</span> <span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">build_options</span><span class="o">/</span><span class="n">darwin_amd64_gfortran</span> <span class="o">-</span><span class="n">mods</span> <span class="o">../</span><span class="n">code</span>
+<span class="n">make</span> <span class="n">depend</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<p>Note here that I’ve used the <code class="docutils literal notranslate"><span class="pre">darwin_amd64_gfortran</span></code> optfile I’ve identified for my machine. Be sure to substitute the optfile identified for your system if it is different than mine.</p>
+<p>The above commands will output a lot of lines in your terminal and generate a lot of files in your <code class="docutils literal notranslate"><span class="pre">build</span></code> directory. You can ensure your compilation was successful by looking for the <code class="docutils literal notranslate"><span class="pre">mitgcmuv</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="n">mitgcmuv</span>
+</pre></div>
+</div>
+<p>This command should return <code class="docutils literal notranslate"><span class="pre">mitgcmuv</span></code> (and not “No such file or directory”) when the compilation is successful.</p>
+</section>
+<section id="running-without-mpi">
+<h4>Running without MPI<a class="headerlink" href="#running-without-mpi" title="Permalink to this headline">#</a></h4>
+<p>Now that you’ve compiled your code, you can run the tutorial. Begin by moving into the run directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span><span class="n">run</span>
+</pre></div>
+</div>
+<p>Next, we’ll link all of the pertinent files to the run directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="nb">input</span><span class="o">/*</span> <span class="o">.</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">build</span><span class="o">/</span><span class="n">mitgcmuv</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>With everything in place, we’re ready to run! Execute the <code class="docutils literal notranslate"><span class="pre">mitgcmuv</span></code> executable as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mitgcmuv</span> <span class="o">&gt;</span> <span class="n">output</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">mitgcmuv</span></code> executable will output a lot of information about the model run - the <code class="docutils literal notranslate"> <span class="pre">&gt;</span> <span class="pre">output.txt</span></code> addition writes all of this output into the <code class="docutils literal notranslate"><span class="pre">output.txt</span></code> file rather than terminal.</p>
+<p>If you get get the following glorious message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">STOP</span> <span class="n">NORMAL</span> <span class="n">END</span>
+</pre></div>
+</div>
+<p>you’ll know the run is successful. As you continue in your modeling endeavors, seeing this message will start to bring you a mix of joy and relief. There’s so many things that can go awry in both compilation and in running the model - seeing this message gives some sense of comfort that you’re on the right track.</p>
+</section>
+</section>
+<section id="compiling-and-running-with-mpi">
+<h3>Compiling and Running with MPI<a class="headerlink" href="#compiling-and-running-with-mpi" title="Permalink to this headline">#</a></h3>
+<section id="compiling-with-mpi">
+<h4>Compiling with MPI<a class="headerlink" href="#compiling-with-mpi" title="Permalink to this headline">#</a></h4>
+<p>To modify the experiment to run with MPI, we’ll need to update the <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file in the <code class="docutils literal notranslate"><span class="pre">code</span></code> directory. There’s already a size file available for compiling with MPI - let’s swap out this file for the one we used before</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span><span class="n">code</span>
+<span class="n">mv</span> <span class="n">SIZE</span><span class="o">.</span><span class="n">h</span> <span class="n">SIZE</span><span class="o">.</span><span class="n">h_no_mpi</span>
+<span class="n">mv</span> <span class="n">SIZE</span><span class="o">.</span><span class="n">h_mpi</span> <span class="n">SIZE</span><span class="o">.</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>We can take a look in the updated <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file by examining the number of processors are now both set to 2 and each processor will take care of 1/4 of the domain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     <span class="o">&amp;</span>           <span class="n">sNx</span> <span class="o">=</span>  <span class="mi">31</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">sNy</span> <span class="o">=</span>  <span class="mi">31</span><span class="p">,</span>
+     <span class="o">...</span>
+     <span class="o">&amp;</span>           <span class="n">nPx</span> <span class="o">=</span>   <span class="mi">2</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">nPy</span> <span class="o">=</span>   <span class="mi">2</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>For more information on the grids, see the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/mitgcm/defining_the_grid.html">Defining the Model Grid</a> page.</p>
+<p>Now that the <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file is updated, we need to recompile the code. Further, since <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> is included in essentially every single script, we need to remove all of the previously compiled code and recompile with the previous steps.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span>
+<span class="n">rm</span> <span class="n">build</span><span class="o">/*</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">genmake2</span> <span class="o">-</span><span class="n">of</span> <span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">build_options</span><span class="o">/</span><span class="n">darwin_amd64_gfortran</span> <span class="o">-</span><span class="n">mods</span> <span class="o">../</span><span class="n">code</span> <span class="o">-</span><span class="n">mpi</span>
+<span class="n">make</span> <span class="n">depend</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When compiling with MPI, be sure to include the <code class="docutils literal notranslate"><span class="pre">-mpi</span></code> flag in <code class="docutils literal notranslate"><span class="pre">genmake2</span></code></p>
+</div>
+</section>
+<section id="running-with-mpi">
+<h4>Running with MPI<a class="headerlink" href="#running-with-mpi" title="Permalink to this headline">#</a></h4>
+<p>Now that the code is compiled, we’ll move back to the run directory. However, to avoid confusion with the previous run, remove all of the files from the run directory generated by the run without MPI.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+<span class="n">rm</span> <span class="n">run</span><span class="o">/*</span>
+<span class="n">cd</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>Just as before, we’ll link all of the pertinent files to the run directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="nb">input</span><span class="o">/*</span> <span class="o">.</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">build</span><span class="o">/</span><span class="n">mitgcmuv</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>With everything in place, we’re ready to run again. We use the <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> command to run the <code class="docutils literal notranslate"><span class="pre">mitgcmuv</span></code> executable, identifying the 4 processors as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">4</span> <span class="n">mitgcmuv</span>
+</pre></div>
+</div>
+<p>If everything goes to plan, you should receive four of the glorious messages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">STOP</span> <span class="n">NORMAL</span> <span class="n">END</span>
+<span class="n">STOP</span> <span class="n">NORMAL</span> <span class="n">END</span>
+<span class="n">STOP</span> <span class="n">NORMAL</span> <span class="n">END</span>
+<span class="n">STOP</span> <span class="n">NORMAL</span> <span class="n">END</span>
+</pre></div>
+</div>
+<p>Woohoo!</p>
+</section>
 </section>
 </section>
 </section>
@@ -494,8 +622,18 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">Downloading MITgcm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-you-machine-to-compile-code">Prepping you machine to compile code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-model">Compiling and Running a Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-you-machine-to-compile-code">Prepping you machine to compile code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-test-with-a-verification-experiment">Compiling and Running: A test with a verification experiment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-without-mpi">Compiling and Running without MPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-without-mpi">Compiling without MPI</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-without-mpi">Running without MPI</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-with-mpi">Compiling and Running with MPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-with-mpi">Compiling with MPI</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-with-mpi">Running with MPI</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
