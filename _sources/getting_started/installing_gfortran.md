@@ -1,11 +1,11 @@
-# Installing gfortran and MPI on a Mac
+# Installing gfortran and MPI
 
-To run MITgcm, we will need a FORTRAN compiler 
+To run MITgcm, we will need a FORTRAN compiler. This page describes how to install a common compiler on both MacOS and Windows (using Cygwin)
 
 ## Installation on a Mac
 
 ### Install Homebrew
-If you haven't already done so, install gcc
+If you haven't already done so, install homebrew following the instruction at https://brew.sh/.
 
 ### Install gcc
 Next, use homebrew to install gcc
@@ -20,7 +20,7 @@ export GDFONPATH=/Library/Fonts
 export OS=OSX
 export LC_ALL="C"
 ```
-In newer versions of the MacOS, the terminal uses zshell by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:
+In newer versions of the MacOS, the terminal uses `zshell` by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:
 ```
 source ~/.bash_profile
 ```

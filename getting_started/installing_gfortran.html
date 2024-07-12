@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Installing gfortran and MPI on a Mac &#8212; Numerical Ocean Modeling</title>
+    <title>Installing gfortran and MPI &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -158,14 +158,14 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installing gfortran and MPI on a Mac</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installing gfortran and MPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_github.html">Working with Github</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
@@ -378,7 +378,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Installing gfortran and MPI on a Mac</h1>
+    <h1>Installing gfortran and MPI</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -407,14 +407,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="installing-gfortran-and-mpi-on-a-mac">
-<h1>Installing gfortran and MPI on a Mac<a class="headerlink" href="#installing-gfortran-and-mpi-on-a-mac" title="Permalink to this headline">#</a></h1>
-<p>To run MITgcm, we will need a FORTRAN compiler</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="installing-gfortran-and-mpi">
+<h1>Installing gfortran and MPI<a class="headerlink" href="#installing-gfortran-and-mpi" title="Permalink to this headline">#</a></h1>
+<p>To run MITgcm, we will need a FORTRAN compiler. This page describes how to install a common compiler on both MacOS and Windows (using Cygwin)</p>
 <section id="installation-on-a-mac">
 <h2>Installation on a Mac<a class="headerlink" href="#installation-on-a-mac" title="Permalink to this headline">#</a></h2>
 <section id="install-homebrew">
 <h3>Install Homebrew<a class="headerlink" href="#install-homebrew" title="Permalink to this headline">#</a></h3>
-<p>If you haven’t already done so, install gcc</p>
+<p>If you haven’t already done so, install homebrew following the instruction at <a class="reference external" href="https://brew.sh/">https://brew.sh/</a>.</p>
 </section>
 <section id="install-gcc">
 <h3>Install gcc<a class="headerlink" href="#install-gcc" title="Permalink to this headline">#</a></h3>
@@ -430,7 +430,7 @@ document.write(`
 <span class="n">export</span> <span class="n">LC_ALL</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
 </pre></div>
 </div>
-<p>In newer versions of the MacOS, the terminal uses zshell by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:</p>
+<p>In newer versions of the MacOS, the terminal uses <code class="docutils literal notranslate"><span class="pre">zshell</span></code> by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">~/.</span><span class="n">bash_profile</span>
 </pre></div>
 </div>
