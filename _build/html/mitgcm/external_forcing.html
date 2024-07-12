@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/external_forcing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -158,14 +160,14 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_gfortran.html">Installing gfortran and MPI on a Mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_gfortran.html">Installing gfortran and MPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/working_with_github.html">Working with Github</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
@@ -296,7 +298,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/mitgcm/external_forcing.md" target="_blank"
+      <li><a href="../_sources/mitgcm/external_forcing.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -306,7 +308,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -388,10 +390,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exf">data.exf</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#periodicity">Periodicity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-interpolation">Temporal Interpolation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-interpolation">Spatial Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-external-forcing-fields">Common External Forcing Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exf-package">The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-considerations">Compile-time considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-considerations">Run-time considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exf">data.exf</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-the-fields">Formatting the fields</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-interpolation">Temporal Interpolation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-interpolation">Spatial Interpolation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -407,20 +415,143 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="external-forcing">
 <h1>External Forcing<a class="headerlink" href="#external-forcing" title="Permalink to this headline">#</a></h1>
-<p>In MITgcm, the primary way to implement external forcing conditions is through the exf package.</p>
-<p>The external forcing conditions are stored in 3-dimensional grids as (time, Ny, Nx) where (Nx, Ny) is the size of the domain.</p>
+<p>External forcing fields (usually) refer to atmospheric paramters that modify the temperature, salinity, or momentum in the upper ocean. However, there are some occasionally-used external forcing fields that are implemented at the ocean floor, such as geothermal heat flux. The following table lists commonly-used external forcing fields:</p>
+<section id="common-external-forcing-fields">
+<h2>Common External Forcing Fields<a class="headerlink" href="#common-external-forcing-fields" title="Permalink to this headline">#</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field Name</p></th>
+<th class="head"><p>Model Variable</p></th>
+<th class="head"><p>Units</p></th>
+<th class="text-left head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zonal Wind</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UVEL</span></code></p></td>
+<td><p>m/s</p></td>
+<td class="text-left"><p>Wind is positive eastward <em>in model coordinates</em>, which is not necessarily east on the real globe, depending on the orientation of the model grid</p></td>
+</tr>
+<tr class="row-odd"><td><p>Meridional Wind</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VVEL</span></code></p></td>
+<td><p>m/s</p></td>
+<td class="text-left"><p>Wind is positive northward <em>in model coordinates</em>, which is not necessarily east on the real globe, depending on the orientation of the model grid</p></td>
+</tr>
+<tr class="row-even"><td><p>Surface Air Temperature</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ATEMP</span></code></p></td>
+<td><p>K</p></td>
+<td class="text-left"><p>If Celsius is used, an offset of 273.15 must be applied in the data.exf file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Surface Specific Humidity</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AQH</span></code></p></td>
+<td><p>kg H<span class="math notranslate nohighlight">\(_2\)</span>O per kg air</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Downward shortwave radiation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SWDOWN</span></code></p></td>
+<td><p>W/m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
+<td class="text-left"><p>Downward positive</p></td>
+</tr>
+<tr class="row-odd"><td><p>Downward longwave radiation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LWDOWN</span></code></p></td>
+<td><p>W/m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
+<td class="text-left"><p>Downward positive</p></td>
+</tr>
+<tr class="row-even"><td><p>Precipitation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PRECIP</span></code></p></td>
+<td><p>m/s</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Runoff</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RUNOFF</span></code></p></td>
+<td><p>m/s</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-exf-package">
+<h2>The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package<a class="headerlink" href="#the-exf-package" title="Permalink to this headline">#</a></h2>
+<p>In MITgcm, the primary way to implement external forcing conditions is through the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package.</p>
+<section id="compile-time-considerations">
+<h3>Compile-time considerations<a class="headerlink" href="#compile-time-considerations" title="Permalink to this headline">#</a></h3>
+<p>To enable the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package for compilation, add a line for <code class="docutils literal notranslate"><span class="pre">exf</span></code> in the <code class="docutils literal notranslate"><span class="pre">packages.conf</span></code> files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package does not strictly require the use of the <code class="docutils literal notranslate"><span class="pre">cal</span></code> package, many of the <code class="docutils literal notranslate"><span class="pre">exf</span></code> funtionality was built around tools from the <code class="docutils literal notranslate"><span class="pre">cal</span></code> package. With this in mind, it’s recommended that the <code class="docutils literal notranslate"><span class="pre">cal</span></code> package also be enabled by adding a line for <code class="docutils literal notranslate"><span class="pre">cal</span></code> in the <code class="docutils literal notranslate"><span class="pre">packages.conf</span></code> file.</p>
+</div>
+<p>Note that by default, the <a class="reference external" href="https://github.com/MITgcm/MITgcm/blob/master/pkg/exf/EXF_OPTIONS.h">EXF_OPTIONS.h</a> file is configured to use all of the fields listed in the table above. Further information is provided on the <a class="reference external" href="https://mitgcm.readthedocs.io/en/latest/phys_pkgs/exf.html">MITgcm documentation page</a> for the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package.</p>
+</section>
+<section id="run-time-considerations">
+<h3>Run-time considerations<a class="headerlink" href="#run-time-considerations" title="Permalink to this headline">#</a></h3>
 <section id="data-exf">
-<h2>data.exf<a class="headerlink" href="#data-exf" title="Permalink to this headline">#</a></h2>
-<p>The data.exf file outlines 4 namelists to assign exf parameters.</p>
-<section id="periodicity">
-<h3>Periodicity<a class="headerlink" href="#periodicity" title="Permalink to this headline">#</a></h3>
+<h4>data.exf<a class="headerlink" href="#data-exf" title="Permalink to this headline">#</a></h4>
+<p>The data.exf file is a required file when using the external forcing package. There are four main namelists in this file:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Namelist</p></th>
+<th class="text-left head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EXF_NML_01</span></code></p></td>
+<td class="text-left"><p>Set parameters for reading, scaling, and applying external forcing conditions</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EXF_NML_02</span></code></p></td>
+<td class="text-left"><p>Set the file names and start dates for each external field file</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EXF_NML_03</span></code></p></td>
+<td class="text-left"><p>Set scaling parameters for the forcing fields</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EXF_NML_04</span></code></p></td>
+<td class="text-left"><p>Set the spatial interpolation method for each field</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EXF_NML_OBCS</span></code></p></td>
+<td class="text-left"><p>When using open boundaries, the time stepping is outlined in this namelist. Not required if boundary conditions are not used.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="formatting-the-fields">
+<h4>Formatting the fields<a class="headerlink" href="#formatting-the-fields" title="Permalink to this headline">#</a></h4>
+<p>The external forcing fields are stored in files sized (time, Ny, Nx). There are two ways the files can be organized:</p>
+<ol class="arabic simple">
+<li><p>All of the external forcing conditions can be added in a single file, or</p></li>
+<li><p>The external forcing conditions can be stored in annual files. In this case, each file must end in an underscore and the year. For example, <code class="docutils literal notranslate"><span class="pre">UWIND_2001</span></code>, <code class="docutils literal notranslate"><span class="pre">UWIND_2002</span></code>, etc. When using this option, the flag <code class="docutils literal notranslate"><span class="pre">useExfYearlyFields=</span> <span class="pre">.TRUE.,</span></code> must be set in <code class="docutils literal notranslate"><span class="pre">EXF_NML_01</span></code> and the file name is specified as <code class="docutils literal notranslate"><span class="pre">uwindfile='UWIND'</span></code>, in <code class="docutils literal notranslate"><span class="pre">EXF_NML_02</span></code> - the underscore and year will be appended based on the model time.</p></li>
+</ol>
 </section>
 <section id="temporal-interpolation">
-<h3>Temporal Interpolation<a class="headerlink" href="#temporal-interpolation" title="Permalink to this headline">#</a></h3>
+<h4>Temporal Interpolation<a class="headerlink" href="#temporal-interpolation" title="Permalink to this headline">#</a></h4>
+<p>In the data.exf file, temporal information is provided for each file in <code class="docutils literal notranslate"><span class="pre">EXF_NML_02</span></code>. For example, consider the following information for the zonal wind file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">uwindstartdate1</span>   <span class="o">=</span> <span class="mi">19920101</span><span class="p">,</span>
+ <span class="n">uwindstartdate2</span>   <span class="o">=</span> <span class="mi">030000</span><span class="p">,</span>
+ <span class="n">uwindperiod</span>       <span class="o">=</span> <span class="mf">21600.0</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>This information indicates the first timestep in the file corresponds to the date 1 January 1992 at 3:00 am. The first date line corresponds to the date (YYYYMMDD) and the second to the time (HHMMSS). The final line corresponds to the temporal resolution in the model - in this case, the file provides 6-hourly wind speeds i.e. the second timesteps corresponds to 1 January 1992 at 9:00 am.</p>
+<p>In the special case that a climatological file is provided (i.e. if the file is a monthly file that will be repeated each year in the model), then the date information is omitted and the period is set to <code class="docutils literal notranslate"><span class="pre">uwindperiod</span> <span class="pre">=</span> <span class="pre">-12,</span></code>.</p>
+<p>To determine the external forcing value at a given time, the model <strong>linearly interpolates between the two closest timesteps</strong> at each model point.</p>
 </section>
 <section id="spatial-interpolation">
-<h3>Spatial Interpolation<a class="headerlink" href="#spatial-interpolation" title="Permalink to this headline">#</a></h3>
-<p>There are a few options for spatial interpolation. One straight-forward method is to manually interpolate the conditions onto the model domaim prior to the model run. In this case, specify the interpolation method as 0 in namelist 4.</p>
+<h4>Spatial Interpolation<a class="headerlink" href="#spatial-interpolation" title="Permalink to this headline">#</a></h4>
+<p>There are two ways that the model can spatially interpolate from the provided conditions to the model grid.</p>
+<p>First, the external forcing conditions can be provided on the exact same grid as the model. In this case, a flag of 0 should be provided in <code class="docutils literal notranslate"><span class="pre">EXF_NML_04</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">uwind_interpMethod</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Second, the model can linearly interpolate the external forcing conditions onto the model grid. In this case, the geographic information for the locations of the external forcing field must be provided in <code class="docutils literal notranslate"><span class="pre">EXF_NML_04</span></code>, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">uwind_lon0</span>        <span class="o">=</span>   <span class="mf">0.0000000</span><span class="n">D0</span><span class="p">,</span>
+ <span class="n">uwind_lat0</span>        <span class="o">=</span> <span class="o">-</span><span class="mf">89.4628220</span><span class="n">D0</span><span class="p">,</span>
+ <span class="n">uwind_lon_inc</span>     <span class="o">=</span>   <span class="mf">0.7031250</span><span class="n">D0</span><span class="p">,</span>
+ <span class="n">uwind_lat_inc</span>     <span class="o">=</span> <span class="mf">0.6958694</span><span class="p">,</span><span class="mf">0.6999817</span><span class="p">,</span><span class="mf">0.7009048</span><span class="p">,</span><span class="mf">0.7012634</span><span class="p">,</span><span class="mf">0.7014313</span><span class="p">,</span>
+                     <span class="mi">245</span><span class="o">*</span><span class="mf">0.7017418</span><span class="p">,</span>
+                     <span class="mf">0.7014313</span><span class="p">,</span><span class="mf">0.7012634</span><span class="p">,</span><span class="mf">0.7009048</span><span class="p">,</span><span class="mf">0.6999817</span><span class="p">,</span><span class="mf">0.6958694</span>
+ <span class="n">uwind_nlon</span>        <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+ <span class="n">uwind_nlat</span>        <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>where the lines above correspond to the lower left coordinates of the field, the grid spacings, and the shape of the field.</p>
+</section>
 </section>
 </section>
 </section>
@@ -434,16 +565,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "ms274"
         },
         kernelOptions: {
-            name: "python3",
+            name: "ms274",
             path: "./mitgcm"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'ms274'</script>
 
                 </article>
               
@@ -492,10 +623,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exf">data.exf</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#periodicity">Periodicity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-interpolation">Temporal Interpolation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-interpolation">Spatial Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-external-forcing-fields">Common External Forcing Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exf-package">The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-considerations">Compile-time considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-considerations">Run-time considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exf">data.exf</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-the-fields">Formatting the fields</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-interpolation">Temporal Interpolation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-interpolation">Spatial Interpolation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
