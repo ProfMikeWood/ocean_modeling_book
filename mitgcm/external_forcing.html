@@ -390,7 +390,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-external-forcing-fields">Common External Forcing Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-external-forcing-fields">Common External Forcing Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fields">Example Fields</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exf-package">The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-considerations">Compile-time considerations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-considerations">Run-time considerations</a><ul class="nav section-nav flex-column">
@@ -415,7 +418,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="external-forcing">
 <h1>External Forcing<a class="headerlink" href="#external-forcing" title="Permalink to this headline">#</a></h1>
-<p>External forcing fields (usually) refer to atmospheric paramters that modify the temperature, salinity, or momentum in the upper ocean. However, there are some occasionally-used external forcing fields that are implemented at the ocean floor, such as geothermal heat flux. The following table lists commonly-used external forcing fields:</p>
+<p>External forcing fields (usually) refer to atmospheric parameters that modify the temperature, salinity, or momentum in the upper ocean. However, there are some occasionally-used external forcing fields that are implemented at the ocean floor, such as geothermal heat flux. The following table lists commonly-used external forcing fields:</p>
 <section id="common-external-forcing-fields">
 <h2>Common External Forcing Fields<a class="headerlink" href="#common-external-forcing-fields" title="Permalink to this headline">#</a></h2>
 <table class="colwidths-auto table">
@@ -427,16 +430,6 @@ document.write(`
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Zonal Wind</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">UVEL</span></code></p></td>
-<td><p>m/s</p></td>
-<td class="text-left"><p>Wind is positive eastward <em>in model coordinates</em>, which is not necessarily east on the real globe, depending on the orientation of the model grid</p></td>
-</tr>
-<tr class="row-odd"><td><p>Meridional Wind</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">VVEL</span></code></p></td>
-<td><p>m/s</p></td>
-<td class="text-left"><p>Wind is positive northward <em>in model coordinates</em>, which is not necessarily east on the real globe, depending on the orientation of the model grid</p></td>
-</tr>
 <tr class="row-even"><td><p>Surface Air Temperature</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ATEMP</span></code></p></td>
 <td><p>K</p></td>
@@ -450,12 +443,22 @@ document.write(`
 <tr class="row-even"><td><p>Downward shortwave radiation</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">SWDOWN</span></code></p></td>
 <td><p>W/m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
-<td class="text-left"><p>Downward positive</p></td>
+<td class="text-left"><p>Downward positive by default. If units are upward positive, a <span class="math notranslate nohighlight">\(-1\)</span> scalar must be applied in the data.exf file.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Downward longwave radiation</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">LWDOWN</span></code></p></td>
 <td><p>W/m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
-<td class="text-left"><p>Downward positive</p></td>
+<td class="text-left"><p>Downward positive by default. If units are upward positive, a <span class="math notranslate nohighlight">\(-1\)</span> scalar must be applied in the data.exf file.</p></td>
+</tr>
+<tr class="row-even"><td><p>Zonal Wind</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UVEL</span></code></p></td>
+<td><p>m/s</p></td>
+<td class="text-left"><p>Wind is positive eastward <em>in model coordinates</em>, which is not necessarily east on the real globe, depending on the orientation of the model grid</p></td>
+</tr>
+<tr class="row-odd"><td><p>Meridional Wind</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VVEL</span></code></p></td>
+<td><p>m/s</p></td>
+<td class="text-left"><p>Wind is positive northward <em>in model coordinates</em>, which is not necessarily east on the real globe, depending on the orientation of the model grid</p></td>
 </tr>
 <tr class="row-even"><td><p>Precipitation</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">PRECIP</span></code></p></td>
@@ -469,6 +472,11 @@ document.write(`
 </tr>
 </tbody>
 </table>
+<section id="example-fields">
+<h3>Example Fields<a class="headerlink" href="#example-fields" title="Permalink to this headline">#</a></h3>
+<p>The following plot shows the 8 external forcing fields using the ECCO Version 5 Alpha State Estimate. The timesteps shown are for 15 January 2008.</p>
+<p><img alt="ECCO Version 5 Alpha External Forcing Fields" src="https://github.com/ProfMikeWood/ocean_modeling_book/tree/main/images/ecco_exf_fields.png" /></p>
+</section>
 </section>
 <section id="the-exf-package">
 <h2>The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package<a class="headerlink" href="#the-exf-package" title="Permalink to this headline">#</a></h2>
@@ -623,7 +631,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-external-forcing-fields">Common External Forcing Fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-external-forcing-fields">Common External Forcing Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fields">Example Fields</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exf-package">The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-considerations">Compile-time considerations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-considerations">Run-time considerations</a><ul class="nav section-nav flex-column">
