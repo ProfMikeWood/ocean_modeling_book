@@ -12,6 +12,7 @@ There are three main ways to prescribe initial conditions in MITgcm:
 1. Reference Conditions
 2. Hydrography Conditions
 3. Pickup Files
+
 The first two options are used when the model is initialized at `nIter=0`; otherwise, the third option must be used.
 
 ### Option 1: Reference Condition
@@ -19,16 +20,17 @@ When `nIter=0` and no conditions are provided, the model will be initialized wit
 
 ### Option 2: Hydrography Conditions
 To specify initial conditions when `nIter=0`, the user can generate 3D fields and provide the file names in the `&PARM05` namelist of the data file. Specifically, the following variable names can be specified:
+
 |----------|-----------|
 | Variable | File Name |
 |----------|-----------|
 | Temperature (THETA) | `hydrogTheta' |
-| Salinity (SALT) | `hydrogTheta' |
-| Zonal Velocity (UVEL) | `hydrogTheta' |
-| Meridional Velocity (VVEL) | `hydrogTheta' |
-| Sea Surface Height (ETAN) | `hydrogTheta' |
+| Salinity (SALT) | `hydrogSaltFile' |
+| Zonal Velocity (UVEL) | `uVelInitFile' |
+| Meridional Velocity (VVEL) | `vVelInitFile' |
+| Sea Surface Height (ETAN) | `pSurfInitFile' |
 
-If any of the above files are not specified, the model will default to option 0.
+If any of the above files are not specified, the model will default to option 1.
 
 Each file should store a single binary grid of size (Nr, Ny, Nx), here written in Pythonic ordering (i.e. if the grid were a numpy array, then np.shape would return (Nr, Ny, Nx)). The only exception is the sea surface height field, which has a shape of (1, Ny, Nx).
 

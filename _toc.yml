@@ -7,7 +7,7 @@ parts:
   - caption: Getting Started
     chapters:
     - file: getting_started/setting_up_python_and_jupyter
-    - file: getting_started/installing_gfortran
+    - file: getting_started/installing_compiler_and_mpi
     - file: getting_started/working_with_github
   - caption: Oceanography
     chapters:
