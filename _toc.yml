@@ -7,8 +7,9 @@ parts:
   - caption: Getting Started
     chapters:
     - file: getting_started/setting_up_python_and_jupyter
-    - file: getting_started/installing_compiler_and_mpi
     - file: getting_started/setting_up_a_github_repository
+    - file: getting_started/getting_familiar_with_jupyter_notebooks
+    - file: getting_started/installing_compiler_and_mpi
   - caption: Oceanography
     chapters:
     - file: oceanography/momentum
