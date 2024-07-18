@@ -158,14 +158,14 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_gfortran.html">Installing gfortran and MPI on a Mac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/working_with_github.html">Working with Github</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
@@ -388,8 +388,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-global-model">Option 1: Global Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-the-obcs-package">Option 2: The OBCS Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-condition-options">Boundary Condition Options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-global-model">Option 1: Global Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-the-obcs-package">Option 2: The OBCS Package</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#obcs-compile-time-considerations"><code class="docutils literal notranslate"><span class="pre">obcs</span></code> Compile-Time Considerations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#obcs-run-time-considerations"><code class="docutils literal notranslate"><span class="pre">obcs</span></code> Run-Time Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-boundary-locations">Assigning Boundary Locations</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-file-names">Assigning File Names</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#balancing-boundary-conditions">Balancing Boundary Conditions</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-sponge-parameters">Assigning Sponge Parameters</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-periodicity">Assigning Periodicity</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-boundary-condition-fields">Preparing Boundary Condition Fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -403,13 +418,187 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="boundary-conditions">
 <h1>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">#</a></h1>
+<p>Boundary conditions are model state parameters that are applied at the edges of a regional domain. As typical domains are square, the sides of the domain are denoted “north”, “south”, “east” and “west” corresponding to the top, bottom, right, and left boundaries. However, it should be noted that these directions do not necessarily correspond to the cardinal directions in the model.</p>
+<p>The typical boundary conditions required in a regional model are outlined in the following table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Descrition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">THETA</span></code></p></td>
+<td><p>Potential Temperature</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SALT</span></code></p></td>
+<td><p>Salinity</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UVEL</span></code></p></td>
+<td><p>Velocity in the model x-direction</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VVEL</span></code></p></td>
+<td><p>Velocity in the model y-direction</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that velocity may still be applied on boundaries when the velocity component is parallel. For example, <code class="docutils literal notranslate"><span class="pre">UVEL</span></code> can still be applied on the southern boundary even though it is parallel to the boundary.</p>
+<p>In the case that the model also contains seaice, the following conditions are additionally applied:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Descrition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AREA</span></code></p></td>
+<td><p>Sea ice concentration</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HEFF</span></code></p></td>
+<td><p>Effective sea ice thickness</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HSNOW</span></code></p></td>
+<td><p>Effective thickness of snow on sea ice</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UICE</span></code></p></td>
+<td><p>Sea ice velocity in the model x-direction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VICE</span></code></p></td>
+<td><p>Sea ice velocity in the model y-direction</p></td>
+</tr>
+</tbody>
+</table>
+<section id="boundary-condition-options">
+<h2>Boundary Condition Options<a class="headerlink" href="#boundary-condition-options" title="Permalink to this headline">#</a></h2>
 <section id="option-1-global-model">
-<h2>Option 1: Global Model<a class="headerlink" href="#option-1-global-model" title="Permalink to this headline">#</a></h2>
-<p>The default behavior for a model is to be periodic. In other words, the right side is connected to the left side, and the top is connected to the bottom.</p>
-<p>The most assured way to suppress this behavior is to generate a bathymetry that has 0 depth on all sides.</p>
+<h3>Option 1: Global Model<a class="headerlink" href="#option-1-global-model" title="Permalink to this headline">#</a></h3>
+<p>The default behavior for boundary conditions in MITgcm is that the conditions are periodic. In other words, the right side is connected to the left side, and the top is connected to the bottom.</p>
+<p>If you would like to generate an enclosed regional model, the most assured way to suppress the periodic behavior is to generate a bathymetry that has 0 depth on all four boundaries. This approach is used in the <a class="reference external" href="https://mitgcm.readthedocs.io/en/latest/examples/barotropic_gyre/barotropic_gyre.html">MITgcm Barotropic Gyre</a> tutorial.</p>
 </section>
 <section id="option-2-the-obcs-package">
-<h2>Option 2: The OBCS Package<a class="headerlink" href="#option-2-the-obcs-package" title="Permalink to this headline">#</a></h2>
+<h3>Option 2: The OBCS Package<a class="headerlink" href="#option-2-the-obcs-package" title="Permalink to this headline">#</a></h3>
+<p>In the case that a regional model is desired, the Open Boundary ConditionS (OBCS) package can be used.</p>
+<section id="obcs-compile-time-considerations">
+<h4><code class="docutils literal notranslate"><span class="pre">obcs</span></code> Compile-Time Considerations<a class="headerlink" href="#obcs-compile-time-considerations" title="Permalink to this headline">#</a></h4>
+<p>To enable the <code class="docutils literal notranslate"><span class="pre">obcs</span></code> package for compilation, add a line for <code class="docutils literal notranslate"><span class="pre">obcs</span></code> in the <code class="docutils literal notranslate"><span class="pre">packages.conf</span></code> files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While the <code class="docutils literal notranslate"><span class="pre">obcs</span></code> package does not strictly require the use of the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package, the designation of condition time-stepping is provided in the <code class="docutils literal notranslate"><span class="pre">data.exf</span></code> package and its funtionality was built around tools from the <code class="docutils literal notranslate"><span class="pre">cal</span></code> package. With this in mind, most regional models that use <code class="docutils literal notranslate"><span class="pre">obcs</span></code> also enable the <code class="docutils literal notranslate"><span class="pre">exf</span></code> and <code class="docutils literal notranslate"><span class="pre">cal</span></code> packages by adding these to the <code class="docutils literal notranslate"><span class="pre">packages.conf</span></code> file.</p>
+</div>
+<p>By default, the <a class="reference external" href="https://github.com/MITgcm/MITgcm/blob/master/pkg/obcs/OBCS_OPTIONS.h">OBCS_OPTIONS.h</a> file will allow for the presciption of boundary conditions on all four sides of the model. If you model has fewer boundaries (e.g. one or more is on land), then consider turning off one or more of these options to save time in running the model. For example, if your model does not have an eastern boundary, then consider deactivating this code using the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#undef ALLOW_OBCS_WEST</span>
+</pre></div>
+</div>
+<p>In addition, the <code class="docutils literal notranslate"><span class="pre">obcs</span></code> package does not activate code for a boundary “sponge” by default. If you would like to add a sponge to your boundaries (see below), then consider including this code in the <code class="docutils literal notranslate"><span class="pre">OBCS_OPTIONS.h</span></code> by modifying the sponge line as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#define ALLOW_OBCS_SPONGE</span>
+</pre></div>
+</div>
+</section>
+<section id="obcs-run-time-considerations">
+<h4><code class="docutils literal notranslate"><span class="pre">obcs</span></code> Run-Time Considerations<a class="headerlink" href="#obcs-run-time-considerations" title="Permalink to this headline">#</a></h4>
+<p>The data.obcs file is a required file when using the boundary condition package. There is one main parameter list in this file (<code class="docutils literal notranslate"><span class="pre">&amp;OBCS_PARM01</span></code>) which contains the majority of the periment information.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Namelist</p></th>
+<th class="text-left head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBCS_PARM01</span></code></p></td>
+<td class="text-left"><p>Set parameters for reading and applying boundary conditions</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OBCS_PARM02</span></code></p></td>
+<td class="text-left"><p>Used to provide Orlankski boundary conditions. Not required when Orlanski conditions are turned off.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBCS_PARM03</span></code></p></td>
+<td class="text-left"><p>Used to provide sponge parameters. Not required when the sponge code is turned off.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OBCS_PARM04</span></code></p></td>
+<td class="text-left"><p>Used to provide Stevens boundary conditions. Not required when Stevens conditions are turned off.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="assigning-boundary-locations">
+<h5>Assigning Boundary Locations<a class="headerlink" href="#assigning-boundary-locations" title="Permalink to this headline">#</a></h5>
+<p>The boundary location assignment is typically provided at the top of the <code class="docutils literal notranslate"><span class="pre">&amp;OBCS_PARM01</span></code> namelist. For each of the boundaries used in the regional model, an array of indices equal to the length of the boundary must be provided. For example, consider a regional domain with 240 columns and 360 rows with open boundaries on the north, south, and west sides of the domain but a closed east side on land. In the case that the bottom row is the southern boundary, the left column is the west boundary, and the top row is north boundary, the locations of the boundaries would be provided as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">OB_Jsouth</span> <span class="o">=</span>   <span class="mi">240</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span>
+  <span class="n">OB_Iwest</span>  <span class="o">=</span>   <span class="mi">360</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span>
+  <span class="n">OB_Jnorth</span> <span class="o">=</span>   <span class="mi">240</span><span class="o">*</span><span class="mi">360</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>This situation is most common for regional model although there is a lot of flexibility in how the conditions may be applied. For more information, see the <a class="reference external" href="https://mitgcm.readthedocs.io/en/latest/phys_pkgs/obcs.html">obcs documentation</a>.</p>
+</section>
+<section id="assigning-file-names">
+<h5>Assigning File Names<a class="headerlink" href="#assigning-file-names" title="Permalink to this headline">#</a></h5>
+<p>The <code class="docutils literal notranslate"><span class="pre">&amp;OBCS_PARM01</span></code> namelist also contains the list of files that will be provided on each boundary. The file names are specified with the letters “OB” then a capital letter corresponding to the boundary, and then a letter or letters corresponding to the vairables, followed by the word file. For example, <code class="docutils literal notranslate"><span class="pre">OBNtFile</span></code> and <code class="docutils literal notranslate"><span class="pre">OBWsFile</span></code> would correspond to the files for <code class="docutils literal notranslate"><span class="pre">THETA</span></code> (t) on the northern (n) boundary and <code class="docutils literal notranslate"><span class="pre">SALT</span></code> (s) on the western (W) boundary. The full list of variable letters is as follows:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Letter for file assignment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">THETA</span></code></p></td>
+<td><p>t</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SALT</span></code></p></td>
+<td><p>s</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UVEL</span></code></p></td>
+<td><p>u</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VVEL</span></code></p></td>
+<td><p>v</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AREA</span></code></p></td>
+<td><p>a</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">HEFF</span></code></p></td>
+<td><p>h</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">HSNOW</span></code></p></td>
+<td><p>sn</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UICE</span></code></p></td>
+<td><p>uice</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VICE</span></code></p></td>
+<td><p>vice</p></td>
+</tr>
+</tbody>
+</table>
+<p>With this convention, the files are identified in the namelist. For example, the files for theta on the northern, southern, and western boundaries may be listed as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">OBNtFile</span><span class="o">=</span><span class="s1">&#39;Theta_north.bin&#39;</span>
+ <span class="n">OBStFile</span><span class="o">=</span><span class="s1">&#39;Theta_south.bin&#39;</span>
+ <span class="n">OBWtFile</span><span class="o">=</span><span class="s1">&#39;Theta_west.bin&#39;</span>
+</pre></div>
+</div>
+<p>These lines would repeat for each variable being prescribed with boundary conditions in the given file.</p>
+</section>
+<section id="balancing-boundary-conditions">
+<h5>Balancing Boundary Conditions<a class="headerlink" href="#balancing-boundary-conditions" title="Permalink to this headline">#</a></h5>
+<p>One convenient option provided by the <code class="docutils literal notranslate"><span class="pre">obcs</span></code> package is the ability to balance flow through each of the boundaries. While every attempt should be made to balance the conditions when the files are formulated, often differences can arise. The balancing option ensures that no mass is loss or gained in the domain. To run the balancing script, provide the following lines in the <code class="docutils literal notranslate"><span class="pre">&amp;OBCS_PARM01</span></code> namelist:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">useOBCSbalance</span> <span class="o">=</span> <span class="o">.</span><span class="n">TRUE</span><span class="o">.</span><span class="p">,</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Mass additions into the domain such as those from precipitation or runoff will not be included in the balancing code by default. In effect, if your mass additions are not equal to your mass loss (e.g. precipitation &gt; evaporation), this will change the volume in your domain and will likely lead to issues. This can be averted by setting <code class="docutils literal notranslate"><span class="pre">OBCSbalanceSurf</span> <span class="pre">=</span> <span class="pre">.TRUE.</span></code> in <code class="docutils literal notranslate"><span class="pre">&amp;OBCS_PARM01</span></code>.</p>
+</div>
+</section>
+<section id="assigning-sponge-parameters">
+<h5>Assigning Sponge Parameters<a class="headerlink" href="#assigning-sponge-parameters" title="Permalink to this headline">#</a></h5>
+<p>Under construction.</p>
+</section>
+<section id="assigning-periodicity">
+<h5>Assigning Periodicity<a class="headerlink" href="#assigning-periodicity" title="Permalink to this headline">#</a></h5>
+<p>Under construction.</p>
+</section>
+</section>
+<section id="preparing-boundary-condition-fields">
+<h4>Preparing Boundary Condition Fields<a class="headerlink" href="#preparing-boundary-condition-fields" title="Permalink to this headline">#</a></h4>
+<p>Under construction.</p>
+</section>
+</section>
 </section>
 </section>
 
@@ -480,8 +669,23 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-global-model">Option 1: Global Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-the-obcs-package">Option 2: The OBCS Package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-condition-options">Boundary Condition Options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-global-model">Option 1: Global Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-the-obcs-package">Option 2: The OBCS Package</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#obcs-compile-time-considerations"><code class="docutils literal notranslate"><span class="pre">obcs</span></code> Compile-Time Considerations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#obcs-run-time-considerations"><code class="docutils literal notranslate"><span class="pre">obcs</span></code> Run-Time Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-boundary-locations">Assigning Boundary Locations</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-file-names">Assigning File Names</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#balancing-boundary-conditions">Balancing Boundary Conditions</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-sponge-parameters">Assigning Sponge Parameters</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#assigning-periodicity">Assigning Periodicity</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-boundary-condition-fields">Preparing Boundary Condition Fields</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

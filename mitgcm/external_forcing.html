@@ -395,8 +395,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exf-package">The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-considerations">Compile-time considerations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-considerations">Run-time considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exf-compile-time-considerations"><code class="docutils literal notranslate"><span class="pre">exf</span></code> Compile-Time Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exf-run-time-considerations"><code class="docutils literal notranslate"><span class="pre">exf</span></code> Run-Time Considerations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exf">data.exf</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-the-fields">Formatting the fields</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-interpolation">Temporal Interpolation</a></li>
@@ -481,8 +481,8 @@ document.write(`
 <section id="the-exf-package">
 <h2>The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package<a class="headerlink" href="#the-exf-package" title="Permalink to this headline">#</a></h2>
 <p>In MITgcm, the primary way to implement external forcing conditions is through the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package.</p>
-<section id="compile-time-considerations">
-<h3>Compile-time considerations<a class="headerlink" href="#compile-time-considerations" title="Permalink to this headline">#</a></h3>
+<section id="exf-compile-time-considerations">
+<h3><code class="docutils literal notranslate"><span class="pre">exf</span></code> Compile-Time Considerations<a class="headerlink" href="#exf-compile-time-considerations" title="Permalink to this headline">#</a></h3>
 <p>To enable the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package for compilation, add a line for <code class="docutils literal notranslate"><span class="pre">exf</span></code> in the <code class="docutils literal notranslate"><span class="pre">packages.conf</span></code> files.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -490,8 +490,8 @@ document.write(`
 </div>
 <p>Note that by default, the <a class="reference external" href="https://github.com/MITgcm/MITgcm/blob/master/pkg/exf/EXF_OPTIONS.h">EXF_OPTIONS.h</a> file is configured to use all of the fields listed in the table above. Further information is provided on the <a class="reference external" href="https://mitgcm.readthedocs.io/en/latest/phys_pkgs/exf.html">MITgcm documentation page</a> for the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package.</p>
 </section>
-<section id="run-time-considerations">
-<h3>Run-time considerations<a class="headerlink" href="#run-time-considerations" title="Permalink to this headline">#</a></h3>
+<section id="exf-run-time-considerations">
+<h3><code class="docutils literal notranslate"><span class="pre">exf</span></code> Run-Time Considerations<a class="headerlink" href="#exf-run-time-considerations" title="Permalink to this headline">#</a></h3>
 <section id="data-exf">
 <h4>data.exf<a class="headerlink" href="#data-exf" title="Permalink to this headline">#</a></h4>
 <p>The data.exf file is a required file when using the external forcing package. There are four main namelists in this file:</p>
@@ -636,8 +636,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exf-package">The <code class="docutils literal notranslate"><span class="pre">exf</span></code> package</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-considerations">Compile-time considerations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-considerations">Run-time considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exf-compile-time-considerations"><code class="docutils literal notranslate"><span class="pre">exf</span></code> Compile-Time Considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exf-run-time-considerations"><code class="docutils literal notranslate"><span class="pre">exf</span></code> Run-Time Considerations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exf">data.exf</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-the-fields">Formatting the fields</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-interpolation">Temporal Interpolation</a></li>
