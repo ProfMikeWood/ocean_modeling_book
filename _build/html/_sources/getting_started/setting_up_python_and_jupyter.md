@@ -34,17 +34,22 @@ conda install matplotlib
 conda install netcdf4
 conda install xarray
 conda install jupyter
-conda install jupyterlab
-conda install ipykernel 
 conda install cartopy
 conda install moviepy
 conda install git
 ```
 
-Finally, configure your environment to use in a jupyter notebook:
+Finally, configure your environment to use in a jupyter notebook. 
+
+On maachine running MacOS use:
 
 ```
 python3 -m ipykernel install --user --name=cs185c
+```
+
+On Windows, use:
+```
+python -m ipykernel install --user --name=cs185c
 ```
 
 
