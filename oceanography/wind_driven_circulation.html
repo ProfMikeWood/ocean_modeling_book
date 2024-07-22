@@ -60,7 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/wind_driven_circulation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -407,7 +408,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="wind-driven-circulation">
+  <section class="tex2jax_ignore mathjax_ignore" id="wind-driven-circulation">
 <h1>Wind-Driven Circulation<a class="headerlink" href="#wind-driven-circulation" title="Permalink to this headline">#</a></h1>
 <p>A large part of the upper-ocean circulation is driven by wind blowing across the ocean surface. The page provides a brief overview of atmospheric circulation and its role in setting up circulation at the ocean surface.</p>
 <section id="synoptic-scale-atmospheric-circulation">
@@ -421,42 +422,30 @@ document.write(`
 <p>Another observation that can be gleaned from the above wind plot is that in the northern hemisphere, equatorward flow is directed to the west and polarward flow is directed to the east. Put another way, the flow is directed to the right of its meridional flow. The situtation is opposite in the southern hemispehre - the meridional flow is deflected to the left.</p>
 <p>This effect, known as the <strong>Coriolis Force</strong>, is the apparent deflection of moving objects on the surface of a rotating body. It is describe as a “force” in that it exerts an apparent acceleration on moving objects although it is not an actual force. For this reason, it some sometimes referred to as the <em>Coriolis effect</em>.</p>
 <p>The magnitude of the Coriolis force can be expressed in terms of the latitude and the angular rotational speed of the planet, i.e.</p>
-<p>$
-f = 2\Omega \sin \theta
-$</p>
-<p>where $\Omega = 10^{-5}$ s$^{-1}$ is the angular rotation of Earth and $\theta$ is the latitude.</p>
+<div class="math notranslate nohighlight">
+\[    f = 2\Omega \sin \theta\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Omega = 10^{-5}\)</span> s<span class="math notranslate nohighlight">\(^{-1}\)</span> is the angular rotation of Earth and <span class="math notranslate nohighlight">\(\theta\)</span> is the latitude.</p>
 </section>
 <section id="wind-stress-on-the-ocean-surface">
 <h2>Wind Stress on the Ocean Surface<a class="headerlink" href="#wind-stress-on-the-ocean-surface" title="Permalink to this headline">#</a></h2>
 <p>As wind blows arcross the ocean surface, friction between the air and ocean generates a shear on the ocoean surface, known as wind stress. Wind stress is found to be roughly propotional to the wind speed as</p>
-<p>$
-\tau_{yy} =
-$</p>
+<div class="math notranslate nohighlight">
+\[    \tau_{yy} =\]</div>
 </section>
 <section id="ekman-transport">
 <h2>Ekman Transport<a class="headerlink" href="#ekman-transport" title="Permalink to this headline">#</a></h2>
 <p>Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. The equations describing ocean current components resulting from a northward windstress are</p>
-<p>$$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9d67379-dc32-4b9b-b753-6fa4a5e8fb36">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c9d67379-dc32-4b9b-b753-6fa4a5e8fb36" title="Permalink to this equation">#</a></span>\[\begin{align}
-u &amp; = V_0 exp(az) sin(\pi /4 − az)\\
-v &amp;= V_0 exp(az) cos(\pi /4 − az)
-\end{align}\]</div>
-<p>$$</p>
-<p>where</p>
-<p>$$
-V_0 = \frac{\tau_{yy}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}
-$$</p>
-<p>These equations were derived by <span id="id1"></span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations here are reproduced from Chapter 9 of <span id="id2">Stewart [<a class="reference internal" href="../references.html#id4" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and defailts of the derivation.</p>
-<p>There are many implications of these observations but for the purposes of the surface ocean where $z=0$, we can see that</p>
-<p>$$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b2ea8731-7363-466e-bd9f-1392bbe1e919">
-<span class="eqno">(2)<a class="headerlink" href="#equation-b2ea8731-7363-466e-bd9f-1392bbe1e919" title="Permalink to this equation">#</a></span>\[\begin{align}
-u &amp; = V_0  \frac{\sqrt{2}}{2}\\
-v &amp;= V_0 \frac{\sqrt{2}}{2}
-\end{align}\]</div>
-<p>$$</p>
-<p>In other words, the <em>surface ocean currents flow at an angle 45$^{\circ}$ relative to the wind stress direction</em>. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}u &amp; = V_0 e^{az} sin(\pi /4 − az)\\
+v &amp;= V_0 e^{az} cos(\pi /4 − az)
+```\end{align}```\end{split}\\where\\```{math}
+V_0 = \frac{\tau_{yy}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}\end{aligned}\end{align} \]</div>
+<p>These equations were derived by <span id="id1">Ekman [<a class="reference internal" href="../references.html#id3">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations here are reproduced from Chapter 9 of <span id="id2">Stewart [<a class="reference internal" href="../references.html#id4" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and defailts of the derivation.</p>
+<p>There are many implications of these observations but for the purposes of the surface ocean where <span class="math notranslate nohighlight">\(z=0\)</span>, we can see that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u &amp; = V_0  \frac{\sqrt{2}}{2}\\
+v &amp;= V_0 \frac{\sqrt{2}}{2}\end{split}\]</div>
+<p>In other words, the <em>surface ocean currents flow at an angle 45<span class="math notranslate nohighlight">\(^{\circ}\)</span> relative to the wind stress direction</em>. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.</p>
 </section>
 <section id="synoptic-scale-ocean-circulation">
 <h2>Synoptic-Scale Ocean Circulation<a class="headerlink" href="#synoptic-scale-ocean-circulation" title="Permalink to this headline">#</a></h2>

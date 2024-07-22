@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/equation_of_state';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -392,14 +394,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="equation-of-state">
+  <section class="tex2jax_ignore mathjax_ignore" id="equation-of-state">
 <h1>Equation of State<a class="headerlink" href="#equation-of-state" title="Permalink to this headline">#</a></h1>
-<p>Density ($\rho$) is a key parameter in determining fluid flow in the ocean. For example, it plays a role in the pressure gradient force:
-$$
+<p>Density (<span class="math notranslate nohighlight">\(\rho\)</span>) is a key parameter in determining fluid flow in the ocean. For example, it plays a role in the pressure gradient force:
+$<span class="math notranslate nohighlight">\(
 F_{\text{pressure gradient}} = -\frac{1}{\rho}\nabla p
-$$
-where $p$ is the pressure.</p>
-<p>Density itself is a function of temperature, salinity, and pressure: $\rho = f(T,S,p)$. This relationship, called the <strong>equation of state</strong> has been drived by measuring the density of seawater in a laboratory setting across a wide range of temperature, salinity, and pressure values.</p>
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>p$ is the pressure.</p>
+<p>Density itself is a function of temperature, salinity, and pressure: <span class="math notranslate nohighlight">\(\rho = f(T,S,p)\)</span>. This relationship, called the <strong>equation of state</strong> has been drived by measuring the density of seawater in a laboratory setting across a wide range of temperature, salinity, and pressure values.</p>
 <p>Given its fundamental role relating key ocean properties, the equation of state is used often oceanography and has been implemented in toolboxes in various languages. In Python, we can access this relationship using the Gibbs Seawater Toolbox (gsw) and use it to examine density in temperature and salinity space:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -452,11 +454,11 @@ where $p$ is the pressure.</p>
 <img alt="../_images/ec5d255a2978ba3dce4ffa27a7a99282ead7b2fe28c11119048b12c9ce5cb9b4.png" src="../_images/ec5d255a2978ba3dce4ffa27a7a99282ead7b2fe28c11119048b12c9ce5cb9b4.png" />
 </div>
 </div>
-<p>By examining the density contours in temperature-salinity space, we observe that the density of typical ocean water lies in the range of 1020 to 1030 kg/m$^3$. Since the 1000 is constant, it is often substracted as a reference density $\rho_0$ and the density is plotted in terms of $sigma = \rho - \rho_0$.</p>
-<p>We also observe that the function is typically not linear - especially at lower temperatures and salinities, which are typical of many locations in the Arctic. Given this locally linear nature of the equation of state, it is commonly expressed in terms of expansion and contraction coefficients $\alpha$ and $\beta$ for temperature and salinity, respectively:
-$$
+<p>By examining the density contours in temperature-salinity space, we observe that the density of typical ocean water lies in the range of 1020 to 1030 kg/m<span class="math notranslate nohighlight">\(^3\)</span>. Since the 1000 is constant, it is often substracted as a reference density <span class="math notranslate nohighlight">\(\rho_0\)</span> and the density is plotted in terms of <span class="math notranslate nohighlight">\(sigma = \rho - \rho_0\)</span>.</p>
+<p>We also observe that the function is typically not linear - especially at lower temperatures and salinities, which are typical of many locations in the Arctic. Given this locally linear nature of the equation of state, it is commonly expressed in terms of expansion and contraction coefficients <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> for temperature and salinity, respectively:
+$<span class="math notranslate nohighlight">\(
 \Delta \rho = \alpha \Delta \Theta \text{ and } \Delta \rho = \beta \Delta S
-$$</p>
+\)</span>$</p>
 </section>
 
     <script type="text/x-thebe-config">

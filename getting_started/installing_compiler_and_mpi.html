@@ -414,7 +414,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="installing-a-compiler-with-mpi">
+  <section class="tex2jax_ignore mathjax_ignore" id="installing-a-compiler-with-mpi">
 <h1>Installing a compiler with MPI<a class="headerlink" href="#installing-a-compiler-with-mpi" title="Permalink to this headline">#</a></h1>
 <p>To run MITgcm, we will need two cruicial components: a fortran compiler and a version of MPI. This page describes how to install these items on both MacOS and Windows (using Cygwin).</p>
 <p>The compiler is used to translate the fortran MITgcm source code into code that can be run on your machine. Message Passing Interface (MPI) is a framework to allow for the parallelization of the model code, dividing portions of the model across different CPUs.</p>
@@ -423,7 +423,7 @@ document.write(`
 <p>On a Mac, installation of the compiler and MPI are made considerably easier using the homebrew package manager.</p>
 <section id="install-homebrew">
 <h3>Install Homebrew<a class="headerlink" href="#install-homebrew" title="Permalink to this headline">#</a></h3>
-<p>If you haven’t already done so, install homebrew following the instruction at https://brew.sh/.</p>
+<p>If you haven’t already done so, install homebrew following the instruction at <a class="reference external" href="https://brew.sh/">https://brew.sh/</a>.</p>
 </section>
 <section id="install-gcc">
 <h3>Install gcc<a class="headerlink" href="#install-gcc" title="Permalink to this headline">#</a></h3>
@@ -496,7 +496,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 <section id="install-cygwin-with-required-packages">
 <h3>Install Cygwin with required packages<a class="headerlink" href="#install-cygwin-with-required-packages" title="Permalink to this headline">#</a></h3>
 <p>If you haven’t already done so, install Cygwin by running the executable on the <a class="reference external" href="https://www.cygwin.com/install.html">Cygwin installation page</a>. All of the default installation options are typically fine.</p>
-<p>For the mirroring site, choose a site near where you are located. I chose mirrors.kernels.org because it is located in California but you may like to choose a different option depending on your location.</p>
+<p>For the mirroring site, choose a site near where you are located. I chose <a class="reference external" href="http://mirrors.kernels.org">mirrors.kernels.org</a> because it is located in California but you may like to choose a different option depending on your location.</p>
 <p>When it comes to the package selection screen, add the list of packages in the following table. The version numbers were the most recent up-to-date files when I</p>
 <table class="colwidths-auto table">
 <thead>

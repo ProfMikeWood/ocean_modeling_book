@@ -19,9 +19,9 @@ This effect, known as the **Coriolis Force**, is the apparent deflection of movi
 
 The magnitude of the Coriolis force can be expressed in terms of the latitude and the angular rotational speed of the planet, i.e.
 
-$
-f = 2\Omega \sin \theta
-$
+```{math}
+    f = 2\Omega \sin \theta
+```
 
 where $\Omega = 10^{-5}$ s$^{-1}$ is the angular rotation of Earth and $\theta$ is the latitude. 
 
@@ -29,37 +29,33 @@ where $\Omega = 10^{-5}$ s$^{-1}$ is the angular rotation of Earth and $\theta$ 
 ## Wind Stress on the Ocean Surface
 As wind blows arcross the ocean surface, friction between the air and ocean generates a shear on the ocoean surface, known as wind stress. Wind stress is found to be roughly propotional to the wind speed as
 
-$
-\tau_{yy} =
-$
+```{math}
+    \tau_{yy} =
+```
 
 
 ## Ekman Transport
 Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. The equations describing ocean current components resulting from a northward windstress are
 
-$$
-\begin{align}
-u & = V_0 exp(az) sin(\pi /4 − az)\\
-v &= V_0 exp(az) cos(\pi /4 − az)
-\end{align}
-$$
+```{math}
+u & = V_0 e^{az} sin(\pi /4 − az)\\
+v &= V_0 e^{az} cos(\pi /4 − az)
+```\end{align}```
 
 where
 
-$$
+```{math}
 V_0 = \frac{\tau_{yy}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}
-$$
+```
 
-These equations were derived by {cite:ts}`ekman1905influenceekman1905influence` by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations here are reproduced from Chapter 9 of {cite:ts}`stewart2008introduction` where further information can be found regarding the history and defailts of the derivation.
+These equations were derived by {cite:ts}`ekman1905influence` by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations here are reproduced from Chapter 9 of {cite:ts}`stewart2008introduction` where further information can be found regarding the history and defailts of the derivation.
 
 There are many implications of these observations but for the purposes of the surface ocean where $z=0$, we can see that
 
-$$
-\begin{align}
+```{math}
 u & = V_0  \frac{\sqrt{2}}{2}\\
 v &= V_0 \frac{\sqrt{2}}{2}
-\end{align}
-$$
+```
 
 In other words, the *surface ocean currents flow at an angle 45$^{\circ}$ relative to the wind stress direction*. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.
 

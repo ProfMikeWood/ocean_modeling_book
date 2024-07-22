@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/conservation_equations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -411,7 +413,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="conservation-equations">
+  <section class="tex2jax_ignore mathjax_ignore" id="conservation-equations">
 <h1>Conservation Equations<a class="headerlink" href="#conservation-equations" title="Permalink to this headline">#</a></h1>
 <p>This page is aimed at outlining the main equations governing fluid flow in the ocean. Further information is provided on subsequent pages.</p>
 <section id="id1">
@@ -433,17 +435,17 @@ document.write(`
 <td><p>Fluid velocity in the zonal, meridional, and vertical directions</p></td>
 <td><p>meters per second</p></td>
 </tr>
-<tr class="row-even"><td><p>$\rho$</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\rho\)</span></p></td>
 <td><p>Density</p></td>
-<td><p>kg/m$^3$</p></td>
+<td><p>kg/m<span class="math notranslate nohighlight">\(^3\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p>g</p></td>
 <td><p>Gravitational Acceleration</p></td>
-<td><p>m/s$^3$</p></td>
+<td><p>m/s<span class="math notranslate nohighlight">\(^3\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>$\Theta$</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Theta\)</span></p></td>
 <td><p>Potential Temperature</p></td>
-<td><p>$^{\circ}$C</p></td>
+<td><p><span class="math notranslate nohighlight">\(^{\circ}\)</span>C</p></td>
 </tr>
 <tr class="row-odd"><td><p>S</p></td>
 <td><p>Practical Salinity</p></td>
@@ -457,21 +459,21 @@ document.write(`
 <section id="conservation-of-mass">
 <h3>Conservation of Mass<a class="headerlink" href="#conservation-of-mass" title="Permalink to this headline">#</a></h3>
 <p>At a given point in the ocean, mass must be conserved</p>
-<p>$
-\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial }{\partial x} = 0
-$</p>
+<p><span class="math notranslate nohighlight">\(
+\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial }{\partial x} = 0 
+\)</span></p>
 </section>
 <section id="conservation-of-momentum">
 <h3>Conservation of Momentum<a class="headerlink" href="#conservation-of-momentum" title="Permalink to this headline">#</a></h3>
-<p>$
+<p><span class="math notranslate nohighlight">\(
 \frac{\partial \textbf{u}}{\partial x}
-$</p>
+\)</span></p>
 </section>
 <section id="conservation-of-heat">
 <h3>Conservation of Heat<a class="headerlink" href="#conservation-of-heat" title="Permalink to this headline">#</a></h3>
-<p>$
+<p><span class="math notranslate nohighlight">\(
 \frac{\partial \Theta}{\partial t} + \frac{\partial \Theta \textbf{u}}{\partial t}  = 0
-$</p>
+\)</span></p>
 </section>
 <section id="id3">
 <h3><a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
@@ -481,9 +483,9 @@ $</p>
 <h2>Common Approximations and Simplifying Assumptions<a class="headerlink" href="#common-approximations-and-simplifying-assumptions" title="Permalink to this headline">#</a></h2>
 <section id="hydrostatic">
 <h3>Hydrostatic<a class="headerlink" href="#hydrostatic" title="Permalink to this headline">#</a></h3>
-<p>$
+<p><span class="math notranslate nohighlight">\(
 \frac{\partial p}{\partial z} = \rho g
-$</p>
+\)</span></p>
 </section>
 </section>
 </section>
