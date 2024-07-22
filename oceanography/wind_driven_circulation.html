@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Momentum" href="momentum.html" />
-    <link rel="prev" title="Installing a compiler with MPI" href="../getting_started/installing_compiler_and_mpi.html" />
+    <link rel="prev" title="Overview" href="oceanography_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -166,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
@@ -410,42 +411,49 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="wind-driven-circulation">
 <h1>Wind-Driven Circulation<a class="headerlink" href="#wind-driven-circulation" title="Permalink to this headline">#</a></h1>
-<p>A large part of the upper-ocean circulation is driven by wind blowing across the ocean surface. The page provides a brief overview of atmospheric circulation and its role in setting up circulation at the ocean surface.</p>
+<p>A large part of the upper-ocean circulation is driven by wind blowing across the ocean surface. This page provides a brief overview of atmospheric circulation and it’s role in setting up circulation at the ocean surface.</p>
 <section id="synoptic-scale-atmospheric-circulation">
 <h2>Synoptic-scale Atmospheric Circulation<a class="headerlink" href="#synoptic-scale-atmospheric-circulation" title="Permalink to this headline">#</a></h2>
-<p>The following plots show the annual mean wind speed at 10 m from the ERA5 climatte model:</p>
-<p>Plot here</p>
-<p>As we can see from the plot above, surface winds fall into three primary cells in each hemisphere: a westward equator-ward flow between 0 and 30 degrees, an eastward poleward flow between 30 and 60 degrees, and a polar flow moving westward. This general flow forms the surface components of the Hadley, Ferrel, and Polar circulation cells, respectively.</p>
+<p>The following plots show the annual mean wind speed components at 10 m above the ocean surface from the ERA5 climate model:</p>
+<img alt="ERA5 Wind Fields" class="align-center" src="../_images/ecco_wind_fields.png" />
+<p>As we can see from the plot above, surface winds fall into three primary cells in each hemisphere. Between 0<span class="math notranslate nohighlight">\(^{\circ}\)</span> and 30<span class="math notranslate nohighlight">\(^{\circ}\)</span> winds tend to flow in the westward direction with a strong equator-ward component on the eastern side of each ocean basin. Between 30<span class="math notranslate nohighlight">\(^{\circ}\)</span> and 60<span class="math notranslate nohighlight">\(^{\circ}\)</span>, this pattern is reversed: winds tend to flow in the eastward driection with a pole-ward flow observed on the western side of the ocean basins. Finally, poleward of 60<span class="math notranslate nohighlight">\(^{\circ}\)</span>, winds tend to be more spatially variable. These mean flow patterns form the surface components of the Hadley, Ferrel, and Polar circulation cells, respectively.</p>
+<p>Further information on the 3-cell global atmospheric circulation patterns is available in a variety of resources including an overview on <a class="reference external" href="https://www.noaa.gov/jetstream/global/global-atmospheric-circulations">NOAA’s website</a>.</p>
 </section>
 <section id="the-coriolis-force">
 <h2>The Coriolis “Force”<a class="headerlink" href="#the-coriolis-force" title="Permalink to this headline">#</a></h2>
-<p>Another observation that can be gleaned from the above wind plot is that in the northern hemisphere, equatorward flow is directed to the west and polarward flow is directed to the east. Put another way, the flow is directed to the right of its meridional flow. The situtation is opposite in the southern hemispehre - the meridional flow is deflected to the left.</p>
+<p>Another observation that can be gleaned from the above wind plots is that in the northern hemisphere, equatorward flow is directed to the west and polarward flow is directed to the east. Put another way, the flow is directed to the right of its meridional flow.</p>
+<p>The situtation is opposite in the southern hemispehre - the meridional flow is deflected to the left.</p>
 <p>This effect, known as the <strong>Coriolis Force</strong>, is the apparent deflection of moving objects on the surface of a rotating body. It is describe as a “force” in that it exerts an apparent acceleration on moving objects although it is not an actual force. For this reason, it some sometimes referred to as the <em>Coriolis effect</em>.</p>
-<p>The magnitude of the Coriolis force can be expressed in terms of the latitude and the angular rotational speed of the planet, i.e.</p>
+<p>The magnitude of the Coriolis force can be expressed as the Coriolis parameter <span class="math notranslate nohighlight">\(f\)</span> in terms of the angular rotational speed (<span class="math notranslate nohighlight">\(\Omega\)</span>) of Earth and the latitude (<span class="math notranslate nohighlight">\(\theta\)</span>), i.e.</p>
 <div class="math notranslate nohighlight">
 \[    f = 2\Omega \sin \theta\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Omega = 10^{-5}\)</span> s<span class="math notranslate nohighlight">\(^{-1}\)</span> is the angular rotation of Earth and <span class="math notranslate nohighlight">\(\theta\)</span> is the latitude.</p>
+<p>where <span class="math notranslate nohighlight">\(\Omega = 7.29 \times 10^{-5}\)</span> s<span class="math notranslate nohighlight">\(^{-1}\)</span>.</p>
 </section>
 <section id="wind-stress-on-the-ocean-surface">
 <h2>Wind Stress on the Ocean Surface<a class="headerlink" href="#wind-stress-on-the-ocean-surface" title="Permalink to this headline">#</a></h2>
-<p>As wind blows arcross the ocean surface, friction between the air and ocean generates a shear on the ocoean surface, known as wind stress. Wind stress is found to be roughly propotional to the wind speed as</p>
+<p>As wind blows arcross the ocean surface, friction between the air and ocean generates a shear on the ocean surface called wind stress. Wind stress is found to be roughly propotional to the wind speed (<span class="math notranslate nohighlight">\(\vec{U}\)</span>) relative to the ocean surface (<span class="math notranslate nohighlight">\(\vec{U}_0\)</span>), as</p>
 <div class="math notranslate nohighlight">
-\[    \tau_{yy} =\]</div>
+\[    \vec{\tau} = \rho_a C_D |\Delta \vec{U}| \Delta \vec{U}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\rho_a\)</span> is the density of the atmosphere, <span class="math notranslate nohighlight">\(C_D\)</span> is a drag coefficient, and <span class="math notranslate nohighlight">\(\Delta \vec{U} = \vec{U} - \vec{U}_0\)</span> is the relative wind speed vector. This “bulk formula”, described in equation 3a of <span id="id1"></span> is often used in ocean models, such as MITgcm, to parameterize the effect of wind on the ocean surface. Since wind stress modifies the momentum at the ocean surface, it is often described as a “momentum flux”.</p>
 </section>
 <section id="ekman-transport">
 <h2>Ekman Transport<a class="headerlink" href="#ekman-transport" title="Permalink to this headline">#</a></h2>
 <p>Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. The equations describing ocean current components resulting from a northward windstress are</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\begin{split}u &amp; = V_0 e^{az} sin(\pi /4 − az)\\
-v &amp;= V_0 e^{az} cos(\pi /4 − az)
-```\end{align}```\end{split}\\where\\```{math}
-V_0 = \frac{\tau_{yy}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}\end{aligned}\end{align} \]</div>
-<p>These equations were derived by <span id="id1">Ekman [<a class="reference internal" href="../references.html#id3">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations here are reproduced from Chapter 9 of <span id="id2">Stewart [<a class="reference internal" href="../references.html#id4" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and defailts of the derivation.</p>
+\[\begin{split}u &amp; = V_0 e^{az} sin(\pi /4 − az)\\
+v &amp;= V_0 e^{az} cos(\pi /4 − az)\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(z\)</span> is the depth and</p>
+<div class="math notranslate nohighlight">
+\[V_0 = \frac{\tau_{y}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\tau_{y}\)</span> is the northward wind stress, <span class="math notranslate nohighlight">\(\rho_w\)</span> is the density of sea water, <span class="math notranslate nohighlight">\(f\)</span> is the Coriolis parameter, and <span class="math notranslate nohighlight">\(A_z\)</span> is the vertical viscosity (friction).</p>
+<p>This structure, termed the “Ekman spiral” can be visualized with vectors as follows:</p>
+<p>Plot HERE</p>
+<p>The Ekman spiral equations were derived by <span id="id2">Ekman [<a class="reference internal" href="../references.html#id3" title="Vagn Walfrid Ekman. On the influence of the earth's rotation on ocean-currents. 1905.">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations above are reproduced from Chapter 9 of <span id="id3">Stewart [<a class="reference internal" href="../references.html#id5" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and details of the derivation.</p>
 <p>There are many implications of these observations but for the purposes of the surface ocean where <span class="math notranslate nohighlight">\(z=0\)</span>, we can see that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}u &amp; = V_0  \frac{\sqrt{2}}{2}\\
 v &amp;= V_0 \frac{\sqrt{2}}{2}\end{split}\]</div>
-<p>In other words, the <em>surface ocean currents flow at an angle 45<span class="math notranslate nohighlight">\(^{\circ}\)</span> relative to the wind stress direction</em>. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.</p>
+<p>In other words, the <strong>surface ocean currents flow at an angle 45<span class="math notranslate nohighlight">\(^{\circ}\)</span> relative to the wind stress direction</strong>. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.</p>
 </section>
 <section id="synoptic-scale-ocean-circulation">
 <h2>Synoptic-Scale Ocean Circulation<a class="headerlink" href="#synoptic-scale-ocean-circulation" title="Permalink to this headline">#</a></h2>
@@ -488,12 +496,12 @@ v &amp;= V_0 \frac{\sqrt{2}}{2}\end{split}\]</div>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../getting_started/installing_compiler_and_mpi.html"
+       href="oceanography_overview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Installing a compiler with MPI</p>
+        <p class="prev-next-title">Overview</p>
       </div>
     </a>
     <a class="right-next"
