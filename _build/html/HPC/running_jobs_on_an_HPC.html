@@ -60,8 +60,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'HPC/running_jobs_on_an_HPC';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -166,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
@@ -417,7 +416,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="running-jobs-on-an-hpc">
+  <section id="running-jobs-on-an-hpc">
 <h1>Running jobs on an HPC<a class="headerlink" href="#running-jobs-on-an-hpc" title="Permalink to this headline">#</a></h1>
 <p>High performance computing clusters typically implement a job queue to manage computations submitted by different users. The two most common job managers for HPCs are slurm and pbs. Each is slightly different but the commands to submit and manage jobs work in essentially the same way.</p>
 <section id="creating-a-job-script">
@@ -426,9 +425,9 @@ document.write(`
 <section id="determining-the-number-of-cpus-and-nodes">
 <h3>Determining the number of CPUs and Nodes<a class="headerlink" href="#determining-the-number-of-cpus-and-nodes" title="Permalink to this headline">#</a></h3>
 <p>When requesting resources, we need to determine how many CPUs are required for the job. Typically, this is implemented in the construction of the code to be parallelized. In the case of MITgcm, the number of CPUs is the total number of processors identified in the SIZE.h file (nPx*nPy). After the CPUs have been determined, next you need to determine the nodes to request for the job - the key component of the job script. The number of nodes for a job is determined by how many CPUs are on each node - a specification which you will find in the documentation for your HPC. For example, a common configuration is to pair 2 Broadwell processors containing 14 CPUs each as a node, resulting in 28 CPUs per node. Then, the total nodes required for your job is given by</p>
-<p><span class="math notranslate nohighlight">\(
+<p>$
 \text{ceiling}\left(\frac{\text{nunber of cpus}}{\text{cpus per node}}\right)
-\)</span></p>
+$</p>
 </section>
 <section id="job-script-format">
 <h3>Job Script Format<a class="headerlink" href="#job-script-format" title="Permalink to this headline">#</a></h3>

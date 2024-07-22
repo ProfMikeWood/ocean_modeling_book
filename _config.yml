@@ -24,6 +24,11 @@ sphinx:
   config:
     bibtex_reference_style: author_year
 
+# This allows for equations in latex form
+parse:
+  myst_enable_extensions:
+    - amsmath
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/executablebooks/jupyter-book  # Online location of your book

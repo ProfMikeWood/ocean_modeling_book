@@ -12,6 +12,8 @@ parts:
     - file: getting_started/installing_compiler_and_mpi
   - caption: Oceanography
     chapters:
+    - file: oceanography/oceangraphy_overview
+    - file: oceanography/wind_driven_circulation
     - file: oceanography/momentum
     - file: oceanography/thermodynamics
     - file: oceanography/equation_of_state
