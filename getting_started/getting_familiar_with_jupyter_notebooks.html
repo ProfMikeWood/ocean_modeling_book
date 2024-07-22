@@ -164,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
@@ -392,7 +393,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-a-jupyter-notebook">Opening a Jupyter Notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-basics">Jupyter Notebook Basics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-jupyter-kernel">The Jupyter Kernel</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-cells">Types of Cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-cells">Jupyter Cells</a></li>
 </ul>
 </li>
 </ul>
@@ -406,23 +407,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="getting-familiar-with-jupyter-notebooks">
+  <section id="getting-familiar-with-jupyter-notebooks">
 <h1>Getting Familiar with Jupyter Notebooks<a class="headerlink" href="#getting-familiar-with-jupyter-notebooks" title="Permalink to this headline">#</a></h1>
-<p>Under Construction</p>
+<p>Jupyter notebooks were designed as a convenient way to store both text and code together in the same place. They were created primarily with the coding languages <strong>Ju</strong>lia, <strong>Pyt</strong>hon, and <strong>R</strong> in mind although there are some plugins for other languages as well.</p>
 <section id="opening-a-jupyter-notebook">
 <h2>Opening a Jupyter Notebook<a class="headerlink" href="#opening-a-jupyter-notebook" title="Permalink to this headline">#</a></h2>
-<p>Under Construction</p>
+<p>A straight-forward way to open a Jupyter notebook is through the terminal. If you are using a Mac, you can open the default Terminal application. If you are on a Windows machine, then you can launch the Anaconda Prompt, found under the Start menu.</p>
+<p>When you open the terminal, activate a conda environment with jupyter installed. If you followed the Installing Python and Jupyter instructions, your <code class="docutils literal notranslate"><span class="pre">cs185c</span></code> environment will be set up correctly. Activate it in the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">cs185c</span>
+</pre></div>
+</div>
+<p>Now, you can launch your Jupyter notebook with the simple command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span> <span class="n">notebook</span>
+</pre></div>
+</div>
+<p>Note that your notebook will open in your default web browser. Jupyter leverages the web brower interface but it is not online.</p>
+<p>With Jupyter open, you can navigate through your file system, open existing notebooks, and create new ones using the option in the upper right hand side of the screen.</p>
 </section>
 <section id="jupyter-notebook-basics">
 <h2>Jupyter Notebook Basics<a class="headerlink" href="#jupyter-notebook-basics" title="Permalink to this headline">#</a></h2>
-<p>Under Construction</p>
+<p>There are two key components to familiarize yourself with in a Jupyter notebook - the kernel and the notebook cells. These are described in the next two sections.</p>
 <section id="the-jupyter-kernel">
 <h3>The Jupyter Kernel<a class="headerlink" href="#the-jupyter-kernel" title="Permalink to this headline">#</a></h3>
-<p>Under Construction</p>
+<p>The kernel of a notebook is running in the background of a notebook and supports the compilation and running of code. If you configured your conda environment to be accessible in a Jupyter notebook, you can use your environment for the kernel. This will allow you to use all of the packages installed in your environment in the notebook.</p>
 </section>
-<section id="types-of-cells">
-<h3>Types of Cells<a class="headerlink" href="#types-of-cells" title="Permalink to this headline">#</a></h3>
-<p>Under Construction</p>
+<section id="jupyter-cells">
+<h3>Jupyter Cells<a class="headerlink" href="#jupyter-cells" title="Permalink to this headline">#</a></h3>
+<p>There are two main types of cells in a Jupyter notebook: Code cells and Markdown cells. Code cells are used to run Python code blocks. Markdown cells store formatted text such as headers, tables, equations, and other types of text. The page HERE provides a convenient reference on formatting Markdown text.</p>
+<p>To run a cell, you can use the play button on the top bar of the notebook. Alternatively, you can use the hot key <code class="docutils literal notranslate"><span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">Enter</span></code>. When a coding cell is running, the bracket next to the cell will have a astericks (<code class="docutils literal notranslate"><span class="pre">[*]</span></code>) and when it completes, it will contain a number (<code class="docutils literal notranslate"><span class="pre">[17]</span></code>). The numbers will show the order you have run the cells and they do not need to be run from top to bottom.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When data is stored into variables in a notebook, it is stored in memory for use in subsequent cells. Use caution when storing large arrays into new variables throughout the notebook.</p>
+</div>
+<p>By default, a new cell will start as a Code cell but the cell type can be changed using dropdown found in the header bar of the notebook.</p>
 </section>
 </section>
 </section>
@@ -497,7 +514,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-a-jupyter-notebook">Opening a Jupyter Notebook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-basics">Jupyter Notebook Basics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-jupyter-kernel">The Jupyter Kernel</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-cells">Types of Cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-cells">Jupyter Cells</a></li>
 </ul>
 </li>
 </ul>

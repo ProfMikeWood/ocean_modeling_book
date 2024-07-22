@@ -60,8 +60,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/external_forcing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -166,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
@@ -417,7 +416,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="external-forcing">
+  <section id="external-forcing">
 <h1>External Forcing<a class="headerlink" href="#external-forcing" title="Permalink to this headline">#</a></h1>
 <p>External forcing fields (usually) refer to atmospheric parameters that modify the temperature, salinity, or momentum in the upper ocean. However, there are some occasionally-used external forcing fields that are implemented at the ocean floor, such as geothermal heat flux. The following table lists commonly-used external forcing fields:</p>
 <section id="common-external-forcing-fields">
@@ -438,18 +437,18 @@ document.write(`
 </tr>
 <tr class="row-odd"><td><p>Surface Specific Humidity</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">AQH</span></code></p></td>
-<td><p>kg H<span class="math notranslate nohighlight">\(_2\)</span>O per kg air</p></td>
+<td><p>kg H$_2$O per kg air</p></td>
 <td class="text-left"><p></p></td>
 </tr>
 <tr class="row-even"><td><p>Downward shortwave radiation</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">SWDOWN</span></code></p></td>
-<td><p>W/m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
-<td class="text-left"><p>Downward positive by default. If units are upward positive, a <span class="math notranslate nohighlight">\(-1\)</span> scalar must be applied in the data.exf file.</p></td>
+<td><p>W/m$^2$</p></td>
+<td class="text-left"><p>Downward positive by default. If units are upward positive, a $-1$ scalar must be applied in the data.exf file.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Downward longwave radiation</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">LWDOWN</span></code></p></td>
-<td><p>W/m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
-<td class="text-left"><p>Downward positive by default. If units are upward positive, a <span class="math notranslate nohighlight">\(-1\)</span> scalar must be applied in the data.exf file.</p></td>
+<td><p>W/m$^2$</p></td>
+<td class="text-left"><p>Downward positive by default. If units are upward positive, a $-1$ scalar must be applied in the data.exf file.</p></td>
 </tr>
 <tr class="row-even"><td><p>Zonal Wind</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">UVEL</span></code></p></td>

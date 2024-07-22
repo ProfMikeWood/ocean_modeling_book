@@ -60,8 +60,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'modeling/model_grids';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -166,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
@@ -403,13 +402,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="model-grids">
+  <section id="model-grids">
 <h1>Model Grids<a class="headerlink" href="#model-grids" title="Permalink to this headline">#</a></h1>
 <p>To simulate ocean circulation, one of the first steps is to define the model grid. There are several implementations of model grids that define where on each grid cell the tracer and velocity components are defined.</p>
 <p><span id="id1">Arakawa and Lamb [<a class="reference internal" href="../references.html#id2" title="Akio Arakawa and Vivian R Lamb. Computational design of the basic dynamical processes of the ucla general circulation model. General circulation models of the atmosphere, 17(Supplement C):173–265, 1977.">1977</a>]</span> define five different grid configurations lettered A-E. Here, the “Arakawa-C” is defined because it is used in MITgcm.</p>
 <section id="arakawa-c-grid">
 <h2>Arakawa-C Grid<a class="headerlink" href="#arakawa-c-grid" title="Permalink to this headline">#</a></h2>
-<p>The C-grid defines the tracer components at the center of the grid cell and the <span class="math notranslate nohighlight">\(u\)</span>- and <span class="math notranslate nohighlight">\(v\)</span>- velocity components on the left and lower edges of the cell, respectively. With this definition, the stream function (<span class="math notranslate nohighlight">\(\psi\)</span>) and vorticity (<span class="math notranslate nohighlight">\(\zeta\)</span>) are defined on the lower left corner of each cell. We can visualize the grid as follows:</p>
+<p>The C-grid defines the tracer components at the center of the grid cell and the $u$- and $v$- velocity components on the left and lower edges of the cell, respectively. With this definition, the stream function ($\psi$) and vorticity ($\zeta$) are defined on the lower left corner of each cell. We can visualize the grid as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
