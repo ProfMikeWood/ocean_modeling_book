@@ -401,7 +401,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesque-approximation">The Boussinesque Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussines-approximation">The Boussines Approximation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
 </ul>
             </nav>
@@ -416,7 +416,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="momentum">
 <h1>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">#</a></h1>
-<p>This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of <span id="id1">Stewart [<a class="reference internal" href="../references.html#id5" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span>.</p>
+<p>This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of <span id="id1">Stewart [<a class="reference internal" href="../references.html#id7" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span>.</p>
 <section id="momentum-overview">
 <h2>Momentum Overview<a class="headerlink" href="#momentum-overview" title="Permalink to this headline">#</a></h2>
 <p>Under construction</p>
@@ -450,13 +450,23 @@ document.write(`
 <p>Under construction</p>
 </section>
 </section>
-<section id="the-boussinesque-approximation">
-<h2>The Boussinesque Approximation<a class="headerlink" href="#the-boussinesque-approximation" title="Permalink to this headline">#</a></h2>
-<p>Under construction</p>
+<section id="the-boussines-approximation">
+<h2>The Boussines Approximation<a class="headerlink" href="#the-boussines-approximation" title="Permalink to this headline">#</a></h2>
+<p>The Boussinesq approximation for momentum is that sea water is, in effect, incompressible. Put into symbols, this means that</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\rho} \frac{D \rho}{D t}  = 0\]</div>
+<p>This Boussinesq approximation is often used when constructing numerical ocean models with fixed grids because the grid cells will not change volume due to changes in density. This is an important consideration because in the real ocean, variations in density <em>do</em> have a measureable effect on ocean volume. In fact, changes in density resulting primarily from increased ocean heat content are a major contributor to contempory sea level rise <span id="id2">[<a class="reference internal" href="../references.html#id4" title="Thomas Frederikse, Felix Landerer, Lambert Caron, Surendra Adhikari, David Parkes, Vincent W Humphrey, Sönke Dangendorf, Peter Hogarth, Laure Zanna, Lijing Cheng, and others. The causes of sea-level rise since 1900. Nature, 584(7821):393–397, 2020.">Frederikse <em>et al.</em>, 2020</a>]</span>. In effect, hen computing density-driven variations in sea level from ocean state estimates, it’s necessary to apply a correction <em>a posteriori</em> <span id="id3">[<a class="reference internal" href="../references.html#id5" title="Richard J Greatbatch. A note on the representation of steric sea level in models that conserve volume rather than mass. Journal of Geophysical Research: Oceans, 99(C6):12767–12771, 1994.">Greatbatch, 1994</a>]</span>.</p>
 </section>
 <section id="the-continuity-equation">
 <h2>The Continuity Equation<a class="headerlink" href="#the-continuity-equation" title="Permalink to this headline">#</a></h2>
-<p>Under construction</p>
+<p>Applying the conservation equation to momentum (i.e. the conservation of mass in a given volume) results in:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \rho}{\partial t} + \frac{\partial (\rho u)}{\partial x} + \frac{\partial (\rho v)}{\partial y} + \frac{\partial (\rho w)}{\partial z} = 0\]</div>
+<p>This equation is known as the <em>continuity equation</em>.</p>
+<p>Under the Boussinesq approximation, this is simplified to:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0\]</div>
+<p>Or, put another way, the flow into a given region but be equal to the flow out.</p>
 </section>
 </section>
 
@@ -535,7 +545,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesque-approximation">The Boussinesque Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussines-approximation">The Boussines Approximation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
 </ul>
   </nav></div>
