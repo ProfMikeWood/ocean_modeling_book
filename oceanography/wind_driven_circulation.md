@@ -38,7 +38,7 @@ As wind blows arcross the ocean surface, friction between the air and ocean gene
     \vec{\tau} = \rho_a C_D |\Delta \vec{U}| \Delta \vec{U}
 ```
 
-where $\rho_a$ is the density of the atmosphere, $C_D$ is a drag coefficient, and $\Delta \vec{U} = \vec{U} - \vec{U}_0$ is the relative wind speed vector. This "bulk formula", described in equation 3a of {cite:ts}`arge2009global` is often used in ocean models, such as MITgcm, to parameterize the effect of wind on the ocean surface. Since wind stress modifies the momentum at the ocean surface, it is often described as a "momentum flux".
+where $\rho_a$ is the density of the atmosphere, $C_D$ is a drag coefficient, and $\Delta \vec{U} = \vec{U} - \vec{U}_0$ is the relative wind speed vector. This "bulk formula", described in equation 3a of {cite:ts}`large2009global` is often used in ocean models, such as MITgcm, to parameterize the effect of wind on the ocean surface. Since wind stress modifies the momentum at the ocean surface, it is often described as a "momentum flux".
 
 
 ## Ekman Transport
@@ -55,7 +55,7 @@ where $z$ is the depth and
 V_0 = \frac{\tau_{y}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}
 ```
 
-Here, $\tau_{y}$ is the northward wind stress, $\rho_w$ is the density of sea water, $f$ is the Coriolis parameter, and $A_z$ is the vertical viscosity (friction).
+Here, $\tau_{y}$ is the northward wind stress, $\rho_w$ is the density of sea water, $f$ is the Coriolis parameter, and $A_z$ is the vertical eddy viscosity (friction).
 
 This structure, termed the "Ekman spiral" can be visualized with vectors as follows:
 
