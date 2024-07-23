@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/momentum';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -164,6 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
@@ -367,7 +370,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -383,6 +388,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-overview">Momentum Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-momentum-equations">The Momentum Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-total-derivative-of-momentum">The Total Derivative of Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pressure-gradient-force">The Pressure Gradient Force</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coriolis-force">The Coriolis Force</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesque-approximation">The Boussinesque Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -394,7 +416,48 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="momentum">
 <h1>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">#</a></h1>
-<p>This section will detail momentum equations.</p>
+<p>This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of <span id="id1">Stewart [<a class="reference internal" href="../references.html#id5" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span>.</p>
+<section id="momentum-overview">
+<h2>Momentum Overview<a class="headerlink" href="#momentum-overview" title="Permalink to this headline">#</a></h2>
+<p>Under construction</p>
+</section>
+<section id="the-momentum-equations">
+<h2>The Momentum Equations<a class="headerlink" href="#the-momentum-equations" title="Permalink to this headline">#</a></h2>
+<p>The momentum equations describe how momentum change at any given location in the ocean given the forces that act on it. They can be written succintly in vector notation as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{D\textbf{v}}{Dt} = - \frac{1}{\rho}\nabla p - 2\boldsymbol\Omega\times\textbf{v} + \textbf{g} + \textbf{F}_r\]</div>
+<p>In this equation, the left-hand side is the total derivative of <span class="math notranslate nohighlight">\(\textbf{v}\)</span>, and the right-hand side terms are the pressure gradient force (<span class="math notranslate nohighlight">\(-1/\rho \nabla p\)</span>), the Coriolis force (<span class="math notranslate nohighlight">\(2\boldsymbol\Omega\times\textbf{v}\)</span>), gravity (<span class="math notranslate nohighlight">\(\textbf{g}\)</span>), and frictional forces (i.e. viscosity, <span class="math notranslate nohighlight">\(\textbf{F}_r\)</span>). Each of these terms is describe in the following subsections.</p>
+<p>The vector notation for these equations can be expanded as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} + w\frac{\partial u}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial x} - 2\Omega v \text{sin}\theta + F_x\\
+\frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} + w\frac{\partial v}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial y} - 2\Omega u \text{sin}\theta + F_y\\
+\frac{\partial w}{\partial t} + u\frac{\partial w}{\partial x} + v\frac{\partial w}{\partial y} + w\frac{\partial w}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial z} + F_z\\\end{split}\]</div>
+<p>Note that the small vertical component of the Coriolis has been removed from …</p>
+<section id="the-total-derivative-of-momentum">
+<h3>The Total Derivative of Momentum<a class="headerlink" href="#the-total-derivative-of-momentum" title="Permalink to this headline">#</a></h3>
+<p>Under construction</p>
+</section>
+<section id="the-pressure-gradient-force">
+<h3>The Pressure Gradient Force<a class="headerlink" href="#the-pressure-gradient-force" title="Permalink to this headline">#</a></h3>
+<p>Under construction</p>
+</section>
+<section id="the-coriolis-force">
+<h3>The Coriolis Force<a class="headerlink" href="#the-coriolis-force" title="Permalink to this headline">#</a></h3>
+<p>Under construction</p>
+</section>
+<section id="frictional-forces">
+<h3>Frictional Forces<a class="headerlink" href="#frictional-forces" title="Permalink to this headline">#</a></h3>
+<p>Under construction</p>
+</section>
+</section>
+<section id="the-boussinesque-approximation">
+<h2>The Boussinesque Approximation<a class="headerlink" href="#the-boussinesque-approximation" title="Permalink to this headline">#</a></h2>
+<p>Under construction</p>
+</section>
+<section id="the-continuity-equation">
+<h2>The Continuity Equation<a class="headerlink" href="#the-continuity-equation" title="Permalink to this headline">#</a></h2>
+<p>Under construction</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -455,6 +518,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-overview">Momentum Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-momentum-equations">The Momentum Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-total-derivative-of-momentum">The Total Derivative of Momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pressure-gradient-force">The Pressure Gradient Force</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coriolis-force">The Coriolis Force</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesque-approximation">The Boussinesque Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
