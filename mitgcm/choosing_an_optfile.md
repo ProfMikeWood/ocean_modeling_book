@@ -11,7 +11,7 @@ If you are using MacOS with gfortran (recommend), then typically the darwin_amd_
 ### Windows with Cygwin
 If you are using Windows with a Cygwin installation, then use the [] file.
 
-### Copmuting Cluster
+### Computing Cluster
 The optfile used for compilation on a computing cluster will depend on your cluster's compiler. There are many options available and typically need to be paired with module loaded prior to compiling and running MITgcm.
 
 #### Listing the modules
