@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Primitive Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="momentum.html">Momentum</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
@@ -177,6 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes.html">Time-Stepping Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
@@ -425,7 +427,8 @@ document.write(`
 <p>Heat and salt can both be considered “tracers” in the ocean. At any given location, tracer concentrations <span class="math notranslate nohighlight">\(C\)</span> can be described by</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial(\rho C)}{\partial t} + \nabla \cdot (\rho C \textbf{u}) = \rho J\]</div>
-<p>where <span class="math notranslate nohighlight">\(J\)</span> is a local source term. Under the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html#the-boussinesq-approximation">Boussinesq approximation</a>, the density variations can be removed from the above equation as</p>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is a local source term. See Chapter 2 of <span id="id1">McWilliams [<a class="reference internal" href="../references.html#id7" title="James C McWilliams. Fundamentals of geophysical fluid dynamics. Cambridge University Press, 2006.">2006</a>]</span> for further details.</p>
+<p>Under the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html#the-boussinesq-approximation">Boussinesq approximation</a>, the density variations can be removed from the above equation as</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial C}{\partial t} + \textbf{u} \cdot \nabla C = J\]</div>
 </section>

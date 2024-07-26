@@ -23,9 +23,6 @@ The vector notation for these equations can be expanded as
 ```
 Note that the small vertical component of the Coriolis has been removed from ...
 
-### The Total Derivative of Momentum
-Under construction
-
 ### The Pressure Gradient Force
 Under construction
 

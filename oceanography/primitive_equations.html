@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Thermodynamics &#8212; Numerical Ocean Modeling</title>
+    <title>Primitive Equations &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/primitive_equations';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -167,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Thermodynamics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Primitive Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
@@ -175,6 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes.html">Time-Stepping Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
@@ -383,7 +387,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Thermodynamics</h1>
+    <h1>Primitive Equations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -393,9 +397,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-general-conservation-equation">A General Conservation Equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics-overview">Thermodynamics Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conservation-equations">The Conservation Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equations">The Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-total-derivative">The Total Derivative</a></li>
 </ul>
             </nav>
         </div>
@@ -407,19 +414,65 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="thermodynamics">
-<h1>Thermodynamics<a class="headerlink" href="#thermodynamics" title="Permalink to this headline">#</a></h1>
-<p>This section is aimed at describing the main terms in the equations for heat and salt which are key for numerical modeling.</p>
-<section id="a-general-conservation-equation">
-<h2>A General Conservation Equation<a class="headerlink" href="#a-general-conservation-equation" title="Permalink to this headline">#</a></h2>
-<p>Heat and salt can be considered “trace</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="primitive-equations">
+<h1>Primitive Equations<a class="headerlink" href="#primitive-equations" title="Permalink to this headline">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
+<p>Primitive equations refer to the set of complete mathematical equations that describe the heat, salt, mass, and momentum at any given location in the ocean. They are formulated using conservation laws for energy, momentum, and mass. Further, they are linked with the equation of state. Here, the equations are collected in one place to provide a concise overview. The next three subsections for Momentum, Thermodynamics, and Equation of State describe the terms of these equations with some details about how they are derived.</p>
 </section>
-<section id="thermodynamics-overview">
-<h2>Thermodynamics Overview<a class="headerlink" href="#thermodynamics-overview" title="Permalink to this headline">#</a></h2>
-<p>Under construction</p>
+<section id="the-equations">
+<h2>The Equations<a class="headerlink" href="#the-equations" title="Permalink to this headline">#</a></h2>
+<p>Under Construction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>\<span class="n">frac</span><span class="p">{</span><span class="n">D</span>\<span class="n">textbf</span><span class="p">{</span><span class="n">v</span><span class="p">}}{</span><span class="n">Dt</span><span class="p">}</span> <span class="o">&amp;=</span> <span class="o">-</span> \<span class="n">frac</span><span class="p">{</span><span class="mi">1</span><span class="p">}{</span>\<span class="n">rho</span><span class="p">}</span>\<span class="n">nabla</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">2</span>\<span class="n">boldsymbol</span>\<span class="n">Omega</span>\<span class="n">times</span>\<span class="n">textbf</span><span class="p">{</span><span class="n">v</span><span class="p">}</span> <span class="o">+</span> \<span class="n">textbf</span><span class="p">{</span><span class="n">g</span><span class="p">}</span> <span class="o">+</span> \<span class="n">textbf</span><span class="p">{</span><span class="n">F</span><span class="p">}</span><span class="n">_r</span>\\
+\<span class="n">frac</span><span class="p">{</span>\<span class="n">partial</span> <span class="n">u</span><span class="p">}{</span>\<span class="n">partial</span> <span class="n">x</span><span class="p">}</span> <span class="o">+</span> \<span class="n">frac</span><span class="p">{</span>\<span class="n">partial</span> <span class="n">v</span><span class="p">}{</span>\<span class="n">partial</span> <span class="n">y</span><span class="p">}</span> <span class="o">+</span> \<span class="n">frac</span><span class="p">{</span>\<span class="n">partial</span> <span class="n">w</span><span class="p">}{</span>\<span class="n">partial</span> <span class="n">z</span><span class="p">}</span> <span class="o">&amp;=</span> <span class="mi">0</span>\\
+\<span class="n">frac</span><span class="p">{</span>\<span class="n">partial</span> <span class="n">S</span><span class="p">}{</span>\<span class="n">partial</span> <span class="n">t</span><span class="p">}</span> <span class="o">+</span> \<span class="n">textbf</span><span class="p">{</span><span class="n">u</span><span class="p">}</span> \<span class="n">cdot</span> \<span class="n">nabla</span> <span class="n">S</span> <span class="o">&amp;=</span> <span class="n">J_S</span>\\
+\<span class="n">frac</span><span class="p">{</span>\<span class="n">partial</span> \<span class="n">Theta</span><span class="p">}{</span>\<span class="n">partial</span> <span class="n">t</span><span class="p">}</span> <span class="o">+</span> \<span class="n">textbf</span><span class="p">{</span><span class="n">u</span><span class="p">}</span> \<span class="n">cdot</span> \<span class="n">nabla</span> \<span class="n">Theta</span> <span class="o">&amp;=</span> \<span class="n">frac</span><span class="p">{</span><span class="n">J_H</span><span class="p">}{</span>\<span class="n">rho</span> <span class="n">C_p</span><span class="p">}</span>\\
+\<span class="n">rho</span> <span class="o">&amp;=</span> <span class="n">f</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="notation">
+<h3>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">#</a></h3>
+<p>Under Construction.</p>
+<p>Here we define the symbology used in the above equations and subsequent sections:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Variable</p></th>
+<th class="head"><p>Typical Units</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x, y, z</p></td>
+<td><p>Cooridinates for zonal, meridional, and veritical directions</p></td>
+<td><p>meters</p></td>
+</tr>
+<tr class="row-odd"><td><p>u, v, w</p></td>
+<td><p>Fluid velocity in the zonal, meridional, and vertical directions</p></td>
+<td><p>meters per second</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\rho\)</span></p></td>
+<td><p>Density</p></td>
+<td><p>kg/m<span class="math notranslate nohighlight">\(^3\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>g</p></td>
+<td><p>Gravitational Acceleration</p></td>
+<td><p>m/s<span class="math notranslate nohighlight">\(^3\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\Theta\)</span></p></td>
+<td><p>Potential Temperature</p></td>
+<td><p><span class="math notranslate nohighlight">\(^{\circ}\)</span>C</p></td>
+</tr>
+<tr class="row-odd"><td><p>S</p></td>
+<td><p>Practical Salinity</p></td>
+<td><p>psu</p></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="the-conservation-equations">
-<h2>The Conservation Equations<a class="headerlink" href="#the-conservation-equations" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="the-total-derivative">
+<h2>The Total Derivative<a class="headerlink" href="#the-total-derivative" title="Permalink to this headline">#</a></h2>
+<p>Under Construction.</p>
 </section>
 </section>
 
@@ -490,9 +543,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-general-conservation-equation">A General Conservation Equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics-overview">Thermodynamics Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conservation-equations">The Conservation Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equations">The Equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-total-derivative">The Total Derivative</a></li>
 </ul>
   </nav></div>
 

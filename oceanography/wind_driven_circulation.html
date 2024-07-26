@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Primitive Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
@@ -177,6 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes.html">Time-Stepping Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
@@ -450,7 +452,7 @@ v &amp;= V_0 e^{az} cos(\pi /4 − az)\end{split}\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\tau_{y}\)</span> is the northward wind stress, <span class="math notranslate nohighlight">\(\rho_w\)</span> is the density of sea water, <span class="math notranslate nohighlight">\(f\)</span> is the Coriolis parameter, and <span class="math notranslate nohighlight">\(A_z\)</span> is the vertical eddy viscosity (friction).</p>
 <p>This structure, termed the “Ekman spiral” can be visualized with vectors as follows:</p>
 <p>Plot HERE</p>
-<p>The Ekman spiral equations were derived by <span id="id2">Ekman [<a class="reference internal" href="../references.html#id3" title="Vagn Walfrid Ekman. On the influence of the earth's rotation on ocean-currents. 1905.">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations above are reproduced from Chapter 9 of <span id="id3">Stewart [<a class="reference internal" href="../references.html#id7" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and details of the derivation.</p>
+<p>The Ekman spiral equations were derived by <span id="id2">Ekman [<a class="reference internal" href="../references.html#id3" title="Vagn Walfrid Ekman. On the influence of the earth's rotation on ocean-currents. 1905.">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations above are reproduced from Chapter 9 of <span id="id3">Stewart [<a class="reference internal" href="../references.html#id8" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and details of the derivation.</p>
 <p>There are many implications of these observations but for the purposes of the surface ocean where <span class="math notranslate nohighlight">\(z=0\)</span>, we can see that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}u &amp; = V_0  \frac{\sqrt{2}}{2}\\
