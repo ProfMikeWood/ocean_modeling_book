@@ -60,6 +60,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/thermodynamics';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -166,6 +168,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="momentum.html">Momentum</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
@@ -392,7 +396,12 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics-overview">Thermodynamics Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conservation-equations">The Conservation Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-general-conservation-equation">A General Conservation Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conservation-of-salt">Conservation of Salt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conservation-of-heat">Conservation of Heat</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-temperature">Potential Temperature</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -409,10 +418,37 @@ document.write(`
 <p>This section is aimed at describing the main terms in the equations for heat and salt which are key for numerical modeling.</p>
 <section id="thermodynamics-overview">
 <h2>Thermodynamics Overview<a class="headerlink" href="#thermodynamics-overview" title="Permalink to this headline">#</a></h2>
-<p>Under construction</p>
+<p>Under Construction.</p>
 </section>
-<section id="the-conservation-equations">
-<h2>The Conservation Equations<a class="headerlink" href="#the-conservation-equations" title="Permalink to this headline">#</a></h2>
+<section id="a-general-conservation-equation">
+<h2>A General Conservation Equation<a class="headerlink" href="#a-general-conservation-equation" title="Permalink to this headline">#</a></h2>
+<p>Heat and salt can both be considered “tracers” in the ocean. At any given location, tracer concentrations <span class="math notranslate nohighlight">\(C\)</span> can be described by</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial(\rho C)}{\partial t} + \nabla \cdot (\rho C \textbf{u}) = \rho J\]</div>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is a local source term. Under the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html#the-boussinesq-approximation">Boussinesq approximation</a>, the density variations can be removed from the above equation as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial C}{\partial t} + \textbf{u} \cdot \nabla C = J\]</div>
+</section>
+<section id="conservation-of-salt">
+<h2>Conservation of Salt<a class="headerlink" href="#conservation-of-salt" title="Permalink to this headline">#</a></h2>
+<p>The above conservation equation can be applied to salinity <span class="math notranslate nohighlight">\(S\)</span> (kg/m<span class="math notranslate nohighlight">\(^3\)</span>) in the ocean as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial S}{\partial t} + \textbf{u} \cdot \nabla S = J_S\]</div>
+<p>where here, <span class="math notranslate nohighlight">\(J_S\)</span> represents sources and sinks of salinity. At the surface of the ocean, salinity can increase as a result of evaporation or brine rejection during the process of sea ice formation. Salinity can also decrease as a result of precipitation, runoff from rivers and ice sheets, and the melting of sea ice.</p>
+</section>
+<section id="conservation-of-heat">
+<h2>Conservation of Heat<a class="headerlink" href="#conservation-of-heat" title="Permalink to this headline">#</a></h2>
+<p>The above conservation equation can also be applied to heat concentration <span class="math notranslate nohighlight">\(H\)</span> (J/m<span class="math notranslate nohighlight">\(^3\)</span>) as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial H}{\partial t} + \textbf{u} \cdot \nabla H = J_H\]</div>
+<p>Often, it is advantageous to express heat in terms of temperature <span class="math notranslate nohighlight">\(H = \rho C_p \Theta\)</span> where <span class="math notranslate nohighlight">\(C_p = 4186\)</span> J kg<span class="math notranslate nohighlight">\(^{-1}\)</span> C<span class="math notranslate nohighlight">\(^{\circ-1}\)</span>. In this case, the conservation equation is expressed as</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \Theta}{\partial t} + \textbf{u} \cdot \nabla \Theta = \frac{J_H}{\rho C_p}\]</div>
+<p>At the surface of the ocean, there are various sources and sinks of heat including upwelling and downwelling radiation, and latent and sensible heat fluxes with the atmosphere and sea ice. In addition, geothermal heat provides a source of heat on the ocean floor, primarily near mid-ocean ridges.</p>
+<section id="potential-temperature">
+<h3>Potential Temperature<a class="headerlink" href="#potential-temperature" title="Permalink to this headline">#</a></h3>
+<p>In the above conservation equation, temperature (<span class="math notranslate nohighlight">\(t\)</span>) is expressed as <em>potential temperature</em> (<span class="math notranslate nohighlight">\(\Theta\)</span>) - the temperature of the water parcel if it were moved to the surface without exchanging any heat with its surroundings. It is advantangeous to use potential temperature rather than in situ temperature when building numerical models (and assessing oceanographic conditions in general) because water gains and loses heat as it moves down and up in the water column. This occurs because water compresses under pressure, which induces thermodynamic work on the water parcel. Formulating temperature as potential temperature circumvents this issue.</p>
+</section>
 </section>
 </section>
 
@@ -484,7 +520,12 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics-overview">Thermodynamics Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conservation-equations">The Conservation Equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-general-conservation-equation">A General Conservation Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conservation-of-salt">Conservation of Salt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conservation-of-heat">Conservation of Heat</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-temperature">Potential Temperature</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
