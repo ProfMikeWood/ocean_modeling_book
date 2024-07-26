@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Thermodynamics" href="thermodynamics.html" />
-    <link rel="prev" title="Wind-Driven Circulation" href="wind_driven_circulation.html" />
+    <link rel="prev" title="Thermodynamics" href="primitive_equations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -168,6 +168,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Thermodynamics</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
@@ -401,7 +403,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussines-approximation">The Boussines Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesq-approximation">The Boussinesq Approximation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
 </ul>
             </nav>
@@ -426,7 +428,7 @@ document.write(`
 <p>The momentum equations describe how momentum change at any given location in the ocean given the forces that act on it. They can be written succintly in vector notation as:</p>
 <div class="math notranslate nohighlight">
 \[\frac{D\textbf{v}}{Dt} = - \frac{1}{\rho}\nabla p - 2\boldsymbol\Omega\times\textbf{v} + \textbf{g} + \textbf{F}_r\]</div>
-<p>In this equation, the left-hand side is the total derivative of <span class="math notranslate nohighlight">\(\textbf{v}\)</span>, and the right-hand side terms are the pressure gradient force (<span class="math notranslate nohighlight">\(-1/\rho \nabla p\)</span>), the Coriolis force (<span class="math notranslate nohighlight">\(2\boldsymbol\Omega\times\textbf{v}\)</span>), gravity (<span class="math notranslate nohighlight">\(\textbf{g}\)</span>), and frictional forces (i.e. viscosity, <span class="math notranslate nohighlight">\(\textbf{F}_r\)</span>). Each of these terms is describe in the following subsections.</p>
+<p>In this equation, known as the <em>Navier-Stokes</em> equation, the left-hand side is the total derivative of <span class="math notranslate nohighlight">\(\textbf{v}\)</span>, and the right-hand side terms are the pressure gradient force (<span class="math notranslate nohighlight">\(-1/\rho \nabla p\)</span>), the Coriolis force (<span class="math notranslate nohighlight">\(2\boldsymbol\Omega\times\textbf{v}\)</span>), gravity (<span class="math notranslate nohighlight">\(\textbf{g}\)</span>), and frictional forces (i.e. viscosity, <span class="math notranslate nohighlight">\(\textbf{F}_r\)</span>). Each of these terms is describe in the following subsections.</p>
 <p>The vector notation for these equations can be expanded as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} + w\frac{\partial u}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial x} - 2\Omega v \text{sin}\theta + F_x\\
@@ -450,8 +452,8 @@ document.write(`
 <p>Under construction</p>
 </section>
 </section>
-<section id="the-boussines-approximation">
-<h2>The Boussines Approximation<a class="headerlink" href="#the-boussines-approximation" title="Permalink to this headline">#</a></h2>
+<section id="the-boussinesq-approximation">
+<h2>The Boussinesq Approximation<a class="headerlink" href="#the-boussinesq-approximation" title="Permalink to this headline">#</a></h2>
 <p>The Boussinesq approximation for momentum is that sea water is, in effect, incompressible. Put into symbols, this means that</p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{\rho} \frac{D \rho}{D t}  = 0\]</div>
@@ -502,12 +504,12 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="wind_driven_circulation.html"
+       href="primitive_equations.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Wind-Driven Circulation</p>
+        <p class="prev-next-title">Thermodynamics</p>
       </div>
     </a>
     <a class="right-next"
@@ -545,7 +547,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussines-approximation">The Boussines Approximation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesq-approximation">The Boussinesq Approximation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
 </ul>
   </nav></div>

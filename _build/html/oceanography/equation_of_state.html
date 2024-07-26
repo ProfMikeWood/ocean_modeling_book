@@ -168,6 +168,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Equation of State</a></li>
@@ -397,12 +399,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="equation-of-state">
 <h1>Equation of State<a class="headerlink" href="#equation-of-state" title="Permalink to this headline">#</a></h1>
-<p>Density (<span class="math notranslate nohighlight">\(\rho\)</span>) is a key parameter in determining fluid flow in the ocean. For example, it plays a role in the pressure gradient force:
-$<span class="math notranslate nohighlight">\(
+<p>Density (<span class="math notranslate nohighlight">\(\rho\)</span>) is a key parameter in determining fluid flow in the ocean. For example, it plays a role in the pressure gradient force:</p>
+<div class="math notranslate nohighlight">
+\[
 F_{\text{pressure gradient}} = -\frac{1}{\rho}\nabla p
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>p$ is the pressure.</p>
-<p>Density itself is a function of temperature, salinity, and pressure: <span class="math notranslate nohighlight">\(\rho = f(T,S,p)\)</span>. This relationship, called the <strong>equation of state</strong> has been drived by measuring the density of seawater in a laboratory setting across a wide range of temperature, salinity, and pressure values.</p>
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p\)</span> is the pressure.</p>
+<p>Density itself is a function of temperature, salinity, and pressure: <span class="math notranslate nohighlight">\(\rho = f(T,S,p)\)</span>. This relationship, called the <strong>equation of state</strong> has been derived by measuring the density of seawater in a laboratory setting across a wide range of temperature, salinity, and pressure values. Then, polynomials with up to 100 terms are fit to these observations to deive the equation of state.</p>
 <p>Given its fundamental role relating key ocean properties, the equation of state is used often oceanography and has been implemented in toolboxes in various languages. In Python, we can access this relationship using the Gibbs Seawater Toolbox (gsw) and use it to examine density in temperature and salinity space:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -455,11 +458,41 @@ where \)</span>p$ is the pressure.</p>
 <img alt="../_images/ec5d255a2978ba3dce4ffa27a7a99282ead7b2fe28c11119048b12c9ce5cb9b4.png" src="../_images/ec5d255a2978ba3dce4ffa27a7a99282ead7b2fe28c11119048b12c9ce5cb9b4.png" />
 </div>
 </div>
-<p>By examining the density contours in temperature-salinity space, we observe that the density of typical ocean water lies in the range of 1020 to 1030 kg/m<span class="math notranslate nohighlight">\(^3\)</span>. Since the 1000 is constant, it is often substracted as a reference density <span class="math notranslate nohighlight">\(\rho_0\)</span> and the density is plotted in terms of <span class="math notranslate nohighlight">\(sigma = \rho - \rho_0\)</span>.</p>
-<p>We also observe that the function is typically not linear - especially at lower temperatures and salinities, which are typical of many locations in the Arctic. Given this locally linear nature of the equation of state, it is commonly expressed in terms of expansion and contraction coefficients <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> for temperature and salinity, respectively:
-$<span class="math notranslate nohighlight">\(
-\Delta \rho = \alpha \Delta \Theta \text{ and } \Delta \rho = \beta \Delta S
-\)</span>$</p>
+<p>By examining the density contours in temperature-salinity space, we observe that the density of typical ocean water lies in the range of 1020 to 1030 kg/m<span class="math notranslate nohighlight">\(^3\)</span>. Since the 1000 is constant, it is often substracted as a reference density <span class="math notranslate nohighlight">\(\rho_0\)</span> and the density is plotted in terms of <span class="math notranslate nohighlight">\(\sigma = \rho - \rho_0\)</span>.</p>
+<p>We also observe that the function is typically not linear - especially at lower temperatures and salinities, which are typical of many locations in the Arctic. GHowever, given that the equation of state is <em>locally</em> linear, it is commonly expressed in terms of expansion and contraction coefficients <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> for temperature and salinity, respectively:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\Delta \rho}{\rho} = \alpha \Delta \Theta \text{ and } \frac{\Delta \rho}{\rho} = \beta \Delta S
+\]</div>
+<p>The values for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> vary in the ocean in different temperature and salinity regimes. Typical values are on the order of <span class="math notranslate nohighlight">\(\alpha \approx -2 \times 10^{-4}\)</span> and <span class="math notranslate nohighlight">\(\beta \approx 7 \times 10^{-4}\)</span>. For example, the figure above can be approximate with the following coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define coefficients</span>
+<span class="n">Rho_0</span> <span class="o">=</span> <span class="mi">1002</span>        <span class="c1"># reference density, kg/m^3</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.23e-4</span>    <span class="c1"># K^-1</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">7.59e-4</span>      <span class="c1"># (g/kg)^-1</span>
+
+<span class="c1"># approximate density with coefficients</span>
+<span class="n">Rho_Approx</span> <span class="o">=</span> <span class="n">Rho_0</span> <span class="o">+</span> <span class="n">Rho_0</span><span class="o">*</span><span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">Conservative_Temperature</span><span class="o">+</span><span class="n">beta</span><span class="o">*</span><span class="n">Absolute_Salinity</span><span class="p">)</span>
+
+<span class="c1"># make a plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">practical_salinity</span><span class="p">,</span> <span class="n">potential_temperature</span><span class="p">,</span> <span class="n">Rho_Approx</span><span class="p">,</span>
+                <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;silver&#39;</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1020</span><span class="p">,</span><span class="mi">1029</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="o">.</span><span class="n">levels</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">fmt</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; kg/m$^3$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Potential Temperature $^{\circ}$C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Practical Salinity (psu)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Temperature - Salinity Diagram&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/926146ac3fe3f02c6af6b44b6669c016363129802b4177a8ce9275d321d3a971.png" src="../_images/926146ac3fe3f02c6af6b44b6669c016363129802b4177a8ce9275d321d3a971.png" />
+</div>
+</div>
+<p>Given the relatively cheap cost of using the polynomial equations, most numerical models do not use the <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> approximations but they can be useful for back-of-the-envelope calculations.</p>
 </section>
 
     <script type="text/x-thebe-config">

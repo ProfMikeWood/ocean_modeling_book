@@ -12,7 +12,7 @@ The momentum equations describe how momentum change at any given location in the
 \frac{D\textbf{v}}{Dt} = - \frac{1}{\rho}\nabla p - 2\boldsymbol\Omega\times\textbf{v} + \textbf{g} + \textbf{F}_r
 ```
 
-In this equation, the left-hand side is the total derivative of $\textbf{v}$, and the right-hand side terms are the pressure gradient force ($-1/\rho \nabla p$), the Coriolis force ($2\boldsymbol\Omega\times\textbf{v}$), gravity ($\textbf{g}$), and frictional forces (i.e. viscosity, $\textbf{F}_r$). Each of these terms is describe in the following subsections.
+In this equation, known as the *Navier-Stokes* equation, the left-hand side is the total derivative of $\textbf{v}$, and the right-hand side terms are the pressure gradient force ($-1/\rho \nabla p$), the Coriolis force ($2\boldsymbol\Omega\times\textbf{v}$), gravity ($\textbf{g}$), and frictional forces (i.e. viscosity, $\textbf{F}_r$). Each of these terms is describe in the following subsections.
 
 The vector notation for these equations can be expanded as
 
@@ -35,7 +35,7 @@ Under construction
 ### Frictional Forces
 Under construction
 
-## The Boussines Approximation 
+## The Boussinesq Approximation 
 The Boussinesq approximation for momentum is that sea water is, in effect, incompressible. Put into symbols, this means that
 
 ```{math}

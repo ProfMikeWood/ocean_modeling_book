@@ -14,6 +14,8 @@ parts:
     chapters:
     - file: oceanography/oceanography_overview
     - file: oceanography/wind_driven_circulation
+    - file: oceanography/thermohaline_circulation
+    - file: oceanography/primitive_equations
     - file: oceanography/momentum
     - file: oceanography/thermodynamics
     - file: oceanography/equation_of_state
