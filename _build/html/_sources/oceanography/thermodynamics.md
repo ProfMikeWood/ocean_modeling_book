@@ -12,7 +12,9 @@ Heat and salt can both be considered "tracers" in the ocean. At any given locati
 \frac{\partial(\rho C)}{\partial t} + \nabla \cdot (\rho C \textbf{u}) = \rho J
 ```
 
-where $J$ is a local source term. Under the [Boussinesq approximation](https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html#the-boussinesq-approximation), the density variations can be removed from the above equation as
+where $J$ is a local source term. See Chapter 2 of {cite:ts}`mcwilliams2006fundamentals` for further details.
+
+Under the [Boussinesq approximation](https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html#the-boussinesq-approximation), the density variations can be removed from the above equation as
 
 ```{math}
 \frac{\partial C}{\partial t} + \textbf{u} \cdot \nabla C = J

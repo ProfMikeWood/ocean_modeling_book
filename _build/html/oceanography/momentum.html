@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Thermodynamics" href="thermodynamics.html" />
-    <link rel="prev" title="Thermodynamics" href="primitive_equations.html" />
+    <link rel="prev" title="Primitive Equations" href="primitive_equations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Primitive Equations</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
@@ -177,6 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes.html">Time-Stepping Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
@@ -397,7 +399,6 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-overview">Momentum Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-momentum-equations">The Momentum Equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-total-derivative-of-momentum">The Total Derivative of Momentum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pressure-gradient-force">The Pressure Gradient Force</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coriolis-force">The Coriolis Force</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
@@ -418,7 +419,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="momentum">
 <h1>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">#</a></h1>
-<p>This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of <span id="id1">Stewart [<a class="reference internal" href="../references.html#id7" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span>.</p>
+<p>This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of <span id="id1">Stewart [<a class="reference internal" href="../references.html#id8" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span>.</p>
 <section id="momentum-overview">
 <h2>Momentum Overview<a class="headerlink" href="#momentum-overview" title="Permalink to this headline">#</a></h2>
 <p>Under construction</p>
@@ -435,10 +436,6 @@ document.write(`
 \frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} + w\frac{\partial v}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial y} - 2\Omega u \text{sin}\theta + F_y\\
 \frac{\partial w}{\partial t} + u\frac{\partial w}{\partial x} + v\frac{\partial w}{\partial y} + w\frac{\partial w}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial z} + F_z\\\end{split}\]</div>
 <p>Note that the small vertical component of the Coriolis has been removed from …</p>
-<section id="the-total-derivative-of-momentum">
-<h3>The Total Derivative of Momentum<a class="headerlink" href="#the-total-derivative-of-momentum" title="Permalink to this headline">#</a></h3>
-<p>Under construction</p>
-</section>
 <section id="the-pressure-gradient-force">
 <h3>The Pressure Gradient Force<a class="headerlink" href="#the-pressure-gradient-force" title="Permalink to this headline">#</a></h3>
 <p>Under construction</p>
@@ -509,7 +506,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Thermodynamics</p>
+        <p class="prev-next-title">Primitive Equations</p>
       </div>
     </a>
     <a class="right-next"
@@ -541,7 +538,6 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-overview">Momentum Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-momentum-equations">The Momentum Equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-total-derivative-of-momentum">The Total Derivative of Momentum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pressure-gradient-force">The Pressure Gradient Force</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coriolis-force">The Coriolis Force</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
