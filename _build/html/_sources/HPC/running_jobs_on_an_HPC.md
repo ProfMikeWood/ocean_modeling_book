@@ -6,7 +6,7 @@ High performance computing clusters typically implement a job queue to manage co
 In the section above, we saw that to submit a job, we'll first need to generate a job script. A job script outlines the time and resources required to run the job and other pertinent parameters.
 
 ### Determining the number of CPUs and Nodes
-When requesting resources, we need to determine how many CPUs are required for the job. Typically, this is implemented in the construction of the code to be parallelized. In the case of MITgcm, the number of CPUs is the total number of processors identified in the SIZE.h file (nPx*nPy). After the CPUs have been determined, next you need to determine the nodes to request for the job - the key component of the job script. The number of nodes for a job is determined by how many CPUs are on each node - a specification which you will find in the documentation for your HPC. For example, a common configuration is to pair 2 Broadwell processors containing 14 CPUs each as a node, resulting in 28 CPUs per node. Then, the total nodes required for your job is given by
+When requesting resources, we need to determine how many CPUs are required for the job. Typically, this is implemented in the construction of the code to be parallelized. In the case of MITgcm, the number of CPUs is the total number of processors identified in the SIZE.h file (`nPx`*`nPy`). After the CPUs have been determined, next you need to determine the nodes to request for the job - the key component of the job script. The number of nodes for a job is determined by how many CPUs are on each node - a specification which you will find in the documentation for your HPC. For example, a common configuration is to pair 2 Broadwell processors containing 14 CPUs each as a node, resulting in 28 CPUs per node. Then, the total nodes required for your job is given by
 
 $
 \text{ceiling}\left(\frac{\text{nunber of cpus}}{\text{cpus per node}}\right)
@@ -19,6 +19,22 @@ A job script typically has three components:
 3. Running the job executable
 
 #### Example job script for slurm for MITgcm
+```
+> cat test_job
+#!/bin/bash
+#SBATCH --partition=nodes
+#SBATCH --nodes=5
+#SBATCH --ntasks=140
+#SBATCH --time=120:00:00
+#SBATCH --first.last@email.com
+#SBATCH --mail-type=ALL
+
+module purge
+module load gnu/6.3.0 netcdf/gnu-6.3.0 mpich/gnu-6.3.0 hdf5/gnu-6.3.0
+ulimit -s unlimited
+
+mpiexec -np 140 ./mitgcmuv
+```
 
 
 #### Example job script for pbs for MITgcm
@@ -59,19 +75,20 @@ Then, to check the output, the `squeue -u` command could be used to check the st
 
 ```{code}
 qstat -u mwood
-Job ID
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+           2545870     nodes test_job    mwood  R      11:18      5 node[17-21]
 ```
 
 In this output, we can see the following:
-- the job ID name ()
-- the user name ()
+- the job ID name (2545870)
+- the user name (mwood)
 - the job status (R = Running)
-- the total time elapse ()
-- the number of nodes in user by the user ()
+- the total time elapsed (11:18)
+- the number of nodes in use by the user (5)
 
 If the user wanted to cancel the job due to an error noticed in the output, they could run
 ```
-scancel job_ID
+scancel 2545870
 ```
 
 
@@ -104,7 +121,13 @@ In this output, we can see the following:
 
 If the user wanted to cancel the job `test_job_1` due to an error noticed in the output, they could run
 ```
-qdel test_job_1
+qdel 00000001.pbspl1
 ```
 
 ## Assessing a job when its complete
+
+When a job is complete, the job management system will provide a file that contains all of the output and some summative information on the run.
+
+On slurm, the file will be named `slurm-[jobID].out`. For the example given above, this would be `slurm-2545870.out`. On pbs, the file will be named `[jobname].[jobnumber]`. For the example given above, the file would be named `test_job_1.o00000001`.
+
+

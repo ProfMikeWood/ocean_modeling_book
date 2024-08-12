@@ -166,6 +166,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
@@ -173,6 +175,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes.html">Time-Stepping Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="current nav bd-sidenav">
@@ -402,7 +406,6 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
 </ul>
             </nav>
         </div>
@@ -416,34 +419,48 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="choosing-an-optfile">
 <h1>Choosing an optfile<a class="headerlink" href="#choosing-an-optfile" title="Permalink to this headline">#</a></h1>
-<p>To compile the MITgcm source code, you’ll need an optfile that defines paths to your local libraries.</p>
+<p>To compile the MITgcm source code, you’ll need to defines paths to your local libraries. These tell MITgcm where to find important files for compilation including those for MPI and netcdf. MITgcm comes with a set of common “optfiles” that provide code to search in a number of locations for the right libraries. As all systems are organized differently, the selection of an optfile depends on the system you’re using. Here are some examples:</p>
 <section id="systems">
 <h2>Systems<a class="headerlink" href="#systems" title="Permalink to this headline">#</a></h2>
 <section id="macos">
 <h3>MacOS<a class="headerlink" href="#macos" title="Permalink to this headline">#</a></h3>
-<p>If you are using MacOS with gfortran (recommend), then typically the darwin_amd_gfortran file works well.</p>
+<p>If you are using MacOS with the gfortran compiler, following the instructions <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, then typically the darwin_amd_gfortran file works well.</p>
 </section>
 <section id="windows-with-cygwin">
 <h3>Windows with Cygwin<a class="headerlink" href="#windows-with-cygwin" title="Permalink to this headline">#</a></h3>
-<p>If you are using Windows with a Cygwin installation, then use the [] file.</p>
+<p>If you are using Windows with a Cygwin installation, following the instructions <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, then use the [] file.</p>
 </section>
 <section id="computing-cluster">
 <h3>Computing Cluster<a class="headerlink" href="#computing-cluster" title="Permalink to this headline">#</a></h3>
-<p>The optfile used for compilation on a computing cluster will depend on your cluster’s compiler. There are many options available and typically need to be paired with module loaded prior to compiling and running MITgcm.</p>
+<p>The optfile used for compilation on a computing cluster will depend on your cluster’s compiler options. There are many options available and they typically need to be paired with modules loaded prior to compiling and running MITgcm.</p>
 <section id="listing-the-modules">
 <h4>Listing the modules<a class="headerlink" href="#listing-the-modules" title="Permalink to this headline">#</a></h4>
-<p>The key modules to load for MITgcm are the modules for MPI and netcdf/hdf5. The latter modules will depend on your MPI version (MPICH, OPMI, etc)</p>
+<p>To list the modules available on your cluster, use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">avail</span>
+</pre></div>
+</div>
+<p>The key modules to load for MITgcm are the modules for MPI and netcdf/hdf5. The latter modules will depend on your MPI version (MPICH, OPMI, etc) and typically need to match. Below are two examples for Pleaides and Spartan, showing two ways to import required modules and choose an associated optfile.</p>
 </section>
 <section id="example-1-pleaides">
 <h4>Example 1: [Pleaides]<a class="headerlink" href="#example-1-pleaides" title="Permalink to this headline">#</a></h4>
+<p>Pleaides is the NASA HPC cluster. On Pleaides, the following modules have been used for a successful compilation of MITgcm:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">comp</span><span class="o">-</span><span class="n">intel</span> <span class="n">mpi</span><span class="o">-</span><span class="n">hpe</span> <span class="n">hdf4</span><span class="o">/</span><span class="mf">4.2.12</span> <span class="n">hdf5</span><span class="o">/</span><span class="mf">1.8.18</span><span class="n">_mpt</span> <span class="n">netcdf</span><span class="o">/</span><span class="mf">4.4.1.1</span><span class="n">_mpt</span>
+</pre></div>
+</div>
+<p>Using these modules, the <code class="docutils literal notranslate"><span class="pre">linux_amd64_ifort+mpi_ice_nas</span></code> optfile works well.</p>
 </section>
 <section id="example-2-spartan">
 <h4>Example 2: [Spartan]<a class="headerlink" href="#example-2-spartan" title="Permalink to this headline">#</a></h4>
+<p>Spartan is the HPC cluster at San Jose State University.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">gnu</span><span class="o">/</span><span class="mf">6.3.0</span> <span class="n">netcdf</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">hdf5</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span>
+</pre></div>
+</div>
+<p>Using these modules, the <code class="docutils literal notranslate"><span class="pre">linux_amd64_gfortran</span></code> optfile works well. Note that the MPI path corresponding to the chosen MPI implementtion should be exported before running <code class="docutils literal notranslate"><span class="pre">genmake2</span></code> e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MPI_INC_DIR</span><span class="o">=/</span><span class="n">act</span><span class="o">/</span><span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span><span class="o">/</span><span class="n">include</span><span class="o">/</span>
+</pre></div>
+</div>
 </section>
 </section>
-</section>
-<section id="id1">
-<h2><a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -525,7 +542,6 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
 </ul>
   </nav></div>
 

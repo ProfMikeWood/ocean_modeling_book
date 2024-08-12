@@ -12,7 +12,7 @@ git clone https://github.com/MITgcm/MITgcm
 ## Prepping you machine to compile code
 Once you have MITgcm on your machine, there's a few steps required to get your machine set up.
 
-At the least, you'll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. [HERE](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_gfortran.html), I've provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.
+At the least, you'll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. [HERE](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html), I've provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.
 
 Once your installations are complete, you'll need to identify an "optfile" that passes information to your compiler. Details for selecting an optfile are available [HERE](https://profmikewood.github.io/ocean_modeling_book/mitgcm/choosing_an_optfile.html). For example, on my system (MacOS with gfortran), I will use the `darwin_amd64_gfortran` optfile.
 
@@ -108,6 +108,10 @@ We can take a look in the updated `SIZE.h` file by examining the number of proce
      &           nPy =   2,
 ```
 For more information on the grids, see the [Defining the Model Grid](https://profmikewood.github.io/ocean_modeling_book/mitgcm/defining_the_grid.html) page.
+
+```{warning}
+conda environments have a tendency to interfere with compilation when using MPI. Be sure that you do not have a conda environment activated in your terminal when compiling with MPI i.e. you should not see `(base)` or other environments at the start of your terminal line. If one is activated, use `conda deactivate` to deactivate it.
+```
 
 Now that the `SIZE.h` file is updated, we need to recompile the code. Further, since `SIZE.h` is included in essentially every single script, we need to remove all of the previously compiled code and recompile with the previous steps. 
 ```

@@ -168,6 +168,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
@@ -175,6 +177,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes.html">Time-Stepping Schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
@@ -427,7 +431,7 @@ document.write(`
 <p>In the section above, we saw that to submit a job, we’ll first need to generate a job script. A job script outlines the time and resources required to run the job and other pertinent parameters.</p>
 <section id="determining-the-number-of-cpus-and-nodes">
 <h3>Determining the number of CPUs and Nodes<a class="headerlink" href="#determining-the-number-of-cpus-and-nodes" title="Permalink to this headline">#</a></h3>
-<p>When requesting resources, we need to determine how many CPUs are required for the job. Typically, this is implemented in the construction of the code to be parallelized. In the case of MITgcm, the number of CPUs is the total number of processors identified in the SIZE.h file (nPx*nPy). After the CPUs have been determined, next you need to determine the nodes to request for the job - the key component of the job script. The number of nodes for a job is determined by how many CPUs are on each node - a specification which you will find in the documentation for your HPC. For example, a common configuration is to pair 2 Broadwell processors containing 14 CPUs each as a node, resulting in 28 CPUs per node. Then, the total nodes required for your job is given by</p>
+<p>When requesting resources, we need to determine how many CPUs are required for the job. Typically, this is implemented in the construction of the code to be parallelized. In the case of MITgcm, the number of CPUs is the total number of processors identified in the SIZE.h file (<code class="docutils literal notranslate"><span class="pre">nPx</span></code>*<code class="docutils literal notranslate"><span class="pre">nPy</span></code>). After the CPUs have been determined, next you need to determine the nodes to request for the job - the key component of the job script. The number of nodes for a job is determined by how many CPUs are on each node - a specification which you will find in the documentation for your HPC. For example, a common configuration is to pair 2 Broadwell processors containing 14 CPUs each as a node, resulting in 28 CPUs per node. Then, the total nodes required for your job is given by</p>
 <p><span class="math notranslate nohighlight">\(
 \text{ceiling}\left(\frac{\text{nunber of cpus}}{\text{cpus per node}}\right)
 \)</span></p>
@@ -442,6 +446,22 @@ document.write(`
 </ol>
 <section id="example-job-script-for-slurm-for-mitgcm">
 <h4>Example job script for slurm for MITgcm<a class="headerlink" href="#example-job-script-for-slurm-for-mitgcm" title="Permalink to this headline">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">cat</span> <span class="n">test_job</span>
+<span class="c1">#!/bin/bash</span>
+<span class="c1">#SBATCH --partition=nodes</span>
+<span class="c1">#SBATCH --nodes=5</span>
+<span class="c1">#SBATCH --ntasks=140</span>
+<span class="c1">#SBATCH --time=120:00:00</span>
+<span class="c1">#SBATCH --first.last@email.com</span>
+<span class="c1">#SBATCH --mail-type=ALL</span>
+
+<span class="n">module</span> <span class="n">purge</span>
+<span class="n">module</span> <span class="n">load</span> <span class="n">gnu</span><span class="o">/</span><span class="mf">6.3.0</span> <span class="n">netcdf</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">hdf5</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span>
+<span class="n">ulimit</span> <span class="o">-</span><span class="n">s</span> <span class="n">unlimited</span>
+
+<span class="n">mpiexec</span> <span class="o">-</span><span class="n">np</span> <span class="mi">140</span> <span class="o">./</span><span class="n">mitgcmuv</span>
+</pre></div>
+</div>
 </section>
 <section id="example-job-script-for-pbs-for-mitgcm">
 <h4>Example job script for pbs for MITgcm<a class="headerlink" href="#example-job-script-for-pbs-for-mitgcm" title="Permalink to this headline">#</a></h4>
@@ -502,19 +522,20 @@ To submit the job, the user would enter the following from the scratch directory
 </div>
 <p>Then, to check the output, the <code class="docutils literal notranslate"><span class="pre">squeue</span> <span class="pre">-u</span></code> command could be used to check the status of the job running on the cluster.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qstat</span> <span class="o">-</span><span class="n">u</span> <span class="n">mwood</span>
-<span class="n">Job</span> <span class="n">ID</span>
+             <span class="n">JOBID</span> <span class="n">PARTITION</span>     <span class="n">NAME</span>     <span class="n">USER</span> <span class="n">ST</span>       <span class="n">TIME</span>  <span class="n">NODES</span> <span class="n">NODELIST</span><span class="p">(</span><span class="n">REASON</span><span class="p">)</span>
+           <span class="mi">2545870</span>     <span class="n">nodes</span> <span class="n">test_job</span>    <span class="n">mwood</span>  <span class="n">R</span>      <span class="mi">11</span><span class="p">:</span><span class="mi">18</span>      <span class="mi">5</span> <span class="n">node</span><span class="p">[</span><span class="mi">17</span><span class="o">-</span><span class="mi">21</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>In this output, we can see the following:</p>
 <ul class="simple">
-<li><p>the job ID name ()</p></li>
-<li><p>the user name ()</p></li>
+<li><p>the job ID name (2545870)</p></li>
+<li><p>the user name (mwood)</p></li>
 <li><p>the job status (R = Running)</p></li>
-<li><p>the total time elapse ()</p></li>
-<li><p>the number of nodes in user by the user ()</p></li>
+<li><p>the total time elapsed (11:18)</p></li>
+<li><p>the number of nodes in use by the user (5)</p></li>
 </ul>
 <p>If the user wanted to cancel the job due to an error noticed in the output, they could run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scancel</span> <span class="n">job_ID</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scancel</span> <span class="mi">2545870</span>
 </pre></div>
 </div>
 </section>
@@ -545,13 +566,15 @@ To submit the job, the user would enter the following from the scratch directory
 <li><p>the number of nodes (Nds) requested by the user (11)</p></li>
 </ul>
 <p>If the user wanted to cancel the job <code class="docutils literal notranslate"><span class="pre">test_job_1</span></code> due to an error noticed in the output, they could run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qdel</span> <span class="n">test_job_1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qdel</span> <span class="mf">00000001.</span><span class="n">pbspl1</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="assessing-a-job-when-its-complete">
 <h2>Assessing a job when its complete<a class="headerlink" href="#assessing-a-job-when-its-complete" title="Permalink to this headline">#</a></h2>
+<p>When a job is complete, the job management system will provide a file that contains all of the output and some summative information on the run.</p>
+<p>On slurm, the file will be named <code class="docutils literal notranslate"><span class="pre">slurm-[jobID].out</span></code>. For the example given above, this would be <code class="docutils literal notranslate"><span class="pre">slurm-2545870.out</span></code>. On pbs, the file will be named <code class="docutils literal notranslate"><span class="pre">[jobname].[jobnumber]</span></code>. For the example given above, the file would be named <code class="docutils literal notranslate"><span class="pre">test_job_1.o00000001</span></code>.</p>
 </section>
 </section>
 
