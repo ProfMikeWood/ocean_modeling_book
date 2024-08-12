@@ -4,6 +4,10 @@ To run MITgcm, we will need two cruicial components: a fortran compiler and a ve
 
 The compiler is used to translate the fortran MITgcm source code into code that can be run on your machine. Message Passing Interface (MPI) is a framework to allow for the parallelization of the model code, dividing portions of the model across different CPUs.
 
+```{warning}
+conda environments have been reported to potentially interfere with the installation of compilers. Be sure that you do not have a conda environment activated in your terminal when following the installation instructions below i.e. you should not see `(base)` or other environments at the start of your terminal line. If one is activated, use `conda deactivate` to deactivate it.
+```
+
 ## Installation on a Mac
 
 On a Mac, installation of the compiler and MPI are made considerably easier using the homebrew package manager.
@@ -59,6 +63,22 @@ brew config
 and looking for the line with
 ```
 HOMEBREW_PREFIX: /opt/homebrew
+```
+
+#### Checking your MPI Installation
+To check your MPI installation and your paths, open up a new terminal and use the following command:
+
+```
+mpirun -np 4 uname
+```
+
+Your terminal should print 4 versions of your operating system, e.g.
+
+```
+Darwin
+Darwin
+Darwin
+Darwin
 ```
 
 ### Format the bash profile
