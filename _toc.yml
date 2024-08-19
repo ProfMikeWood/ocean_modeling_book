@@ -33,10 +33,12 @@ parts:
     - file: mitgcm/initial_conditions
     - file: mitgcm/external_forcing
     - file: mitgcm/boundary_conditions
+    - file: mitgcm/diagnosing_issues
   - caption: Computing Clusters
     chapters:
     - file: HPC/navigating_an_HPC
     - file: HPC/running_jobs_on_an_HPC
+    - file: HPC/conda_environments_on_an_HPC
   - caption: Model Analysis
     chapters:
     - file: analysis/volume_budgets

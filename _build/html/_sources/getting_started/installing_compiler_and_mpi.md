@@ -27,6 +27,12 @@ export CXX=g++
 export GDFONPATH=/Library/Fonts
 export OS=OSX
 export LC_ALL="C"
+
+export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+export C_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
 ```
 In newer versions of the MacOS, the terminal uses `zshell` by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:
 ```
@@ -56,7 +62,7 @@ export PKG_CONFIG_PATH="/opt/homebrew/Cellar/open-mpi/5.0.3_1/lib/pkgconfig"
 export MPI_HOME="/opt/homebrew/Cellar/open-mpi/5.0.3_1/lib/"
 export TMPDIR="/tmp"
 ```
-Note that your homebrew path may differ. You can check the head of the path suing
+Note that your homebrew path may differ. You can check the head of the path using
 ```
 brew config
 ```
@@ -79,16 +85,6 @@ Darwin
 Darwin
 Darwin
 Darwin
-```
-
-### Format the bash profile
-Finally, we will add some additional paths to the ~/.bash_profile file:
-```
-export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
-export C_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
 ```
 
 

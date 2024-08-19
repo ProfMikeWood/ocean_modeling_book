@@ -187,11 +187,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="initial_conditions.html">Initial Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="external_forcing.html">External Forcing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnosing_issues.html">Diagnosing Issues</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
 <ul class="nav bd-sidenav">
@@ -396,7 +398,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">Downloading MITgcm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-you-machine-to-compile-code">Prepping you machine to compile code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-your-machine-to-compile-code">Prepping your machine to compile code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-test-with-a-verification-experiment">Compiling and Running: A test with a verification experiment</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-without-mpi">Compiling and Running without MPI</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-without-mpi">Compiling without MPI</a></li>
@@ -431,8 +433,8 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<section id="prepping-you-machine-to-compile-code">
-<h2>Prepping you machine to compile code<a class="headerlink" href="#prepping-you-machine-to-compile-code" title="Permalink to this headline">#</a></h2>
+<section id="prepping-your-machine-to-compile-code">
+<h2>Prepping your machine to compile code<a class="headerlink" href="#prepping-your-machine-to-compile-code" title="Permalink to this headline">#</a></h2>
 <p>Once you have MITgcm on your machine, there’s a few steps required to get your machine set up.</p>
 <p>At the least, you’ll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, I’ve provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.</p>
 <p>Once your installations are complete, you’ll need to identify an “optfile” that passes information to your compiler. Details for selecting an optfile are available <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/mitgcm/choosing_an_optfile.html">HERE</a>. For example, on my system (MacOS with gfortran), I will use the <code class="docutils literal notranslate"><span class="pre">darwin_amd64_gfortran</span></code> optfile.</p>
@@ -633,7 +635,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">Downloading MITgcm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-you-machine-to-compile-code">Prepping you machine to compile code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-your-machine-to-compile-code">Prepping your machine to compile code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-test-with-a-verification-experiment">Compiling and Running: A test with a verification experiment</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-without-mpi">Compiling and Running without MPI</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-without-mpi">Compiling without MPI</a></li>

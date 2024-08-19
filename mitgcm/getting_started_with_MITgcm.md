@@ -9,7 +9,7 @@ Then, clone the MITgcm source code from the Github repository:
 git clone https://github.com/MITgcm/MITgcm
 ```
 
-## Prepping you machine to compile code
+## Prepping your machine to compile code
 Once you have MITgcm on your machine, there's a few steps required to get your machine set up.
 
 At the least, you'll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. [HERE](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html), I've provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.

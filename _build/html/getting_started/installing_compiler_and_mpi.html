@@ -187,11 +187,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
 <ul class="nav bd-sidenav">
@@ -403,7 +405,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-your-mpi-installation">Checking your MPI Installation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-the-bash-profile">Format the bash profile</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-cygwin">Installation on a Windows (using Cygwin)</a><ul class="nav section-nav flex-column">
@@ -444,11 +445,17 @@ document.write(`
 </pre></div>
 </div>
 <p>Then, add the following lines to the .bash_profile.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">CC</span><span class="o">=</span><span class="n">gcc</span>
-<span class="n">export</span> <span class="n">CXX</span><span class="o">=</span><span class="n">g</span><span class="o">++</span> 
-<span class="n">export</span> <span class="n">GDFONPATH</span><span class="o">=/</span><span class="n">Library</span><span class="o">/</span><span class="n">Fonts</span>
-<span class="n">export</span> <span class="n">OS</span><span class="o">=</span><span class="n">OSX</span>
-<span class="n">export</span> <span class="n">LC_ALL</span><span class="o">=</span><span class="s2">&quot;C&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export CC=gcc
+export CXX=g++ 
+export GDFONPATH=/Library/Fonts
+export OS=OSX
+export LC_ALL=&quot;C&quot;
+
+export LDFLAGS=&quot;-L/opt/homebrew/opt/curl/lib&quot;
+export CPPFLAGS=&quot;-I/opt/homebrew/opt/curl/include&quot;
+export C_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
 </pre></div>
 </div>
 <p>In newer versions of the MacOS, the terminal uses <code class="docutils literal notranslate"><span class="pre">zshell</span></code> by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:</p>
@@ -481,7 +488,7 @@ document.write(`
 <span class="n">export</span> <span class="n">TMPDIR</span><span class="o">=</span><span class="s2">&quot;/tmp&quot;</span>
 </pre></div>
 </div>
-<p>Note that your homebrew path may differ. You can check the head of the path suing</p>
+<p>Note that your homebrew path may differ. You can check the head of the path using</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">config</span>
 </pre></div>
 </div>
@@ -503,17 +510,6 @@ document.write(`
 </pre></div>
 </div>
 </section>
-</section>
-<section id="format-the-bash-profile">
-<h3>Format the bash profile<a class="headerlink" href="#format-the-bash-profile" title="Permalink to this headline">#</a></h3>
-<p>Finally, we will add some additional paths to the ~/.bash_profile file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export LDFLAGS=&quot;-L/opt/homebrew/opt/curl/lib&quot;
-export CPPFLAGS=&quot;-I/opt/homebrew/opt/curl/include&quot;
-export C_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
-export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
-</pre></div>
-</div>
 </section>
 </section>
 <section id="installation-on-a-windows-using-cygwin">
@@ -648,7 +644,6 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-your-mpi-installation">Checking your MPI Installation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format-the-bash-profile">Format the bash profile</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-cygwin">Installation on a Windows (using Cygwin)</a><ul class="nav section-nav flex-column">
