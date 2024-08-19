@@ -37,6 +37,7 @@ conda install jupyter
 conda install cartopy
 conda install moviepy
 conda install git
+conda install cmocean
 ```
 
 Finally, configure your environment to use in a jupyter notebook. 
