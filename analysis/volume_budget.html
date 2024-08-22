@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Initial Conditions &#8212; Numerical Ocean Modeling</title>
+    <title>Volume Budgets &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -60,11 +60,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/initial_conditions';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'analysis/volume_budget';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="External Forcing" href="external_forcing.html" />
-    <link rel="prev" title="Defining the Model Grid" href="defining_the_grid.html" />
+    <link rel="next" title="Heat Budgets" href="heat_budget.html" />
+    <link rel="prev" title="conda Environments" href="../HPC/conda_environments_on_an_HPC.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -179,15 +181,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../modeling/subgridscale_parameterizations.html">Sub-Grid-Scale Parameterizations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="file_layout.html">File Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="choosing_an_optfile.html">Choosing an optfile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="defining_the_grid.html">Defining the Model Grid</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Initial Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="external_forcing.html">External Forcing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="diagnosing_issues.html">Diagnosing Issues</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
 <ul class="nav bd-sidenav">
@@ -196,10 +198,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="nav bd-sidenav">
@@ -275,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmitgcm/initial_conditions.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fanalysis/volume_budget.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -305,7 +307,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/mitgcm/initial_conditions.md" target="_blank"
+      <li><a href="../_sources/analysis/volume_budget.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -315,7 +317,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -387,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Initial Conditions</h1>
+    <h1>Volume Budgets</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -397,10 +399,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prescribing-initial-conditions">Prescribing Initial Conditions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-reference-condition">Option 1: Reference Condition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-hydrography-conditions">Option 2: Hydrography Conditions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-pickup-files">Option 3: Pickup Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-fields">Required Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-diagnostics-organization">Suggested Diagnostics Organization</a></li>
 </ul>
 </li>
 </ul>
@@ -414,62 +414,48 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="initial-conditions">
-<h1>Initial Conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline">#</a></h1>
-<p>When starting up an ocean model, the model needs to know where to start from. The initial conditions include</p>
-<ul class="simple">
-<li><p>Temperature</p></li>
-<li><p>Salinity</p></li>
-<li><p>Zonal and Meridional Velocity</p></li>
-<li><p>Sea Surface Height</p></li>
-</ul>
-<section id="prescribing-initial-conditions">
-<h2>Prescribing Initial Conditions<a class="headerlink" href="#prescribing-initial-conditions" title="Permalink to this headline">#</a></h2>
-<p>There are three main ways to prescribe initial conditions in MITgcm:</p>
-<ol class="arabic simple">
-<li><p>Reference Conditions</p></li>
-<li><p>Hydrography Conditions</p></li>
-<li><p>Pickup Files</p></li>
-</ol>
-<p>The first two options are used when the model is initialized at <code class="docutils literal notranslate"><span class="pre">nIter=0</span></code>; otherwise, the third option must be used.</p>
-<section id="option-1-reference-condition">
-<h3>Option 1: Reference Condition<a class="headerlink" href="#option-1-reference-condition" title="Permalink to this headline">#</a></h3>
-<p>When <code class="docutils literal notranslate"><span class="pre">nIter=0</span></code> and no conditions are provided, the model will be initialized with the conditions specified as <code class="docutils literal notranslate"><span class="pre">tRef</span></code> and <code class="docutils literal notranslate"><span class="pre">sRef</span></code> provided in <code class="docutils literal notranslate"><span class="pre">&amp;PARM01</span></code> namelist of the <code class="docutils literal notranslate"><span class="pre">data</span></code> file. <code class="docutils literal notranslate"><span class="pre">tRef</span></code> and <code class="docutils literal notranslate"><span class="pre">sRef</span></code> are a list of temperatures and salinities with length <code class="docutils literal notranslate"><span class="pre">Nr</span></code>, the number of the depth levels in the model. In this case, the model will initialize the velocity as zero and the sea surface height as 0.</p>
-</section>
-<section id="option-2-hydrography-conditions">
-<h3>Option 2: Hydrography Conditions<a class="headerlink" href="#option-2-hydrography-conditions" title="Permalink to this headline">#</a></h3>
-<p>To specify initial conditions when <code class="docutils literal notranslate"><span class="pre">nIter=0</span></code>, the user can generate 3D fields and provide the file names in the <code class="docutils literal notranslate"><span class="pre">&amp;PARM05</span></code> namelist of the data file. Specifically, the following variable names can be specified:</p>
-<p>|———-|———–|</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="volume-budgets">
+<h1>Volume Budgets<a class="headerlink" href="#volume-budgets" title="Permalink to this headline">#</a></h1>
+<p>This page outlines the pertinent files and methodology to compute a volume budget using output from an MITgcm model.</p>
+<section id="required-fields">
+<h2>Required Fields<a class="headerlink" href="#required-fields" title="Permalink to this headline">#</a></h2>
+<p>The following fields are required for the heat budget:</p>
 <table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Variable</p></th>
-<th class="head"><p>File Name</p></th>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Variable Name</p></th>
+<th class="head"><p>Units</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Temperature (THETA)</p></td>
-<td><p>`hydrogTheta’</p></td>
+<tr class="row-even"><td><p>Zonal mass-weighted component of velocity</p></td>
+<td><p>UVELMASS</p></td>
+<td><p>m/s</p></td>
 </tr>
-<tr class="row-odd"><td><p>Salinity (SALT)</p></td>
-<td><p>`hydrogSaltFile’</p></td>
+<tr class="row-odd"><td><p>Meridional mass-weighted component of velocity</p></td>
+<td><p>VVELMASS</p></td>
+<td><p>m/s</p></td>
 </tr>
-<tr class="row-even"><td><p>Zonal Velocity (UVEL)</p></td>
-<td><p>`uVelInitFile’</p></td>
+<tr class="row-even"><td><p>Vertical mass-weighted component of velocity</p></td>
+<td><p>WVELMASS</p></td>
+<td><p>m/s</p></td>
 </tr>
-<tr class="row-odd"><td><p>Meridional Velocity (VVEL)</p></td>
-<td><p>`vVelInitFile’</p></td>
-</tr>
-<tr class="row-even"><td><p>Sea Surface Height (ETAN)</p></td>
-<td><p>`pSurfInitFile’</p></td>
+<tr class="row-odd"><td><p>Net surface freshwater flux</p></td>
+<td><p>oceFWflx</p></td>
+<td><p>kg/m<span class="math notranslate nohighlight">\(^2\)</span>/s</p></td>
 </tr>
 </tbody>
 </table>
-<p>If any of the above files are not specified, the model will default to option 1.</p>
-<p>Each file should store a single binary grid of size (Nr, Ny, Nx), here written in Pythonic ordering (i.e. if the grid were a numpy array, then np.shape would return (Nr, Ny, Nx)). The only exception is the sea surface height field, which has a shape of (1, Ny, Nx).</p>
-</section>
-<section id="option-3-pickup-files">
-<h3>Option 3: Pickup Files<a class="headerlink" href="#option-3-pickup-files" title="Permalink to this headline">#</a></h3>
-<p>When <code class="docutils literal notranslate"><span class="pre">nIter1</span></code> is not 0, then the model is interpreted as coming into the simulation in the middle of a run and will look for a pickup file. A pickup file has the 5 standard fields mentioned above plus 5 more for tendencies. In commonly-used configurations, the pickup fields are stacked in the following order: UVEL, VVEL, THETA, SALT, GUM1, GVM1, GUM2, GVM2, ETAH, DETAHDT, ETAN. Here, G represents the tendencies of U and V at the previous 2 timesteps before the pickup iteration (M1 and M2). If you would like to start a model at a different iteration than 0 (possibly to initialize the model at a given date when working with the cal package), then these fields can be constructed and stacked into a pickup file. The grids are stacked along the depth dimension so that the total grid has a size (8*Nr+3, Ny, Nx).</p>
+<section id="suggested-diagnostics-organization">
+<h3>Suggested Diagnostics Organization<a class="headerlink" href="#suggested-diagnostics-organization" title="Permalink to this headline">#</a></h3>
+<p>The following entries to the <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> file would yield the terms above.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#---</span>
+<span class="n">frequency</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
+<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;UVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;VVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;WVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;oceFWFlx&#39;</span><span class="p">,</span>
+<span class="n">filename</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/vol_flux/vol_flux&#39;</span><span class="p">,</span>
+
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -483,16 +469,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "cs185c"
         },
         kernelOptions: {
-            name: "python3",
-            path: "./mitgcm"
+            name: "cs185c",
+            path: "./analysis"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'cs185c'</script>
 
                 </article>
               
@@ -506,20 +492,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="defining_the_grid.html"
+       href="../HPC/conda_environments_on_an_HPC.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Defining the Model Grid</p>
+        <p class="prev-next-title">conda Environments</p>
       </div>
     </a>
     <a class="right-next"
-       href="external_forcing.html"
+       href="heat_budget.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">External Forcing</p>
+        <p class="prev-next-title">Heat Budgets</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -541,10 +527,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prescribing-initial-conditions">Prescribing Initial Conditions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-reference-condition">Option 1: Reference Condition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-hydrography-conditions">Option 2: Hydrography Conditions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-pickup-files">Option 3: Pickup Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-fields">Required Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-diagnostics-organization">Suggested Diagnostics Organization</a></li>
 </ul>
 </li>
 </ul>
