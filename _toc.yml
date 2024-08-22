@@ -41,9 +41,9 @@ parts:
     - file: HPC/conda_environments_on_an_HPC
   - caption: Model Analysis
     chapters:
-    - file: analysis/volume_budgets
-    - file: analysis/heat_budgets
-    - file: analysis/salt_budgets
+    - file: analysis/volume_budget
+    - file: analysis/heat_budget
+    - file: analysis/salt_budget
   - caption: References
     chapters:
     - file: references
