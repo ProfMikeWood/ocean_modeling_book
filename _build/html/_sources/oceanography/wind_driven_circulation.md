@@ -42,11 +42,16 @@ where $\rho_a$ is the density of the atmosphere, $C_D$ is a drag coefficient, an
 
 
 ## Ekman Transport
-Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. The equations describing ocean current components resulting from a northward windstress are
+Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. To examine the effect of winds on the surface of the ocean, we can first consider a northward-oriented windstress. Other cases will be similar but the math is tidier in the northward case.
+
+Under a 
+
+
+The equations describing ocean current components resulting from a northward windstress are
 
 ```{math}
-u & = V_0 e^{az} sin(\pi /4 − az)\\
-v &= V_0 e^{az} cos(\pi /4 − az)
+u & = V_0 e^{az} \text{sin}(\pi /4 − az)\\
+v &= V_0 e^{az} \text{cos}(\pi /4 − az)
 ```
 
 where $z$ is the depth and
@@ -57,12 +62,21 @@ V_0 = \frac{\tau_{y}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}
 
 Here, $\tau_{y}$ is the northward wind stress, $\rho_w$ is the density of sea water, $f$ is the Coriolis parameter, and $A_z$ is the vertical eddy viscosity (friction).
 
-This structure, termed the "Ekman spiral" can be visualized with vectors as follows:
+This structure, termed the "Ekman spiral" can be visualized with vectors in a top-down view as follows:
 
-Plot HERE
+```{image} ../images/ekman_spiral.png
+:alt: Ekman Spiral
+:align: center
+```
 
+The Ekman spiral equations were derived by {cite:ts}`ekman1905influence` by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. From the [Momentum Equations](https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html), this simplifies the equations to
 
-The Ekman spiral equations were derived by {cite:ts}`ekman1905influence` by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations above are reproduced from Chapter 9 of {cite:ts}`stewart2008introduction` where further information can be found regarding the history and details of the derivation.
+```{math}
+fv &= - A_z \frac{\partial^2 u}{\partial z^2}\\
+fu &= A_z \frac{\partial^2 v}{\partial z^2}
+```
+
+The periodic solutions above can be substituted into this set of partial differential equations to see that they are indeed a solution. These equations are reproduced from Chapter 9 of {cite:ts}`stewart2008introduction` where further information can be found regarding the history and details of the derivation.
 
 There are many implications of these observations but for the purposes of the surface ocean where $z=0$, we can see that
 
@@ -71,13 +85,16 @@ u & = V_0  \frac{\sqrt{2}}{2}\\
 v &= V_0 \frac{\sqrt{2}}{2}
 ```
 
-In other words, the **surface ocean currents flow at an angle 45$^{\circ}$ relative to the wind stress direction**. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.
+In other words, the **surface ocean currents flow at an angle 45$^{\circ}$ relative to the wind stress direction**. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere. It is shown here for a northward wind stress and depicted in the northern hemisphere, but the results are easily generalizable to other wind directions and the southern hemisphere.
 
 
 ## Synoptic-Scale Ocean Circulation
 The above component - atmospheric circulation at the ocean surface, the Coriolis effect, and the resulting Ekman transport - lead to the large-scale circulation patterns in the ocean surface. Below is a plot of the mean surface velocity from the ECCO Version 4 State Estimate:
 
-Plot here
+```{image} ../images/ecco_velocity_fields.png
+:alt: ECCO Ocean Surface Velocity Fields
+:align: center
+```
 
 What we see is a rotational circulation pattern in each of the major sub tropical oceans: the North and South Pacific, the North and South Atlantic, and the Indian Ocean. These circulation patterns are the ocean gyres.
 
