@@ -42,7 +42,7 @@ conda install cmocean
 
 Finally, configure your environment to use in a jupyter notebook. 
 
-On maachine running MacOS use:
+On machine running MacOS use:
 
 ```
 python3 -m ipykernel install --user --name=cs185c

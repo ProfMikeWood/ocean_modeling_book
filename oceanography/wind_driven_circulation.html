@@ -444,27 +444,33 @@ document.write(`
 </section>
 <section id="ekman-transport">
 <h2>Ekman Transport<a class="headerlink" href="#ekman-transport" title="Permalink to this headline">#</a></h2>
-<p>Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. The equations describing ocean current components resulting from a northward windstress are</p>
+<p>Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. To examine the effect of winds on the surface of the ocean, we can first consider a northward-oriented windstress. Other cases will be similar but the math is tidier in the northward case.</p>
+<p>Under a</p>
+<p>The equations describing ocean current components resulting from a northward windstress are</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}u &amp; = V_0 e^{az} sin(\pi /4 − az)\\
-v &amp;= V_0 e^{az} cos(\pi /4 − az)\end{split}\]</div>
+\[\begin{split}u &amp; = V_0 e^{az} \text{sin}(\pi /4 − az)\\
+v &amp;= V_0 e^{az} \text{cos}(\pi /4 − az)\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(z\)</span> is the depth and</p>
 <div class="math notranslate nohighlight">
 \[V_0 = \frac{\tau_{y}}{\rho_w^2 f A_z} \text{ and } a = \sqrt{\frac{f}{2A_z}}\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(\tau_{y}\)</span> is the northward wind stress, <span class="math notranslate nohighlight">\(\rho_w\)</span> is the density of sea water, <span class="math notranslate nohighlight">\(f\)</span> is the Coriolis parameter, and <span class="math notranslate nohighlight">\(A_z\)</span> is the vertical eddy viscosity (friction).</p>
-<p>This structure, termed the “Ekman spiral” can be visualized with vectors as follows:</p>
-<p>Plot HERE</p>
-<p>The Ekman spiral equations were derived by <span id="id2">Ekman [<a class="reference internal" href="../references.html#id3" title="Vagn Walfrid Ekman. On the influence of the earth's rotation on ocean-currents. 1905.">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. The equations above are reproduced from Chapter 9 of <span id="id3">Stewart [<a class="reference internal" href="../references.html#id8" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and details of the derivation.</p>
+<p>This structure, termed the “Ekman spiral” can be visualized with vectors in a top-down view as follows:</p>
+<img alt="Ekman Spiral" class="align-center" src="../_images/ekman_spiral.png" />
+<p>The Ekman spiral equations were derived by <span id="id2">Ekman [<a class="reference internal" href="../references.html#id3" title="Vagn Walfrid Ekman. On the influence of the earth's rotation on ocean-currents. 1905.">1905</a>]</span> by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. From the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html">Momentum Equations</a>, this simplifies the equations to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}fv &amp;= - A_z \frac{\partial^2 u}{\partial z^2}\\
+fu &amp;= A_z \frac{\partial^2 v}{\partial z^2}\end{split}\]</div>
+<p>The periodic solutions above can be substituted into this set of partial differential equations to see that they are indeed a solution. These equations are reproduced from Chapter 9 of <span id="id3">Stewart [<a class="reference internal" href="../references.html#id8" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span> where further information can be found regarding the history and details of the derivation.</p>
 <p>There are many implications of these observations but for the purposes of the surface ocean where <span class="math notranslate nohighlight">\(z=0\)</span>, we can see that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}u &amp; = V_0  \frac{\sqrt{2}}{2}\\
 v &amp;= V_0 \frac{\sqrt{2}}{2}\end{split}\]</div>
-<p>In other words, the <strong>surface ocean currents flow at an angle 45<span class="math notranslate nohighlight">\(^{\circ}\)</span> relative to the wind stress direction</strong>. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere.</p>
+<p>In other words, the <strong>surface ocean currents flow at an angle 45<span class="math notranslate nohighlight">\(^{\circ}\)</span> relative to the wind stress direction</strong>. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere. It is shown here for a northward wind stress and depicted in the northern hemisphere, but the results are easily generalizable to other wind directions and the southern hemisphere.</p>
 </section>
 <section id="synoptic-scale-ocean-circulation">
 <h2>Synoptic-Scale Ocean Circulation<a class="headerlink" href="#synoptic-scale-ocean-circulation" title="Permalink to this headline">#</a></h2>
 <p>The above component - atmospheric circulation at the ocean surface, the Coriolis effect, and the resulting Ekman transport - lead to the large-scale circulation patterns in the ocean surface. Below is a plot of the mean surface velocity from the ECCO Version 4 State Estimate:</p>
-<p>Plot here</p>
+<img alt="ECCO Ocean Surface Velocity Fields" class="align-center" src="../_images/ecco_velocity_fields.png" />
 <p>What we see is a rotational circulation pattern in each of the major sub tropical oceans: the North and South Pacific, the North and South Atlantic, and the Indian Ocean. These circulation patterns are the ocean gyres.</p>
 <p>Here, I describe the connections that lead to the formation of the North Pacific gyre - the other gyres are similar.</p>
 </section>

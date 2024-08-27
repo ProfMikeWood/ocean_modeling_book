@@ -7,7 +7,7 @@ Primitive equations refer to the set of complete mathematical equations that des
 
 Under Construction.
 
-```
+```{math}
 \frac{D\textbf{v}}{Dt} &= - \frac{1}{\rho}\nabla p - 2\boldsymbol\Omega\times\textbf{v} + \textbf{g} + \textbf{F}_r\\
 \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} &= 0\\
 \frac{\partial S}{\partial t} + \textbf{u} \cdot \nabla S &= J_S\\
