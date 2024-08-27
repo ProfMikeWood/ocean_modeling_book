@@ -44,10 +44,15 @@ where $\rho_a$ is the density of the atmosphere, $C_D$ is a drag coefficient, an
 ## Ekman Transport
 Much like the atmosphere, the currents induced by wind stress on the ocean surface are subject to the Coriolis force, meaning they are deflected to the right (left) in the northern (southern) hemisphere. To examine the effect of winds on the surface of the ocean, we can first consider a northward-oriented windstress. Other cases will be similar but the math is tidier in the northward case.
 
-Under a 
+From the assumptions that the ocean is in steady state and the ocean homogeneous, the [Momentum Equations](https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html), simplify to the equations 
+
+```{math}
+fv &= - A_z \frac{\partial^2 u}{\partial z^2}\\
+fu &= A_z \frac{\partial^2 v}{\partial z^2}
+```
 
 
-The equations describing ocean current components resulting from a northward windstress are
+With the boundary condition of a northward windstress ($\vec{\tau} = \tau_y$), the solution to these equations is
 
 ```{math}
 u & = V_0 e^{az} \text{sin}(\pi /4 − az)\\
@@ -69,12 +74,9 @@ This structure, termed the "Ekman spiral" can be visualized with vectors in a to
 :align: center
 ```
 
-The Ekman spiral equations were derived by {cite:ts}`ekman1905influence` by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. From the [Momentum Equations](https://profmikewood.github.io/ocean_modeling_book/oceanography/momentum.html), this simplifies the equations to
+In the image above, the thick black arrow denotes the wind direction and the thin arrows depict the magnitude of the current velocity at various depths below the wind. The magnitude here was estimated for a wind speed of 20 m/s.  
 
-```{math}
-fv &= - A_z \frac{\partial^2 u}{\partial z^2}\\
-fu &= A_z \frac{\partial^2 v}{\partial z^2}
-```
+The Ekman spiral equations were derived by {cite:ts}`ekman1905influence` by assuming that over large horizontal spatial scales and in steady state, the dominant terms in the momentum equation near the ocean surface are the Coriolis force and friction. 
 
 The periodic solutions above can be substituted into this set of partial differential equations to see that they are indeed a solution. These equations are reproduced from Chapter 9 of {cite:ts}`stewart2008introduction` where further information can be found regarding the history and details of the derivation.
 
@@ -85,20 +87,18 @@ u & = V_0  \frac{\sqrt{2}}{2}\\
 v &= V_0 \frac{\sqrt{2}}{2}
 ```
 
-In other words, the **surface ocean currents flow at an angle 45$^{\circ}$ relative to the wind stress direction**. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere. It is shown here for a northward wind stress and depicted in the northern hemisphere, but the results are easily generalizable to other wind directions and the southern hemisphere.
+In other words, the **surface ocean currents flow at an angle 45$^{\circ}$ relative to the wind stress direction**. This observation is critical in assessing the surface ocean flow relative to that of the atmosphere. It is shown here for a northward wind stress and depicted in the northern hemisphere, but the results are generalizable to other wind directions and the southern hemisphere.
 
 
 ## Synoptic-Scale Ocean Circulation
-The above component - atmospheric circulation at the ocean surface, the Coriolis effect, and the resulting Ekman transport - lead to the large-scale circulation patterns in the ocean surface. Below is a plot of the mean surface velocity from the ECCO Version 4 State Estimate:
+The above components - atmospheric circulation at the ocean surface, the Coriolis effect, and the resulting Ekman transport - lead to the large-scale circulation patterns in the ocean surface. Below is a plot of the mean surface velocity from the ECCO Version 4 State Estimate:
 
 ```{image} ../images/ecco_velocity_fields.png
 :alt: ECCO Ocean Surface Velocity Fields
 :align: center
 ```
 
-What we see is a rotational circulation pattern in each of the major sub tropical oceans: the North and South Pacific, the North and South Atlantic, and the Indian Ocean. These circulation patterns are the ocean gyres.
-
-Here, I describe the connections that lead to the formation of the North Pacific gyre - the other gyres are similar.
+What we see is a rotational circulation pattern in each of the major oceans: the North and South Pacific, the North and South Atlantic, and the Indian Ocean. In other words, in the zonal direction, we see westward flow near the equator and eastward flow aroudnd 45$^{\circ}$; in the meridional direction south of 45$^{\circ}$, we see strong poleward flow in the western boundaries and weak equatorward flow in eastern boundatries. These circulation patterns make up the branches of the *ocean gyres*.
 
 
 
