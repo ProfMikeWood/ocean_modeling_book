@@ -7,6 +7,7 @@ from matplotlib.gridspec import GridSpec
 import matplotlib.ticker as mticker
 from matplotlib.patches import Polygon
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
+import gsw
 
 import cartopy
 import cartopy.crs as ccrs
@@ -81,7 +82,7 @@ def plot_crosssection(output_file, longitude, latitude, var_grid, Z, depth, plot
     lon_index = np.argmin(np.abs(longitude - plot_lon))
 
     fig = plt.figure(figsize=(10, 10))
-    # plt.style.use('dark_background')
+    plt.style.use('dark_background')
 
     gs = GridSpec(3, 15, left=0.09, right=0.95, bottom=0.05, top=0.96,hspace=0.03)
 
@@ -104,7 +105,10 @@ def plot_crosssection(output_file, longitude, latitude, var_grid, Z, depth, plot
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
 
-    axc = fig.add_subplot(gs[0, -2])
+    if plot_metadata['long_name']=='Density':
+        axc = fig.add_subplot(gs[0, -1])
+    else:
+        axc = fig.add_subplot(gs[0, -2])
     x = np.array([0, 1])
     y = np.linspace(plot_metadata['vmin'], plot_metadata['vmax'], 100)
     X, Y = np.meshgrid(x, y)
@@ -152,7 +156,7 @@ data_folder = '/Users/mike/Documents/Teaching/Courses/CS 185C/Data'
 
 plot_lon = -31
 
-var_name = 'Theta'
+var_name = 'Density'
 
 if var_name == 'Theta':
     plot_metadata = {'var_name': 'Theta',
@@ -187,5 +191,34 @@ if var_name == 'Salt':
     output_file = '../images/ecco_atlantic_crossection_Salt.png'
 
     plot_crosssection(output_file, longitude, latitude, Salt, Z, depth, plot_lon, plot_metadata)
+
+if var_name == 'Density':
+    plot_metadata = {'var_name': 'Density',
+                     'long_name': 'Density',
+                     'vmin': 1022,
+                     'vmax': 1030,
+                     'cmap': cm.dense,
+                     'units': 'kg/m$^3$',
+                     'contour_ticks': np.arange(1022,1030,0.5)}
+
+    print('   - Reading Theta')
+    longitude, latitude, Theta = read_theta(data_folder)
+
+    Z, depth = read_grid(data_folder, longitude, latitude, plot_lon)
+
+    print('   - Reading Salt')
+    _, _, Salt = read_salt(data_folder)
+
+    print('   - Reading Density')
+    Absolute_salinity = gsw.conversions.SA_from_SP(Salt, Z[0], np.mean(longitude), np.mean(latitude))
+    Conservative_temperature = gsw.conversions.CT_from_pt(Absolute_salinity, Theta)
+
+    Rho = gsw.density.rho(Absolute_salinity, Conservative_temperature, Z[0])
+
+    print(np.min(Rho), np.max(Rho))
+
+    output_file = '../images/ecco_atlantic_crossection_Density.png'
+
+    plot_crosssection(output_file, longitude, latitude, Rho, Z, depth, plot_lon, plot_metadata)
 
 
