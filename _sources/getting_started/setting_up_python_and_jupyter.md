@@ -40,9 +40,16 @@ conda install git
 conda install cmocean
 ```
 
+```{note}
+If any of the conda installations don't work, you can specify the source directly. For example, `cmocean` and `moviepy` are both available via `conda-forge` as 
+```{code}
+conda install conda-forge::cmocean
+conda install conda-forge::moviepy
+```
+
 Finally, configure your environment to use in a jupyter notebook. 
 
-On machine running MacOS use:
+On MacOS, use:
 
 ```
 python3 -m ipykernel install --user --name=cs185c

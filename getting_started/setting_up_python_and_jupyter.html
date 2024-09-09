@@ -445,8 +445,16 @@ document.write(`
 <span class="n">conda</span> <span class="n">install</span> <span class="n">cmocean</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If any of the conda installations don’t work, you can specify the source directly. For example, <code class="docutils literal notranslate"><span class="pre">cmocean</span></code> and <code class="docutils literal notranslate"><span class="pre">moviepy</span></code> are both available via <code class="docutils literal notranslate"><span class="pre">conda-forge</span></code> as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">cmocean</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">moviepy</span>
+</pre></div>
+</div>
+</div>
 <p>Finally, configure your environment to use in a jupyter notebook.</p>
-<p>On machine running MacOS use:</p>
+<p>On MacOS, use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">ipykernel</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">cs185c</span>
 </pre></div>
 </div>
