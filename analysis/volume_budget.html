@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
@@ -436,11 +437,7 @@ document.write(`
 <td><p>VVELMASS</p></td>
 <td><p>m/s</p></td>
 </tr>
-<tr class="row-even"><td><p>Vertical mass-weighted component of velocity</p></td>
-<td><p>WVELMASS</p></td>
-<td><p>m/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>Net surface freshwater flux</p></td>
+<tr class="row-even"><td><p>Net surface freshwater flux</p></td>
 <td><p>oceFWflx</p></td>
 <td><p>kg/m<span class="math notranslate nohighlight">\(^2\)</span>/s</p></td>
 </tr>
@@ -450,11 +447,15 @@ document.write(`
 <h3>Suggested Diagnostics Organization<a class="headerlink" href="#suggested-diagnostics-organization" title="Permalink to this headline">#</a></h3>
 <p>The following entries to the <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> file would yield the terms above.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#---</span>
+<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;UVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;VVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;oceFWflx&#39;</span><span class="p">,</span>
 <span class="n">frequency</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
-<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;UVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;VVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;WVELMASS&#39;</span><span class="p">,</span><span class="s1">&#39;oceFWFlx&#39;</span><span class="p">,</span>
 <span class="n">filename</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/vol_flux/vol_flux&#39;</span><span class="p">,</span>
 
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">WVELMASS</span></code> is not required to close the budget since the surface velocity is proportional to <code class="docutils literal notranslate"><span class="pre">oceFWflx</span></code>. In other words, if <code class="docutils literal notranslate"><span class="pre">WVELMASS</span></code> is depth-integrated from k=Nr to k=1 it will cancel out to zero.</p>
 </div>
 </section>
 </section>
