@@ -35,6 +35,7 @@ conda install netcdf4
 conda install xarray
 conda install jupyter
 conda install cartopy
+conda install ffmpeg
 conda install moviepy
 conda install git
 conda install cmocean

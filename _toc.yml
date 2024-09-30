@@ -10,6 +10,7 @@ parts:
     - file: getting_started/setting_up_a_github_repository
     - file: getting_started/getting_familiar_with_jupyter_notebooks
     - file: getting_started/installing_compiler_and_mpi
+    - file: getting_started/getting_familiar_with_unix_environments
   - caption: Oceanography
     chapters:
     - file: oceanography/oceanography_overview

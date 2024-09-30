@@ -163,6 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
@@ -457,7 +458,7 @@ document.write(`
 <td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
 </tr>
 <tr class="row-odd"><td><p>Net short-wave radiation</p></td>
-<td><p>oceQnet</p></td>
+<td><p>oceQsw</p></td>
 <td><p>W / m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p>Vertical mass-weighted transport of Potential Temperature</p></td>
@@ -475,6 +476,10 @@ document.write(`
 </tbody>
 </table>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">KPPg_TH</span></code> variable is only required when using the <code class="docutils literal notranslate"><span class="pre">kpp</span></code> package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">implicitDiffusion=.TRUE.</span></code>, then the diffusive flux terms <code class="docutils literal notranslate"><span class="pre">DFxE_TH</span></code>, <code class="docutils literal notranslate"><span class="pre">DFyE_TH</span></code>, and <code class="docutils literal notranslate"><span class="pre">DFrE_TH</span></code> are not required to close the budget.</p>
+</div>
 <section id="suggested-diagnostics-organization">
 <h3>Suggested Diagnostics Organization<a class="headerlink" href="#suggested-diagnostics-organization" title="Permalink to this headline">#</a></h3>
 <p>The following entries to the <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> file would yield the terms above.</p>
