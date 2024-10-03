@@ -429,14 +429,21 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-and-editing-files-and-directories">Making and Editing Files and Directories</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-files">Editing Files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-files">Editing Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🤔 Try it for yourself:</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🤔 Try it for yourself:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">💡 Solution:</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files-and-directories">Deleting Files and Directories</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🤔 Try it for yourself:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">💡 Solution:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">🤔 Try it for yourself:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">💡 Solution:</a></li>
 </ul>
 </li>
 </ul>
@@ -534,14 +541,15 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span>
 </pre></div>
 </div>
-<p>From the above command you may see something like the following on a Mac system:</p>
+<p>From the above command you may see something like the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">mike</span>
 </pre></div>
 </div>
-<p>or the following on a Windows system:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">mike</span>
+<p>Typically, the terminal is configured to open in your home directory. You can check your home directory with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>echo $HOME
 </pre></div>
 </div>
+<p>This location is typically the location where your shell will open when you launch your terminal</p>
 </section>
 <section id="listing-contents-of-your-directory">
 <h4>Listing contents of your directory<a class="headerlink" href="#listing-contents-of-your-directory" title="Permalink to this headline">#</a></h4>
@@ -592,7 +600,7 @@ document.write(`
 </pre></div>
 </div>
 <p>You can repeat the cd command in succession to move around your computer, or you can string together a full path to move to a different location, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Model_Files</span><span class="o">/</span><span class="n">model_config_example</span><span class="o">/</span><span class="n">MITgcm</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">model_Files</span><span class="o">/</span><span class="n">model_config_example</span>
 </pre></div>
 </div>
 <section id="id1">
@@ -605,6 +613,10 @@ document.write(`
 <p>Your exact solution will depend on the location of your home directory and where you saved and unzipped your <code class="docutils literal notranslate"><span class="pre">model_config_example</span></code> files.</p>
 <p>You may choose to enter individual commands such as <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">model_config_example</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">run</span></code>. Or you can string your commands together to make a long path to your destination, e.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">model_config_example/run</span></code></p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the Tab key to complete the name of a directory after typing a few characters of its name.</p>
+</div>
 </section>
 </section>
 </section>
@@ -612,11 +624,11 @@ document.write(`
 <h3>Copying and Linking Files<a class="headerlink" href="#copying-and-linking-files" title="Permalink to this headline">#</a></h3>
 <section id="copying-files">
 <h4>Copying Files<a class="headerlink" href="#copying-files" title="Permalink to this headline">#</a></h4>
-<p>Files can be copied with the <code class="docutils literal notranslate"><span class="pre">cp</span></code> command (short for copy). The syntax for the copy command is to first list the path of the file to copy and then the destination for that file. For example, suppose you are in the <code class="docutils literal notranslate"><span class="pre">run</span></code> directory and would like to copy the file <code class="docutils literal notranslate"><span class="pre">eedata</span></code> from folder <code class="docutils literal notranslate"><span class="pre">namelist</span></code>.  In this case, the copy can be completed with:</p>
+<p>Files can be copied with the <code class="docutils literal notranslate"><span class="pre">cp</span></code> command (short for <strong>c</strong>o<strong>p</strong>y). The syntax for the copy command is to first list the path of the file to copy and then the destination for that file. For example, suppose you are in the <code class="docutils literal notranslate"><span class="pre">run</span></code> directory and would like to copy the file <code class="docutils literal notranslate"><span class="pre">eedata</span></code> from folder <code class="docutils literal notranslate"><span class="pre">namelist</span></code>.  In this case, the copy can be completed with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">../</span><span class="n">namelist</span><span class="o">/</span><span class="n">eedata</span> <span class="n">eedata</span>
 </pre></div>
 </div>
-<p>The first argument is source file and the second is the destination file. If you want the file name to stay the same, then you can optionally use the <code class="docutils literal notranslate"><span class="pre">.</span></code> symbol to indicate the current directory as the destination as:</p>
+<p>The first argument is the source file and the second is the destination file. If you want the file name to stay the same, then you can optionally provide a directory. For example, you can use the <code class="docutils literal notranslate"><span class="pre">.</span></code> symbol to indicate the current directory as the destination as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">../</span><span class="n">namelist</span><span class="o">/</span><span class="n">eedata</span> <span class="o">.</span>
 </pre></div>
 </div>
@@ -628,7 +640,7 @@ document.write(`
 <section id="id4">
 <h5>💡 Solution:<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h5>
 <div class="toggle docutils container">
-<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">../namelist/data*</span> <span class="pre">.</span></code></p>
+<p>Top copy all of the files starting with the characters <code class="docutils literal notranslate"><span class="pre">data</span></code> from the <code class="docutils literal notranslate"><span class="pre">namelist</span></code> directory to the current directory, use <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">../namelist/data*</span> <span class="pre">.</span></code></p>
 </div>
 </section>
 </section>
@@ -661,18 +673,34 @@ document.write(`
 <h3>Making and Editing Files and Directories<a class="headerlink" href="#making-and-editing-files-and-directories" title="Permalink to this headline">#</a></h3>
 <section id="editing-files">
 <h4>Editing Files<a class="headerlink" href="#editing-files" title="Permalink to this headline">#</a></h4>
-<p>We can make and edit files with a variety of different editors that come pre-installed on command line interfaces. One popular editor is the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor which can be opened with the <code class="docutils literal notranslate"><span class="pre">nano</span></code>  command. For example, we can create and edit a <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> file with the following call:</p>
+<p>We can make and edit files with a variety of different editors that often come pre-installed on command line interfaces.</p>
+<p>One popular editor is the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor which can be opened with the <code class="docutils literal notranslate"><span class="pre">nano</span></code>  command. For example, we can create and edit a <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> file with the following call:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">nano</span></code> text editor will open in the terminal directly and will have the following appearance.</p>
 <img alt="The Nano Text Editor" class="align-center" src="../_images/nano_screenshot.png" />
 <p>You can edit the text in the file directly. Then, when your edits are complete, use CTRL-X to save and exit.</p>
-<p>To see the text that the file contains, you can use <code class="docutils literal notranslate"><span class="pre">cat</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">cat</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
+<p>Alternatively, we can use our native text editors to edit files directly. To create a file, we can use the <code class="docutils literal notranslate"><span class="pre">touch</span></code> command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">touch</span> <span class="n">notes</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
-<p>The code above returns the following contents:</p>
+<p>Then, in MacOS, we can use TextEdit open and edit this file with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">-</span><span class="n">a</span> <span class="n">TextEdit</span> <span class="n">notes</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Similarly, on Windows, we can use the Notepad program with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">notepad</span><span class="o">.</span><span class="n">exe</span> <span class="n">notes</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<section id="id7">
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h5>
+<p>Create a file called <code class="docutils literal notranslate"><span class="pre">notes.txt</span></code> and add some notes to the file.</p>
+<p>To see the text that the file contains, you can use <code class="docutils literal notranslate"><span class="pre">cat</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>The code above returns the following contents, assuming that the file was created with <code class="docutils literal notranslate"><span class="pre">nano</span></code> as shown above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">file</span> <span class="n">contains</span> <span class="n">information</span> <span class="n">about</span> <span class="n">the</span> <span class="n">model</span> <span class="n">configuration</span>
 </pre></div>
 </div>
@@ -684,6 +712,7 @@ document.write(`
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tail</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
+</section>
 </section>
 <section id="creating-directories">
 <h4>Creating Directories<a class="headerlink" href="#creating-directories" title="Permalink to this headline">#</a></h4>
@@ -697,16 +726,22 @@ document.write(`
 <section id="shell-profiles">
 <h3>Shell Profiles<a class="headerlink" href="#shell-profiles" title="Permalink to this headline">#</a></h3>
 <p>Each shell has a given profile - a script that is automatically run when you open a terminal. For example, the default terminal on MacOS is <em>zshell</em> which has the default shell profile in the <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file. Similarly, bash shells have profiles in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> and/or <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">.</span></code> in front of each file ensures that the file is hidden.</p>
-<p>All shell profiles should be placed in your home directory. You can check your home directory with the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>echo $HOME
-</pre></div>
-</div>
-<p>This location is typically the location where your shell will open when you launch your terminal</p>
+<p>All shell profiles should be placed in your home directory.</p>
 <p>You can see your hidden profile in your home directory using the <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag on the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls -a $HOME
 </pre></div>
 </div>
 <p>To edit your profile, you can use the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor as described above.</p>
+<section id="id8">
+<h4>🤔 Try it for yourself:<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<p>Add a welcome message for yourself in your profile. Then, open a new terminal window to double check that your profile is working.</p>
+</section>
+<section id="id9">
+<h4>💡 Solution:<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
+<div class="toggle docutils container">
+<p>Use your favorite text editor to open your profile file. Then, use the <code class="docutils literal notranslate"><span class="pre">echo</span></code> command to print a message, e.g. <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Welcome</span> <span class="pre">Mike&quot;</span></code>.</p>
+</div>
+</section>
 </section>
 <section id="deleting-files-and-directories">
 <h3>Deleting Files and Directories<a class="headerlink" href="#deleting-files-and-directories" title="Permalink to this headline">#</a></h3>
@@ -727,12 +762,12 @@ document.write(`
 </pre></div>
 </div>
 <p>Again, caution should be used with deleting directories because the contents cannot be recovered after they are gone.</p>
-<section id="id7">
-<h4>🤔 Try it for yourself:<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+<section id="id10">
+<h4>🤔 Try it for yourself:<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
 <p>Suppose you made some changes to the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package and need to recompile the model to reflect these changes. Remove all <code class="docutils literal notranslate"><span class="pre">exf</span></code> files from the build directory.</p>
 </section>
-<section id="id8">
-<h4>💡 Solution:<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<section id="id11">
+<h4>💡 Solution:<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
 <div class="toggle docutils container">
 <p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">../build/exf*</span></code></p>
 </div>
@@ -839,14 +874,21 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-and-editing-files-and-directories">Making and Editing Files and Directories</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-files">Editing Files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-files">Editing Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🤔 Try it for yourself:</a></li>
+</ul>
+</li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">🤔 Try it for yourself:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">💡 Solution:</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files-and-directories">Deleting Files and Directories</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🤔 Try it for yourself:</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">💡 Solution:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">🤔 Try it for yourself:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">💡 Solution:</a></li>
 </ul>
 </li>
 </ul>
