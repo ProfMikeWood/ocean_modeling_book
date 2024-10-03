@@ -20,7 +20,7 @@ Next, use homebrew to install gcc
 ```
 brew install gcc
 ```
-Then, add the following lines to the .bash_profile. 
+Then, add the following lines to the `.bash_profile`. 
 ```
 export CC=gcc
 export CXX=g++ 
@@ -34,7 +34,7 @@ export C_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/in
 export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
 export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
 ```
-In newer versions of the MacOS, the terminal uses `zshell` by default. If this is the case then add the following line in the ~/.zschrc file to source the bash_profile on startup:
+In newer versions of the MacOS, the terminal uses `zshell` by default. If this is the case then add the following line in the `~/.zschrc` file to source the `.bash_profile` on startup:
 ```
 source ~/.bash_profile
 ```
@@ -50,19 +50,8 @@ Next, we will install MPI to leverage multiple CPUs to run our model. Again, we 
 ```
 brew install openmpi
 ```
-You can check the installation with your 
-```
-/opt/homebrew/Cellar/open-mpi/5.0.3_1/bin/mpirun --version
-```
-Next, add the openmpi paths to the bash_profile
-```
-export MPI_INC_DIR="/opt/homebrew/Cellar/open-mpi/5.0.3_1/include"
-export PATH="$PATH:/opt/homebrew/Cellar/open-mpi/5.0.3_1/bin"
-export PKG_CONFIG_PATH="/opt/homebrew/Cellar/open-mpi/5.0.3_1/lib/pkgconfig"
-export MPI_HOME="/opt/homebrew/Cellar/open-mpi/5.0.3_1/lib/"
-export TMPDIR="/tmp"
-```
-Note that your homebrew path may differ. You can check the head of the path using
+
+To determine the location where your `openmpi` is installed, check the head of the path using
 ```
 brew config
 ```
@@ -70,6 +59,23 @@ and looking for the line with
 ```
 HOMEBREW_PREFIX: /opt/homebrew
 ```
+
+
+When you have identified your path, you can check the installation with
+```
+/opt/homebrew/Cellar/open-mpi/5.0.3_1/bin/mpirun --version
+```
+Note that your path may differ.
+
+Next, using this path, add the `openmpi` paths to your `.bash_profile`:
+```
+export MPI_INC_DIR="/opt/homebrew/Cellar/open-mpi/5.0.3_1/include"
+export PATH="$PATH:/opt/homebrew/Cellar/open-mpi/5.0.3_1/bin"
+export PKG_CONFIG_PATH="/opt/homebrew/Cellar/open-mpi/5.0.3_1/lib/pkgconfig"
+export MPI_HOME="/opt/homebrew/Cellar/open-mpi/5.0.3_1/lib/"
+export TMPDIR="/tmp"
+```
+ 
 
 #### Checking your MPI Installation
 To check your MPI installation and your paths, open up a new terminal and use the following command:
@@ -96,27 +102,29 @@ If you haven't already done so, install Cygwin by running the executable on the 
 
 For the mirroring site, choose a site near where you are located. I chose mirrors.kernels.org because it is located in California but you may like to choose a different option depending on your location.
 
-When it comes to the package selection screen, add the list of packages in the following table. The version numbers were the most recent up-to-date files when I 
+When it comes to the package selection screen, add the list of packages in the following table. The version numbers were the most recent up-to-date files when attemped in Fall 2024.
 
 | Package | Version |
 | ------- | ------- |
-| gcc-fortran | X.X |
-| netcdf | X.X |
-| openmpi | X.X |
-| git | X.X |
-| tsch | X.X |
-| gcc-g++ | X.X |
-| vim | X.X |
-| make | X.X |
+| gcc-fortran | 12.4.0-3 |
+| netcdf | 4.9.2-1 |
+| openmpi | 4.1.6-1 |
+| git | 2.45.1-1 |
+| tsch | 6.24.10-1 |
+| gcc-g++ | 12.4.0-3 |
+| vim | 9.0.2155-2 |
+| nano | 4.9-1 |
+| make | 4.4.1-2 |
 | pkg-config | 2.2.0-1 |
 
 To add a package to the installation list, choose "Full" from the drop-down in the upper-left corner. Then, use the search feature to find the package. If the line for the package says "Skip", use drop-down to choose the most recent (non-Test) version. After you have selected the packages, they should all show up under the "Pending" tab. After verifying all packages will be installed, choose next and continue clicking through the installation.
 
-At this point, you will be able to run MITgcm without MPI. To use MIT, continue on to the following step.
-
-### Configuring MPI
+At this point, you will be able to run MITgcm without MPI.
 
 
 ```{note}
 Compiling MITgcm on Windows using Cygwin is considerably slower than compiling on a native linux machine. I have provided these notes as *a* possible way the MITgcm could be used on Windows. If you have discovered a quicker way, please let me know by raising an issue on the [Github repository](https://github.com/ProfMikeWood/ocean_modeling_book) for this site to explain how you did it!
 ```
+
+### Configuring MPI on Cygwin
+Under construction.

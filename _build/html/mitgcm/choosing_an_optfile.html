@@ -161,6 +161,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
 <ul class="nav bd-sidenav">
@@ -402,8 +403,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-with-cygwin">Windows with Cygwin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-cluster">Computing Cluster</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-the-modules">Listing the modules</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-pleaides">Example 1: [Pleaides]</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-spartan">Example 2: [Spartan]</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spartan">Example 1: Spartan</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-pleaides">Example 2: Pleaides</a></li>
 </ul>
 </li>
 </ul>
@@ -426,11 +427,11 @@ document.write(`
 <h2>Systems<a class="headerlink" href="#systems" title="Permalink to this headline">#</a></h2>
 <section id="macos">
 <h3>MacOS<a class="headerlink" href="#macos" title="Permalink to this headline">#</a></h3>
-<p>If you are using MacOS with the gfortran compiler, following the instructions <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, then typically the darwin_amd_gfortran file works well.</p>
+<p>If you are using MacOS with the gfortran compiler, following the instructions <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html#installation-on-a-mac">HERE</a>, then use the <strong>darwin_amd_gfortran</strong> file.</p>
 </section>
 <section id="windows-with-cygwin">
 <h3>Windows with Cygwin<a class="headerlink" href="#windows-with-cygwin" title="Permalink to this headline">#</a></h3>
-<p>If you are using Windows with a Cygwin installation, following the instructions <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, then use the [] file.</p>
+<p>If you are using Windows with a Cygwin installation, following the instructions <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html#installation-on-a-windows-using-cygwin">HERE</a>, then use the <strong>linux_amd64_gfortran</strong> file.</p>
 </section>
 <section id="computing-cluster">
 <h3>Computing Cluster<a class="headerlink" href="#computing-cluster" title="Permalink to this headline">#</a></h3>
@@ -443,24 +444,24 @@ document.write(`
 </div>
 <p>The key modules to load for MITgcm are the modules for MPI and netcdf/hdf5. The latter modules will depend on your MPI version (MPICH, OPMI, etc) and typically need to match. Below are two examples for Pleaides and Spartan, showing two ways to import required modules and choose an associated optfile.</p>
 </section>
-<section id="example-1-pleaides">
-<h4>Example 1: [Pleaides]<a class="headerlink" href="#example-1-pleaides" title="Permalink to this headline">#</a></h4>
+<section id="example-1-spartan">
+<h4>Example 1: Spartan<a class="headerlink" href="#example-1-spartan" title="Permalink to this headline">#</a></h4>
+<p>Spartan is the HPC cluster at San Jose State University. On Spartan, load the following modules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">gnu</span><span class="o">/</span><span class="mf">6.3.0</span> <span class="n">netcdf</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">hdf5</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span>
+</pre></div>
+</div>
+<p>Using these modules, the <code class="docutils literal notranslate"><span class="pre">linux_amd64_gfortran</span></code> optfile works well. Note that the MPI path corresponding to the chosen MPI implementation should be exported before running <code class="docutils literal notranslate"><span class="pre">genmake2</span></code> e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MPI_INC_DIR</span><span class="o">=/</span><span class="n">act</span><span class="o">/</span><span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span><span class="o">/</span><span class="n">include</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-pleaides">
+<h4>Example 2: Pleaides<a class="headerlink" href="#example-2-pleaides" title="Permalink to this headline">#</a></h4>
 <p>Pleaides is the NASA HPC cluster. On Pleaides, the following modules have been used for a successful compilation of MITgcm:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">comp</span><span class="o">-</span><span class="n">intel</span> <span class="n">mpi</span><span class="o">-</span><span class="n">hpe</span> <span class="n">hdf4</span><span class="o">/</span><span class="mf">4.2.12</span> <span class="n">hdf5</span><span class="o">/</span><span class="mf">1.8.18</span><span class="n">_mpt</span> <span class="n">netcdf</span><span class="o">/</span><span class="mf">4.4.1.1</span><span class="n">_mpt</span>
 </pre></div>
 </div>
 <p>Using these modules, the <code class="docutils literal notranslate"><span class="pre">linux_amd64_ifort+mpi_ice_nas</span></code> optfile works well.</p>
-</section>
-<section id="example-2-spartan">
-<h4>Example 2: [Spartan]<a class="headerlink" href="#example-2-spartan" title="Permalink to this headline">#</a></h4>
-<p>Spartan is the HPC cluster at San Jose State University.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">gnu</span><span class="o">/</span><span class="mf">6.3.0</span> <span class="n">netcdf</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span> <span class="n">hdf5</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span>
-</pre></div>
-</div>
-<p>Using these modules, the <code class="docutils literal notranslate"><span class="pre">linux_amd64_gfortran</span></code> optfile works well. Note that the MPI path corresponding to the chosen MPI implementtion should be exported before running <code class="docutils literal notranslate"><span class="pre">genmake2</span></code> e.g.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MPI_INC_DIR</span><span class="o">=/</span><span class="n">act</span><span class="o">/</span><span class="n">mpich</span><span class="o">/</span><span class="n">gnu</span><span class="o">-</span><span class="mf">6.3.0</span><span class="o">/</span><span class="n">include</span><span class="o">/</span>
-</pre></div>
-</div>
 </section>
 </section>
 </section>
@@ -538,8 +539,8 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-with-cygwin">Windows with Cygwin</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-cluster">Computing Cluster</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-the-modules">Listing the modules</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-pleaides">Example 1: [Pleaides]</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-spartan">Example 2: [Spartan]</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-spartan">Example 1: Spartan</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-pleaides">Example 2: Pleaides</a></li>
 </ul>
 </li>
 </ul>

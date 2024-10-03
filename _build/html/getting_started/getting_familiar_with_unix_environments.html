@@ -398,14 +398,49 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-file-system">Navigating the File System</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-and-editing-files">Making and Editing Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-files">Copying Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files">Deleting Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-commands">Summary of Commands</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-commands-to-set-up-run-directory">Summary of Commands to Set Up Run Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-file-system">Navigating the File System</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-your-path">Determining your path</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-contents-of-your-directory">Listing contents of your directory</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-for-yourself">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">💡 Solution:</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-directories">Changing Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">💡 Solution:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-and-linking-files">Copying and Linking Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-files">Copying Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">💡 Solution:</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-files">Linking Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">💡 Solution:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-and-editing-files-and-directories">Making and Editing Files and Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-files">Editing Files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files-and-directories">Deleting Files and Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🤔 Try it for yourself:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">💡 Solution:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -419,112 +454,290 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="getting-familiar-with-unix-environments">
 <h1>Getting Familiar with Unix Environments<a class="headerlink" href="#getting-familiar-with-unix-environments" title="Permalink to this headline">#</a></h1>
-<p>This page is designed as an introduction to unix shell scripting.</p>
+<p>This page is designed to provide an introduction to Unix-type shell commands. On MacOS, the standard Terminal is <code class="docutils literal notranslate"><span class="pre">zsh</span></code> (as of 2019) which is a Unix-type shell. On Windows, the <a class="reference external" href="https://www.cygwin.com/">cygwin</a> project provides a Unix-like environment that uses the same commands.</p>
+<section id="summary-of-commands">
+<h2>Summary of Commands<a class="headerlink" href="#summary-of-commands" title="Permalink to this headline">#</a></h2>
+<p>The commands introduced in this page are summarized in the following table for convenience:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Commonly-Used Options</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pwd</p></td>
+<td><p>Obtains the present working directory</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ls</p></td>
+<td><p>Lists the contents of the present working directory</p></td>
+<td><p>-l (verbose); -a (show hidden)</p></td>
+</tr>
+<tr class="row-even"><td><p>cd</p></td>
+<td><p>Changes directory to a different location</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>cp</p></td>
+<td><p>Copies files from one location to another</p></td>
+<td><p>-r (recursively copy from directories)</p></td>
+</tr>
+<tr class="row-even"><td><p>ln</p></td>
+<td><p>Links one file to another</p></td>
+<td><p>-s (symbolic)</p></td>
+</tr>
+<tr class="row-odd"><td><p>cat</p></td>
+<td><p>Print contents of a file to the terminal</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>head</p></td>
+<td><p>Print contents of the start of a file</p></td>
+<td><p>-n (number of lines)</p></td>
+</tr>
+<tr class="row-odd"><td><p>tail</p></td>
+<td><p>Print contents of the end of a file</p></td>
+<td><p>-n (number of lines)</p></td>
+</tr>
+<tr class="row-even"><td><p>mkdir</p></td>
+<td><p>Make a directory</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>rm</p></td>
+<td><p>Removes file(s) from the system</p></td>
+<td><p>-r (recursively remove from directories)</p></td>
+</tr>
+<tr class="row-even"><td><p>rmdir</p></td>
+<td><p>Remove directory</p></td>
+<td><p>-R (remove a directory and all of the files inside of it)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">#</a></h2>
 <section id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Open your shell</p></li>
-<li><p>Download the example dataset</p></li>
-</ul>
+<h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h3>
+<p>To get started with this introductory tutorial, use the following steps:</p>
+<ol class="arabic simple">
+<li><p>Download the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/getting_started/model_config_example.zip">model_config_example.zip</a> example file set from the Github repository for this book and unzip it.</p></li>
+<li><p>Open the Unix shell you use on your machine.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">model_config_example</span></code> directory contains several subdirectories containing various files in the following format:</p>
+<img alt="Model File Structure" class="align-center" src="../_images/model_file_structure.png" />
+<p>This directory structure mimics the typical structure used for MITgcm models.</p>
 </section>
 <section id="navigating-the-file-system">
-<h2>Navigating the File System<a class="headerlink" href="#navigating-the-file-system" title="Permalink to this headline">#</a></h2>
-<p>When you open your terminal, you want to determine where in your file system you are.</p>
+<h3>Navigating the File System<a class="headerlink" href="#navigating-the-file-system" title="Permalink to this headline">#</a></h3>
+<section id="determining-your-path">
+<h4>Determining your path<a class="headerlink" href="#determining-your-path" title="Permalink to this headline">#</a></h4>
+<p>When you open your terminal, one of the first thing you want to determine is where in your file system you are. The command <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, which stands for <strong>p</strong>resent <strong>w</strong>orking <strong>d</strong>irectory, will show you where you are located.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span>
 </pre></div>
 </div>
-<p>The command pwd stands for <em>p</em>resent <em>w</em>orking <em>directory</em>.</p>
 <p>From the above command you may see something like the following on a Mac system:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">mike</span>
 </pre></div>
 </div>
 <p>or the following on a Windows system:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">mike</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span><span class="p">:</span>\<span class="n">mike</span>
 </pre></div>
 </div>
-<p>Wherever you are, you can determine what files, folders and other items are in your current folder:</p>
+</section>
+<section id="listing-contents-of-your-directory">
+<h4>Listing contents of your directory<a class="headerlink" href="#listing-contents-of-your-directory" title="Permalink to this headline">#</a></h4>
+<p>Wherever you are, you can determine what files, folders and other items are in your current folder using the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
 </pre></div>
 </div>
-<p>Your <code class="docutils literal notranslate"><span class="pre">ls</span></code> command will look something like the following:</p>
+<p>The output of your <code class="docutils literal notranslate"><span class="pre">ls</span></code> command will look something like the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Applications</span>         <span class="n">Library</span>              <span class="n">Pictures</span>             <span class="nb">bin</span>
 <span class="n">Documents</span>            <span class="n">Movies</span>               <span class="n">Public</span>               <span class="n">opt</span>
 <span class="n">Desktop</span>              <span class="n">Downloads</span>            <span class="n">Music</span>               
 </pre></div>
 </div>
-<p>To move from one folder to the next, use the cd command:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All Unix commands have the structure <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">-(options)</span> <span class="pre">(arguments)</span></code> where options and arguments may or may not be present.</p>
+</div>
+<section id="try-it-for-yourself">
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#try-it-for-yourself" title="Permalink to this headline">#</a></h5>
+<p>Try the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command with the following and consider how they affect the output:</p>
+<ul class="simple">
+<li><p>option <code class="docutils literal notranslate"><span class="pre">-l</span></code></p></li>
+<li><p>option <code class="docutils literal notranslate"><span class="pre">-a</span></code></p></li>
+<li><p>argument <code class="docutils literal notranslate"><span class="pre">Documents</span></code></p></li>
+<li><p>argument <code class="docutils literal notranslate"><span class="pre">D*</span></code></p></li>
+</ul>
+</section>
+<section id="solution">
+<h5>💡 Solution:<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h5>
+<div class="toggle docutils container">
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-l</span></code> option gives verbose output</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-a</span></code> option shows hidden files</p></li>
+<li><p>Providing <code class="docutils literal notranslate"><span class="pre">Documents</span></code> as an argument will list all files in the <code class="docutils literal notranslate"><span class="pre">Documents</span></code> folder rather than the current directory</p></li>
+<li><p>Providing <code class="docutils literal notranslate"><span class="pre">D*</span></code> as an argument will list all files in directories starting with the letter <code class="docutils literal notranslate"><span class="pre">D</span></code>. Here, we see that <code class="docutils literal notranslate"><span class="pre">*</span></code> is a <em>wildcard</em> character and can be used to find directories that match a given pattern.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="changing-directories">
+<h4>Changing Directories<a class="headerlink" href="#changing-directories" title="Permalink to this headline">#</a></h4>
+<p>To move from one directory to another, use the <code class="docutils literal notranslate"><span class="pre">cd</span></code> command (short for <strong>c</strong>hange <strong>d</strong>irectory):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Documents</span>
 </pre></div>
 </div>
-<p>You can repeat the cd command in succession to move around your computer, or you can string together a full path to move to a different location:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Teaching</span><span class="o">/</span><span class="n">Courses</span><span class="o">/</span><span class="n">CS</span> <span class="mi">185</span><span class="n">C</span><span class="o">/</span><span class="n">Lectures</span><span class="o">/</span><span class="n">Lecture</span> <span class="mi">7</span><span class="o">-</span><span class="mi">2</span>
+<p>You can move up one folder in your directory using two dots in your path as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
 </pre></div>
 </div>
+<p>You can repeat the cd command in succession to move around your computer, or you can string together a full path to move to a different location, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Model_Files</span><span class="o">/</span><span class="n">model_config_example</span><span class="o">/</span><span class="n">MITgcm</span>
+</pre></div>
+</div>
+<section id="id1">
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h5>
+<p>Move into the <code class="docutils literal notranslate"><span class="pre">run</span></code> subdirectory of the <code class="docutils literal notranslate"><span class="pre">model_config_example</span></code> directory.</p>
 </section>
-<section id="making-and-editing-files">
-<h2>Making and Editing Files<a class="headerlink" href="#making-and-editing-files" title="Permalink to this headline">#</a></h2>
-<p>We can make and edit files with a variety of different editors, such as the nano command. For example, we can edit the file with</p>
+<section id="id2">
+<h5>💡 Solution:<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h5>
+<div class="toggle docutils container">
+<p>Your exact solution will depend on the location of your home directory and where you saved and unzipped your <code class="docutils literal notranslate"><span class="pre">model_config_example</span></code> files.</p>
+<p>You may choose to enter individual commands such as <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">model_config_example</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">run</span></code>. Or you can string your commands together to make a long path to your destination, e.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">model_config_example/run</span></code></p>
+</div>
+</section>
+</section>
+</section>
+<section id="copying-and-linking-files">
+<h3>Copying and Linking Files<a class="headerlink" href="#copying-and-linking-files" title="Permalink to this headline">#</a></h3>
+<section id="copying-files">
+<h4>Copying Files<a class="headerlink" href="#copying-files" title="Permalink to this headline">#</a></h4>
+<p>Files can be copied with the <code class="docutils literal notranslate"><span class="pre">cp</span></code> command (short for copy). The syntax for the copy command is to first list the path of the file to copy and then the destination for that file. For example, suppose you are in the <code class="docutils literal notranslate"><span class="pre">run</span></code> directory and would like to copy the file <code class="docutils literal notranslate"><span class="pre">eedata</span></code> from folder <code class="docutils literal notranslate"><span class="pre">namelist</span></code>.  In this case, the copy can be completed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">../</span><span class="n">namelist</span><span class="o">/</span><span class="n">eedata</span> <span class="n">eedata</span>
+</pre></div>
+</div>
+<p>The first argument is source file and the second is the destination file. If you want the file name to stay the same, then you can optionally use the <code class="docutils literal notranslate"><span class="pre">.</span></code> symbol to indicate the current directory as the destination as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">../</span><span class="n">namelist</span><span class="o">/</span><span class="n">eedata</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Just like with file paths, wildcards can be used to copy multiple files at once that follow the same pattern.</p>
+<section id="id3">
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h5>
+<p>Copy all files from <code class="docutils literal notranslate"><span class="pre">namelist</span></code> that start with <code class="docutils literal notranslate"><span class="pre">data</span></code> to the run directory:</p>
+</section>
+<section id="id4">
+<h5>💡 Solution:<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h5>
+<div class="toggle docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">../namelist/data*</span> <span class="pre">.</span></code></p>
+</div>
+</section>
+</section>
+<section id="linking-files">
+<h4>Linking Files<a class="headerlink" href="#linking-files" title="Permalink to this headline">#</a></h4>
+<p>Often we would like files to be in multiple locations at the same time. For example, two different models may rely on the same underlying data. In this case, we don’t need two complete copies of the data - each model just needs to know where the data located. In these circumstances, a symbolic link is desirable.</p>
+<p>We can symbolicly link files with the <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span></code> command. For example, suppose we wanted to link the <code class="docutils literal notranslate"><span class="pre">bathymetry.bin</span></code> file from the <code class="docutils literal notranslate"><span class="pre">input</span></code> directory into the <code class="docutils literal notranslate"><span class="pre">run</span></code> directory. In this case, we could use</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="nb">input</span><span class="o">/</span><span class="n">bathymetry</span><span class="o">.</span><span class="n">bin</span> <span class="o">.</span>
+</pre></div>
+</div>
+<section id="id5">
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h5>
+<p>Link the rest of the folders and files from the <code class="docutils literal notranslate"><span class="pre">input</span></code> directory into your <code class="docutils literal notranslate"><span class="pre">run</span></code> directory.</p>
+</section>
+<section id="id6">
+<h5>💡 Solution:<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h5>
+<div class="toggle docutils container">
+<p>To see what other files are in the input directory, we can use the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">../input</span></code> command.</p>
+<p>After discovering the names of the three other items, we can use</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">../input/exf</span> <span class="pre">.</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">../input/obcs</span> <span class="pre">.</span></code>, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">../input/tile001.mitgrid</span> <span class="pre">.</span></code>.</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="making-and-editing-files-and-directories">
+<h3>Making and Editing Files and Directories<a class="headerlink" href="#making-and-editing-files-and-directories" title="Permalink to this headline">#</a></h3>
+<section id="editing-files">
+<h4>Editing Files<a class="headerlink" href="#editing-files" title="Permalink to this headline">#</a></h4>
+<p>We can make and edit files with a variety of different editors that come pre-installed on command line interfaces. One popular editor is the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor which can be opened with the <code class="docutils literal notranslate"><span class="pre">nano</span></code>  command. For example, we can create and edit a <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> file with the following call:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
-<p>You can edit the text directly. When you are done, you can use CTRL-X to save and exit.</p>
-<p>To see that the file contains, you can use <code class="docutils literal notranslate"><span class="pre">cat</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
+<p>The <code class="docutils literal notranslate"><span class="pre">nano</span></code> text editor will open in the terminal directly and will have the following appearance.</p>
+<img alt="The Nano Text Editor" class="align-center" src="../_images/nano_screenshot.png" />
+<p>You can edit the text in the file directly. Then, when your edits are complete, use CTRL-X to save and exit.</p>
+<p>To see the text that the file contains, you can use <code class="docutils literal notranslate"><span class="pre">cat</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">cat</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>The code above returns the following contents:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">file</span> <span class="n">contains</span> <span class="n">information</span> <span class="n">about</span> <span class="n">the</span> <span class="n">model</span> <span class="n">configuration</span>
+</pre></div>
+</div>
+<p>To see just the start of the file, you can use <code class="docutils literal notranslate"><span class="pre">head</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">head</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 <p>To see just the end of the file, you can use <code class="docutils literal notranslate"><span class="pre">tail</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tail</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
-<p>We can link files with …</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span>
+</section>
+<section id="creating-directories">
+<h4>Creating Directories<a class="headerlink" href="#creating-directories" title="Permalink to this headline">#</a></h4>
+<p>Directories can also be creates and removed using tools on the command line.</p>
+<p>To make a directory, we use use the <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command (short for <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory). For example, suppose you wanted to make a directory called <code class="docutils literal notranslate"><span class="pre">diags</span></code>. This can be achieved with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">diags</span>
 </pre></div>
 </div>
-<p>Exercise: Link the following files into the current run directory:</p>
-<ul class="simple">
-<li><p>the mitgcmuv files</p></li>
-<li><p>the input files</p></li>
-<li><p>the namelist files</p></li>
-</ul>
+</section>
 </section>
 <section id="shell-profiles">
-<h2>Shell Profiles<a class="headerlink" href="#shell-profiles" title="Permalink to this headline">#</a></h2>
-<p>Each shell has a given profile. You can see your profile with</p>
+<h3>Shell Profiles<a class="headerlink" href="#shell-profiles" title="Permalink to this headline">#</a></h3>
+<p>Each shell has a given profile - a script that is automatically run when you open a terminal. For example, the default terminal on MacOS is <em>zshell</em> which has the default shell profile in the <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file. Similarly, bash shells have profiles in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> and/or <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">.</span></code> in front of each file ensures that the file is hidden.</p>
+<p>All shell profiles should be placed in your home directory. You can check your home directory with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>echo $HOME
+</pre></div>
+</div>
+<p>This location is typically the location where your shell will open when you launch your terminal</p>
+<p>You can see your hidden profile in your home directory using the <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag on the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ls -a $HOME
 </pre></div>
 </div>
-<p>The</p>
+<p>To edit your profile, you can use the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor as described above.</p>
 </section>
-<section id="copying-files">
-<h2>Copying Files<a class="headerlink" href="#copying-files" title="Permalink to this headline">#</a></h2>
-<p>We can make and edit files with …</p>
+<section id="deleting-files-and-directories">
+<h3>Deleting Files and Directories<a class="headerlink" href="#deleting-files-and-directories" title="Permalink to this headline">#</a></h3>
+<p>We can delete files with the <code class="docutils literal notranslate"><span class="pre">rm</span></code> command - short for remove. For example, if we no longer wanted the temporary note that we made before, we could remove it with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="n">tmp_note</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Deleting files in a Unix Environment is PERMANENT. There is no Trash or Recycle bin and there will not be a note asking you if you’re sure you would like to delete that file. Before using the <code class="docutils literal notranslate"><span class="pre">rm</span></code> command, be sure to think for an extra second or two about what you intend to do.</p>
+</div>
+<p>To remove a directory, such as <code class="docutils literal notranslate"><span class="pre">diags</span></code>, we can use the similar <code class="docutils literal notranslate"><span class="pre">rmdir</span></code> command as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rmdir</span> <span class="n">diags</span>
+</pre></div>
+</div>
+<p>One caveat (or perhaps safety net) of this command is that the directory must be empty before it is deleted. If you would like to remove the directory and all of the files inside of it, you can use the recursive option for the command as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rmdir</span> <span class="o">-</span><span class="n">r</span> <span class="n">diags</span>
+</pre></div>
+</div>
+<p>Again, caution should be used with deleting directories because the contents cannot be recovered after they are gone.</p>
+<section id="id7">
+<h4>🤔 Try it for yourself:<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h4>
+<p>Suppose you made some changes to the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package and need to recompile the model to reflect these changes. Remove all <code class="docutils literal notranslate"><span class="pre">exf</span></code> files from the build directory.</p>
 </section>
-<section id="deleting-files">
-<h2>Deleting Files<a class="headerlink" href="#deleting-files" title="Permalink to this headline">#</a></h2>
-<p>We can delete files with …</p>
+<section id="id8">
+<h4>💡 Solution:<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<div class="toggle docutils container">
+<p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">../build/exf*</span></code></p>
+</div>
 </section>
-<section id="summary-of-commands">
-<h2>Summary of Commands<a class="headerlink" href="#summary-of-commands" title="Permalink to this headline">#</a></h2>
-<p>Add a summary here</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Command</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>pwd</p></td>
-<td><p>Obtains the present working directory</p></td>
-</tr>
-<tr class="row-odd"><td><p>ls</p></td>
-<td><p>Lists the contents of the present working directory</p></td>
-</tr>
-</tbody>
-</table>
 </section>
-<section id="summary-of-commands-to-set-up-run-directory">
-<h2>Summary of Commands to Set Up Run Directory<a class="headerlink" href="#summary-of-commands-to-set-up-run-directory" title="Permalink to this headline">#</a></h2>
-<p>Add a summary here</p>
 </section>
 </section>
 
@@ -595,14 +808,49 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-file-system">Navigating the File System</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-and-editing-files">Making and Editing Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-files">Copying Files</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files">Deleting Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-commands">Summary of Commands</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-commands-to-set-up-run-directory">Summary of Commands to Set Up Run Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-the-file-system">Navigating the File System</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-your-path">Determining your path</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-contents-of-your-directory">Listing contents of your directory</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-for-yourself">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">💡 Solution:</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-directories">Changing Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">💡 Solution:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-and-linking-files">Copying and Linking Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-files">Copying Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">💡 Solution:</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linking-files">Linking Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">🤔 Try it for yourself:</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">💡 Solution:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-and-editing-files-and-directories">Making and Editing Files and Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#editing-files">Editing Files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-directories">Creating Directories</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shell-profiles">Shell Profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-files-and-directories">Deleting Files and Directories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">🤔 Try it for yourself:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">💡 Solution:</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
