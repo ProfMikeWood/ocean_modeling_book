@@ -60,6 +60,10 @@ The above commands will output a lot of lines in your terminal and generate a lo
 ls mitgcmuv
 ```
 
+```{note}
+On Windows, the `mitgcmuv` file will have an executable extention `.exe`. This is the same file indicated above.
+```
+
 This command should return `mitgcmuv` (and not "No such file or directory") when the compilation is successful.
 
 #### Running without MPI
