@@ -1,6 +1,6 @@
 # Installing a compiler with MPI
 
-To run MITgcm, we will need two cruicial components: a fortran compiler and a version of MPI. This page describes how to install these items on both MacOS and Windows (using Cygwin).
+To run MITgcm, we will need two cruicial components: a fortran compiler and a version of MPI. This page describes how to install these items on MacOS, Windows (using Cygwin), and Linux (Ubuntu).
 
 The compiler is used to translate the fortran MITgcm source code into code that can be run on your machine. Message Passing Interface (MPI) is a framework to allow for the parallelization of the model code, dividing portions of the model across different CPUs.
 
@@ -13,7 +13,7 @@ conda environments have been reported to potentially interfere with the installa
 On a Mac, installation of the compiler and MPI are made considerably easier using the homebrew package manager.
 
 ### Install Homebrew
-If you haven't already done so, install homebrew following the instruction at https://brew.sh/.
+If you haven't already done so, install homebrew following the instruction at https://brew.sh/. This will involve copying the command from the main page of homebrew and running it in your Terminal. Then, when the installation is complete, be sure to run the final three lines that are output from the installation script.
 
 ### Install gcc
 Next, use homebrew to install gcc
@@ -128,3 +128,21 @@ Compiling MITgcm on Windows using Cygwin is considerably slower than compiling o
 
 ### Configuring MPI on Cygwin
 Under construction.
+
+## Installation on Linux (Ubuntu)
+On Ubuntu, the installation is straight-forward using `apt`.
+
+### Install the Compiler
+To install the compiler tools, use the following:
+```
+sudo apt install gcc 
+sudo apt install gfortran
+sudo apt install build-essential
+```
+
+### Install MPI
+To install the MPI tools, use the following:
+```
+sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
+```
+
