@@ -413,6 +413,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-mpi-on-cygwin">Configuring MPI on Cygwin</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-linux-ubuntu">Installation on Linux (Ubuntu)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-compiler">Install the Compiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mpi">Install MPI</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -426,7 +431,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="installing-a-compiler-with-mpi">
 <h1>Installing a compiler with MPI<a class="headerlink" href="#installing-a-compiler-with-mpi" title="Permalink to this headline">#</a></h1>
-<p>To run MITgcm, we will need two cruicial components: a fortran compiler and a version of MPI. This page describes how to install these items on both MacOS and Windows (using Cygwin).</p>
+<p>To run MITgcm, we will need two cruicial components: a fortran compiler and a version of MPI. This page describes how to install these items on MacOS, Windows (using Cygwin), and Linux (Ubuntu).</p>
 <p>The compiler is used to translate the fortran MITgcm source code into code that can be run on your machine. Message Passing Interface (MPI) is a framework to allow for the parallelization of the model code, dividing portions of the model across different CPUs.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -437,7 +442,7 @@ document.write(`
 <p>On a Mac, installation of the compiler and MPI are made considerably easier using the homebrew package manager.</p>
 <section id="install-homebrew">
 <h3>Install Homebrew<a class="headerlink" href="#install-homebrew" title="Permalink to this headline">#</a></h3>
-<p>If you haven’t already done so, install homebrew following the instruction at <a class="reference external" href="https://brew.sh/">https://brew.sh/</a>.</p>
+<p>If you haven’t already done so, install homebrew following the instruction at <a class="reference external" href="https://brew.sh/">https://brew.sh/</a>. This will involve copying the command from the main page of homebrew and running it in your Terminal. Then, when the installation is complete, be sure to run the final three lines that are output from the installation script.</p>
 </section>
 <section id="install-gcc">
 <h3>Install gcc<a class="headerlink" href="#install-gcc" title="Permalink to this headline">#</a></h3>
@@ -573,6 +578,26 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 <p>Under construction.</p>
 </section>
 </section>
+<section id="installation-on-linux-ubuntu">
+<h2>Installation on Linux (Ubuntu)<a class="headerlink" href="#installation-on-linux-ubuntu" title="Permalink to this headline">#</a></h2>
+<p>On Ubuntu, the installation is straight-forward using <code class="docutils literal notranslate"><span class="pre">apt</span></code>.</p>
+<section id="install-the-compiler">
+<h3>Install the Compiler<a class="headerlink" href="#install-the-compiler" title="Permalink to this headline">#</a></h3>
+<p>To install the compiler tools, use the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gcc</span> 
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gfortran</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+</pre></div>
+</div>
+</section>
+<section id="install-mpi">
+<h3>Install MPI<a class="headerlink" href="#install-mpi" title="Permalink to this headline">#</a></h3>
+<p>To install the MPI tools, use the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openmpi</span><span class="o">-</span><span class="nb">bin</span> <span class="n">openmpi</span><span class="o">-</span><span class="n">doc</span> <span class="n">libopenmpi</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -655,6 +680,11 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-cygwin">Installation on a Windows (using Cygwin)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-cygwin-with-required-packages">Install Cygwin with required packages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-mpi-on-cygwin">Configuring MPI on Cygwin</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-linux-ubuntu">Installation on Linux (Ubuntu)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-compiler">Install the Compiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mpi">Install MPI</a></li>
 </ul>
 </li>
 </ul>

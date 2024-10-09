@@ -11,6 +11,9 @@ If you are using MacOS with the gfortran compiler, following the instructions [H
 ### Windows with Cygwin
 If you are using Windows with a Cygwin installation, following the instructions [HERE](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html#installation-on-a-windows-using-cygwin), then use the **linux_amd64_gfortran** file.
 
+### Linux (Ubuntu)
+If you are using Linux with Ubuntu, following the instructions [HERE](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html), then use the **linux_amd64_gfortran** file.
+
 ### Computing Cluster
 The optfile used for compilation on a computing cluster will depend on your cluster's compiler options. There are many options available and they typically need to be paired with modules loaded prior to compiling and running MITgcm.
 
