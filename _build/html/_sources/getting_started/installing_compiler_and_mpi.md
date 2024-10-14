@@ -146,3 +146,53 @@ To install the MPI tools, use the following:
 sudo apt-get install openmpi-bin openmpi-doc libopenmpi-dev
 ```
 
+## Installation on Linux (Arch Linux or Arch-based distros)
+
+On Arch-based Linux distributions, the installation is straight-forward using the `pacman` package manager. However, on Arch-based systems, the installation is a bit more involved. Here are the steps to install MITgcm on Arch-based systems.
+
+### Install Compiler
+
+To compile MITgcm, you need a Fortran compiler. Download the GNU Compiler Collection package [
+`gcc`](https://archlinux.org/packages/?name=gcc) and the Fortran front-end [
+`gcc-fortran`](https://archlinux.org/packages/?name=gcc-fortran).
+
+```shell
+sudo pacman -S gcc gcc-fortran
+```
+
+### Install NetCDF
+
+MITgcm uses the NetCDF library to read and write data. Download the NetCDF package [
+`netcdf`](https://archlinux.org/packages/?name=netcdf), the Fortran interface [
+`netcdf-fortran`](https://archlinux.org/packages/?name=netcdf-fortran), and the HDF5 library [
+`hdf5`](https://archlinux.org/packages/?name=hdf5).
+
+```shell
+sudo pacman -S netcdf netcdf-fortran hdf5
+```
+
+### Install OpenMPI
+
+MITgcm uses the OpenMPI library for parallel computing. Download the OpenMPI package [
+`openmpi`](https://archlinux.org/packages/?name=openmpi).
+
+```shell
+sudo pacman -S openmpi 
+```
+
+#### Checking your MPI Installation
+
+To check your MPI installation and your paths, open up a new terminal and use the following command:
+
+```shell
+mpirun -np 4 uname
+```
+
+Your terminal should print 4 versions of your operating system, e.g.
+
+```shell
+Linux
+Linux
+Linux
+Linux
+```

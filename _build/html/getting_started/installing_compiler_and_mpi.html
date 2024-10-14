@@ -418,6 +418,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mpi">Install MPI</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-linux-arch-linux-or-arch-based-distros">Installation on Linux (Arch Linux or Arch-based distros)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-compiler">Install Compiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Install NetCDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-openmpi">Install OpenMPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Checking your MPI Installation</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -598,6 +607,51 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 </section>
+<section id="installation-on-linux-arch-linux-or-arch-based-distros">
+<h2>Installation on Linux (Arch Linux or Arch-based distros)<a class="headerlink" href="#installation-on-linux-arch-linux-or-arch-based-distros" title="Permalink to this headline">#</a></h2>
+<p>On Arch-based Linux distributions, the installation is straight-forward using the <code class="docutils literal notranslate"><span class="pre">pacman</span></code> package manager. However, on Arch-based systems, the installation is a bit more involved. Here are the steps to install MITgcm on Arch-based systems.</p>
+<section id="install-compiler">
+<h3>Install Compiler<a class="headerlink" href="#install-compiler" title="Permalink to this headline">#</a></h3>
+<p>To compile MITgcm, you need a Fortran compiler. Download the GNU Compiler Collection package <a class="reference external" href="https://archlinux.org/packages/?name=gcc">
+<code class="docutils literal notranslate"><span class="pre">gcc</span></code></a> and the Fortran front-end <a class="reference external" href="https://archlinux.org/packages/?name=gcc-fortran">
+<code class="docutils literal notranslate"><span class="pre">gcc-fortran</span></code></a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>gcc<span class="w"> </span>gcc-fortran
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>Install NetCDF<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>MITgcm uses the NetCDF library to read and write data. Download the NetCDF package <a class="reference external" href="https://archlinux.org/packages/?name=netcdf">
+<code class="docutils literal notranslate"><span class="pre">netcdf</span></code></a>, the Fortran interface <a class="reference external" href="https://archlinux.org/packages/?name=netcdf-fortran">
+<code class="docutils literal notranslate"><span class="pre">netcdf-fortran</span></code></a>, and the HDF5 library <a class="reference external" href="https://archlinux.org/packages/?name=hdf5">
+<code class="docutils literal notranslate"><span class="pre">hdf5</span></code></a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>netcdf<span class="w"> </span>netcdf-fortran<span class="w"> </span>hdf5
+</pre></div>
+</div>
+</section>
+<section id="install-openmpi">
+<h3>Install OpenMPI<a class="headerlink" href="#install-openmpi" title="Permalink to this headline">#</a></h3>
+<p>MITgcm uses the OpenMPI library for parallel computing. Download the OpenMPI package <a class="reference external" href="https://archlinux.org/packages/?name=openmpi">
+<code class="docutils literal notranslate"><span class="pre">openmpi</span></code></a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>openmpi<span class="w"> </span>
+</pre></div>
+</div>
+<section id="id2">
+<h4>Checking your MPI Installation<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<p>To check your MPI installation and your paths, open up a new terminal and use the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>uname
+</pre></div>
+</div>
+<p>Your terminal should print 4 versions of your operating system, e.g.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Linux
+Linux
+Linux
+Linux
+</pre></div>
+</div>
+</section>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -685,6 +739,15 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-linux-ubuntu">Installation on Linux (Ubuntu)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-compiler">Install the Compiler</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-mpi">Install MPI</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-linux-arch-linux-or-arch-based-distros">Installation on Linux (Arch Linux or Arch-based distros)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-compiler">Install Compiler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Install NetCDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-openmpi">Install OpenMPI</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Checking your MPI Installation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
