@@ -17,6 +17,21 @@ It turned out that the processing tiles were too big for my machine despite the 
 
 ## Run-Time Issues
 
+### Cannot match namelist
+One common run-time error results from an incorrect keyword or a typo in one of the namelist files (i.e. the files `data.*`). Consider the following error message:
+
+```
+At line 2458 of file diagnostics_readparms.for (unit = 11, file = 'scratch1.000000000')
+Fortran runtime error: Cannot match namelist object name dumpatfirst
+
+Error termination. Backtrace:
+#0  0x1012d2d2f
+#1  0x1012d38d7
+...
+```
+
+The above message tells you that you have an error in one of your namelist. The good news is that it also provides lots of information. From the message, we can see that the `diagnostics` package flagged the error and even that the incorrect namelist keyword is `dumpatfirst`. Further, MITgcm has outputted the incorrect lines to a files called `scratch1.000000000` where you can investigate the issue. To remedy this run-time error, remove the incorrect keyword and/or fix the typo.
+
 ### Dealing with NaNs
 When MITgcm encounters an unexpected NaN in a computation, the NaN will propagate through all fields such that all model output will be NaN. By default, the model will continue running, carrying around all of those NaNs - no good! This behavior can be be suppressed using the `--ieee` flag at compile time, forcing the model to stop running, i.e.
 
@@ -36,7 +51,7 @@ This functionality will provide a back trace to the location in the code where t
 
 When using R_STAR coordinates, there is a potential for the model to crash if the layer thickness gets too small or too big. This is particularly prevalent when using sea ice next to the coast.
 
-When this occurs, it's helpful to find where in the model the error occurred in order to adjust the model (e.g. potentially change the topography). The model will print a message where the error occurs, but only in the STDERR file for the tile. To find the tile(s) where the error happened, search for the error with `grep`:
+When this occurs, it's helpful to find where in the model the error occurred in order to adjust the model (e.g. potentially change the topography). The model will print a message where the error occurs, but only in the `STDERR` file for the tile. To find the tile(s) where the error happened, search for the error with `grep`:
 
 ```
 grep CALC_R_STAR STDERR*
