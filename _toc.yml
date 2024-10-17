@@ -45,6 +45,7 @@ parts:
     - file: analysis/volume_budget
     - file: analysis/heat_budget
     - file: analysis/salt_budget
-  - caption: References
+  - caption: Documentation
     chapters:
+    - file: contributions
     - file: references
