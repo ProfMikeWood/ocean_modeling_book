@@ -202,6 +202,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../state_estimation/greens_function.html">Green’s Functions</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
@@ -405,8 +409,10 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-issues">Run-Time Issues</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cannot-match-namelist">Cannot match namelist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cannot-read-file">Cannot read file</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-nans">Dealing with NaNs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abnormal-end-s-r-calc-r-star">ABNORMAL END: S/R CALC_R_STAR</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forrtl-no-such-file-or-directory">forrtl: no such file or directory</a></li>
 </ul>
 </li>
 </ul>
@@ -450,7 +456,20 @@ document.write(`
 <span class="o">...</span>
 </pre></div>
 </div>
-<p>The above message tells you that you have an error in one of your namelist. The good news is that it also provides lots of information. From the message, we can see that the <code class="docutils literal notranslate"><span class="pre">diagnostics</span></code> package flagged the error and even that the incorrect namelist keyword is <code class="docutils literal notranslate"><span class="pre">dumpatfirst</span></code>. Further, MITgcm has outputted the incorrect lines to a files called <code class="docutils literal notranslate"><span class="pre">scratch1.000000000</span></code> where you can investigate the issue. To remedy this run-time error, remove the incorrect keyword and/or fix the typo.</p>
+<p>The above message tells you that you have an error in one of your namelist files. The good news is that it also provides lots of information about the error. From the message, we can see that the <code class="docutils literal notranslate"><span class="pre">diagnostics</span></code> package flagged the error and even that the incorrect namelist keyword is <code class="docutils literal notranslate"><span class="pre">dumpatfirst</span></code>. Further, MITgcm has output the incorrect lines to files called <code class="docutils literal notranslate"><span class="pre">scratch1.000000000*</span></code> where you can investigate the issue. To remedy this run-time error, remove the incorrect keyword and/or fix the typo.</p>
+</section>
+<section id="cannot-read-file">
+<h3>Cannot read file<a class="headerlink" href="#cannot-read-file" title="Permalink to this headline">#</a></h3>
+<p>Another common run-time error results from MITgcm looking for a file that does not exist. THis will result in the following error message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">STOP</span> <span class="n">ABNORMAL</span> <span class="n">END</span><span class="p">:</span> <span class="n">S</span><span class="o">/</span><span class="n">R</span> <span class="n">MDS_READ_SEC_YZ</span>
+</pre></div>
+</div>
+<p>When you receive this message, you have a few options. First, you can look in the STDERR.* files to see if the file was identified. If the exact file is not listed, then look at the ends of the STDOUT file to determine which file was trying to be opened. In either case, once you’ve identified the problem file, you can diagnose the issue with the file.</p>
+<p>For example, consider that you received the following message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MDS_READ_SEC_YZ</span><span class="p">:</span> <span class="n">filename</span><span class="p">:</span> <span class="n">obcs</span><span class="o">/</span><span class="n">UVEL_east_0000</span> <span class="p">,</span> <span class="n">obcs</span><span class="o">/</span><span class="n">UVEL_east_0000</span><span class="mf">.001.001</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+<p>This message has arisen because a date was not correctly assgined to the obcs file. In this case, check the end of the data.exf file where the obcs periods are identified to find the issue.</p>
 </section>
 <section id="dealing-with-nans">
 <h3>Dealing with NaNs<a class="headerlink" href="#dealing-with-nans" title="Permalink to this headline">#</a></h3>
@@ -482,6 +501,10 @@ WARNING: r*FacW &lt; hFacInf at       1 pts : bi,bj,Thid,Iter=   1   1   1    24
 STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
 </pre></div>
 </div>
+</section>
+<section id="forrtl-no-such-file-or-directory">
+<h3>forrtl: no such file or directory<a class="headerlink" href="#forrtl-no-such-file-or-directory" title="Permalink to this headline">#</a></h3>
+<p>This error can arise for a few different reasons. First, there may be issues with the MPI installation. Check that MPI is properly installation using the instructions provided in the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a> section. This error may also arise if the the run dirctory is missing an eedata file. MITgcm does have a catch to warn the user when an eedata file is not provided - however, sometime this error arises before the eedata warning can be produced.</p>
 </section>
 </section>
 </section>
@@ -559,8 +582,10 @@ STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-issues">Run-Time Issues</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cannot-match-namelist">Cannot match namelist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cannot-read-file">Cannot read file</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-nans">Dealing with NaNs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abnormal-end-s-r-calc-r-star">ABNORMAL END: S/R CALC_R_STAR</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forrtl-no-such-file-or-directory">forrtl: no such file or directory</a></li>
 </ul>
 </li>
 </ul>
