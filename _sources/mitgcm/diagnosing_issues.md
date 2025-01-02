@@ -30,7 +30,23 @@ Error termination. Backtrace:
 ...
 ```
 
-The above message tells you that you have an error in one of your namelist. The good news is that it also provides lots of information. From the message, we can see that the `diagnostics` package flagged the error and even that the incorrect namelist keyword is `dumpatfirst`. Further, MITgcm has outputted the incorrect lines to a files called `scratch1.000000000` where you can investigate the issue. To remedy this run-time error, remove the incorrect keyword and/or fix the typo.
+The above message tells you that you have an error in one of your namelist files. The good news is that it also provides lots of information about the error. From the message, we can see that the `diagnostics` package flagged the error and even that the incorrect namelist keyword is `dumpatfirst`. Further, MITgcm has output the incorrect lines to files called `scratch1.000000000*` where you can investigate the issue. To remedy this run-time error, remove the incorrect keyword and/or fix the typo.
+
+### Cannot read file
+Another common run-time error results from MITgcm looking for a file that does not exist. THis will result in the following error message:
+
+```
+STOP ABNORMAL END: S/R MDS_READ_SEC_YZ
+```
+
+When you receive this message, you have a few options. First, you can look in the STDERR.* files to see if the file was identified. If the exact file is not listed, then look at the ends of the STDOUT file to determine which file was trying to be opened. In either case, once you've identified the problem file, you can diagnose the issue with the file.
+
+For example, consider that you received the following message:
+```
+MDS_READ_SEC_YZ: filename: obcs/UVEL_east_0000 , obcs/UVEL_east_0000.001.001.data
+```
+
+This message has arisen because a date was not correctly assgined to the obcs file. In this case, check the end of the data.exf file where the obcs periods are identified to find the issue.
 
 ### Dealing with NaNs
 When MITgcm encounters an unexpected NaN in a computation, the NaN will propagate through all fields such that all model output will be NaN. By default, the model will continue running, carrying around all of those NaNs - no good! This behavior can be be suppressed using the `--ieee` flag at compile time, forcing the model to stop running, i.e.
@@ -67,5 +83,8 @@ fail at i,j=  46   2 ; rStarFacW,H,eta =  0.097682  1.000000E+01 -5.381625E+00 -
 WARNING: r*FacW < hFacInf at       1 pts : bi,bj,Thid,Iter=   1   1   1    241260
 STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
 ```
+
+### forrtl: no such file or directory
+This error can arise for a few different reasons. First, there may be issues with the MPI installation. Check that MPI is properly installation using the instructions provided in the [Installing a compiler with MPI](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html) section. This error may also arise if the the run dirctory is missing an eedata file. MITgcm does have a catch to warn the user when an eedata file is not provided - however, sometime this error arises before the eedata warning can be produced.
 
 
