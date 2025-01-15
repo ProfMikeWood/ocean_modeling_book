@@ -5,7 +5,7 @@ Welcome to an Introduction to Ocean Modeling!
 This resource is designed to be a practical guide to introduce the construction, implementation, and analysis of ocean models. Here, we investigate 3D numerical models constructed by solving equations of motion and thermodynamics in a time-stepping scheme. The primary tool used in this book is the [MIT General Circulation model](https://github.com/MITgcm/MITgcm) - a versitile, open-sourced framework used widely in oceanography.
 
 ```{note}
-This book is currently being written for a CS 185C Special Topics Course at San José State University. It is a work in progress and will continue to be updated through Fall 2024. If you have any feedback or constructive suggestions, feel free to submit an issue on the [Github repository](https://github.com/ProfMikeWood/ocean_modeling_book) for this book.
+This book is currently being written for a CS 185C Special Topics Course at San José State University. It is a work in progress and will continue to be updated through Spring 2025. If you have any feedback or constructive suggestions, feel free to submit an issue on the [Github repository](https://github.com/ProfMikeWood/ocean_modeling_book) for this book.
 ```
 
 This book is for people new to ocean modeling although it will hopefully also serve as a convenient reference for those who have been at it for a while. People with an introductory background in coding, some knowledge of calculus, and an understanding of Earth science topics will be most suited to leverage these resources.
@@ -24,5 +24,5 @@ None of these sections is intended to be exhaustive - rather, the aim is to gene
 ```{tableofcontents}
 ```
 
-This book was created for a CS 185C Special Topics Course at San José State University.
+This book was initially created for a CS 185C Special Topics Course at San José State University.
 
