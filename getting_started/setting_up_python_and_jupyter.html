@@ -404,7 +404,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-miniconda">Download Miniconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-up-a-conda-environment">Step up a conda environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-a-conda-environment">Set up a conda environment</a></li>
 </ul>
             </nav>
         </div>
@@ -423,8 +423,8 @@ document.write(`
 <p>There are many ways to install python for use on your machine. One of the most popular ways is to use Anaconda - a distribution of Python designed for data science. Anaconda contains many programs that may not be applicable to your application. Miniconda, on the other hand, is a paired-down version of Anaconda that allows you to install new modules as you need them. As a result, it takes up far less storage on your machine. Miniconda will include Python (the programming language) and conda (the package manager).</p>
 <p>To download Miniconda, navigate to <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a> and choose a Conda Installer that pertains to your system. For Windows machines, the majority of machines are 64-bit. For MacOS, choose the pkg file which pertains to your chip (see <a class="reference external" href="https://support.apple.com/en-us/HT211814">HERE</a>).</p>
 </section>
-<section id="step-up-a-conda-environment">
-<h2>Step up a conda environment<a class="headerlink" href="#step-up-a-conda-environment" title="Permalink to this headline">#</a></h2>
+<section id="set-up-a-conda-environment">
+<h2>Set up a conda environment<a class="headerlink" href="#set-up-a-conda-environment" title="Permalink to this headline">#</a></h2>
 <p>After you have downloaded miniconda, set up a conda environment. Begin by opening up a terminal of your choice. On Windows, you can open the “Anaconda Prompt” application by searching for it in the start menu. On Mac, you can open a standard Terminal in the Applications/Utilities directory.</p>
 <p>With your terminal open, create a conda environment called cs185c with Python version 3.11 using the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">cs185c</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.11</span>
@@ -446,10 +446,10 @@ document.write(`
 <span class="n">conda</span> <span class="n">install</span> <span class="n">xarray</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="n">jupyter</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="n">cartopy</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">ffmpeg</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">moviepy</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="n">git</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">cmocean</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">ffmpeg</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">moviepy</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span><span class="p">::</span><span class="n">cmocean</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -540,7 +540,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-miniconda">Download Miniconda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-up-a-conda-environment">Step up a conda environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-a-conda-environment">Set up a conda environment</a></li>
 </ul>
   </nav></div>
 
