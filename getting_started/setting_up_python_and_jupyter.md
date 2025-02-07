@@ -6,7 +6,7 @@ There are many ways to install python for use on your machine. One of the most p
 To download Miniconda, navigate to https://docs.conda.io/en/latest/miniconda.html and choose a Conda Installer that pertains to your system. For Windows machines, the majority of machines are 64-bit. For MacOS, choose the pkg file which pertains to your chip (see [HERE](https://support.apple.com/en-us/HT211814)).
 
 
-## Step up a conda environment
+## Set up a conda environment
 After you have downloaded miniconda, set up a conda environment. Begin by opening up a terminal of your choice. On Windows, you can open the "Anaconda Prompt" application by searching for it in the start menu. On Mac, you can open a standard Terminal in the Applications/Utilities directory. 
 
 With your terminal open, create a conda environment called cs185c with Python version 3.11 using the following command:
@@ -35,10 +35,10 @@ conda install netcdf4
 conda install xarray
 conda install jupyter
 conda install cartopy
-conda install ffmpeg
-conda install moviepy
 conda install git
-conda install cmocean
+conda install conda-forge::ffmpeg
+conda install conda-forge::moviepy
+conda install conda-forge::cmocean
 ```
 
 ```{note}
