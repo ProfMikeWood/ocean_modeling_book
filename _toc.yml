@@ -23,8 +23,8 @@ parts:
   - caption: Numerical Modeling
     chapters:
     - file: modeling/model_grids
-    - file: modeling/timestepping_schemes
-    - file: modeling/subgridscale_parameterizations
+    - file: modeling/difference_methods
+#    - file: modeling/subgridscale_parameterizations
   - caption: MITgcm
     chapters:
     - file: mitgcm/getting_started_with_MITgcm

@@ -1,0 +1,1017 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Difference Methods &#8212; Numerical Ocean Modeling</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modeling/difference_methods';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting Started with MITgcm" href="../mitgcm/getting_started_with_MITgcm.html" />
+    <link rel="prev" title="Model Grids" href="model_grids.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Numerical Ocean Modeling
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="model_grids.html">Model Grids</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Difference Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../state_estimation/greens_function.html">Green’s Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmodeling/difference_methods.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/modeling/difference_methods.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Difference Methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-example-a-toss-up">A First Example: A Toss Up</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-equation">Differential Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-analytical-solution">An Analytical Solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sanity-check">🤔 Sanity Check</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-numerical-solution">A Numerical Solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-at-time-t-delta-t">Solution at time <span class="math notranslate nohighlight">\(t = \Delta t\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-at-time-t-2-delta-t">Solution at time <span class="math notranslate nohighlight">\(t = 2\Delta t\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-at-all-times">Solution at all times</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-for-consideration">🤔 Question for consideration:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🤔 Question for consideration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-methods-for-derivatives">Difference Methods for Derivatives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-difference">Forward Difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-difference">Backward Difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centered-difference">Centered Difference</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🤔 Sanity Check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-methods-for-second-derivatives">Difference Methods for Second Derivatives</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="difference-methods">
+<h1>Difference Methods<a class="headerlink" href="#difference-methods" title="Permalink to this headline">#</a></h1>
+<p><strong>Overview:</strong></p>
+<p>In this notebook, we will start to consider difference methods - a way to numerically estimate derivatives. These methods provide us with recipes to construct numerical algorithms that can be used to solve differential equations.</p>
+<p><strong>Import modules</strong></p>
+<p>Begin by importing modules to conduct calculations and make plots in this notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-first-example-a-toss-up">
+<h2>A First Example: A Toss Up<a class="headerlink" href="#a-first-example-a-toss-up" title="Permalink to this headline">#</a></h2>
+<p>As a first example, we will begin by considering the trajectory of a ball that is tossed in the air. When the ball is in the air, it is only subjected to gravity (neglecting frictional drag forces for simplicity). The equation describing the ball’s trajectory is <span class="math notranslate nohighlight">\(y(t)\)</span>.</p>
+<p>In this scenario, we know that the acceleration of the object is given by the gravitational constant <span class="math notranslate nohighlight">\(g\)</span> here on Earth:</p>
+<section id="differential-equation">
+<h3>Differential Equation<a class="headerlink" href="#differential-equation" title="Permalink to this headline">#</a></h3>
+<p>The differential equation is</p>
+<div class="math notranslate nohighlight">
+\[
+y''(t) = -g
+\]</div>
+<p>where here we have included the <span class="math notranslate nohighlight">\(-\)</span> to indicate that <span class="math notranslate nohighlight">\(y\)</span> is measured in the positive direction upward from Earth.</p>
+<p>If we’d like to predict the full trajectory of our ball in the air, we also need to have the initial conditions for our toss - where it starts and how fast we throw it.</p>
+</section>
+<section id="initial-conditions">
+<h3>Initial Conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline">#</a></h3>
+<p>The initial conditions are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+y'(0) &amp;= v_0\\
+y(0) &amp;= 0
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_0\)</span> is the initial velocity and <span class="math notranslate nohighlight">\(0\)</span> represents the starting height of the ball (your hand).</p>
+</section>
+<section id="an-analytical-solution">
+<h3>An Analytical Solution<a class="headerlink" href="#an-analytical-solution" title="Permalink to this headline">#</a></h3>
+<p>In this simple example, we are able to compute an “analytical solution” for the trajectory for this ball toss over time. That is, using rules of calculus, we can write down an equation that describes the trajectory:</p>
+<div class="math notranslate nohighlight">
+\[
+y = -\frac{g}{2}t^2 + v_0t
+\]</div>
+<section id="sanity-check">
+<h4>🤔 Sanity Check<a class="headerlink" href="#sanity-check" title="Permalink to this headline">#</a></h4>
+<p>Check that this analytical solution does indeed satisfy the differential equation and initial conditions above.</p>
+<p>Let’s create a quick plot of this trajectory. Start by computing the trajectory based on the above solution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define constants</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span> <span class="c1">#m/s2</span>
+
+<span class="c1"># define initial conditions</span>
+<span class="n">v_0</span> <span class="o">=</span> <span class="mi">25</span> <span class="c1">#m/s</span>
+<span class="n">y_0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#m</span>
+
+<span class="c1"># make a time array</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span>
+
+<span class="c1"># compute the trajectory</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">g</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">v_0</span><span class="o">*</span><span class="n">t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then, plot the solution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a plot of the solution</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># enter plotting line here</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;analytical solution&#39;</span><span class="p">)</span>
+
+<span class="c1"># format axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m, $y$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s, $t$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4d1dad59168fb0b951794c6b4ad3b265e4062a35e9c4c8a7c19e701d2a64ec55.png" src="../_images/4d1dad59168fb0b951794c6b4ad3b265e4062a35e9c4c8a7c19e701d2a64ec55.png" />
+</div>
+</div>
+<p>As we can see, the ball rises up through the air from its initial height and then starts to descend. This follows our intuitition of the scenario.</p>
+</section>
+</section>
+<section id="a-numerical-solution">
+<h3>A Numerical Solution<a class="headerlink" href="#a-numerical-solution" title="Permalink to this headline">#</a></h3>
+<p>In this simple example, we can write an analytical solution describing the whole trajectory through time. However, what if we didn’t know how to do that? In other words, what if we couldn’t write down a specific equation? One alternative is to track the ball in the air through time, using knowledge of the ball’s position and speed along with the physics of the situation to determine the trajectory.</p>
+<p>From calculus, we know that the derivative of an equation represents a change in the value over a given interval (time in this case). We could approximate this as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{dt} \approx \frac{y(t+\Delta t) - y(t)}{\Delta t}
+\]</div>
+<p>A little rearranging gives us the following:</p>
+<div class="math notranslate nohighlight">
+\[
+y(t+\Delta t) \approx y(t) + \frac{dy}{dt} \Delta t
+\]</div>
+<p>In other words: the position at a short time in the future (<span class="math notranslate nohighlight">\(y(t+\Delta t)\)</span>) is the position at the current time (<span class="math notranslate nohighlight">\(y(t)\)</span>) plus the rate of change of the object times the time interval. This approach is at the heart of <strong>Euler’s Method</strong> for solving differential equations.</p>
+<p>In a similar sense, we could apply the same idea to estimate the second derivative:</p>
+<div class="math notranslate nohighlight">
+\[
+y'(t+\Delta t) \approx y'(t) + \frac{d^2y}{dt^2} \Delta t
+\]</div>
+<p>Let’s see if we can use this information to chart out a trajectory.</p>
+<section id="solution-at-time-t-delta-t">
+<h4>Solution at time <span class="math notranslate nohighlight">\(t = \Delta t\)</span><a class="headerlink" href="#solution-at-time-t-delta-t" title="Permalink to this headline">#</a></h4>
+<p>At time <span class="math notranslate nohighlight">\(t=\Delta t\)</span>, the above equations give us</p>
+<div class="math notranslate nohighlight">
+\[
+y(\Delta t) \approx y(0) + \frac{dy}{dt} \Delta t = v_0 \Delta t
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+y'(\Delta t) \approx y'(0) + \frac{d^2y}{dt^2} \Delta t = v_0 -g \Delta t
+\]</div>
+<p>Let’s plot this information as before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the time step</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># seconds</span>
+
+<span class="c1"># estimate the next position</span>
+<span class="n">y_1</span> <span class="o">=</span> <span class="n">v_0</span><span class="o">*</span><span class="n">delta_t</span>
+
+<span class="c1"># estimate the next velocity</span>
+<span class="n">v_1</span> <span class="o">=</span> <span class="n">v_0</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;analytical solution&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical_solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span> <span class="s1">&#39; Position at time $t=\Delta t$&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m, $y$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s, $t$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/91a9b97f4f9b04f9d87ed3cc9f26255744bc7acfb408176101f696a7a2cb1b94.png" src="../_images/91a9b97f4f9b04f9d87ed3cc9f26255744bc7acfb408176101f696a7a2cb1b94.png" />
+</div>
+</div>
+</section>
+<section id="solution-at-time-t-2-delta-t">
+<h4>Solution at time <span class="math notranslate nohighlight">\(t = 2\Delta t\)</span><a class="headerlink" href="#solution-at-time-t-2-delta-t" title="Permalink to this headline">#</a></h4>
+<p>At time <span class="math notranslate nohighlight">\(t=2\Delta t\)</span>, we can take one additional step from the location we just solved for:</p>
+<div class="math notranslate nohighlight">
+\[
+y(2\Delta t) \approx y(\Delta t) + \frac{dy}{dt} \Delta t = y_1 + v_1 \Delta t
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+y'(2\Delta t) \approx y'(\Delta t) + \frac{d^2y}{dt^2} \Delta t = v_1 -g \Delta t
+\]</div>
+<p>Let’s plot this information as before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># estimate the next position</span>
+<span class="n">y_2</span> <span class="o">=</span> <span class="n">y_1</span> <span class="o">+</span> <span class="n">v_1</span><span class="o">*</span><span class="n">delta_t</span>
+
+<span class="c1"># estimate the next velocity</span>
+<span class="n">v_2</span> <span class="o">=</span> <span class="n">v_1</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;analytical solution&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical_solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">y_1</span><span class="p">,</span> <span class="s1">&#39; Position at time $t=\Delta t$&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">y_2</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">y_2</span><span class="p">,</span> <span class="s1">&#39; Position at time $t=2\Delta t$&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m, $y$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s, $t$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dee2e8b50b873eb8b1e2fe8804b1989fc0bf191fcf77e6d771d5eee2cdda8f8d.png" src="../_images/dee2e8b50b873eb8b1e2fe8804b1989fc0bf191fcf77e6d771d5eee2cdda8f8d.png" />
+</div>
+</div>
+</section>
+<section id="solution-at-all-times">
+<h4>Solution at all times<a class="headerlink" href="#solution-at-all-times" title="Permalink to this headline">#</a></h4>
+<p>Leveraging the approach above, we can generalize the algorithm with a loop:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a time array for the iteration</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">n_timesteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="p">)</span><span class="o">/</span><span class="n">delta_t</span><span class="p">)</span>
+
+<span class="c1"># make empty arrays to store the solution</span>
+<span class="n">y_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+<span class="n">v_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+
+<span class="c1"># start the solutions with the initial conditions</span>
+<span class="n">y_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_0</span>
+<span class="n">v_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_0</span>
+
+<span class="c1"># loop through the entire time array</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_timesteps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># estimate the next velocity</span>
+    <span class="n">v_next</span> <span class="o">=</span> <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+    <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_next</span>
+
+    <span class="c1"># estimate the next position</span>
+    <span class="n">y_next</span> <span class="o">=</span> <span class="n">y_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">delta_t</span>
+    <span class="n">y_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_next</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, plot the full solution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;analytical solution&#39;</span><span class="p">)</span>
+
+<span class="n">t_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span><span class="n">delta_t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_solution</span><span class="p">,</span> <span class="n">y_solution</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span>
+         <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical_solution&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m, $y$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s, $t$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4e7c66063e575709de7104ad764684448543201499a5ff7058b5f46053afc87c.png" src="../_images/4e7c66063e575709de7104ad764684448543201499a5ff7058b5f46053afc87c.png" />
+</div>
+</div>
+</section>
+<section id="question-for-consideration">
+<h4>🤔 Question for consideration:<a class="headerlink" href="#question-for-consideration" title="Permalink to this headline">#</a></h4>
+<p>Shoot! It looks like we’ve over shot the solution. Why?</p>
+<p>Let’s try again with a different approximation to the derivative. What if we try to anticipate what the derivative will be on the upcoming timestep to “get ahead” of the accumulated errors? Let’s see:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a time array for the iteration</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">n_timesteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="p">)</span><span class="o">/</span><span class="n">delta_t</span><span class="p">)</span>
+
+<span class="c1"># make empty arrays to store the solution</span>
+<span class="n">y_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+<span class="n">v_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+
+<span class="c1"># start the solutions with the initial conditions</span>
+<span class="n">y_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_0</span>
+<span class="n">v_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_0</span>
+
+<span class="c1"># loop through the entire time array</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_timesteps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># estimate the next velocity</span>
+    <span class="n">v_next</span> <span class="o">=</span> <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+    <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_next</span>
+
+    <span class="c1"># estimate the next position</span>
+    <span class="n">y_next</span> <span class="o">=</span> <span class="n">y_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">delta_t</span>
+    <span class="n">y_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_next</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;analytical solution&#39;</span><span class="p">)</span>
+
+<span class="n">t_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span><span class="n">delta_t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_solution</span><span class="p">,</span> <span class="n">y_solution</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span>
+         <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical_solution&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m, $y$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s, $t$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/219cc9cdffce468b0d8d7bd64325a110063254c64d8a7f1ad65b08a209677723.png" src="../_images/219cc9cdffce468b0d8d7bd64325a110063254c64d8a7f1ad65b08a209677723.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h4>🤔 Question for consideration:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<p>Shoot! It looks like we’ve now undershot the solution. Why?</p>
+<p>Any other ideas? Maybe split the difference?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a time array for the iteration</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">n_timesteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="p">)</span><span class="o">/</span><span class="n">delta_t</span><span class="p">)</span>
+
+<span class="c1"># make empty arrays to store the solution</span>
+<span class="n">y_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+<span class="n">v_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+
+<span class="c1"># start the solutions with the initial conditions</span>
+<span class="n">y_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_0</span>
+<span class="n">v_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_0</span>
+
+<span class="c1"># loop through the entire time array</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_timesteps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># estimate the next velocity</span>
+    <span class="n">v_next</span> <span class="o">=</span> <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+    <span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_next</span>
+
+    <span class="c1"># estimate the next position</span>
+    <span class="n">y_next</span> <span class="o">=</span> <span class="n">y_solution</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">v_solution</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
+    <span class="n">y_solution</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_next</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;analytical solution&#39;</span><span class="p">)</span>
+
+<span class="n">t_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">v_0</span><span class="o">/</span><span class="n">g</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span><span class="n">delta_t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_solution</span><span class="p">,</span> <span class="n">y_solution</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span>
+         <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical_solution&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m, $y$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s, $t$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/828371814c6900226d326c4cb77d403ca2b870e1d38f028e37baa889433c0dfc.png" src="../_images/828371814c6900226d326c4cb77d403ca2b870e1d38f028e37baa889433c0dfc.png" />
+</div>
+</div>
+<p>Ah! This time we nailed it.</p>
+<p>The key take-away in the above equations is that esimating the rate of change of the solution through time is key for getting a good approximation to the true solution through time.</p>
+</section>
+</section>
+</section>
+<section id="difference-methods-for-derivatives">
+<h2>Difference Methods for Derivatives<a class="headerlink" href="#difference-methods-for-derivatives" title="Permalink to this headline">#</a></h2>
+<p>In the examples above, we saw a few different ways we could approximate the derivative. Let’s review these approximations here:</p>
+<section id="forward-difference">
+<h3>Forward Difference<a class="headerlink" href="#forward-difference" title="Permalink to this headline">#</a></h3>
+<p>A forward difference uses estimates of the solution at a time now and one time step in the future to estimate the derivative:</p>
+<div class="math notranslate nohighlight">
+\[
+y'(t) \approx \frac{y(t+\Delta t) - y(t)}{\Delta t}
+\]</div>
+</section>
+<section id="backward-difference">
+<h3>Backward Difference<a class="headerlink" href="#backward-difference" title="Permalink to this headline">#</a></h3>
+<p>A backward difference uses estimates of the solution at a time now and one time step in the <em>past</em> to estimate the derivative:</p>
+<div class="math notranslate nohighlight">
+\[
+y'(t) \approx \frac{y(t) - y(t-\Delta t)}{\Delta t}
+\]</div>
+</section>
+<section id="centered-difference">
+<h3>Centered Difference<a class="headerlink" href="#centered-difference" title="Permalink to this headline">#</a></h3>
+<p>A centered difference uses estimates of the solution one time step in the future and one time step in the past to estimate the derivative:</p>
+<div class="math notranslate nohighlight">
+\[
+y'(t) \approx \frac{y(t+\Delta t) - y(t-\Delta t)}{2\Delta t}
+\]</div>
+<section id="id2">
+<h4>🤔 Sanity Check<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<p>In the solution above, we averaged the forward and backwards velocities to obtain a better solution - this is equivalent to the centered difference. Show that the centered difference is equivalent to averaging the forward and backward differences.</p>
+</section>
+</section>
+</section>
+<section id="difference-methods-for-second-derivatives">
+<h2>Difference Methods for Second Derivatives<a class="headerlink" href="#difference-methods-for-second-derivatives" title="Permalink to this headline">#</a></h2>
+<p>In the examples above, we explicitly solved for velocity through time by considering the gravitational acceleration. However, we could also approximate the second derivative in the same way. Consider the forward difference as applied to the second derivative:</p>
+<div class="math notranslate nohighlight">
+\[
+y''(t) \approx \frac{y'(t+\Delta t) - y'(t)}{\Delta t}
+\]</div>
+<p>What happens if we appoximate <span class="math notranslate nohighlight">\(y'(t+\Delta t)\)</span> and <span class="math notranslate nohighlight">\(y'(t)\)</span> each by backwards differences? Fill this in to derive an approximation to the second derivative.</p>
+<div class="math notranslate nohighlight">
+\[
+y''(t) \approx \frac{y(t+\Delta t) - 2y(t) + y(t-\Delta t)}{\Delta t^2}
+\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "cs185c"
+        },
+        kernelOptions: {
+            name: "cs185c",
+            path: "./modeling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'cs185c'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="model_grids.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Model Grids</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../mitgcm/getting_started_with_MITgcm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Getting Started with MITgcm</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-example-a-toss-up">A First Example: A Toss Up</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-equation">Differential Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-analytical-solution">An Analytical Solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sanity-check">🤔 Sanity Check</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-numerical-solution">A Numerical Solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-at-time-t-delta-t">Solution at time <span class="math notranslate nohighlight">\(t = \Delta t\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-at-time-t-2-delta-t">Solution at time <span class="math notranslate nohighlight">\(t = 2\Delta t\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-at-all-times">Solution at all times</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-for-consideration">🤔 Question for consideration:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🤔 Question for consideration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-methods-for-derivatives">Difference Methods for Derivatives</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-difference">Forward Difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-difference">Backward Difference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#centered-difference">Centered Difference</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🤔 Sanity Check</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-methods-for-second-derivatives">Difference Methods for Second Derivatives</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Wood
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
