@@ -404,6 +404,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-issues">Compile-Time Issues</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-dylib-file">Missing dylib file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-command-not-found">$’\r’: command not found</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-issues">Run-Time Issues</a><ul class="nav section-nav flex-column">
@@ -428,7 +429,6 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="diagnosing-issues">
 <h1>Diagnosing Issues<a class="headerlink" href="#diagnosing-issues" title="Permalink to this headline">#</a></h1>
 <p>There’s a lot that can (and will) go sideways when compiling and running MITgcm. This page details a few common errors and some solutions to diagnose the problems.</p>
-<p>[Under Construction]</p>
 <section id="compile-time-issues">
 <h2>Compile-Time Issues<a class="headerlink" href="#compile-time-issues" title="Permalink to this headline">#</a></h2>
 <section id="missing-dylib-file">
@@ -439,6 +439,19 @@ document.write(`
 </pre></div>
 </div>
 <p>It turned out that the processing tiles were too big for my machine despite the code compiling fine. By reducing the processing tile size, this error was alleviated.</p>
+</section>
+<section id="r-command-not-found">
+<h3>$’\r’: command not found<a class="headerlink" href="#r-command-not-found" title="Permalink to this headline">#</a></h3>
+<p>Issue: When cloning MITgcm on a Windows system and attempting to compile in Cygwin, the new line characters may all be interpreted with as <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>, which won’t fly in Unix. In this case, you will get the following errors when running the <code class="docutils literal notranslate"><span class="pre">genmake2</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../../../tools/genmake2: line 8: $&#39;\r&#39;: command not found
+../../../tools/genmake2: line 10: syntax error near unexpected token `$&#39;{\r&#39;&#39;
+../../../tools/genmake2: line 10: `usage() {
+</pre></div>
+</div>
+<p>Not to worry, Cygwin comes with a command called <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> which can remedy this issue. The catch is that you need to apply this function to <em>all</em> files in the MITgcm clone. To accomplish this, navigate to your MITgcm directory and run the following command to apply <code class="docutils literal notranslate"><span class="pre">dos2unix</span></code> to all of the MITgcm files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">find</span> <span class="o">.</span> <span class="o">-</span><span class="nb">type</span> <span class="n">f</span> <span class="o">-</span><span class="n">print0</span> <span class="o">|</span> <span class="n">xargs</span> <span class="o">-</span><span class="mi">0</span> <span class="n">dos2unix</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section id="run-time-issues">
@@ -577,6 +590,7 @@ STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-time-issues">Compile-Time Issues</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-dylib-file">Missing dylib file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-command-not-found">$’\r’: command not found</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-time-issues">Run-Time Issues</a><ul class="nav section-nav flex-column">

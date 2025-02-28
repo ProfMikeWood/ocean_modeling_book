@@ -2,8 +2,6 @@
 
 There's a lot that can (and will) go sideways when compiling and running MITgcm. This page details a few common errors and some solutions to diagnose the problems.
 
-[Under Construction]
-
 ## Compile-Time Issues
 
 ### Missing dylib file
@@ -14,6 +12,21 @@ dyld[XXXXX]: dyld cache [path] not loaded: syscall to map cache into shared regi
 dyld[XXXXX]: Library not loaded: /usr/lib/libSystem.B.dylib
 ```
 It turned out that the processing tiles were too big for my machine despite the code compiling fine. By reducing the processing tile size, this error was alleviated.
+
+### $'\r': command not found
+
+Issue: When cloning MITgcm on a Windows system and attempting to compile in Cygwin, the new line characters may all be interpreted with as `\r\n`, which won't fly in Unix. In this case, you will get the following errors when running the `genmake2` command:
+```
+../../../tools/genmake2: line 8: $'\r': command not found
+../../../tools/genmake2: line 10: syntax error near unexpected token `$'{\r''
+../../../tools/genmake2: line 10: `usage() {
+```
+
+Not to worry, Cygwin comes with a command called `dos2unix` which can remedy this issue. The catch is that you need to apply this function to *all* files in the MITgcm clone. To accomplish this, navigate to your MITgcm directory and run the following command to apply `dos2unix` to all of the MITgcm files:
+
+```
+find . -type f -print0 | xargs -0 dos2unix
+```
 
 ## Run-Time Issues
 
