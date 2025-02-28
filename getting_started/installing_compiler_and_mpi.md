@@ -107,7 +107,9 @@ When it comes to the package selection screen, add the list of packages in the f
 | Package | Version |
 | ------- | ------- |
 | gcc-fortran | 12.4.0-3 |
-| netcdf | 4.9.2-1 |
+| libnetcdf-fortran-devel | 4.6.1-1 |
+| netcdf | 4.6.1-1 |
+| netcdf-fortran-debuginfo | 4.6.1-1 |
 | openmpi | 4.1.6-1 |
 | git | 2.45.1-1 |
 | tsch | 6.24.10-1 |
@@ -115,7 +117,9 @@ When it comes to the package selection screen, add the list of packages in the f
 | vim | 9.0.2155-2 |
 | nano | 4.9-1 |
 | make | 4.4.1-2 |
+| makedepend | 1.0.9-1 |
 | pkg-config | 2.2.0-1 |
+| dos2unix | 7.5.2-1 |
 
 To add a package to the installation list, choose "Full" from the drop-down in the upper-left corner. Then, use the search feature to find the package. If the line for the package says "Skip", use drop-down to choose the most recent (non-Test) version. After you have selected the packages, they should all show up under the "Pending" tab. After verifying all packages will be installed, choose next and continue clicking through the installation.
 
