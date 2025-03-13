@@ -93,6 +93,23 @@ Darwin
 Darwin
 ```
 
+## Installation on a Windows (using WSL)
+One way to install a fortran compiler on a Windows machine is using the Windows Subsystem for Linux - a Linux distribution for Windows.
+
+To install WSL, follow the instructions [HERE](https://learn.microsoft.com/en-us/windows/wsl/install), opening a Powershell terminal from your start menu and running the following command:
+
+```
+wsl --install
+```
+
+Note that you can install different Linux distributions but the default will be Ubuntu (recommended). After the installation has completed, you will be able to open your Linux distribution from the start menu (e.g. search for Ubuntu if you used the default wsl installation). Note that you will need to make a new "user" for Ubuntu with a password - this is separate from your windows user name and password. Its recommended that you create your username without spaces to avoid issues with your path.
+
+Once you have your terminal open, use the Linux instructions below corresponding to your installation. For example, if you used the Ubuntu distribution, then follow the [instructions for Ubuntu](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html#installation-on-linux-ubuntu) below. 
+
+```{admonition} WSL Note
+When opening your Ubuntu terminal, you will be in your `$HOME` directory i.e. something of the form `/home/mwood`. To change directories from this directory to your `C:` drive, you can use `cd $HOME/../../mnt/c`.
+```
+
 
 ## Installation on a Windows (using Cygwin)
 One way to install a fortran compiler on a Windows machine is using the Cygwin terminal. 
@@ -126,9 +143,14 @@ To add a package to the installation list, choose "Full" from the drop-down in t
 At this point, you will be able to run MITgcm without MPI.
 
 
-```{note}
-Compiling MITgcm on Windows using Cygwin is considerably slower than compiling on a native linux machine. I have provided these notes as *a* possible way the MITgcm could be used on Windows. If you have discovered a quicker way, please let me know by raising an issue on the [Github repository](https://github.com/ProfMikeWood/ocean_modeling_book) for this site to explain how you did it!
+```{admonition} Cygwin Note 1
+Compiling MITgcm on Windows using Cygwin is considerably slower than compiling on a native linux machine. Use this option as a back-up in case the WSL option above is not working. 
 ```
+
+```{admonition} Cygwin Note 2
+When opening your Cygwin terminal, you will be in your `$HOME` directory i.e. something of the form `/home/mwood`. To change directories from this directory to your `C:` drive, you can use `cd $HOME/../../cygdrive/c`.
+```
+
 
 ### Configuring MPI on Cygwin
 Under construction.

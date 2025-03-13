@@ -412,6 +412,7 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-wsl">Installation on a Windows (using WSL)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-cygwin">Installation on a Windows (using Cygwin)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-cygwin-with-required-packages">Install Cygwin with required packages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-mpi-on-cygwin">Configuring MPI on Cygwin</a></li>
@@ -532,6 +533,20 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </section>
 </section>
 </section>
+<section id="installation-on-a-windows-using-wsl">
+<h2>Installation on a Windows (using WSL)<a class="headerlink" href="#installation-on-a-windows-using-wsl" title="Permalink to this headline">#</a></h2>
+<p>One way to install a fortran compiler on a Windows machine is using the Windows Subsystem for Linux - a Linux distribution for Windows.</p>
+<p>To install WSL, follow the instructions <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">HERE</a>, opening a Powershell terminal from your start menu and running the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="o">--</span><span class="n">install</span>
+</pre></div>
+</div>
+<p>Note that you can install different Linux distributions but the default will be Ubuntu (recommended). After the installation has completed, you will be able to open your Linux distribution from the start menu (e.g. search for Ubuntu if you used the default wsl installation). Note that you will need to make a new “user” for Ubuntu with a password - this is separate from your windows user name and password. Its recommended that you create your username without spaces to avoid issues with your path.</p>
+<p>Once you have your terminal open, use the Linux instructions below corresponding to your installation. For example, if you used the Ubuntu distribution, then follow the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html#installation-on-linux-ubuntu">instructions for Ubuntu</a> below.</p>
+<div class="admonition-wsl-note admonition">
+<p class="admonition-title">WSL Note</p>
+<p>When opening your Ubuntu terminal, you will be in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory i.e. something of the form <code class="docutils literal notranslate"><span class="pre">/home/mwood</span></code>. To change directories from this directory to your <code class="docutils literal notranslate"><span class="pre">C:</span></code> drive, you can use <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$HOME/../../mnt/c</span></code>.</p>
+</div>
+</section>
 <section id="installation-on-a-windows-using-cygwin">
 <h2>Installation on a Windows (using Cygwin)<a class="headerlink" href="#installation-on-a-windows-using-cygwin" title="Permalink to this headline">#</a></h2>
 <p>One way to install a fortran compiler on a Windows machine is using the Cygwin terminal.</p>
@@ -593,9 +608,13 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </table>
 <p>To add a package to the installation list, choose “Full” from the drop-down in the upper-left corner. Then, use the search feature to find the package. If the line for the package says “Skip”, use drop-down to choose the most recent (non-Test) version. After you have selected the packages, they should all show up under the “Pending” tab. After verifying all packages will be installed, choose next and continue clicking through the installation.</p>
 <p>At this point, you will be able to run MITgcm without MPI.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Compiling MITgcm on Windows using Cygwin is considerably slower than compiling on a native linux machine. I have provided these notes as <em>a</em> possible way the MITgcm could be used on Windows. If you have discovered a quicker way, please let me know by raising an issue on the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book">Github repository</a> for this site to explain how you did it!</p>
+<div class="admonition-cygwin-note-1 admonition">
+<p class="admonition-title">Cygwin Note 1</p>
+<p>Compiling MITgcm on Windows using Cygwin is considerably slower than compiling on a native linux machine. Use this option as a back-up in case the WSL option above is not working.</p>
+</div>
+<div class="admonition-cygwin-note-2 admonition">
+<p class="admonition-title">Cygwin Note 2</p>
+<p>When opening your Cygwin terminal, you will be in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory i.e. something of the form <code class="docutils literal notranslate"><span class="pre">/home/mwood</span></code>. To change directories from this directory to your <code class="docutils literal notranslate"><span class="pre">C:</span></code> drive, you can use <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">$HOME/../../cygdrive/c</span></code>.</p>
 </div>
 </section>
 <section id="configuring-mpi-on-cygwin">
@@ -747,6 +766,7 @@ Linux
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-wsl">Installation on a Windows (using WSL)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-on-a-windows-using-cygwin">Installation on a Windows (using Cygwin)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-cygwin-with-required-packages">Install Cygwin with required packages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-mpi-on-cygwin">Configuring MPI on Cygwin</a></li>
