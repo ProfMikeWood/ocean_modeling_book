@@ -45,6 +45,17 @@ parts:
     - file: analysis/volume_budget
     - file: analysis/heat_budget
     - file: analysis/salt_budget
+  - caption: A Regional Model Example
+    chapters:
+    - file: regional_example/model_description
+    - file: regional_example/model_grid
+    - file: regional_example/bathymetry
+    - file: regional_example/initial_conditions
+    - file: regional_example/external_conditions
+    - file: regional_example/boundary_conditions
+    - file: regional_example/choosing_packages
+    - file: regional_example/running_the_model
+#    - file: regional_example/assessing_results
   - caption: State Estimation
     chapters:
     - file: state_estimation/greens_function
