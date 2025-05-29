@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Momentum &#8212; Numerical Ocean Modeling</title>
+    <title>Heat Budgets &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'oceanography/momentum';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'special_topics/heat_budget';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Thermodynamics" href="thermodynamics.html" />
-    <link rel="prev" title="Primitive Equations" href="primitive_equations.html" />
+    <link rel="next" title="Salt Budgets" href="salt_budget.html" />
+    <link rel="prev" title="Volume Budgets" href="volume_budget.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -166,14 +166,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="oceanography_overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wind_driven_circulation.html">Wind-Driven Circulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thermohaline_circulation.html">Thermohaline Circulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="primitive_equations.html">Primitive Equations</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Momentum</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thermodynamics.html">Thermodynamics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equation_of_state.html">Equation of State</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
@@ -198,11 +198,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
 <ul class="nav bd-sidenav">
@@ -294,7 +294,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Foceanography/momentum.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fspecial_topics/heat_budget.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -324,7 +324,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/oceanography/momentum.md" target="_blank"
+      <li><a href="../_sources/special_topics/heat_budget.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -334,7 +334,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -406,7 +406,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Momentum</h1>
+    <h1>Heat Budgets</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,15 +416,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-overview">Momentum Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-momentum-equations">The Momentum Equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pressure-gradient-force">The Pressure Gradient Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coriolis-force">The Coriolis Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-fields">Required Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-diagnostics-organization">Suggested Diagnostics Organization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesq-approximation">The Boussinesq Approximation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
 </ul>
             </nav>
         </div>
@@ -436,66 +431,92 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="momentum">
-<h1>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">#</a></h1>
-<p>This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of <span id="id1">Stewart [<a class="reference internal" href="../references.html#id9" title="Robert H Stewart. Introduction to physical oceanography. Robert H. Stewart, 2008.">2008</a>]</span>.</p>
-<section id="momentum-overview">
-<h2>Momentum Overview<a class="headerlink" href="#momentum-overview" title="Permalink to this headline">#</a></h2>
-<p>In ocean modeling, momentum equations describe how the velocity of seawater changes over time due to various forces. These equations are fundamental for simulating ocean circulation patterns, including currents, eddies, and large-scale gyres. They account for forces such as pressure gradients, Earth’s rotation (Coriolis force), gravity, and frictional effects. Understanding and accurately representing these forces are crucial for realistic ocean models.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="heat-budgets">
+<h1>Heat Budgets<a class="headerlink" href="#heat-budgets" title="Permalink to this headline">#</a></h1>
+<p>This page outlines the pertinent files and methodology to compute a heat budget using output from an MITgcm model.</p>
+<section id="required-fields">
+<h2>Required Fields<a class="headerlink" href="#required-fields" title="Permalink to this headline">#</a></h2>
+<p>The following fields are required for the heat budget:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Variable Name</p></th>
+<th class="head"><p>Units</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zonal Advective Flux of Potential Temperature</p></td>
+<td><p>ADVx_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Meridional Advective Flux of Potential Temperature</p></td>
+<td><p>ADVy_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-even"><td><p>Vertical Advective Flux of Potential Temperature</p></td>
+<td><p>ADVr_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Zonal Diffusive Flux of Potential Temperature</p></td>
+<td><p>DFxE_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-even"><td><p>Meridional Diffusive Flux of Pot.Temperature</p></td>
+<td><p>DFyE_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vertical Diffusive Flux of Pot.Temperature (Explicit part)</p></td>
+<td><p>DFrE_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-even"><td><p>Vertical Diffusive Flux of Pot.Temperature (Implicit part)</p></td>
+<td><p>DFrI_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Net short-wave radiation</p></td>
+<td><p>oceQsw</p></td>
+<td><p>W / m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Vertical mass-weighted transport of Potential Temperature</p></td>
+<td><p>WTHMASS</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Total surface heat flux</p></td>
+<td><p>TFLUX</p></td>
+<td><p>W / m<span class="math notranslate nohighlight">\(^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Vertical Diffusive Flux (KPP Scheme)</p></td>
+<td><p>KPPg_TH</p></td>
+<td><p>C<span class="math notranslate nohighlight">\(^{\circ}\)</span> m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">KPPg_TH</span></code> variable is only required when using the <code class="docutils literal notranslate"><span class="pre">kpp</span></code> package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">implicitDiffusion=.TRUE.</span></code>, then the diffusive flux terms <code class="docutils literal notranslate"><span class="pre">DFxE_TH</span></code>, <code class="docutils literal notranslate"><span class="pre">DFyE_TH</span></code>, and <code class="docutils literal notranslate"><span class="pre">DFrE_TH</span></code> are not required to close the budget.</p>
+</div>
+<section id="suggested-diagnostics-organization">
+<h3>Suggested Diagnostics Organization<a class="headerlink" href="#suggested-diagnostics-organization" title="Permalink to this headline">#</a></h3>
+<p>The following entries to the <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> file would yield the terms above.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#---</span>
+<span class="n">frequency</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
+<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;ADVx_TH &#39;</span><span class="p">,</span><span class="s1">&#39;ADVy_TH &#39;</span><span class="p">,</span><span class="s1">&#39;ADVr_TH &#39;</span><span class="p">,</span>
+<span class="n">filename</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/heat_flux_adv/heat_flux_adv&#39;</span><span class="p">,</span>
+
+<span class="c1">#---</span>
+<span class="n">frequency</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
+<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;DFxE_TH &#39;</span><span class="p">,</span><span class="s1">&#39;DFyE_TH &#39;</span><span class="p">,</span><span class="s1">&#39;DFrE_TH &#39;</span><span class="p">,</span><span class="s1">&#39;DFrI_TH &#39;</span><span class="p">,</span><span class="s1">&#39;KPPg_TH &#39;</span><span class="p">,</span>
+<span class="n">filename</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/heat_flux_diff/heat_flux_diff&#39;</span><span class="p">,</span>
+
+<span class="c1">#---</span>
+<span class="n">frequency</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
+<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;oceQsw &#39;</span><span class="p">,</span><span class="s1">&#39;WTHMASS &#39;</span><span class="p">,</span><span class="s1">&#39;TFLUX   &#39;</span><span class="p">,</span>
+<span class="n">filename</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/heat_flux_surf/heat_flux_surf&#39;</span><span class="p">,</span>
+<span class="n">levels</span><span class="p">(:,</span><span class="mi">3</span><span class="p">)</span>     <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</pre></div>
+</div>
 </section>
-<section id="the-momentum-equations">
-<h2>The Momentum Equations<a class="headerlink" href="#the-momentum-equations" title="Permalink to this headline">#</a></h2>
-<p>The momentum equations describe how momentum changes at any given location in the ocean given the forces that act on it. They can be written succintly in vector notation as:</p>
-<div class="math notranslate nohighlight">
-\[\frac{D\textbf{v}}{Dt} = - \frac{1}{\rho}\nabla p - 2\boldsymbol\Omega\times\textbf{v} + \textbf{g} + \textbf{F}_r\]</div>
-<p>In this equation, known as the <em>Navier-Stokes</em> equation, the left-hand side is the total derivative of <span class="math notranslate nohighlight">\(\textbf{v}\)</span>, and the right-hand side terms are the pressure gradient force (<span class="math notranslate nohighlight">\(-1/\rho \nabla p\)</span>), the Coriolis force (<span class="math notranslate nohighlight">\(2\boldsymbol\Omega\times\textbf{v}\)</span>), gravity (<span class="math notranslate nohighlight">\(\textbf{g}\)</span>), and frictional forces (i.e. viscosity, <span class="math notranslate nohighlight">\(\textbf{F}_r\)</span>). Each of these terms is describe in the following subsections.</p>
-<p>The vector notation for these equations can be expanded as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\frac{\partial u}{\partial t} + u\frac{\partial u}{\partial x} + v\frac{\partial u}{\partial y} + w\frac{\partial u}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial x} - 2\Omega v \text{sin}\theta + F_x\\
-\frac{\partial v}{\partial t} + u\frac{\partial v}{\partial x} + v\frac{\partial v}{\partial y} + w\frac{\partial v}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial y} - 2\Omega u \text{sin}\theta + F_y\\
-\frac{\partial w}{\partial t} + u\frac{\partial w}{\partial x} + v\frac{\partial w}{\partial y} + w\frac{\partial w}{\partial z} &amp;= - \frac{1}{\rho}\frac{\partial p}{\partial z} + F_z\\\end{split}\]</div>
-<p>Note that the small vertical component of the Coriolis has been removed from …</p>
-<section id="the-pressure-gradient-force">
-<h3>The Pressure Gradient Force<a class="headerlink" href="#the-pressure-gradient-force" title="Permalink to this headline">#</a></h3>
-<p>The pressure gradient force arises from spatial variations in pressure within the ocean. It drives fluid from regions of high pressure to low pressure and is a primary mechanism for initiating and maintaining ocean currents. Mathematically, it’s represented as:</p>
-<div class="math notranslate nohighlight">
-\[
-- \frac{1}{\rho}\nabla p
-\]</div>
-<p>​
-where <span class="math notranslate nohighlight">\(\rho\)</span> is the density of seawater and <span class="math notranslate nohighlight">\(\nabla p\)</span> is the pressure gradient. This force is essential for modeling geostrophic flows where there is a balance between pressure gradients and Coriolis forces in large-scale ocean circulation.</p>
-</section>
-<section id="the-coriolis-force">
-<h3>The Coriolis Force<a class="headerlink" href="#the-coriolis-force" title="Permalink to this headline">#</a></h3>
-<p>Due to Earth’s rotation, moving fluids experience an apparent force known as the Coriolis force (or Coriolis “effect”). This force causes moving water to deflect to the right in the Northern Hemisphere and to the left in the Southern Hemisphere, influencing the direction of ocean currents. The Coriolis force is given by:</p>
-<div class="math notranslate nohighlight">
-\[
-- 2\boldsymbol\Omega\times\textbf{v}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\boldsymbol\Omega\)</span> is Earth’s angular velocity vector and <span class="math notranslate nohighlight">\(\textbf{v}\)</span> is the velocity of the fluid. In ocean models, incorporating the Coriolis force is important for simulating realistic current patterns and understanding phenomena like the formation of gyres and the behavior of large-scale circulation systems.</p>
-</section>
-<section id="frictional-forces">
-<h3>Frictional Forces<a class="headerlink" href="#frictional-forces" title="Permalink to this headline">#</a></h3>
-<p>Frictional forces in the ocean arise from the viscosity of seawater and interactions with boundaries such as the seafloor and coastlines. These forces act to slow down water movement and dissipate energy, playing a significant role in boundary layers and mixing processes. In ocean modeling, frictional forces are often parameterized using eddy viscosity concepts to represent the effects of turbulence and small-scale mixing that cannot be directly resolved. Accurate parameterization of frictional forces is crucial for modeling vertical mixing, energy dissipation, and the overall momentum balance in the ocean.</p>
-</section>
-</section>
-<section id="the-boussinesq-approximation">
-<h2>The Boussinesq Approximation<a class="headerlink" href="#the-boussinesq-approximation" title="Permalink to this headline">#</a></h2>
-<p>The Boussinesq approximation for momentum is that sea water is, in effect, incompressible. Put into symbols, this means that</p>
-<div class="math notranslate nohighlight">
-\[\frac{1}{\rho} \frac{D \rho}{D t}  = 0\]</div>
-<p>This Boussinesq approximation is often used when constructing numerical ocean models with fixed grids because the grid cells will not change volume due to changes in density. This is an important consideration because in the real ocean, variations in density <em>do</em> have a measureable effect on ocean volume. In fact, changes in density resulting primarily from increased ocean heat content are a major contributor to contempory sea level rise <span id="id2">[<a class="reference internal" href="../references.html#id4" title="Thomas Frederikse, Felix Landerer, Lambert Caron, Surendra Adhikari, David Parkes, Vincent W Humphrey, Sönke Dangendorf, Peter Hogarth, Laure Zanna, Lijing Cheng, and others. The causes of sea-level rise since 1900. Nature, 584(7821):393–397, 2020.">Frederikse <em>et al.</em>, 2020</a>]</span>. In effect, hen computing density-driven variations in sea level from ocean state estimates, it’s necessary to apply a correction <em>a posteriori</em> <span id="id3">[<a class="reference internal" href="../references.html#id5" title="Richard J Greatbatch. A note on the representation of steric sea level in models that conserve volume rather than mass. Journal of Geophysical Research: Oceans, 99(C6):12767–12771, 1994.">Greatbatch, 1994</a>]</span>.</p>
-</section>
-<section id="the-continuity-equation">
-<h2>The Continuity Equation<a class="headerlink" href="#the-continuity-equation" title="Permalink to this headline">#</a></h2>
-<p>Applying the conservation equation to momentum (i.e. the conservation of mass in a given volume) results in:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial \rho}{\partial t} + \frac{\partial (\rho u)}{\partial x} + \frac{\partial (\rho v)}{\partial y} + \frac{\partial (\rho w)}{\partial z} = 0\]</div>
-<p>This equation is known as the <em>continuity equation</em>.</p>
-<p>Under the Boussinesq approximation, this is simplified to:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0\]</div>
-<p>Or, put another way, the flow into a given region but be equal to the flow out.</p>
 </section>
 </section>
 
@@ -508,16 +529,16 @@ where <span class="math notranslate nohighlight">\(\rho\)</span> is the density 
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "cs185c"
         },
         kernelOptions: {
-            name: "python3",
-            path: "./oceanography"
+            name: "cs185c",
+            path: "./special_topics"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'cs185c'</script>
 
                 </article>
               
@@ -531,20 +552,20 @@ where <span class="math notranslate nohighlight">\(\rho\)</span> is the density 
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="primitive_equations.html"
+       href="volume_budget.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Primitive Equations</p>
+        <p class="prev-next-title">Volume Budgets</p>
       </div>
     </a>
     <a class="right-next"
-       href="thermodynamics.html"
+       href="salt_budget.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Thermodynamics</p>
+        <p class="prev-next-title">Salt Budgets</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -566,15 +587,10 @@ where <span class="math notranslate nohighlight">\(\rho\)</span> is the density 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-overview">Momentum Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-momentum-equations">The Momentum Equations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pressure-gradient-force">The Pressure Gradient Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-coriolis-force">The Coriolis Force</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frictional-forces">Frictional Forces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-fields">Required Fields</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-diagnostics-organization">Suggested Diagnostics Organization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-boussinesq-approximation">The Boussinesq Approximation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-continuity-equation">The Continuity Equation</a></li>
 </ul>
   </nav></div>
 

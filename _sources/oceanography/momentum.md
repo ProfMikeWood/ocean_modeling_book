@@ -3,10 +3,10 @@
 This section is aimed at describing the main terms in the momentum equations which are key for numerical modeling. For derivations of these equations, see one of the sources in the references, such as Chapter 7 of {cite:ts}`stewart2008introduction`.
 
 ## Momentum Overview
-Under construction
+In ocean modeling, momentum equations describe how the velocity of seawater changes over time due to various forces. These equations are fundamental for simulating ocean circulation patterns, including currents, eddies, and large-scale gyres. They account for forces such as pressure gradients, Earth's rotation (Coriolis force), gravity, and frictional effects. Understanding and accurately representing these forces are crucial for realistic ocean models.
 
 ## The Momentum Equations
-The momentum equations describe how momentum change at any given location in the ocean given the forces that act on it. They can be written succintly in vector notation as: 
+The momentum equations describe how momentum changes at any given location in the ocean given the forces that act on it. They can be written succintly in vector notation as: 
 
 ```{math}
 \frac{D\textbf{v}}{Dt} = - \frac{1}{\rho}\nabla p - 2\boldsymbol\Omega\times\textbf{v} + \textbf{g} + \textbf{F}_r
@@ -24,13 +24,26 @@ The vector notation for these equations can be expanded as
 Note that the small vertical component of the Coriolis has been removed from ...
 
 ### The Pressure Gradient Force
-Under construction
+The pressure gradient force arises from spatial variations in pressure within the ocean. It drives fluid from regions of high pressure to low pressure and is a primary mechanism for initiating and maintaining ocean currents. Mathematically, it's represented as:
+
+$$
+- \frac{1}{\rho}\nabla p
+$$
+
+​
+where $\rho$ is the density of seawater and $\nabla p$ is the pressure gradient. This force is essential for modeling geostrophic flows where there is a balance between pressure gradients and Coriolis forces in large-scale ocean circulation.
 
 ### The Coriolis Force
-Under construction
+Due to Earth's rotation, moving fluids experience an apparent force known as the Coriolis force (or Coriolis "effect"). This force causes moving water to deflect to the right in the Northern Hemisphere and to the left in the Southern Hemisphere, influencing the direction of ocean currents. The Coriolis force is given by:
+
+$$
+- 2\boldsymbol\Omega\times\textbf{v}
+$$
+
+where $\boldsymbol\Omega$ is Earth's angular velocity vector and $\textbf{v}$ is the velocity of the fluid. In ocean models, incorporating the Coriolis force is important for simulating realistic current patterns and understanding phenomena like the formation of gyres and the behavior of large-scale circulation systems.
 
 ### Frictional Forces
-Under construction
+Frictional forces in the ocean arise from the viscosity of seawater and interactions with boundaries such as the seafloor and coastlines. These forces act to slow down water movement and dissipate energy, playing a significant role in boundary layers and mixing processes. In ocean modeling, frictional forces are often parameterized using eddy viscosity concepts to represent the effects of turbulence and small-scale mixing that cannot be directly resolved. Accurate parameterization of frictional forces is crucial for modeling vertical mixing, energy dissipation, and the overall momentum balance in the ocean.
 
 ## The Boussinesq Approximation 
 The Boussinesq approximation for momentum is that sea water is, in effect, incompressible. Put into symbols, this means that
