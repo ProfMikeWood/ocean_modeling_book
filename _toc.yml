@@ -40,11 +40,12 @@ parts:
     - file: HPC/navigating_an_HPC
     - file: HPC/running_jobs_on_an_HPC
     - file: HPC/conda_environments_on_an_HPC
-  - caption: Model Analysis
+  - caption: MITgcm Special Topics
     chapters:
-    - file: analysis/volume_budget
-    - file: analysis/heat_budget
-    - file: analysis/salt_budget
+    - file: special_topics/diagnostics_vec
+    - file: special_topics/volume_budget
+    - file: special_topics/heat_budget
+    - file: special_topics/salt_budget
   - caption: A Regional Model Example
     chapters:
     - file: regional_example/model_description
