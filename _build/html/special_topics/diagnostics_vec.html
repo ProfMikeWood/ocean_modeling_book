@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Diagnostics_vec &#8212; Numerical Ocean Modeling</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'special_topics/diagnostics_vec';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Volume Budgets" href="volume_budget.html" />
+    <link rel="prev" title="conda Environments" href="../HPC/conda_environments_on_an_HPC.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Numerical Ocean Modeling
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/difference_methods.html">Difference Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="salt_budget.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_grid.html">Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/bathymetry.html">Bathymetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/external_conditions.html">External Forcing Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../state_estimation/greens_function.html">Green’s Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fspecial_topics/diagnostics_vec.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/special_topics/diagnostics_vec.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Diagnostics_vec</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-demo">Preparing the demo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-the-model">Compiling the Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-diagnostic-vec-fields">Preparing the diagnostic_vec fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-model">Running the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-diagnostic-vec-output">Assessing the diagnostic_vec output</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="diagnostics-vec">
+<h1>Diagnostics_vec<a class="headerlink" href="#diagnostics-vec" title="Permalink to this headline">#</a></h1>
+<p>A diagnostics package for output only where you want it.</p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>Boundary conditions are a critical part of generating regional ocean model domains. Using state estimates like ECCO, data-informed boundary conditions can be generated to provide data-aware regional domains. However, boundary conditions are often needed at high frequency for a number of applications, and this high frequency output is very expensive at global scales. Thus, the <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> package was generated to output model variables in localized areas, but only in certain areas of the domain in order to preserve I/O time and disk space.</p>
+<p>While this package was generated with boundary conditions in mind, it does not necessarily need to be used that way. The user can provide any mask they like to request output anywhere in the domain - from single points (“virtual moorings”) to small subsets of the domain.</p>
+<p>Let’s take a look at an example</p>
+<p><strong>Import the modules for this notebook</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preparing-the-demo">
+<h2>Preparing the demo<a class="headerlink" href="#preparing-the-demo" title="Permalink to this headline">#</a></h2>
+<p>This demo will utilize the <code class="docutils literal notranslate"><span class="pre">tutorial_global_oce_latlon</span></code> experiment provided with MITgcm.</p>
+<p>Let’s start with a fresh clone of MITgcm and the <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> package.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MITgcm</span><span class="o">/</span><span class="n">MITgcm</span><span class="o">.</span><span class="n">git</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mhwood</span><span class="o">/</span><span class="n">diagnostics_vec</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Next, use some of the provided python utilities to add <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> to the model source code.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">diagnostics_vec</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span>
+<span class="n">python3</span> <span class="n">copy_pkg_files_to_MITgcm</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="o">../../</span><span class="n">MITgcm</span>
+</pre></div>
+</div>
+<p>Subsequently, let’s navigate to the tutorial experiment that will be used for this demo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../../</span><span class="n">MITgcm</span><span class="o">/</span><span class="n">verification</span><span class="o">//</span><span class="n">tutorial_global_oce_latlon</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="compiling-the-model">
+<h2>Compiling the Model<a class="headerlink" href="#compiling-the-model" title="Permalink to this headline">#</a></h2>
+<p>To compile with <code class="docutils literal notranslate"><span class="pre">DIAGNOSTICS_VEC</span></code>, we will want to update to key files in our code mods directory.</p>
+<p>First up, let’s modify the <code class="docutils literal notranslate"><span class="pre">DIAGNOSTICS_VEC_SIZE.h</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">code</span><span class="o">/</span>
+<span class="n">cp</span> <span class="o">../../../</span><span class="n">pkg</span><span class="o">/</span><span class="n">diagnostics_vec</span><span class="o">/</span><span class="n">DIAGNOSTICS_VEC_SIZE</span><span class="o">.</span><span class="n">h</span> <span class="o">.</span>
+<span class="n">vim</span> <span class="n">DIAGNOSTICS_VEC_SIZE</span><span class="o">.</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>Edit this file with the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">PARAMETER</span> <span class="p">::</span> <span class="n">VEC_points</span> <span class="o">=</span> <span class="mi">1800</span>
+<span class="n">INTEGER</span><span class="p">,</span> <span class="n">PARAMETER</span> <span class="p">::</span> <span class="n">nVEC_mask</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">INTEGER</span><span class="p">,</span> <span class="n">PARAMETER</span> <span class="p">::</span> <span class="n">nSURF_mask</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Next, let’s add <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> to the list of packages for this model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="n">packages</span><span class="o">.</span><span class="n">conf</span>
+<span class="c1"># add a line for diagnostics_vec</span>
+</pre></div>
+</div>
+<p>Finally, let’s change the model to run with MPI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="o">../</span><span class="n">code</span><span class="o">/</span><span class="n">SIZE</span><span class="o">.</span><span class="n">h</span>
+</pre></div>
+</div>
+<p>And update with the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>     <span class="o">&amp;</span>           <span class="n">sNx</span> <span class="o">=</span>  <span class="mi">45</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">sNy</span> <span class="o">=</span>  <span class="mi">40</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">OLx</span> <span class="o">=</span>   <span class="mi">2</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">OLy</span> <span class="o">=</span>   <span class="mi">2</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">nSx</span> <span class="o">=</span>   <span class="mi">1</span><span class="p">,</span>  <span class="o">&lt;-</span> <span class="n">change</span> <span class="n">to</span> <span class="n">this</span>
+     <span class="o">&amp;</span>           <span class="n">nSy</span> <span class="o">=</span>   <span class="mi">1</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">nPx</span> <span class="o">=</span>   <span class="mi">2</span><span class="p">,</span>  <span class="o">&lt;-</span> <span class="n">change</span> <span class="n">to</span> <span class="n">this</span>
+     <span class="o">&amp;</span>           <span class="n">nPy</span> <span class="o">=</span>   <span class="mi">1</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">Nx</span>  <span class="o">=</span> <span class="n">sNx</span><span class="o">*</span><span class="n">nSx</span><span class="o">*</span><span class="n">nPx</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">Ny</span>  <span class="o">=</span> <span class="n">sNy</span><span class="o">*</span><span class="n">nSy</span><span class="o">*</span><span class="n">nPy</span><span class="p">,</span>
+     <span class="o">&amp;</span>           <span class="n">Nr</span>  <span class="o">=</span>  <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, let’s build the model by loading in some modules</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">purge</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">shared</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">module</span> <span class="n">add</span> <span class="n">openmpi</span><span class="o">-</span><span class="mf">4.1.1</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">9.4.0</span><span class="o">-</span><span class="n">jgsdvep</span>
+<span class="n">module</span> <span class="n">add</span> <span class="n">netcdf</span><span class="o">-</span><span class="n">fortran</span><span class="o">-</span><span class="mf">4.5.3</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">11.1.0</span><span class="o">-</span><span class="n">d35hzyr</span>
+</pre></div>
+</div>
+<p>and the running the typical compile commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span><span class="n">build</span>
+<span class="n">export</span> <span class="n">MPI_HOME</span><span class="o">=/</span><span class="n">efs_ecco</span><span class="o">/</span><span class="n">ECCO</span><span class="o">/</span><span class="n">EMU2</span><span class="o">/</span><span class="n">emu_dir</span><span class="o">/</span><span class="n">ompi</span>
+<span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">genmake2</span> <span class="o">-</span><span class="n">of</span> <span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">build_options</span><span class="o">/</span><span class="n">darwin_amd64_gfortran</span> <span class="o">-</span><span class="n">mods</span> <span class="o">../</span><span class="n">code</span> <span class="o">-</span><span class="n">mpi</span>
+<span class="n">make</span> <span class="n">depend</span>
+<span class="n">make</span>
+</pre></div>
+</div>
+</section>
+<section id="preparing-the-diagnostic-vec-fields">
+<h2>Preparing the diagnostic_vec fields<a class="headerlink" href="#preparing-the-diagnostic-vec-fields" title="Permalink to this headline">#</a></h2>
+<p>To run with <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code>, we will need some masks for each of the outputs we would like. Let’s suppose we would like to make a regional domain in the North Pacific created with boundary conditions from our global model. Let’s plot this domain on the bathymetry of the model to see where our regional model will be located.</p>
+<p>Begin by modifying the model path and reading in the bathymetry:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;/efs_ecco/mwood/dv_example/MITgcm/verification/tutorial_global_oce_latlon&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read in the bathymetry</span>
+<span class="n">n_rows</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">n_cols</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">bathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="s1">&#39;bathymetry.bin&#39;</span><span class="p">),</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span><span class="n">n_cols</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">n_rows</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">bathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="s1">&#39;bathymetry.bin&#39;</span><span class="p">),</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span><span class="n">n_cols</span><span class="p">))</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/efs_ecco/mwood/dv_example/MITgcm/verification/tutorial_global_oce_latlon/input/bathymetry.bin&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, let’s define our subdomain and plot it on the map:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define the rows/cols of the subdomain</span>
+<span class="n">sub_row_min</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">sub_row_max</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">sub_col_min</span><span class="o">=</span><span class="mi">45</span>
+<span class="n">sub_col_max</span><span class="o">=</span><span class="mi">55</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">bathy</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">sub_col_min</span><span class="p">,</span> <span class="n">sub_col_max</span><span class="p">],</span> <span class="p">[</span><span class="n">sub_row_min</span><span class="p">,</span> <span class="n">sub_row_min</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">sub_col_max</span><span class="p">,</span> <span class="n">sub_col_max</span><span class="p">],</span> <span class="p">[</span><span class="n">sub_row_min</span><span class="p">,</span> <span class="n">sub_row_max</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">sub_col_min</span><span class="p">,</span> <span class="n">sub_col_min</span><span class="p">],</span> <span class="p">[</span><span class="n">sub_row_min</span><span class="p">,</span> <span class="n">sub_row_max</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">sub_col_min</span><span class="p">,</span> <span class="n">sub_col_max</span><span class="p">],</span> <span class="p">[</span><span class="n">sub_row_max</span><span class="p">,</span> <span class="n">sub_row_max</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/699d481f663bc45fef59fbe4ae40281b1538c0845e795487bb8aa6a4d1a4a3d5.png" src="../_images/699d481f663bc45fef59fbe4ae40281b1538c0845e795487bb8aa6a4d1a4a3d5.png" />
+</div>
+</div>
+<p>Given this domain, we can make masks for <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> that can be used to generate outputs from the global model along our boundary. In turn, these outputs could be used to generate the subdomain boundary conditions (perhaps via interpolation).</p>
+<p>To generate the masks, we make an array which is zero everywhere except for the boundary location, where we count our points sequentially:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make the north mask</span>
+<span class="n">north_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">))</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sub_col_min</span><span class="p">,</span> <span class="n">sub_col_max</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">north_mask</span><span class="p">[</span><span class="n">sub_row_max</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The north mask has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">north_mask</span><span class="o">!=</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; points&#39;</span><span class="p">)</span>
+
+<span class="c1"># make the south mask</span>
+<span class="n">south_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">))</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sub_col_min</span><span class="p">,</span> <span class="n">sub_col_max</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">south_mask</span><span class="p">[</span><span class="n">sub_row_min</span><span class="p">,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The south mask has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">south_mask</span><span class="o">!=</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; points&#39;</span><span class="p">)</span>
+
+<span class="c1"># make the east mask</span>
+<span class="n">east_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">))</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sub_row_min</span><span class="p">,</span> <span class="n">sub_row_max</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">east_mask</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">sub_col_min</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The east mask has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">east_mask</span><span class="o">!=</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; points&#39;</span><span class="p">)</span>
+
+<span class="c1"># make the west mask</span>
+<span class="n">west_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">))</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sub_row_min</span><span class="p">,</span> <span class="n">sub_row_max</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">west_mask</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">sub_col_max</span><span class="p">]</span> <span class="o">=</span> <span class="n">counter</span>
+    <span class="n">counter</span> <span class="o">+=</span><span class="mi">1</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The west mask has &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">west_mask</span><span class="o">!=</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; points&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The north mask has 11 points
+The south mask has 11 points
+The east mask has 11 points
+The west mask has 11 points
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">bathy</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">)</span>
+<span class="n">plot_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">north_mask</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="n">north_mask</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">plot_mask</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mask Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;North Mask&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">bathy</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">)</span>
+<span class="n">plot_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">east_mask</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="n">east_mask</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">plot_mask</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mask Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;East Mask&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">bathy</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">)</span>
+<span class="n">plot_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">south_mask</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="n">south_mask</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">plot_mask</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mask Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;South Mask&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">bathy</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues_r&#39;</span><span class="p">)</span>
+<span class="n">plot_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">west_mask</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="n">west_mask</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">plot_mask</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mask Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;West Mask&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e189f2f9eae77ce6ae99aa874ed81b4e7a83fea6a8988bffc8dac63baf29c540.png" src="../_images/e189f2f9eae77ce6ae99aa874ed81b4e7a83fea6a8988bffc8dac63baf29c540.png" />
+</div>
+</div>
+<p>After you’re happy with your masks, you can output them to your run directory</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a place for the dv output to be placed</span>
+<span class="k">if</span> <span class="s1">&#39;dv&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">)):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;dv&#39;</span><span class="p">))</span>
+
+<span class="c1"># output the masks to your run directory</span>
+<span class="n">north_mask</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span><span class="s1">&#39;north_mask.bin&#39;</span><span class="p">))</span>
+<span class="n">south_mask</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span><span class="s1">&#39;south_mask.bin&#39;</span><span class="p">))</span>
+<span class="n">west_mask</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span><span class="s1">&#39;west_mask.bin&#39;</span><span class="p">))</span>
+<span class="n">east_mask</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tofile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span><span class="s1">&#39;east_mask.bin&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The final file we will need is a <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> file. Here is an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="o">&amp;</span><span class="n">DIAG_VEC_INPUT_VARS</span>
+<span class="c1">#</span>
+ <span class="n">nml_startTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="n">nml_endTime</span> <span class="o">=</span> <span class="mf">3153600000.</span><span class="p">,</span>
+<span class="c1">#</span>
+<span class="c1"># identify the masks</span>
+<span class="c1">#</span>
+ <span class="n">nml_vecFiles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;dv/north_mask.bin&#39;</span><span class="p">,</span>
+ <span class="n">nml_vecFiles</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;dv/south_mask.bin&#39;</span><span class="p">,</span>
+ <span class="n">nml_vecFiles</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;dv/east_mask.bin&#39;</span><span class="p">,</span>
+ <span class="n">nml_vecFiles</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;dv/west_mask.bin&#39;</span><span class="p">,</span>
+<span class="c1">#</span>
+<span class="c1"># determine how many model iterations will be stored in each file</span>
+<span class="c1">#</span>
+ <span class="n">nml_vec_iters_per_file</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">365</span>
+<span class="c1">#</span>
+<span class="c1"># determine the output/averaging period</span>
+<span class="c1">#</span>
+ <span class="n">nml_vec_avg_periods</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mf">86400.</span><span class="p">,</span> <span class="mf">86400.</span><span class="p">,</span> <span class="mf">86400.</span><span class="p">,</span> <span class="mf">86400.</span><span class="p">,</span>
+<span class="c1">#</span>
+ <span class="n">nml_fields2D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;ETAN    &#39;</span><span class="p">,</span>
+ <span class="n">nml_fields2D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;ETAN    &#39;</span><span class="p">,</span>
+ <span class="n">nml_fields2D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;ETAN    &#39;</span><span class="p">,</span>
+ <span class="n">nml_fields2D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;ETAN    &#39;</span><span class="p">,</span>
+<span class="c1">#</span>
+ <span class="n">nml_fields3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;THETA   &#39;</span><span class="p">,</span><span class="s1">&#39;SALT   &#39;</span><span class="p">,</span><span class="s1">&#39;VVEL   &#39;</span><span class="p">,</span><span class="s1">&#39;UVEL    &#39;</span><span class="p">,</span>
+ <span class="n">nml_levels3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span>   <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span>
+ <span class="n">nml_fields3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;THETA   &#39;</span><span class="p">,</span><span class="s1">&#39;SALT   &#39;</span><span class="p">,</span><span class="s1">&#39;VVEL   &#39;</span><span class="p">,</span><span class="s1">&#39;UVEL    &#39;</span><span class="p">,</span>
+ <span class="n">nml_levels3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span>   <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span>
+ <span class="n">nml_fields3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;THETA   &#39;</span><span class="p">,</span><span class="s1">&#39;SALT   &#39;</span><span class="p">,</span><span class="s1">&#39;VVEL   &#39;</span><span class="p">,</span><span class="s1">&#39;UVEL    &#39;</span><span class="p">,</span>
+ <span class="n">nml_levels3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span>   <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span>
+ <span class="n">nml_fields3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;THETA   &#39;</span><span class="p">,</span><span class="s1">&#39;SALT   &#39;</span><span class="p">,</span><span class="s1">&#39;VVEL   &#39;</span><span class="p">,</span><span class="s1">&#39;UVEL    &#39;</span><span class="p">,</span>
+ <span class="n">nml_levels3D</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span>   <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span>
+<span class="c1">#</span>
+ <span class="n">nml_filePrec</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+ <span class="o">&amp;</span>
+</pre></div>
+</div>
+<p>Generate a file in your run directory called <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> with the output described above.</p>
+</section>
+<section id="running-the-model">
+<h2>Running the model<a class="headerlink" href="#running-the-model" title="Permalink to this headline">#</a></h2>
+<p>To run the model, first we will prepare the run directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">run</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="n">build</span><span class="o">/</span><span class="n">mitgcmuv</span> <span class="o">.</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="nb">input</span><span class="o">/*</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Before running, we will edit 2 files. First let’s edit the <code class="docutils literal notranslate"><span class="pre">data.pkg</span></code> file to include a line for <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code>:</p>
+<p><code class="docutils literal notranslate"> <span class="pre">useDiagnostics_vec</span> <span class="pre">=</span> <span class="pre">.TRUE.,</span></code></p>
+<p>Next, let’s edit the <code class="docutils literal notranslate"><span class="pre">data</span></code> file to run for one year by changing <code class="docutils literal notranslate"><span class="pre">nTimeSteps</span></code> to 365. You may also like to change the <code class="docutils literal notranslate"><span class="pre">dumpFreq</span></code> to 31536000 since we don’t care about the typical output for this example.</p>
+<p>To run the model, we can use a job script, e.g. <code class="docutils literal notranslate"><span class="pre">dv_test.slm</span></code> as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --ntasks=2</span>
+<span class="c1">#SBATCH --ntasks-per-node=2</span>
+<span class="c1">#SBATCH --exclusive</span>
+<span class="c1">#SBATCH --partition=sealevel-c5xl-demand</span>
+<span class="c1">#SBATCH --mem-per-cpu=1GB</span>
+<span class="c1">#SBATCH --time=1:00:00</span>
+
+<span class="n">module</span> <span class="n">purge</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">shared</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">module</span> <span class="n">add</span> <span class="n">openmpi</span><span class="o">-</span><span class="mf">4.1.1</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">9.4.0</span><span class="o">-</span><span class="n">jgsdvep</span>
+<span class="n">module</span> <span class="n">add</span> <span class="n">netcdf</span><span class="o">-</span><span class="n">fortran</span><span class="o">-</span><span class="mf">4.5.3</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">11.1.0</span><span class="o">-</span><span class="n">d35hzyr</span>
+
+<span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">2</span> <span class="o">./</span><span class="n">mitgcmuv</span>
+</pre></div>
+</div>
+<p>Put this script in your run directory and run with the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">dv_test.slm</span></code></p>
+</section>
+<section id="assessing-the-diagnostic-vec-output">
+<h2>Assessing the diagnostic_vec output<a class="headerlink" href="#assessing-the-diagnostic-vec-output" title="Permalink to this headline">#</a></h2>
+<p>The output of the <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> files will be organized in the <code class="docutils literal notranslate"><span class="pre">dv</span></code> directory - one file for each variable. Each file will contain 365 timesteps with output for each depth and each point along the mask. Let’s take a look at an example</p>
+<p>Consider <code class="docutils literal notranslate"><span class="pre">THETA</span></code> along the eastern boundary. From above, we know there are 11 poitns in the east mask and from our model’s <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file, we know there are 15 depth levels. Thus, the shape of this file is (365, 15, 11):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read in the theta file</span>
+<span class="n">theta_dv_east</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;dv&#39;</span><span class="p">,</span>
+                                         <span class="s1">&#39;east_mask_THETA.0000000001.bin&#39;</span><span class="p">),</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">365</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check out a plot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">theta_dv_east</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Timestep &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">theta_dv_east</span><span class="p">[</span><span class="mi">90</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Timestep &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">theta_dv_east</span><span class="p">[</span><span class="mi">180</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Timestep &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">180</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">theta_dv_east</span><span class="p">[</span><span class="mi">270</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Timestep &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">270</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Timestep 270&#39;)
+</pre></div>
+</div>
+<img alt="../_images/06900a156c75e5bef0f208ec4028cc78a35eaef036091a10958924141a85979c.png" src="../_images/06900a156c75e5bef0f208ec4028cc78a35eaef036091a10958924141a85979c.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./special_topics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../HPC/conda_environments_on_an_HPC.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">conda Environments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="volume_budget.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Volume Budgets</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-demo">Preparing the demo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-the-model">Compiling the Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-the-diagnostic-vec-fields">Preparing the diagnostic_vec fields</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-model">Running the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-diagnostic-vec-output">Assessing the diagnostic_vec output</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Wood
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

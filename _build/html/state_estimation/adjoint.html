@@ -195,11 +195,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
 <ul class="nav bd-sidenav">
@@ -416,10 +417,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-true-function">The True Function</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modeled-solution">The Modeled Solution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-solution">Visualizing the Solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-sensivity-of-the-model-to-parameter-perturbations">Assessing the sensivity of the model to parameter perturbations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-assessing-the-sensivity-of-the-model-to-parameter-perturbations">Method 1: Assessing the sensivity of the model to parameter perturbations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-linear">Forward Linear</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizing-the-model-parameters">Optimizing the model parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#green-s-functions-in-an-iterative-process">Green’s Functions in an Iterative Process</a></li>
 </ul>
 </li>
 </ul>
@@ -466,8 +466,9 @@ x^t(t) = h_0 + v_0t + \frac{g}{2}t^2
 <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">delta_t</span><span class="p">)</span>
 
 <span class="c1"># define the true solution </span>
-<span class="n">x_true</span> <span class="o">=</span> <span class="n">h_0_t</span> <span class="o">+</span> <span class="n">v_0_t</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">g_t</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">v_true</span> <span class="o">=</span> <span class="n">v_0_t</span> <span class="o">+</span> <span class="n">g_t</span><span class="o">*</span><span class="n">t</span>
+<span class="n">x_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+<span class="n">x_true</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">h_0_t</span> <span class="o">+</span> <span class="n">v_0_t</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">g_t</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">x_true</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">v_0_t</span> <span class="o">+</span> <span class="n">g_t</span><span class="o">*</span><span class="n">t</span>
 </pre></div>
 </div>
 </div>
@@ -486,7 +487,7 @@ x^t(t) = h_0 + v_0t + \frac{g}{2}t^2
 <p>We can define this measurement function as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,))</span>
 
     <span class="c1"># two times</span>
@@ -494,12 +495,12 @@ x^t(t) = h_0 + v_0t + \frac{g}{2}t^2
     <span class="n">t_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
     
     <span class="c1"># two position measurements</span>
-    <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t_0</span><span class="p">]</span>
-    <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">t_1</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
     
     <span class="c1"># two velocity measurements</span>
-    <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">t_0</span><span class="p">]</span>
-    <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">t_1</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
 
     <span class="k">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
@@ -509,7 +510,7 @@ x^t(t) = h_0 + v_0t + \frac{g}{2}t^2
 <p>Then, the measurement data can then be computed with our function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_O</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v_true</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_O</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
 
 <span class="c1"># uncertainties</span>
 <span class="n">x_sigma</span> <span class="o">=</span> <span class="mi">1</span>
@@ -538,7 +539,7 @@ x^t(t) = h_0 + v_0t + \frac{g}{2}t^2
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Solution&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">x_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">x_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Height&#39;</span><span class="p">)</span>
@@ -548,7 +549,7 @@ x^t(t) = h_0 + v_0t + \frac{g}{2}t^2
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m)&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v_true</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">[</span><span class="mi">1</span><span class="p">,:])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">v_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">v_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Velocity&#39;</span><span class="p">)</span>
@@ -583,32 +584,31 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <p>For the projectile, we can define the model <span class="math notranslate nohighlight">\(M\)</span> in terms of the initial conditions <span class="math notranslate nohighlight">\(h_0\)</span> and <span class="math notranslate nohighlight">\(v_0\)</span> and the gravity parameter <span class="math notranslate nohighlight">\(g\)</span> as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">M</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">M</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">):</span>
     <span class="c1"># compute the number of timesteps</span>
     <span class="n">n_timesteps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     
-    <span class="c1"># make empty arrays to store the solution</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+    <span class="c1"># make an empty array to store the solution</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">n_timesteps</span><span class="p">))</span>
     
     <span class="c1"># start the solutions with the initial conditions</span>
-    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">h_0</span>
-    <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x0</span><span class="p">)):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
     
     <span class="c1"># loop through the entire time array</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_timesteps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         
         <span class="c1"># estimate the next velocity</span>
-        <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
     
         <span class="c1"># estimate the next position</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
+        <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
 
     <span class="c1"># compute the cost function</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_O</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
-    <span class="k">return</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -622,14 +622,14 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model parameters - first guess</span>
 <span class="n">h_0</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">v_0</span> <span class="o">=</span> <span class="mi">17</span>
-<span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">g_t</span>
 
 <span class="c1"># define a time for the model</span>
 <span class="n">delta_t_model</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">t_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">delta_t_model</span><span class="p">)</span>
 
 <span class="c1"># compute an estimated solution</span>
-<span class="n">v_estimated</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
+<span class="n">x_estimated</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="p">[</span><span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
 
 <span class="c1"># print cost</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
@@ -637,7 +637,7 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.595917824422579
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.123105625617655
 </pre></div>
 </div>
 </div>
@@ -648,8 +648,8 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Solution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated Solution&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">x_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">x_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Height&#39;</span><span class="p">)</span>
@@ -659,8 +659,8 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m)&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v_true</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_estimated</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">[</span><span class="mi">1</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">[</span><span class="mi">1</span><span class="p">,:],</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated Solution&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">v_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">v_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Velocity&#39;</span><span class="p">)</span>
@@ -673,54 +673,49 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bf311d3cc5250a88bf393de2b41c3704f3280b35c130b28a5b510ebb1a38d8a4.png" src="../_images/bf311d3cc5250a88bf393de2b41c3704f3280b35c130b28a5b510ebb1a38d8a4.png" />
+<img alt="../_images/3b0bad73c4f189d954ec6a4852da7787edfdba6ac7a1fca618bf4abe68d7e38e.png" src="../_images/3b0bad73c4f189d954ec6a4852da7787edfdba6ac7a1fca618bf4abe68d7e38e.png" />
 </div>
 </div>
 <p>As we can see in the plots above, our model solution clearly differs from the true solution. More importantly, our model solution different from the measurements made of the projectile in both position and velocity.</p>
 <p>The data-model differences <span class="math notranslate nohighlight">\(\textbf{y}^d\)</span> can be computed with the same measurement function defined above where here, we now pass in the estimated model parameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_estimated</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">)</span>
 <span class="n">y_d</span> <span class="o">=</span> <span class="n">y_O</span> <span class="o">-</span> <span class="n">y</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model errors:&#39;</span><span class="p">,</span><span class="n">y_d</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model errors: [ 0.025 -2.6   -1.9   -1.6  ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model errors: [ 0. -3. -2. -2.]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="assessing-the-sensivity-of-the-model-to-parameter-perturbations">
-<h3>Assessing the sensivity of the model to parameter perturbations<a class="headerlink" href="#assessing-the-sensivity-of-the-model-to-parameter-perturbations" title="Permalink to this headline">#</a></h3>
+<section id="method-1-assessing-the-sensivity-of-the-model-to-parameter-perturbations">
+<h3>Method 1: Assessing the sensivity of the model to parameter perturbations<a class="headerlink" href="#method-1-assessing-the-sensivity-of-the-model-to-parameter-perturbations" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># epsilon</span>
 <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.01</span>
 
 <span class="c1"># test 1</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_0f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_0b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-<span class="n">g_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_0f</span> <span class="o">-</span> <span class="n">c_0b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">J_0f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="p">[</span><span class="n">h_0</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">v_0</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">J_0b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="p">[</span><span class="n">h_0</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">v_0</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
+<span class="n">g_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">J_0f</span> <span class="o">-</span> <span class="n">J_0b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
 
 <span class="c1"># test 2</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_1f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_1b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-<span class="n">g_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_1f</span> <span class="o">-</span> <span class="n">c_1b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">J_1f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="p">[</span><span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">+</span><span class="n">eps</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">J_1b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="p">[</span><span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">-</span><span class="n">eps</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
+<span class="n">g_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">J_1f</span> <span class="o">-</span> <span class="n">J_1b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
 
-<span class="c1"># test 3</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_2f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_2b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-<span class="n">g_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_2f</span> <span class="o">-</span> <span class="n">c_2b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">g_0</span><span class="p">,</span> <span class="n">g_1</span><span class="p">,</span> <span class="n">g_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_0</span><span class="p">,</span> <span class="n">g_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7160856609133459 2.415930102120112 2.599286442535731
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7276037280310454 2.425353627703286
 </pre></div>
 </div>
 </div>
@@ -730,41 +725,65 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <h3>Forward Linear<a class="headerlink" href="#forward-linear" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">M_FL</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">,</span> <span class="n">perturb</span><span class="o">=</span><span class="s1">&#39;h_0&#39;</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">M_tl</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">,</span> <span class="n">x0_tl</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
     <span class="c1"># compute the number of timesteps</span>
     <span class="n">n_timesteps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">g_tl</span> <span class="o">=</span> <span class="mi">0</span>
     
-    <span class="c1"># make empty arrays to store the solution</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_timesteps</span><span class="p">,))</span>
+    <span class="c1"># make an empty array to store the solution</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">n_timesteps</span><span class="p">))</span>
+    <span class="n">x_tl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">n_timesteps</span><span class="p">))</span>
     
     <span class="c1"># start the solutions with the initial conditions</span>
-    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">h_0</span>
-    <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x0_tl</span><span class="p">)):</span>
+        <span class="c1">#[x0_tl[i]] = [1, 0][x0_tl[i]]</span>
+        <span class="c1">#[x_tl[i,0]] = [1, 0][x_tl[i,0]]</span>
+        <span class="n">x_tl</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0_tl</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     
     <span class="c1"># loop through the entire time array</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_timesteps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         
         <span class="c1"># estimate the next velocity</span>
-        <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
-    
+        <span class="c1">#[x_tl[1,i]]   = [1, 0, 0][x_tl[1,i]]</span>
+        <span class="c1">#[x_tl[1,i+1]] = [1, 0, delta_t][x_tl[1,i+1]]</span>
+        <span class="c1">#[g_tl]        = [0, 0, 1][g_tl]</span>
+        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+        <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">g_tl</span>
+        
         <span class="c1"># estimate the next position</span>
-        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
+        <span class="c1">#[x_tl[1,i]]   = [1, 0, 0, 0][x_tl[1,i]]</span>
+        <span class="c1">#[x_tl[1,i+1]] = [0, 1, 0, 0][x_tl[1,i+1]]</span>
+        <span class="c1">#[x_tl[0,i]]   = [0, 0, 1, 0][x_tl[0,i]]</span>
+        <span class="c1">#[x_tl[0,i+1]] = [1/(2*delta_t),  1/(2*delta_t), 1, 0][x_tl[0,i+1]]</span>
+        <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
+        <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
 
     <span class="c1"># compute the cost function</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_O</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">Jd</span> <span class="o">=</span> 
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,))</span>
+    <span class="n">y_tl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,))</span>
 
-    <span class="k">return</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
-    <span class="n">Jd</span> <span class="o">=</span>
-         <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+    <span class="c1"># two times</span>
+    <span class="n">t_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">t_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="c1"># two position measurements</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+    
+    <span class="c1"># two velocity measurements</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+
+
+    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_O</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">J_tl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_O</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y_tl</span><span class="p">))</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">x_tl</span><span class="p">,</span> <span class="n">J_tl</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -775,303 +794,103 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <p>Gradient descent</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_cost_gradient</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_cost_gradient</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">):</span>
     <span class="c1"># epsilon</span>
     <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.01</span>
     
     <span class="c1"># test 1</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_0f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_0b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="n">g_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_0f</span> <span class="o">-</span> <span class="n">c_0b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">g_0</span> <span class="o">=</span> <span class="n">M_tl</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">,</span> <span class="n">x0_tl</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
     
     <span class="c1"># test 2</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_1f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_1b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="n">g_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_1f</span> <span class="o">-</span> <span class="n">c_1b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">g_1</span> <span class="o">=</span> <span class="n">M_tl</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">x_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">,</span> <span class="n">x0_tl</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
     
-    <span class="c1"># test 3</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_2f</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="o">+</span><span class="n">eps</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c_2b</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="o">-</span><span class="n">eps</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="n">g_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_2f</span> <span class="o">-</span> <span class="n">c_2b</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
-    
-    <span class="k">return</span><span class="p">(</span><span class="n">g_0</span><span class="p">,</span> <span class="n">g_1</span><span class="p">,</span> <span class="n">g_2</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">g_0</span><span class="p">,</span> <span class="n">g_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The matrix <span class="math notranslate nohighlight">\(\textbf{G}\)</span> is:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model parameters - first guess</span>
-<span class="n">h_0</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">v_0</span> <span class="o">=</span> <span class="mi">17</span>
-<span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
-
-<span class="n">esp</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    
-    <span class="n">gradient</span> <span class="o">=</span> <span class="n">compute_cost_gradient</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="k">10</span>==0:
-        <span class="nb">print</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">gradient</span><span class="p">)</span>
-    <span class="n">h_0</span> <span class="o">-=</span> <span class="n">eps</span><span class="o">*</span><span class="n">gradient</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">v_0</span> <span class="o">-=</span> <span class="n">eps</span><span class="o">*</span><span class="n">gradient</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">g</span> <span class="o">-=</span> <span class="n">eps</span><span class="o">*</span><span class="n">gradient</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-
-<span class="c1"># store the optimized parameters</span>
-<span class="n">h_0_opt</span> <span class="o">=</span> <span class="n">h_0</span>
-<span class="n">v_0_opt</span> <span class="o">=</span> <span class="n">v_0</span>
-<span class="n">g_opt</span> <span class="o">=</span> <span class="n">g</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_0</span><span class="p">,</span> <span class="n">g_1</span> <span class="o">=</span> <span class="n">compute_cost_gradient</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="p">[</span><span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">],</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g_0</span><span class="p">,</span> <span class="n">g_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.595917824422579 (np.float64(0.7160856609135458), np.float64(1.040424794496353), np.float64(2.599286442533))
-2.6668144091133774 (np.float64(0.616226922220986), np.float64(1.032603461985282), np.float64(2.4124004249289177))
-1.906791250913185 (np.float64(0.4198281084963784), np.float64(1.025309859629786), np.float64(1.9849367207818824))
-1.4424646741988407 (np.float64(0.09603165517638734), np.float64(1.0191568214008129), np.float64(1.1732032455935681))
-1.2621100390706605 (np.float64(-0.2126604353398398), np.float64(1.0145910738675212), np.float64(0.31822758875645896))
-1.191052340580848 (np.float64(-0.3966470221201557), np.float64(1.0112598821654828), np.float64(-0.20477588404503866))
-1.1338269806347216 (np.float64(-0.4970710842742254), np.float64(1.0086169567456338), np.float64(-0.4688333277667267))
-1.0706923152502341 (np.float64(-0.5572785974102046), np.float64(1.0063455369278884), np.float64(-0.5970693383008485))
-1.0012656128618953 (np.float64(-0.5984753702428292), np.float64(1.0042916955852021), np.float64(-0.6566817484436716))
-0.9277539248808468 (np.float64(-0.6306341263675186), np.float64(1.002380770203537), np.float64(-0.6812505469400931))
-0.8518431461429351 (np.float64(-0.6587286752820998), np.float64(1.0005768958924577), np.float64(-0.6880252184274238))
-0.7744623343425892 (np.float64(-0.6853861843201525), np.float64(0.9988642307085627), np.float64(-0.686010494460565))
-0.6960158295545856 (np.float64(-0.7120870602804363), np.float64(0.9972377494811724), np.float64(-0.6798247562159465))
-0.616601232408131 (np.float64(-0.7397836708997629), np.float64(0.9956986505377685), np.float64(-0.6717051297864263))
-0.5361438203929261 (np.float64(-0.7692760096149109), np.float64(0.9942523030341377), np.float64(-0.6626064116162789))
-0.45445980661501967 (np.float64(-0.801509928433014), np.float64(0.9929078575513728), np.float64(-0.6527930565325829))
-0.3712660040624934 (np.float64(-0.8379510769211951), np.float64(0.9916793517687594), np.float64(-0.642106953867555))
-0.28613634071183625 (np.float64(-0.881356056046978), np.float64(0.9905890563675968), np.float64(-0.6299577324592576))
-0.1983598169328674 (np.float64(-0.9381485985850035), np.float64(0.9896763686700893), np.float64(-0.6147893335511231))
-0.1064595102451243 (np.float64(-1.0304141061040022), np.float64(0.9890284902498436), np.float64(-0.5905942032045308))
-0.010583692722559032 (np.float64(-0.7570513636399554), np.float64(0.9890305107992603), np.float64(-0.4347966554339859))
-0.08598134118124959 (np.float64(-0.41307871525346623), np.float64(0.9861184166208403), np.float64(-0.6208183060045932))
-0.16483444112038842 (np.float64(-0.4119480650629351), np.float64(0.9829530078121707), np.float64(-0.6170605545168669))
-0.24347054050929554 (np.float64(-0.41126017446029284), np.float64(0.9797509576781493), np.float64(-0.6147716868102504))
-0.3218301252982567 (np.float64(-0.41049930454596095), np.float64(0.9765126249186906), np.float64(-0.6127797283633968))
-0.3998995915097253 (np.float64(-0.40968882441927423), np.float64(0.9732376017801414), np.float64(-0.6108718708152022))
-0.4776724434788035 (np.float64(-0.40884709271705455), np.float64(0.969925540682226), np.float64(-0.6089876183581144))
-0.55514409886062 (np.float64(-0.40798330016988404), np.float64(0.9665761466038703), np.float64(-0.6071044572211914))
-0.6323106555864113 (np.float64(-0.4071021495317628), np.float64(0.9631891573357976), np.float64(-0.6052123981874824))
-0.709168497716121 (np.float64(-0.40620618188952906), np.float64(0.9597643330382155), np.float64(-0.6033064105314234))
-0.7857141435735415 (np.float64(-0.40529683857773446), np.float64(0.9563014510993284), np.float64(-0.6013836989478993))
-0.8619441792841334 (np.float64(-0.4043749673388275), np.float64(0.9528003036209043), np.float64(-0.5994425793087232))
-0.9378552269835834 (np.float64(-0.4034410780948072), np.float64(0.9492606962284711), np.float64(-0.597481964086527))
-1.0134439286845036 (np.float64(-0.4024954795751934), np.float64(0.9456824475901016), np.float64(-0.5955011067405036))
-1.0887069378354008 (np.float64(-0.4015383559989205), np.float64(0.9420653893213782), np.float64(-0.5934994663890247))
-1.16364091493014 (np.float64(-0.40056981202145625), np.float64(0.9384093661223503), np.float64(-0.5914766320647247))
-1.238242525376314 (np.float64(-0.3995899000972747), np.float64(0.9347142360551786), np.float64(-0.5894322784552819))
-1.3125084386941386 (np.float64(-0.3985986377116557), np.float64(0.9309798709022488), np.float64(-0.5873661391013307))
-1.3864353285337807 (np.float64(-0.3975960185627847), np.float64(0.9272061565892997), np.float64(-0.5852779895549665))
-1.4600198732201812 (np.float64(-0.396582020015368), np.float64(0.9233929936415919), np.float64(-0.583167636606019))
-1.5332587566532623 (np.float64(-0.39555660819883265), np.float64(0.9195402976665434), np.float64(-0.5810349111554647))
-1.6061486694569818 (np.float64(-0.39451974157370673), np.float64(0.9156479998534195), np.float64(-0.5788796635044835))
-1.6786863103108534 (np.float64(-0.3934713734845441), np.float64(0.9117160474861663), np.float64(-0.5767017601283619))
-1.750868387419699 (np.float64(-0.39241145402421074), np.float64(0.9077444044610417), np.float64(-0.5745010815173646))
-1.8226916200930028 (np.float64(-0.3913399314271371), np.float64(0.9037330518093967), np.float64(-0.5722775206969843))
-1.894152740413466 (np.float64(-0.3902567531292145), np.float64(0.8996819882211682), np.float64(-0.5700309821697003))
-1.965248494981536 (np.float64(-0.38916186659483376), np.float64(0.8955912305667724), np.float64(-0.5677613813033999))
-2.0359756467239434 (np.float64(-0.3880552199723386), np.float64(0.8914608144163338), np.float64(-0.5654686438697931))
-2.1063309767593927 (np.float64(-0.3869367626256004), np.float64(0.8872907945528752), np.float64(-0.563152705822767))
-2.1763112863155625 (np.float64(-0.38580644557597576), np.float64(0.8830812454791115), np.float64(-0.5608135131168979))
-2.2459133986909245 (np.float64(-0.38466422187375393), np.float64(0.8788322619153632), np.float64(-0.5584510217435223))
-2.3151341612585012 (np.float64(-0.3835100469197883), np.float64(0.8745439592864557), np.float64(-0.5560651977244868))
-2.383970447506925 (np.float64(-0.3823438787469158), np.float64(0.8702164741974272), np.float64(-0.5536560172182847))
-2.4524191591154088 (np.float64(-0.38116567827153336), np.float64(0.865849964894494), np.float64(-0.5512234666530835))
-2.5204772280589527 (np.float64(-0.3799754095207275), np.float64(0.8614446117118035), np.float64(-0.548767542882822))
-2.58814161874135 (np.float64(-0.3787730398417066), np.float64(0.8570006174988265), np.float64(-0.5462882533776359))
-2.65540933015172 (np.float64(-0.377558540095424), np.float64(0.8525182080326488), np.float64(-0.5437856163978738))
-2.7222773980422237 (np.float64(-0.37633188483827684), np.float64(0.8479976324057503), np.float64(-0.5412596612463183))
-2.7887428971230412 (np.float64(-0.37509305249401326), np.float64(0.8434391633949545), np.float64(-0.5387104284413136))
-2.854802943271772 (np.float64(-0.37384202551653534), np.float64(0.8388430978053307), np.float64(-0.5361379699624802))
-2.920454695753361 (np.float64(-0.3725787905457745), np.float64(0.83420975678834), np.float64(-0.5335423494589486))
-2.9856953594476443 (np.float64(-0.37130333855657227), np.float64(0.8295394861344008), np.float64(-0.5309236424838826))
-3.0505221870806425 (np.float64(-0.3700156650024544), np.float64(0.8248326565354347), np.float64(-0.5282819367038893))
-3.1149324814557073 (np.float64(-0.3687157699529431), np.float64(0.8200896638184574), np.float64(-0.5256173321037227))
-3.1789235976813606 (np.float64(-0.3674036582263174), np.float64(0.8153109291475502), np.float64(-0.5229299412154997))
-3.2424929453916693 (np.float64(-0.3660793395172668), np.float64(0.8104968991913708), np.float64(-0.520219889316742))
-3.3056379909549927 (np.float64(-0.3647428285189269), np.float64(0.8056480462578008), np.float64(-0.5174873146071679))
-3.3683562596679724 (np.float64(-0.36339414504085177), np.float64(0.8007648683920898), np.float64(-0.5147323683885041))
-3.4306453379298665 (np.float64(-0.3620333141212795), np.float64(0.7958478894377841), np.float64(-0.5119552152727858))
-3.4925028753937797 (np.float64(-0.3606603661344021), np.float64(0.7908976590585759), np.float64(-0.5091560333014389))
-3.553926587089988 (np.float64(-0.35927533689212865), np.float64(0.78591475272205), np.float64(-0.506335014108128))
-3.61491425551843 (np.float64(-0.3578782677408965), np.float64(0.7808997716409749), np.float64(-0.5034923630602206))
-3.675463732704646 (np.float64(-0.35646920565211015), np.float64(0.775853342675159), np.float64(-0.5006282993647027))
-3.7355729422161184 (np.float64(-0.355048203306918), np.float64(0.7707761181874773), np.float64(-0.49774305617005243))
-3.7952398811348593 (np.float64(-0.3536153191751934), np.float64(0.7656687758620606), np.float64(-0.4948368806781289))
-3.8544626219808364 (np.float64(-0.35217061758736623), np.float64(0.7605320184719488), np.float64(-0.49191003417241586))
-3.913239314584114 (np.float64(-0.3507141688003701), np.float64(0.7553665736075743), np.float64(-0.4889627921039086))
-3.971568187899912 (np.float64(-0.34924604905646195), np.float64(0.7501731933585276), np.float64(-0.485995444119558))
-4.029447551763493 (np.float64(-0.34776634063469203), np.float64(0.7449526539498486), np.float64(-0.48300829405847345))
-4.086875798580821 (np.float64(-0.34627513189557924), np.float64(0.7397057553340858), np.float64(-0.4800016599642021))
-4.143851404950907 (np.float64(-0.34477251731757086), np.float64(0.7344333207381482), np.float64(-0.47697587404611497))
-4.200372933216686 (np.float64(-0.3432585975264413), np.float64(0.7291361961646814), np.float64(-0.473931282648854))
-4.2564390329400705 (np.float64(-0.34173347931623077), np.float64(0.7238152498491246), np.float64(-0.47086824616999756))
-4.312048442298538 (np.float64(-0.3401972756621241), np.float64(0.7184713716731572), np.float64(-0.4677871389736854))
-4.367199989399316 (np.float64(-0.33865010572511345), np.float64(0.7131054725340924), np.float64(-0.4646883492883003))
-4.421892593508518 (np.float64(-0.33709209484804603), np.float64(0.7077184836718153), np.float64(-0.461572279062894))
-4.476125266192005 (np.float64(-0.335523374543234), np.float64(0.7023113559537109), np.float64(-0.45843934381739615))
-4.529897112365289 (np.float64(-0.3339440824709161), np.float64(0.696885059119623), np.float64(-0.45528997245938285))
-4.583207331250012 (np.float64(-0.33235436240941496), np.float64(0.6914405809870239), np.float64(-0.45212460709680435))
-4.6360552172346035 (np.float64(-0.33075436421583504), np.float64(0.6859789266181693), np.float64(-0.4489437027942689))
-4.688440160637019 (np.float64(-0.32914424377814555), np.float64(0.6805011174503939), np.float64(-0.4457477273461574))
-4.740361648367815 (np.float64(-0.32752416295815934), np.float64(0.675008190392834), np.float64(-0.4425371609997786))
-4.791819264491687 (np.float64(-0.3258942895253192), np.float64(0.6695011968894882), np.float64(-0.4393124961685313))
-4.842812690686439 (np.float64(-0.3242547970815579), np.float64(0.6639812019503921), np.float64(-0.43607423712166415))
-4.893341706597976 (np.float64(-0.322605864977632), np.float64(0.6584492831561484), np.float64(-0.4328228996445471))
-4.9434061900908235 (np.float64(-0.3209476782196852), np.float64(0.6529065296328795), np.float64(-0.4295590106967673))
-4.993006117393025 (np.float64(-0.3192804273678185), np.float64(0.6473540410052436), np.float64(-0.4262831080269702))
-5.042141563135995 (np.float64(-0.31760430842573406), np.float64(0.641792926325202), np.float64(-0.4229957397819728))
-5.090812700288327 (np.float64(-0.31591952272149726), np.float64(0.6362243029835568), np.float64(-0.4196974641027307))
-5.139019799984671 (np.float64(-0.31422627678057147), np.float64(0.6306492956016818), np.float64(-0.4163888486693246))
-</pre></div>
-</div>
-</div>
-</div>
-<p>This vector contains the perturbations for each of the parameters in the perturbation experiments and can be used to find the optimized model parameters, i.e.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After the optimization, the parameters are as follows:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    h_0: &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h_0_opt</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; m&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    v_0: &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v_0_opt</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; m/s&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    g: &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g_opt</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; m/s^2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After the optimization, the parameters are as follows:
-    h_0: 5.9593 m
-    v_0: 8.3911 m/s
-    g: -5.5728 m/s^2
-</pre></div>
-</div>
-</div>
-</div>
-<p>With these new parameters, the optimized model can be computed and compared with the true solution:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the optimized model</span>
-<span class="n">v_opt</span><span class="p">,</span> <span class="n">x_opt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0_opt</span><span class="p">,</span> <span class="n">v_0_opt</span><span class="p">,</span> <span class="n">g_opt</span><span class="p">,</span> <span class="n">y_O</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Solution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">x_opt</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Optimized Solution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated Solution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">x_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Measurements&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">x_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Height&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (seconds)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Height (m)&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v_true</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_opt</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Optimized Solution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_estimated</span><span class="p">,</span> <span class="s1">&#39;k.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated Solution&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">v_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_O</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">v_sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Velocity&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (seconds)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity (m/s)&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/42019af43f4eae3d28be5dcf20b831420746af25d833fa6aae58b9f99c89222c.png" src="../_images/42019af43f4eae3d28be5dcf20b831420746af25d833fa6aae58b9f99c89222c.png" />
-</div>
-</div>
-<p>As we can see from this comparison, the solution is much closer to the true solution with the optimized parameters!</p>
-</section>
-<section id="green-s-functions-in-an-iterative-process">
-<h3>Green’s Functions in an Iterative Process<a class="headerlink" href="#green-s-functions-in-an-iterative-process" title="Permalink to this headline">#</a></h3>
-<p>As we saw in the example above, the optimized parameters provided an set of parameters that yielded an improved fit to observation. However, the model did not perfectly reproduce the true solution.</p>
-<p>This approach can also be used in an iterative process to provide further improvements in the parameters. Begin by defining a function to run the Green’s function approach above that can be leveraged in an iterative process:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Greens_function_optimization</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_estimated</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">):</span>
-    <span class="c1"># compute model data differences</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_estimated</span><span class="p">,</span> <span class="n">x_estimated</span><span class="p">)</span>
-    <span class="n">y_d</span> <span class="o">=</span> <span class="n">y_O</span> <span class="o">-</span> <span class="n">data</span>
-
-    <span class="c1"># define some perturbations</span>
-    <span class="c1"># np.random.seed(3)</span>
-    <span class="n">e_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">e_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">e_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="c1"># run the perturbation experiments</span>
-    <span class="n">v_est_0</span><span class="p">,</span> <span class="n">x_est_0</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="o">+</span><span class="n">e_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="n">v_est_1</span><span class="p">,</span> <span class="n">x_est_1</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="o">+</span><span class="n">e_1</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-    <span class="n">v_est_2</span><span class="p">,</span> <span class="n">x_est_2</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="o">+</span><span class="n">e_2</span><span class="p">)</span>
-    
-    <span class="c1"># sample the perturbation experiments at the data locations</span>
-    <span class="n">data_0</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_est_0</span><span class="p">,</span> <span class="n">x_est_0</span><span class="p">)</span>
-    <span class="n">data_1</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_est_1</span><span class="p">,</span> <span class="n">x_est_1</span><span class="p">)</span>
-    <span class="n">data_2</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v_est_2</span><span class="p">,</span> <span class="n">x_est_2</span><span class="p">)</span>
-
-    <span class="c1"># compute the G matrix</span>
-    <span class="n">g0</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_0</span> <span class="o">-</span> <span class="n">data</span><span class="p">)</span><span class="o">/</span><span class="n">e_0</span>
-    <span class="n">g1</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_1</span> <span class="o">-</span> <span class="n">data</span><span class="p">)</span><span class="o">/</span><span class="n">e_1</span>
-    <span class="n">g2</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_2</span> <span class="o">-</span> <span class="n">data</span><span class="p">)</span><span class="o">/</span><span class="n">e_2</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">g0</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">])</span>
-
-    <span class="c1"># solve for the parameters</span>
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">@</span> <span class="n">G</span><span class="p">)</span>
-    <span class="n">eta_soln</span> <span class="o">=</span> <span class="n">P</span><span class="nd">@np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="nd">@y_d</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">eta_soln</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note that in the above function, the perturbations to the parameters are done stochastically rather that prescribed as in the example above.</p>
-<p>Next, we can define a loop to run this process iteratively:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the first-guess parameters and model solution</span>
-<span class="n">h_0</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">v_0</span> <span class="o">=</span> <span class="mi">17</span>
-<span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>
-<span class="n">v</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-
-<span class="c1"># run the Green&#39;s function approximation many times</span>
-<span class="n">iterations</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
-    <span class="n">eta_a</span> <span class="o">=</span> <span class="n">Greens_function_optimization</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">h_0</span> <span class="o">+=</span> <span class="n">eta_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">v_0</span> <span class="o">+=</span> <span class="n">eta_a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">g</span> <span class="o">+=</span> <span class="n">eta_a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-    <span class="n">v</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">t_model</span><span class="p">,</span> <span class="n">delta_t_model</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">v_0</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; iterations, the optimized parameters are:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    h_0: &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h_0</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; m&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    v_0: &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v_0</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; m/s&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    g: &#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; m/s^2&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After 100 iterations, the optimized parameters are:
-    h_0: 3.0000 m
-    v_0: 15.0000 m/s
-    g: -9.8000 m/s^2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.9999999999998614 19.999999999999613
 </pre></div>
 </div>
 </div>
 </div>
 <p>As we can see, applying the process many times over yields a convergence in the parameters to the true solution. This is attainable because the data was sampled exactly from the true solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">M_ad</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">y_O</span><span class="p">,</span> <span class="n">x0_tl</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="c1"># compute the number of timesteps</span>
+    <span class="n">n_timesteps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">g_tl</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># make an empty array to store the solution</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">n_timesteps</span><span class="p">))</span>
+    <span class="n">x_tl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">n_timesteps</span><span class="p">))</span>
+    
+    
+    
+    
+    <span class="c1"># start the solutions with the initial conditions</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x0_tl</span><span class="p">)):</span>
+        <span class="c1">#[x0_tl[i]] = [1, 0][x0_tl[i]]</span>
+        <span class="c1">#[x_tl[i,0]] = [1, 0][x_tl[i,0]]</span>
+        <span class="n">x_tl</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0_tl</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
+        <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="c1"># loop through the entire time array</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_timesteps</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="c1"># estimate the next velocity</span>
+        <span class="c1">#[x_tl[1,i]]   = [1, 0, 0][x_tl[1,i]]</span>
+        <span class="c1">#[x_tl[1,i+1]] = [1, 0, delta_t][x_tl[1,i+1]]</span>
+        <span class="c1">#[g_tl]        = [0, 0, 1][g_tl]</span>
+        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span> <span class="o">*</span> <span class="n">delta_t</span>
+        <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">g_tl</span>
+        
+        <span class="c1"># estimate the next position</span>
+        <span class="c1">#[x_tl[1,i]]   = [1, 0, 0, 0][x_tl[1,i]]</span>
+        <span class="c1">#[x_tl[1,i+1]] = [0, 1, 0, 0][x_tl[1,i+1]]</span>
+        <span class="c1">#[x_tl[0,i]]   = [0, 0, 1, 0][x_tl[0,i]]</span>
+        <span class="c1">#[x_tl[0,i+1]] = [1/(2*delta_t),  1/(2*delta_t), 1, 0][x_tl[0,i+1]]</span>
+        <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
+        <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta_t</span>
+
+    <span class="c1"># compute the cost function</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,))</span>
+    <span class="n">y_tl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,))</span>
+
+    <span class="c1"># two times</span>
+    <span class="n">t_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">t_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="c1"># two position measurements</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+    
+    <span class="c1"># two velocity measurements</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_0</span><span class="p">]</span>
+    <span class="n">y_tl</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_tl</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">t_1</span><span class="p">]</span>
+
+
+    <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_O</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">J_tl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_O</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y_tl</span><span class="p">))</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">x_tl</span><span class="p">,</span> <span class="n">J_tl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -1128,10 +947,9 @@ v^f(t_{i+1}) = M_i[v^f(t_{i})] &amp;= v^f(t_i) +g \Delta t
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-true-function">The True Function</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modeled-solution">The Modeled Solution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-solution">Visualizing the Solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-sensivity-of-the-model-to-parameter-perturbations">Assessing the sensivity of the model to parameter perturbations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-1-assessing-the-sensivity-of-the-model-to-parameter-perturbations">Method 1: Assessing the sensivity of the model to parameter perturbations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-linear">Forward Linear</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizing-the-model-parameters">Optimizing the model parameters</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#green-s-functions-in-an-iterative-process">Green’s Functions in an Iterative Process</a></li>
 </ul>
 </li>
 </ul>

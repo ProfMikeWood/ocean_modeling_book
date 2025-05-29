@@ -13,6 +13,10 @@ dyld[XXXXX]: Library not loaded: /usr/lib/libSystem.B.dylib
 ```
 It turned out that the processing tiles were too big for my machine despite the code compiling fine. By reducing the processing tile size, this error was alleviated.
 
+### failed to convert GOTPCREL relocation
+
+Issue: When compiling with a tile size that was too large (210 by 159), I received this error. I don't understand what cause the error but it was alleviated by reducing the tile size.
+
 ### $'\r': command not found
 
 Issue: When cloning MITgcm on a Windows system and attempting to compile in Cygwin, the new line characters may all be interpreted with as `\r\n`, which won't fly in Unix. In this case, you will get the following errors when running the `genmake2` command:
