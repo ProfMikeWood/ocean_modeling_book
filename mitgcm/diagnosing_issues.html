@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Diagnosing Issues &#8212; Numerical Ocean Modeling</title>
   
@@ -15,58 +14,56 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/diagnosing_issues';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Navigating an HPC" href="../HPC/navigating_an_HPC.html" />
     <link rel="prev" title="Boundary Conditions" href="boundary_conditions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -74,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -108,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -128,9 +137,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -140,12 +153,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -178,6 +202,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../modeling/difference_methods.html">Difference Methods</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
@@ -195,13 +224,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
@@ -212,6 +234,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
 <ul class="nav bd-sidenav">
@@ -236,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -245,14 +274,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -374,26 +403,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -437,15 +468,15 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="diagnosing-issues">
-<h1>Diagnosing Issues<a class="headerlink" href="#diagnosing-issues" title="Permalink to this headline">#</a></h1>
+<h1>Diagnosing Issues<a class="headerlink" href="#diagnosing-issues" title="Link to this heading">#</a></h1>
 <p>There’s a lot that can (and will) go sideways when compiling and running MITgcm. This page details a few common errors and some solutions to diagnose the problems.</p>
 <section id="compile-time-issues">
-<h2>Compile-Time Issues<a class="headerlink" href="#compile-time-issues" title="Permalink to this headline">#</a></h2>
+<h2>Compile-Time Issues<a class="headerlink" href="#compile-time-issues" title="Link to this heading">#</a></h2>
 <section id="missing-dylib-file">
-<h3>Missing dylib file<a class="headerlink" href="#missing-dylib-file" title="Permalink to this headline">#</a></h3>
+<h3>Missing dylib file<a class="headerlink" href="#missing-dylib-file" title="Link to this heading">#</a></h3>
 <p>Issue: When running a large model on a system with MacOS, I encountered the following error.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dyld</span><span class="p">[</span><span class="n">XXXXX</span><span class="p">]:</span> <span class="n">dyld</span> <span class="n">cache</span> <span class="p">[</span><span class="n">path</span><span class="p">]</span> <span class="ow">not</span> <span class="n">loaded</span><span class="p">:</span> <span class="n">syscall</span> <span class="n">to</span> <span class="nb">map</span> <span class="n">cache</span> <span class="n">into</span> <span class="n">shared</span> <span class="n">region</span> <span class="n">failed</span>
 <span class="n">dyld</span><span class="p">[</span><span class="n">XXXXX</span><span class="p">]:</span> <span class="n">Library</span> <span class="ow">not</span> <span class="n">loaded</span><span class="p">:</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libSystem</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">dylib</span>
@@ -454,11 +485,11 @@ document.write(`
 <p>It turned out that the processing tiles were too big for my machine despite the code compiling fine. By reducing the processing tile size, this error was alleviated.</p>
 </section>
 <section id="failed-to-convert-gotpcrel-relocation">
-<h3>failed to convert GOTPCREL relocation<a class="headerlink" href="#failed-to-convert-gotpcrel-relocation" title="Permalink to this headline">#</a></h3>
+<h3>failed to convert GOTPCREL relocation<a class="headerlink" href="#failed-to-convert-gotpcrel-relocation" title="Link to this heading">#</a></h3>
 <p>Issue: When compiling with a tile size that was too large (210 by 159), I received this error. I don’t understand what cause the error but it was alleviated by reducing the tile size.</p>
 </section>
 <section id="r-command-not-found">
-<h3>$’\r’: command not found<a class="headerlink" href="#r-command-not-found" title="Permalink to this headline">#</a></h3>
+<h3>$’\r’: command not found<a class="headerlink" href="#r-command-not-found" title="Link to this heading">#</a></h3>
 <p>Issue: When cloning MITgcm on a Windows system and attempting to compile in Cygwin, the new line characters may all be interpreted with as <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>, which won’t fly in Unix. In this case, you will get the following errors when running the <code class="docutils literal notranslate"><span class="pre">genmake2</span></code> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../../../tools/genmake2: line 8: $&#39;\r&#39;: command not found
 ../../../tools/genmake2: line 10: syntax error near unexpected token `$&#39;{\r&#39;&#39;
@@ -472,9 +503,9 @@ document.write(`
 </section>
 </section>
 <section id="run-time-issues">
-<h2>Run-Time Issues<a class="headerlink" href="#run-time-issues" title="Permalink to this headline">#</a></h2>
+<h2>Run-Time Issues<a class="headerlink" href="#run-time-issues" title="Link to this heading">#</a></h2>
 <section id="cannot-match-namelist">
-<h3>Cannot match namelist<a class="headerlink" href="#cannot-match-namelist" title="Permalink to this headline">#</a></h3>
+<h3>Cannot match namelist<a class="headerlink" href="#cannot-match-namelist" title="Link to this heading">#</a></h3>
 <p>One common run-time error results from an incorrect keyword or a typo in one of the namelist files (i.e. the files <code class="docutils literal notranslate"><span class="pre">data.*</span></code>). Consider the following error message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">At</span> <span class="n">line</span> <span class="mi">2458</span> <span class="n">of</span> <span class="n">file</span> <span class="n">diagnostics_readparms</span><span class="o">.</span><span class="k">for</span> <span class="p">(</span><span class="n">unit</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;scratch1.000000000&#39;</span><span class="p">)</span>
 <span class="n">Fortran</span> <span class="n">runtime</span> <span class="n">error</span><span class="p">:</span> <span class="n">Cannot</span> <span class="n">match</span> <span class="n">namelist</span> <span class="nb">object</span> <span class="n">name</span> <span class="n">dumpatfirst</span>
@@ -488,7 +519,7 @@ document.write(`
 <p>The above message tells you that you have an error in one of your namelist files. The good news is that it also provides lots of information about the error. From the message, we can see that the <code class="docutils literal notranslate"><span class="pre">diagnostics</span></code> package flagged the error and even that the incorrect namelist keyword is <code class="docutils literal notranslate"><span class="pre">dumpatfirst</span></code>. Further, MITgcm has output the incorrect lines to files called <code class="docutils literal notranslate"><span class="pre">scratch1.000000000*</span></code> where you can investigate the issue. To remedy this run-time error, remove the incorrect keyword and/or fix the typo.</p>
 </section>
 <section id="cannot-read-file">
-<h3>Cannot read file<a class="headerlink" href="#cannot-read-file" title="Permalink to this headline">#</a></h3>
+<h3>Cannot read file<a class="headerlink" href="#cannot-read-file" title="Link to this heading">#</a></h3>
 <p>Another common run-time error results from MITgcm looking for a file that does not exist. THis will result in the following error message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">STOP</span> <span class="n">ABNORMAL</span> <span class="n">END</span><span class="p">:</span> <span class="n">S</span><span class="o">/</span><span class="n">R</span> <span class="n">MDS_READ_SEC_YZ</span>
 </pre></div>
@@ -501,7 +532,7 @@ document.write(`
 <p>This message has arisen because a date was not correctly assgined to the obcs file. In this case, check the end of the data.exf file where the obcs periods are identified to find the issue.</p>
 </section>
 <section id="dealing-with-nans">
-<h3>Dealing with NaNs<a class="headerlink" href="#dealing-with-nans" title="Permalink to this headline">#</a></h3>
+<h3>Dealing with NaNs<a class="headerlink" href="#dealing-with-nans" title="Link to this heading">#</a></h3>
 <p>When MITgcm encounters an unexpected NaN in a computation, the NaN will propagate through all fields such that all model output will be NaN. By default, the model will continue running, carrying around all of those NaNs - no good! This behavior can be be suppressed using the <code class="docutils literal notranslate"><span class="pre">--ieee</span></code> flag at compile time, forcing the model to stop running, i.e.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">genmake2</span> <span class="o">-</span><span class="n">of</span> <span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">build_options</span><span class="o">/</span><span class="n">darwin_amd64_gfortran</span> <span class="o">-</span><span class="n">mods</span> <span class="o">../</span><span class="n">code</span> <span class="o">-</span><span class="n">mpi</span> <span class="o">--</span><span class="n">ieee</span>
 </pre></div>
@@ -513,7 +544,7 @@ document.write(`
 <p>This functionality will provide a back trace to the location in the code where the NaN was produced, which is very helpful for debugging. Note however that this will slow down the model run considerably, so it’s not recommend to compile with this option by default.</p>
 </section>
 <section id="abnormal-end-s-r-calc-r-star">
-<h3>ABNORMAL END: S/R CALC_R_STAR<a class="headerlink" href="#abnormal-end-s-r-calc-r-star" title="Permalink to this headline">#</a></h3>
+<h3>ABNORMAL END: S/R CALC_R_STAR<a class="headerlink" href="#abnormal-end-s-r-calc-r-star" title="Link to this heading">#</a></h3>
 <p>When using R_STAR coordinates, there is a potential for the model to crash if the layer thickness gets too small or too big. This is particularly prevalent when using sea ice next to the coast.</p>
 <p>When this occurs, it’s helpful to find where in the model the error occurred in order to adjust the model (e.g. potentially change the topography). The model will print a message where the error occurs, but only in the <code class="docutils literal notranslate"><span class="pre">STDERR</span></code> file for the tile. To find the tile(s) where the error happened, search for the error with <code class="docutils literal notranslate"><span class="pre">grep</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="n">CALC_R_STAR</span> <span class="n">STDERR</span><span class="o">*</span>
@@ -532,7 +563,7 @@ STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
 </div>
 </section>
 <section id="forrtl-no-such-file-or-directory">
-<h3>forrtl: no such file or directory<a class="headerlink" href="#forrtl-no-such-file-or-directory" title="Permalink to this headline">#</a></h3>
+<h3>forrtl: no such file or directory<a class="headerlink" href="#forrtl-no-such-file-or-directory" title="Link to this heading">#</a></h3>
 <p>This error can arise for a few different reasons. First, there may be issues with the MPI installation. Check that MPI is properly installation using the instructions provided in the <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a> section. This error may also arise if the the run dirctory is missing an eedata file. MITgcm does have a catch to warn the user when an eedata file is not provided - however, sometime this error arises before the eedata warning can be produced.</p>
 </section>
 </section>
@@ -563,11 +594,10 @@ STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="boundary_conditions.html"
@@ -587,10 +617,7 @@ STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -598,6 +625,7 @@ STOP in CALC_R_STAR : too SMALL rStarFac[C,W,S] !
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -640,9 +668,10 @@ By Mike Wood
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -666,8 +695,8 @@ By Mike Wood
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

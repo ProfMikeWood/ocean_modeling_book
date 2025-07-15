@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Installing a compiler with MPI &#8212; Numerical Ocean Modeling</title>
   
@@ -15,58 +14,56 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/installing_compiler_and_mpi';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Getting Familiar with Unix Environments" href="getting_familiar_with_unix_environments.html" />
     <link rel="prev" title="Getting Familiar with Jupyter Notebooks" href="getting_familiar_with_jupyter_notebooks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -74,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -108,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -128,9 +137,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -140,12 +153,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -178,6 +202,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../modeling/difference_methods.html">Difference Methods</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
@@ -195,12 +224,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
@@ -211,6 +234,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
 <ul class="nav bd-sidenav">
@@ -235,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -244,14 +274,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -373,26 +403,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -452,10 +484,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="installing-a-compiler-with-mpi">
-<h1>Installing a compiler with MPI<a class="headerlink" href="#installing-a-compiler-with-mpi" title="Permalink to this headline">#</a></h1>
+<h1>Installing a compiler with MPI<a class="headerlink" href="#installing-a-compiler-with-mpi" title="Link to this heading">#</a></h1>
 <p>To run MITgcm, we will need two cruicial components: a fortran compiler and a version of MPI. This page describes how to install these items on MacOS, Windows (using Cygwin), and Linux (Ubuntu).</p>
 <p>The compiler is used to translate the fortran MITgcm source code into code that can be run on your machine. Message Passing Interface (MPI) is a framework to allow for the parallelization of the model code, dividing portions of the model across different CPUs.</p>
 <div class="admonition warning">
@@ -463,14 +495,14 @@ document.write(`
 <p>conda environments have been reported to potentially interfere with the installation of compilers. Be sure that you do not have a conda environment activated in your terminal when following the installation instructions below i.e. you should not see <code class="docutils literal notranslate"><span class="pre">(base)</span></code> or other environments at the start of your terminal line. If one is activated, use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code> to deactivate it.</p>
 </div>
 <section id="installation-on-a-mac">
-<h2>Installation on a Mac<a class="headerlink" href="#installation-on-a-mac" title="Permalink to this headline">#</a></h2>
+<h2>Installation on a Mac<a class="headerlink" href="#installation-on-a-mac" title="Link to this heading">#</a></h2>
 <p>On a Mac, installation of the compiler and MPI are made considerably easier using the homebrew package manager.</p>
 <section id="install-homebrew">
-<h3>Install Homebrew<a class="headerlink" href="#install-homebrew" title="Permalink to this headline">#</a></h3>
+<h3>Install Homebrew<a class="headerlink" href="#install-homebrew" title="Link to this heading">#</a></h3>
 <p>If you haven’t already done so, install homebrew following the instruction at <a class="reference external" href="https://brew.sh/">https://brew.sh/</a>. This will involve copying the command from the main page of homebrew and running it in your Terminal. Then, when the installation is complete, be sure to run the final three lines that are output from the installation script.</p>
 </section>
 <section id="install-gcc">
-<h3>Install gcc<a class="headerlink" href="#install-gcc" title="Permalink to this headline">#</a></h3>
+<h3>Install gcc<a class="headerlink" href="#install-gcc" title="Link to this heading">#</a></h3>
 <p>Next, use homebrew to install gcc</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">gcc</span>
 </pre></div>
@@ -495,14 +527,14 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 <section id="install-netcdf">
-<h3>Install NetCDF<a class="headerlink" href="#install-netcdf" title="Permalink to this headline">#</a></h3>
+<h3>Install NetCDF<a class="headerlink" href="#install-netcdf" title="Link to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">hdf5</span>
 <span class="n">brew</span> <span class="n">install</span> <span class="n">netcdf</span>
 </pre></div>
 </div>
 </section>
 <section id="install-ompi">
-<h3>Install OMPI<a class="headerlink" href="#install-ompi" title="Permalink to this headline">#</a></h3>
+<h3>Install OMPI<a class="headerlink" href="#install-ompi" title="Link to this heading">#</a></h3>
 <p>Next, we will install MPI to leverage multiple CPUs to run our model. Again, we can use the distribution via homebrew:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">openmpi</span>
 </pre></div>
@@ -529,7 +561,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </pre></div>
 </div>
 <section id="checking-your-mpi-installation">
-<h4>Checking your MPI Installation<a class="headerlink" href="#checking-your-mpi-installation" title="Permalink to this headline">#</a></h4>
+<h4>Checking your MPI Installation<a class="headerlink" href="#checking-your-mpi-installation" title="Link to this heading">#</a></h4>
 <p>To check your MPI installation and your paths, open up a new terminal and use the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">4</span> <span class="n">uname</span>
 </pre></div>
@@ -545,7 +577,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </section>
 </section>
 <section id="installation-on-a-windows-using-wsl">
-<h2>Installation on a Windows (using WSL)<a class="headerlink" href="#installation-on-a-windows-using-wsl" title="Permalink to this headline">#</a></h2>
+<h2>Installation on a Windows (using WSL)<a class="headerlink" href="#installation-on-a-windows-using-wsl" title="Link to this heading">#</a></h2>
 <p>One way to install a fortran compiler on a Windows machine is using the Windows Subsystem for Linux - a Linux distribution for Windows.</p>
 <p>To install WSL, follow the instructions <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install">HERE</a>, opening a Powershell terminal from your start menu and running the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="o">--</span><span class="n">install</span>
@@ -559,14 +591,14 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 <section id="installation-on-a-windows-using-cygwin">
-<h2>Installation on a Windows (using Cygwin)<a class="headerlink" href="#installation-on-a-windows-using-cygwin" title="Permalink to this headline">#</a></h2>
+<h2>Installation on a Windows (using Cygwin)<a class="headerlink" href="#installation-on-a-windows-using-cygwin" title="Link to this heading">#</a></h2>
 <p>One way to install a fortran compiler on a Windows machine is using the Cygwin terminal.</p>
 <section id="install-cygwin-with-required-packages">
-<h3>Install Cygwin with required packages<a class="headerlink" href="#install-cygwin-with-required-packages" title="Permalink to this headline">#</a></h3>
+<h3>Install Cygwin with required packages<a class="headerlink" href="#install-cygwin-with-required-packages" title="Link to this heading">#</a></h3>
 <p>If you haven’t already done so, install Cygwin by running the executable on the <a class="reference external" href="https://www.cygwin.com/install.html">Cygwin installation page</a>. All of the default installation options are typically fine.</p>
 <p>For the mirroring site, choose a site near where you are located. I chose <a class="reference external" href="http://mirrors.kernels.org">mirrors.kernels.org</a> because it is located in California but you may like to choose a different option depending on your location.</p>
 <p>When it comes to the package selection screen, add the list of packages in the following table. The version numbers were the most recent up-to-date files when attemped in Fall 2024.</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Package</p></th>
 <th class="head"><p>Version</p></th>
@@ -617,6 +649,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </tr>
 </tbody>
 </table>
+</div>
 <p>To add a package to the installation list, choose “Full” from the drop-down in the upper-left corner. Then, use the search feature to find the package. If the line for the package says “Skip”, use drop-down to choose the most recent (non-Test) version. After you have selected the packages, they should all show up under the “Pending” tab. After verifying all packages will be installed, choose next and continue clicking through the installation.</p>
 <p>At this point, you will be able to run MITgcm without MPI.</p>
 <div class="admonition-cygwin-note-1 admonition">
@@ -629,15 +662,15 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 <section id="configuring-mpi-on-cygwin">
-<h3>Configuring MPI on Cygwin<a class="headerlink" href="#configuring-mpi-on-cygwin" title="Permalink to this headline">#</a></h3>
+<h3>Configuring MPI on Cygwin<a class="headerlink" href="#configuring-mpi-on-cygwin" title="Link to this heading">#</a></h3>
 <p>Under construction.</p>
 </section>
 </section>
 <section id="installation-on-linux-ubuntu">
-<h2>Installation on Linux (Ubuntu)<a class="headerlink" href="#installation-on-linux-ubuntu" title="Permalink to this headline">#</a></h2>
+<h2>Installation on Linux (Ubuntu)<a class="headerlink" href="#installation-on-linux-ubuntu" title="Link to this heading">#</a></h2>
 <p>On Ubuntu, the installation is straight-forward using <code class="docutils literal notranslate"><span class="pre">apt</span></code>.</p>
 <section id="install-the-compiler">
-<h3>Install the Compiler<a class="headerlink" href="#install-the-compiler" title="Permalink to this headline">#</a></h3>
+<h3>Install the Compiler<a class="headerlink" href="#install-the-compiler" title="Link to this heading">#</a></h3>
 <p>To install the compiler tools, use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gcc</span> 
 <span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gfortran</span>
@@ -646,7 +679,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 <section id="install-mpi">
-<h3>Install MPI<a class="headerlink" href="#install-mpi" title="Permalink to this headline">#</a></h3>
+<h3>Install MPI<a class="headerlink" href="#install-mpi" title="Link to this heading">#</a></h3>
 <p>To install the MPI tools, use the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">openmpi</span><span class="o">-</span><span class="nb">bin</span> <span class="n">openmpi</span><span class="o">-</span><span class="n">doc</span> <span class="n">libopenmpi</span><span class="o">-</span><span class="n">dev</span>
 </pre></div>
@@ -654,10 +687,10 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </section>
 </section>
 <section id="installation-on-linux-arch-linux-or-arch-based-distros">
-<h2>Installation on Linux (Arch Linux or Arch-based distros)<a class="headerlink" href="#installation-on-linux-arch-linux-or-arch-based-distros" title="Permalink to this headline">#</a></h2>
+<h2>Installation on Linux (Arch Linux or Arch-based distros)<a class="headerlink" href="#installation-on-linux-arch-linux-or-arch-based-distros" title="Link to this heading">#</a></h2>
 <p>On Arch-based Linux distributions, the installation is straight-forward using the <code class="docutils literal notranslate"><span class="pre">pacman</span></code> package manager. However, on Arch-based systems, the installation is a bit more involved. Here are the steps to install MITgcm on Arch-based systems.</p>
 <section id="install-compiler">
-<h3>Install Compiler<a class="headerlink" href="#install-compiler" title="Permalink to this headline">#</a></h3>
+<h3>Install Compiler<a class="headerlink" href="#install-compiler" title="Link to this heading">#</a></h3>
 <p>To compile MITgcm, you need a Fortran compiler. Download the GNU Compiler Collection package <a class="reference external" href="https://archlinux.org/packages/?name=gcc">
 <code class="docutils literal notranslate"><span class="pre">gcc</span></code></a> and the Fortran front-end <a class="reference external" href="https://archlinux.org/packages/?name=gcc-fortran">
 <code class="docutils literal notranslate"><span class="pre">gcc-fortran</span></code></a>.</p>
@@ -666,7 +699,7 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 <section id="id1">
-<h3>Install NetCDF<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h3>Install NetCDF<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>MITgcm uses the NetCDF library to read and write data. Download the NetCDF package <a class="reference external" href="https://archlinux.org/packages/?name=netcdf">
 <code class="docutils literal notranslate"><span class="pre">netcdf</span></code></a>, the Fortran interface <a class="reference external" href="https://archlinux.org/packages/?name=netcdf-fortran">
 <code class="docutils literal notranslate"><span class="pre">netcdf-fortran</span></code></a>, and the HDF5 library <a class="reference external" href="https://archlinux.org/packages/?name=hdf5">
@@ -676,14 +709,14 @@ export LIBRARY_PATH=$LIBRARY_PATH:/Library/Developer/CommandLineTools/SDKs/MacOS
 </div>
 </section>
 <section id="install-openmpi">
-<h3>Install OpenMPI<a class="headerlink" href="#install-openmpi" title="Permalink to this headline">#</a></h3>
+<h3>Install OpenMPI<a class="headerlink" href="#install-openmpi" title="Link to this heading">#</a></h3>
 <p>MITgcm uses the OpenMPI library for parallel computing. Download the OpenMPI package <a class="reference external" href="https://archlinux.org/packages/?name=openmpi">
 <code class="docutils literal notranslate"><span class="pre">openmpi</span></code></a>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pacman<span class="w"> </span>-S<span class="w"> </span>openmpi<span class="w"> </span>
 </pre></div>
 </div>
 <section id="id2">
-<h4>Checking your MPI Installation<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<h4>Checking your MPI Installation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p>To check your MPI installation and your paths, open up a new terminal and use the following command:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>uname
 </pre></div>
@@ -725,11 +758,10 @@ Linux
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="getting_familiar_with_jupyter_notebooks.html"
@@ -749,10 +781,7 @@ Linux
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -760,6 +789,7 @@ Linux
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -818,9 +848,10 @@ By Mike Wood
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -844,8 +875,8 @@ By Mike Wood
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Difference Methods &#8212; Numerical Ocean Modeling</title>
   
@@ -15,60 +14,58 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'modeling/difference_methods';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Started with MITgcm" href="../mitgcm/getting_started_with_MITgcm.html" />
+    <link rel="next" title="Overview" href="../ecco/ecco_overview.html" />
     <link rel="prev" title="Model Grids" href="model_grids.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -76,19 +73,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -110,12 +111,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -130,9 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -142,12 +155,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -180,6 +204,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="model_grids.html">Model Grids</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Difference Methods</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
@@ -197,12 +226,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
@@ -213,6 +236,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
 <ul class="nav bd-sidenav">
@@ -237,7 +267,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -246,14 +276,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -375,26 +405,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -451,10 +483,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="difference-methods">
-<h1>Difference Methods<a class="headerlink" href="#difference-methods" title="Permalink to this headline">#</a></h1>
+<h1>Difference Methods<a class="headerlink" href="#difference-methods" title="Link to this heading">#</a></h1>
 <p><strong>Overview:</strong></p>
 <p>In this notebook, we will start to consider difference methods - a way to numerically estimate derivatives. These methods provide us with recipes to construct numerical algorithms that can be used to solve differential equations.</p>
 <p><strong>Import modules</strong></p>
@@ -468,11 +500,11 @@ document.write(`
 </div>
 </div>
 <section id="a-first-example-a-toss-up">
-<h2>A First Example: A Toss Up<a class="headerlink" href="#a-first-example-a-toss-up" title="Permalink to this headline">#</a></h2>
+<h2>A First Example: A Toss Up<a class="headerlink" href="#a-first-example-a-toss-up" title="Link to this heading">#</a></h2>
 <p>As a first example, we will begin by considering the trajectory of a ball that is tossed in the air. When the ball is in the air, it is only subjected to gravity (neglecting frictional drag forces for simplicity). The equation describing the ball’s trajectory is <span class="math notranslate nohighlight">\(y(t)\)</span>.</p>
 <p>In this scenario, we know that the acceleration of the object is given by the gravitational constant <span class="math notranslate nohighlight">\(g\)</span> here on Earth:</p>
 <section id="differential-equation">
-<h3>Differential Equation<a class="headerlink" href="#differential-equation" title="Permalink to this headline">#</a></h3>
+<h3>Differential Equation<a class="headerlink" href="#differential-equation" title="Link to this heading">#</a></h3>
 <p>The differential equation is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -482,7 +514,7 @@ y''(t) = -g
 <p>If we’d like to predict the full trajectory of our ball in the air, we also need to have the initial conditions for our toss - where it starts and how fast we throw it.</p>
 </section>
 <section id="initial-conditions">
-<h3>Initial Conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline">#</a></h3>
+<h3>Initial Conditions<a class="headerlink" href="#initial-conditions" title="Link to this heading">#</a></h3>
 <p>The initial conditions are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -494,14 +526,14 @@ y(0) &amp;= 0
 <p>where <span class="math notranslate nohighlight">\(v_0\)</span> is the initial velocity and <span class="math notranslate nohighlight">\(0\)</span> represents the starting height of the ball (your hand).</p>
 </section>
 <section id="an-analytical-solution">
-<h3>An Analytical Solution<a class="headerlink" href="#an-analytical-solution" title="Permalink to this headline">#</a></h3>
+<h3>An Analytical Solution<a class="headerlink" href="#an-analytical-solution" title="Link to this heading">#</a></h3>
 <p>In this simple example, we are able to compute an “analytical solution” for the trajectory for this ball toss over time. That is, using rules of calculus, we can write down an equation that describes the trajectory:</p>
 <div class="math notranslate nohighlight">
 \[
 y = -\frac{g}{2}t^2 + v_0t
 \]</div>
 <section id="sanity-check">
-<h4>🤔 Sanity Check<a class="headerlink" href="#sanity-check" title="Permalink to this headline">#</a></h4>
+<h4>🤔 Sanity Check<a class="headerlink" href="#sanity-check" title="Link to this heading">#</a></h4>
 <p>Check that this analytical solution does indeed satisfy the differential equation and initial conditions above.</p>
 <p>Let’s create a quick plot of this trajectory. Start by computing the trajectory based on the above solution:</p>
 <div class="cell docutils container">
@@ -549,7 +581,7 @@ y = -\frac{g}{2}t^2 + v_0t
 </section>
 </section>
 <section id="a-numerical-solution">
-<h3>A Numerical Solution<a class="headerlink" href="#a-numerical-solution" title="Permalink to this headline">#</a></h3>
+<h3>A Numerical Solution<a class="headerlink" href="#a-numerical-solution" title="Link to this heading">#</a></h3>
 <p>In this simple example, we can write an analytical solution describing the whole trajectory through time. However, what if we didn’t know how to do that? In other words, what if we couldn’t write down a specific equation? One alternative is to track the ball in the air through time, using knowledge of the ball’s position and speed along with the physics of the situation to determine the trajectory.</p>
 <p>From calculus, we know that the derivative of an equation represents a change in the value over a given interval (time in this case). We could approximate this as follows:</p>
 <div class="math notranslate nohighlight">
@@ -569,7 +601,7 @@ y'(t+\Delta t) \approx y'(t) + \frac{d^2y}{dt^2} \Delta t
 \]</div>
 <p>Let’s see if we can use this information to chart out a trajectory.</p>
 <section id="solution-at-time-t-delta-t">
-<h4>Solution at time <span class="math notranslate nohighlight">\(t = \Delta t\)</span><a class="headerlink" href="#solution-at-time-t-delta-t" title="Permalink to this headline">#</a></h4>
+<h4>Solution at time <span class="math notranslate nohighlight">\(t = \Delta t\)</span><a class="headerlink" href="#solution-at-time-t-delta-t" title="Link to this heading">#</a></h4>
 <p>At time <span class="math notranslate nohighlight">\(t=\Delta t\)</span>, the above equations give us</p>
 <div class="math notranslate nohighlight">
 \[
@@ -617,7 +649,7 @@ y'(\Delta t) \approx y'(0) + \frac{d^2y}{dt^2} \Delta t = v_0 -g \Delta t
 </div>
 </section>
 <section id="solution-at-time-t-2-delta-t">
-<h4>Solution at time <span class="math notranslate nohighlight">\(t = 2\Delta t\)</span><a class="headerlink" href="#solution-at-time-t-2-delta-t" title="Permalink to this headline">#</a></h4>
+<h4>Solution at time <span class="math notranslate nohighlight">\(t = 2\Delta t\)</span><a class="headerlink" href="#solution-at-time-t-2-delta-t" title="Link to this heading">#</a></h4>
 <p>At time <span class="math notranslate nohighlight">\(t=2\Delta t\)</span>, we can take one additional step from the location we just solved for:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -665,7 +697,7 @@ y'(2\Delta t) \approx y'(\Delta t) + \frac{d^2y}{dt^2} \Delta t = v_1 -g \Delta 
 </div>
 </section>
 <section id="solution-at-all-times">
-<h4>Solution at all times<a class="headerlink" href="#solution-at-all-times" title="Permalink to this headline">#</a></h4>
+<h4>Solution at all times<a class="headerlink" href="#solution-at-all-times" title="Link to this heading">#</a></h4>
 <p>Leveraging the approach above, we can generalize the algorithm with a loop:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -719,7 +751,7 @@ y'(2\Delta t) \approx y'(\Delta t) + \frac{d^2y}{dt^2} \Delta t = v_1 -g \Delta 
 </div>
 </section>
 <section id="question-for-consideration">
-<h4>🤔 Question for consideration:<a class="headerlink" href="#question-for-consideration" title="Permalink to this headline">#</a></h4>
+<h4>🤔 Question for consideration:<a class="headerlink" href="#question-for-consideration" title="Link to this heading">#</a></h4>
 <p>Shoot! It looks like we’ve over shot the solution. Why?</p>
 <p>Let’s try again with a different approximation to the derivative. What if we try to anticipate what the derivative will be on the upcoming timestep to “get ahead” of the accumulated errors? Let’s see:</p>
 <div class="cell docutils container">
@@ -773,7 +805,7 @@ y'(2\Delta t) \approx y'(\Delta t) + \frac{d^2y}{dt^2} \Delta t = v_1 -g \Delta 
 </div>
 </section>
 <section id="id1">
-<h4>🤔 Question for consideration:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<h4>🤔 Question for consideration:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <p>Shoot! It looks like we’ve now undershot the solution. Why?</p>
 <p>Any other ideas? Maybe split the difference?</p>
 <div class="cell docutils container">
@@ -832,10 +864,10 @@ y'(2\Delta t) \approx y'(\Delta t) + \frac{d^2y}{dt^2} \Delta t = v_1 -g \Delta 
 </section>
 </section>
 <section id="difference-methods-for-derivatives">
-<h2>Difference Methods for Derivatives<a class="headerlink" href="#difference-methods-for-derivatives" title="Permalink to this headline">#</a></h2>
+<h2>Difference Methods for Derivatives<a class="headerlink" href="#difference-methods-for-derivatives" title="Link to this heading">#</a></h2>
 <p>In the examples above, we saw a few different ways we could approximate the derivative. Let’s review these approximations here:</p>
 <section id="forward-difference">
-<h3>Forward Difference<a class="headerlink" href="#forward-difference" title="Permalink to this headline">#</a></h3>
+<h3>Forward Difference<a class="headerlink" href="#forward-difference" title="Link to this heading">#</a></h3>
 <p>A forward difference uses estimates of the solution at a time now and one time step in the future to estimate the derivative:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -843,7 +875,7 @@ y'(t) \approx \frac{y(t+\Delta t) - y(t)}{\Delta t}
 \]</div>
 </section>
 <section id="backward-difference">
-<h3>Backward Difference<a class="headerlink" href="#backward-difference" title="Permalink to this headline">#</a></h3>
+<h3>Backward Difference<a class="headerlink" href="#backward-difference" title="Link to this heading">#</a></h3>
 <p>A backward difference uses estimates of the solution at a time now and one time step in the <em>past</em> to estimate the derivative:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -851,20 +883,20 @@ y'(t) \approx \frac{y(t) - y(t-\Delta t)}{\Delta t}
 \]</div>
 </section>
 <section id="centered-difference">
-<h3>Centered Difference<a class="headerlink" href="#centered-difference" title="Permalink to this headline">#</a></h3>
+<h3>Centered Difference<a class="headerlink" href="#centered-difference" title="Link to this heading">#</a></h3>
 <p>A centered difference uses estimates of the solution one time step in the future and one time step in the past to estimate the derivative:</p>
 <div class="math notranslate nohighlight">
 \[
 y'(t) \approx \frac{y(t+\Delta t) - y(t-\Delta t)}{2\Delta t}
 \]</div>
 <section id="id2">
-<h4>🤔 Sanity Check<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<h4>🤔 Sanity Check<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
 <p>In the solution above, we averaged the forward and backwards velocities to obtain a better solution - this is equivalent to the centered difference. Show that the centered difference is equivalent to averaging the forward and backward differences.</p>
 </section>
 </section>
 </section>
 <section id="difference-methods-for-second-derivatives">
-<h2>Difference Methods for Second Derivatives<a class="headerlink" href="#difference-methods-for-second-derivatives" title="Permalink to this headline">#</a></h2>
+<h2>Difference Methods for Second Derivatives<a class="headerlink" href="#difference-methods-for-second-derivatives" title="Link to this heading">#</a></h2>
 <p>In the examples above, we explicitly solved for velocity through time by considering the gravitational acceleration. However, we could also approximate the second derivative in the same way. Consider the forward difference as applied to the second derivative:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -903,11 +935,10 @@ y''(t) \approx \frac{y(t+\Delta t) - 2y(t) + y(t-\Delta t)}{\Delta t^2}
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="model_grids.html"
@@ -919,18 +950,15 @@ y''(t) \approx \frac{y(t+\Delta t) - 2y(t) + y(t-\Delta t)}{\Delta t^2}
       </div>
     </a>
     <a class="right-next"
-       href="../mitgcm/getting_started_with_MITgcm.html"
+       href="../ecco/ecco_overview.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started with MITgcm</p>
+        <p class="prev-next-title">Overview</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -938,6 +966,7 @@ y''(t) \approx \frac{y(t+\Delta t) - 2y(t) + y(t-\Delta t)}{\Delta t^2}
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -993,9 +1022,10 @@ By Mike Wood
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1019,8 +1049,8 @@ By Mike Wood
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
