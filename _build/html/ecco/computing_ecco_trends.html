@@ -1,0 +1,962 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Computing Trends in ECCO Output &#8212; Numerical Ocean Modeling</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ecco/computing_ecco_trends';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting Started with MITgcm" href="../mitgcm/getting_started_with_MITgcm.html" />
+    <link rel="prev" title="Visualizing ECCO Model Output" href="visualizing_ecco_output.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Numerical Ocean Modeling
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/difference_methods.html">Difference Methods</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Computing Trends in ECCO Output</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_grid.html">Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/bathymetry.html">Bathymetry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/external_conditions.html">External Forcing Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../state_estimation/greens_function.html">Green’s Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fecco/computing_ecco_trends.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ecco/computing_ecco_trends.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Computing Trends in ECCO Output</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-for-this-notebook">Data for this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-visualizing-to-analyzing">From visualizing to analyzing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-change-in-northern-hemisphere-sea-ice">Example: Change in Northern Hemisphere Sea Ice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-areas">Computing areas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-ice-area-in-the-northern-hemisphere">Sea Ice Area in the Northern Hemisphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-trends">Computing Trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-trends">Interpreting Trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-yourself">🤔 Try it yourself</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="computing-trends-in-ecco-output">
+<h1>Computing Trends in ECCO Output<a class="headerlink" href="#computing-trends-in-ecco-output" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>In this notebook, we will look at a simple way tp analyze ocean model output - computing a trend. As in the previous notebook, we will use output from the ECCO Ocean State Estimate (Version 4).</p>
+</section>
+<section id="import-modules">
+<h2>Import Modules<a class="headerlink" href="#import-modules" title="Link to this heading">#</a></h2>
+<p>First, import the modules required to access data from netCDF files and create plots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">import</span> <span class="nn">cmocean.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After the modules are loaded in, establish a path to your data directory for this clas:</p>
+</section>
+<section id="data-for-this-notebook">
+<h2>Data for this notebook<a class="headerlink" href="#data-for-this-notebook" title="Link to this heading">#</a></h2>
+<p>In this notebook, we will use sea ice data from the Versions 4 state estimate. To download the data, you can use the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/tools/Downloading%20ECCO%20Data.ipynb">Downloading ECCO Data</a> notebook available on the Github for this book. Use the following settings to download the pertinent data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;Version4&#39;</span>
+<span class="n">release</span> <span class="o">=</span> <span class="s1">&#39;Release4&#39;</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="s1">&#39;interp_monthly&#39;</span>
+<span class="n">var_name</span> <span class="o">=</span> <span class="s1">&#39;SIarea&#39;</span>
+<span class="n">start_year</span> <span class="o">=</span> <span class="mi">1992</span>
+<span class="n">end_year</span> <span class="o">=</span> <span class="mi">2017</span>
+</pre></div>
+</div>
+<p>Once the data is downloaded, identify the location of your data folder here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a path to a data folder</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="s1">&#39;../../ocean_modeling_book_data/data&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="from-visualizing-to-analyzing">
+<h2>From visualizing to analyzing<a class="headerlink" href="#from-visualizing-to-analyzing" title="Link to this heading">#</a></h2>
+<p>In the previous notebook, we’ve focused on visualizing model output - first in space and then in time with timeseries and Hövmoller diagrams. But in all of this visualization, we have not done any real computation. Here, we’ll start to look at ways to <em>quantify</em> change, starting with investigating trends.</p>
+<section id="example-change-in-northern-hemisphere-sea-ice">
+<h3>Example: Change in Northern Hemisphere Sea Ice<a class="headerlink" href="#example-change-in-northern-hemisphere-sea-ice" title="Link to this heading">#</a></h3>
+<p>In this example, we’ll investigate changes in sea ice in the Arctic ocean. Let’s take a look at one of the data fields using the plotting routines from the previous notebook:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a path to a sea ice file</span>
+<span class="n">seaice_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span><span class="s1">&#39;ECCO&#39;</span><span class="p">,</span><span class="s1">&#39;Version4&#39;</span><span class="p">,</span><span class="s1">&#39;Release4&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;interp_monthly&#39;</span><span class="p">,</span><span class="s1">&#39;SIarea&#39;</span><span class="p">,</span><span class="s1">&#39;SIarea_2015_01.nc&#39;</span><span class="p">)</span>
+
+<span class="c1"># read in the sea ice data at along with the</span>
+<span class="c1"># latitude and longitude information </span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">seaice_file</span><span class="p">)</span>
+<span class="n">longitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">][:])</span>
+<span class="n">latitude</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">][:])</span>
+<span class="n">SIarea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;SIarea&#39;</span><span class="p">][:])</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># subset sea ice to the first time step</span>
+<span class="n">SIarea</span> <span class="o">=</span> <span class="n">SIarea</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+<span class="c1"># create a figure object</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Robinson</span><span class="p">())</span>
+
+<span class="c1"># plot the seaice</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">SIarea</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">ice</span><span class="p">,</span>
+               <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39; sea ice area (m$^2$) / grid cell area (m$^2$)&#39;</span><span class="p">)</span>
+
+<span class="c1"># add coastlines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;silver&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+
+<span class="c1"># format the axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sea Ice Fraction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/65063f55debea096ada1ddf6518ef9cf542b6cf29bf19a32216b1bee324bcad7.png" src="../_images/65063f55debea096ada1ddf6518ef9cf542b6cf29bf19a32216b1bee324bcad7.png" />
+</div>
+</div>
+<p>In looking at the units of sea ice above, it’s clear that we need to multiply each grid cell by it’s area to retrieve the total area of the sea ice since each cell gives the fraction covered by sea ice. Conceptually, it’s easy to do - just multiply the fraction by the cell area. But what’s the cell area? This is a little trickier since our data is given in longitude-latitude coordinates. Further, the area of cells at the equator are larger than those at the poles. We can check this out in a simple plot of the globe with grid lines:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">mticker</span>
+
+<span class="c1"># make a figure object with projection</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_latitude</span> <span class="o">=</span> <span class="mi">30</span><span class="p">))</span>
+
+<span class="c1"># add coastlines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;silver&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+
+<span class="c1"># add grid lines</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">xlocator</span> <span class="o">=</span> <span class="n">mticker</span><span class="o">.</span><span class="n">FixedLocator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">ylocator</span> <span class="o">=</span> <span class="n">mticker</span><span class="o">.</span><span class="n">FixedLocator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="c1"># format the axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/958029cec61bdb61b3762d676a9b2a6173f2bf5676c9ff331370241d58fa24c9.png" src="../_images/958029cec61bdb61b3762d676a9b2a6173f2bf5676c9ff331370241d58fa24c9.png" />
+</div>
+</div>
+</section>
+<section id="computing-areas">
+<h3>Computing areas<a class="headerlink" href="#computing-areas" title="Link to this heading">#</a></h3>
+<p>If we assume the Earth is a perfect sphere with radius <span class="math notranslate nohighlight">\(R=\)</span> 6,371 km, it’s fairly straight-forward to compute the area of each cell if we think of each cell as taking up a given proportion of the sphere. On one hand, the area of a vertical latitude band between <span class="math notranslate nohighlight">\(\phi_1\)</span> and <span class="math notranslate nohighlight">\(\phi_0\)</span> has area</p>
+<div class="math notranslate nohighlight">
+\[
+A_{\text{Longitude Band}} = A_{Earth} \left(\frac{\phi_1 - \phi_0}{2\pi}\right)  = 2 R^2 (\phi_1 - \phi_0)
+\]</div>
+<p>Further, a little trigonometry shows the the area of a portion of the sphere between the equator and a given latitude (<span class="math notranslate nohighlight">\(\theta\)</span>) is scaled by the <em>sin</em> of the latitude. Thus, in a given latitude band between <span class="math notranslate nohighlight">\(\theta_1\)</span> and <span class="math notranslate nohighlight">\(\theta_0\)</span>, the fractional area is</p>
+<div class="math notranslate nohighlight">
+\[
+A_{\text{Latitude Band}} = A_{Earth}\left(\frac{\sin (\theta_1) - \sin (\theta_0)}{2}\right)
+\]</div>
+<p>Putting these pieces together, we can compute the surface area of a given area of a sphere as</p>
+<div class="math notranslate nohighlight">
+\[
+A_{patch} = R^2 (\phi_1 - \phi_0) (\sin (\theta_1) - \sin (\theta_0)) 
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the lon and lat bounds</span>
+<span class="n">lon_step</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">lat_step</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">lon_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mf">180.01</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">)</span>
+<span class="n">lat_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mf">90.01</span><span class="p">,</span> <span class="n">lon_step</span><span class="p">)</span>
+
+<span class="c1"># convert to radians</span>
+<span class="n">lon_bounds_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lon_bounds</span><span class="p">)</span>
+<span class="n">lat_bounds_rad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat_bounds</span><span class="p">)</span>
+
+<span class="c1"># make an array to store the area in each cell</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mi">6371000</span>
+<span class="n">Area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">360</span><span class="p">,</span> <span class="mi">720</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lon_bounds</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lat_bounds</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">Area</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">lon_bounds_rad</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">lon_bounds_rad</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> \
+        <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat_bounds_rad</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat_bounds_rad</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>As with any formula, it’s a good idea to sanity check your results. Here, we know the each of a sphere should be <span class="math notranslate nohighlight">\(4\pi R^2\)</span>, so let’s check the numbers line up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sanity check</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Area</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>510064471909788.3
+510064471909788.25
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looks good! We can even plot the area to be sure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a plot of the Area with a colorbar</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">Area</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f226fc74b2f0bd00602def6e7b3baf2c856339fbd129dc7d05e0002f0233500f.png" src="../_images/f226fc74b2f0bd00602def6e7b3baf2c856339fbd129dc7d05e0002f0233500f.png" />
+</div>
+</div>
+<p>As expected, the area is greater at the equator than the poles. Ok, now onto the trends:</p>
+</section>
+<section id="sea-ice-area-in-the-northern-hemisphere">
+<h3>Sea Ice Area in the Northern Hemisphere<a class="headerlink" href="#sea-ice-area-in-the-northern-hemisphere" title="Link to this heading">#</a></h3>
+<p>Equipped with our area function, we are now ready to compute the total sea ice area in the northern hemisphere through time. Let’s make a list of files first, and then loop through them to compute the area:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list to contain the file names</span>
+<span class="n">file_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># loop through the 12 months</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1992</span><span class="p">,</span><span class="mi">2018</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">13</span><span class="p">):</span>
+        <span class="n">file_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;SIarea_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_&#39;</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">{:02d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">month</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.nc&#39;</span><span class="p">)</span>
+
+<span class="c1"># print out the file names (if desired)</span>
+<span class="c1"># print(file_list)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, loop through each file in the list, storing the total area of the sea ice in an array for plotting:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list to store the temperature values</span>
+<span class="n">si_area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">),))</span>
+
+<span class="c1"># loop through each file</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">)):</span>
+    
+    <span class="c1"># identify path to the data file</span>
+    <span class="n">month_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span><span class="s1">&#39;ECCO&#39;</span><span class="p">,</span><span class="s1">&#39;Version4&#39;</span><span class="p">,</span><span class="s1">&#39;Release4&#39;</span><span class="p">,</span>
+                          <span class="s1">&#39;interp_monthly&#39;</span><span class="p">,</span><span class="s1">&#39;SIarea&#39;</span><span class="p">,</span><span class="n">file_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="c1"># read in the data </span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">month_file</span><span class="p">)</span>
+    <span class="n">SIarea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;SIarea&#39;</span><span class="p">][:])</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># subset to first timestep</span>
+    <span class="n">SIarea</span> <span class="o">=</span> <span class="n">SIarea</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:]</span>
+
+    <span class="c1"># mask points in the southern ocean</span>
+    <span class="n">SIarea</span><span class="p">[:</span><span class="mi">180</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># compute the total sea ice area</span>
+    <span class="n">total_area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">SIarea</span><span class="o">*</span><span class="n">Area</span><span class="p">)</span>
+
+    <span class="c1"># add the computed area to the list</span>
+    <span class="c1"># the list of temperatures</span>
+    <span class="n">si_area</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_area</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we’ve got our sea ice area timeseries, let’s make a plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">si_area</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Northern Hemisphere Sea Ice Area&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sea ice area (m$^2$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Month since 1992/1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9871f2026e5527b7e3d2c0c276b1f33f3bb146c8ea5821a1d2f402f574988ec8.png" src="../_images/9871f2026e5527b7e3d2c0c276b1f33f3bb146c8ea5821a1d2f402f574988ec8.png" />
+</div>
+</div>
+</section>
+<section id="computing-trends">
+<h3>Computing Trends<a class="headerlink" href="#computing-trends" title="Link to this heading">#</a></h3>
+<p>How much has sea ice declined in the time period shown above? Let’s compute a trend line to determine how much ice is lost during this time period. To keep things simple, we’ll just compute the trend for all months of available data although this trend is often computed for September values only.</p>
+<p>First things first, we need to define a time array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a time array for months</span>
+<span class="n">months</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">file_list</span><span class="p">))</span>
+
+<span class="c1"># convert to &quot;decimal years&quot; for simplicity</span>
+<span class="n">years</span> <span class="o">=</span> <span class="mi">1992</span> <span class="o">+</span> <span class="n">months</span><span class="o">/</span><span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the time array in hand, we can now fit a line to the data. To fit a simple trend line, we can use the <code class="docutils literal notranslate"><span class="pre">polyfit</span></code> function from <code class="docutils literal notranslate"><span class="pre">numpy</span></code> with a degree of 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the line coefficients</span>
+<span class="n">line_coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">si_area</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># print the coefficients</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">line_coefficients</span><span class="p">)</span>
+
+<span class="c1"># sanity check: one is the slope and one is intercept - which is which?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-7.11897578e+10  1.52390956e+14]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the trend line on the data to ensure it looks as expected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">si_area</span><span class="p">)</span>
+
+<span class="c1"># plot the trend line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">line_coefficients</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">years</span> <span class="o">+</span> <span class="n">line_coefficients</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Northern Hemisphere Sea Ice Area&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sea ice area (m$^2$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Month since 1992/1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fb84e06d1dbb5132f8df70cdc36fda097bcbb3970f0c3aa28cfe780353fca596.png" src="../_images/fb84e06d1dbb5132f8df70cdc36fda097bcbb3970f0c3aa28cfe780353fca596.png" />
+</div>
+</div>
+</section>
+<section id="interpreting-trends">
+<h3>Interpreting Trends<a class="headerlink" href="#interpreting-trends" title="Link to this heading">#</a></h3>
+<p>The slope of the trend line estimates how much the variable is changing through time. Consider the following questions:</p>
+<ol class="arabic simple">
+<li><p>Is northern hemisphere sea ice being lost or gained?</p></li>
+<li><p>What are the units of the slope of the trend line?</p></li>
+<li><p>What is the equivalent slope in units of square miles? (<span class="math notranslate nohighlight">\(1\)</span> mile<span class="math notranslate nohighlight">\(^2\)</span> = <span class="math notranslate nohighlight">\(2.59 \times 10^6\)</span> m<span class="math notranslate nohighlight">\(^2\)</span>)</p></li>
+</ol>
+<p>Solutions:</p>
+<ol class="arabic simple">
+<li><p>The slope of the line, given by the first coefficient, is negative, indicating that sea ice is being lost.</p></li>
+<li><p>The units of the trend line are m<span class="math notranslate nohighlight">\(^2\)</span> per year since the sea ice area is in m<span class="math notranslate nohighlight">\(^2\)</span> and the time is in “decimal years”.</p></li>
+<li><p>To compute the trend in square miles, we can do a simple conversion using the information above:</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the trend in square miles</span>
+<span class="n">sq_miles</span> <span class="o">=</span> <span class="n">line_coefficients</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">2.59e6</span><span class="p">)</span>
+
+<span class="c1"># print out the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Square miles of Arctic sea ice lost per year:&#39;</span><span class="p">,</span><span class="n">sq_miles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Square miles of Arctic sea ice lost per year: -27486.392961071546
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="try-it-yourself">
+<h3>🤔 Try it yourself<a class="headerlink" href="#try-it-yourself" title="Link to this heading">#</a></h3>
+<p>How do the trends in the Southern Hemisphere compare to those in the Northern Hemisphere during this time period? The answers may suprise you.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "mitgcm"
+        },
+        kernelOptions: {
+            name: "mitgcm",
+            path: "./ecco"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'mitgcm'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="visualizing_ecco_output.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Visualizing ECCO Model Output</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../mitgcm/getting_started_with_MITgcm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Getting Started with MITgcm</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-for-this-notebook">Data for this notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-visualizing-to-analyzing">From visualizing to analyzing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-change-in-northern-hemisphere-sea-ice">Example: Change in Northern Hemisphere Sea Ice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-areas">Computing areas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sea-ice-area-in-the-northern-hemisphere">Sea Ice Area in the Northern Hemisphere</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-trends">Computing Trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-trends">Interpreting Trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-it-yourself">🤔 Try it yourself</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Wood
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

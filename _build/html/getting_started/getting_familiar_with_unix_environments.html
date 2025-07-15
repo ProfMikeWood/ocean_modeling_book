@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Getting Familiar with Unix Environments &#8212; Numerical Ocean Modeling</title>
   
@@ -15,58 +14,56 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/getting_familiar_with_unix_environments';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Overview" href="../oceanography/oceanography_overview.html" />
     <link rel="prev" title="Installing a compiler with MPI" href="installing_compiler_and_mpi.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -74,19 +71,23 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -108,12 +109,20 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -128,9 +137,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../intro.html">
+  
   
   
   
@@ -140,12 +153,23 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -178,6 +202,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../modeling/difference_methods.html">Difference Methods</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
@@ -195,12 +224,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Model Analysis</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../analysis/volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../analysis/salt_budget.html">Salt Budgets</a></li>
-</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
@@ -211,6 +234,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
 <ul class="nav bd-sidenav">
@@ -235,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -244,14 +274,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -373,26 +403,28 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -472,15 +504,15 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="getting-familiar-with-unix-environments">
-<h1>Getting Familiar with Unix Environments<a class="headerlink" href="#getting-familiar-with-unix-environments" title="Permalink to this headline">#</a></h1>
+<h1>Getting Familiar with Unix Environments<a class="headerlink" href="#getting-familiar-with-unix-environments" title="Link to this heading">#</a></h1>
 <p>This page is designed to provide an introduction to Unix-type shell commands. On MacOS, the standard Terminal is <code class="docutils literal notranslate"><span class="pre">zsh</span></code> (as of 2019) which is a Unix-type shell. On Windows, the <a class="reference external" href="https://www.cygwin.com/">cygwin</a> project provides a Unix-like environment that uses the same commands.</p>
 <section id="summary-of-commands">
-<h2>Summary of Commands<a class="headerlink" href="#summary-of-commands" title="Permalink to this headline">#</a></h2>
+<h2>Summary of Commands<a class="headerlink" href="#summary-of-commands" title="Link to this heading">#</a></h2>
 <p>The commands introduced in this page are summarized in the following table for convenience:</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Command</p></th>
 <th class="head"><p>Description</p></th>
@@ -534,11 +566,12 @@ document.write(`
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="tutorial">
-<h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">#</a></h2>
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h2>
 <section id="getting-started">
-<h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h3>
+<h3>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h3>
 <p>To get started with this introductory tutorial, use the following steps:</p>
 <ol class="arabic simple">
 <li><p>Download the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/getting_started/model_config_example.zip">model_config_example.zip</a> example file set from the Github repository for this book and unzip it.</p></li>
@@ -549,9 +582,9 @@ document.write(`
 <p>This directory structure mimics the typical structure used for MITgcm models.</p>
 </section>
 <section id="navigating-the-file-system">
-<h3>Navigating the File System<a class="headerlink" href="#navigating-the-file-system" title="Permalink to this headline">#</a></h3>
+<h3>Navigating the File System<a class="headerlink" href="#navigating-the-file-system" title="Link to this heading">#</a></h3>
 <section id="determining-your-path">
-<h4>Determining your path<a class="headerlink" href="#determining-your-path" title="Permalink to this headline">#</a></h4>
+<h4>Determining your path<a class="headerlink" href="#determining-your-path" title="Link to this heading">#</a></h4>
 <p>When you open your terminal, one of the first thing you want to determine is where in your file system you are. The command <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, which stands for <strong>p</strong>resent <strong>w</strong>orking <strong>d</strong>irectory, will show you where you are located.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pwd</span>
 </pre></div>
@@ -567,7 +600,7 @@ document.write(`
 <p>This location is typically the location where your shell will open when you launch your terminal</p>
 </section>
 <section id="listing-contents-of-your-directory">
-<h4>Listing contents of your directory<a class="headerlink" href="#listing-contents-of-your-directory" title="Permalink to this headline">#</a></h4>
+<h4>Listing contents of your directory<a class="headerlink" href="#listing-contents-of-your-directory" title="Link to this heading">#</a></h4>
 <p>Wherever you are, you can determine what files, folders and other items are in your current folder using the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
 </pre></div>
@@ -583,7 +616,7 @@ document.write(`
 <p>All Unix commands have the structure <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">-(options)</span> <span class="pre">(arguments)</span></code> where options and arguments may or may not be present.</p>
 </div>
 <section id="try-it-for-yourself">
-<h5>🤔 Try it for yourself:<a class="headerlink" href="#try-it-for-yourself" title="Permalink to this headline">#</a></h5>
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#try-it-for-yourself" title="Link to this heading">#</a></h5>
 <p>Try the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command with the following and consider how they affect the output:</p>
 <ul class="simple">
 <li><p>option <code class="docutils literal notranslate"><span class="pre">-l</span></code></p></li>
@@ -593,7 +626,7 @@ document.write(`
 </ul>
 </section>
 <section id="solution">
-<h5>💡 Solution:<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h5>
+<h5>💡 Solution:<a class="headerlink" href="#solution" title="Link to this heading">#</a></h5>
 <div class="toggle docutils container">
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">-l</span></code> option gives verbose output</p></li>
@@ -605,7 +638,7 @@ document.write(`
 </section>
 </section>
 <section id="changing-directories">
-<h4>Changing Directories<a class="headerlink" href="#changing-directories" title="Permalink to this headline">#</a></h4>
+<h4>Changing Directories<a class="headerlink" href="#changing-directories" title="Link to this heading">#</a></h4>
 <p>To move from one directory to another, use the <code class="docutils literal notranslate"><span class="pre">cd</span></code> command (short for <strong>c</strong>hange <strong>d</strong>irectory):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Documents</span>
 </pre></div>
@@ -619,11 +652,11 @@ document.write(`
 </pre></div>
 </div>
 <section id="id1">
-<h5>🤔 Try it for yourself:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h5>
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h5>
 <p>Move into the <code class="docutils literal notranslate"><span class="pre">run</span></code> subdirectory of the <code class="docutils literal notranslate"><span class="pre">model_config_example</span></code> directory.</p>
 </section>
 <section id="id2">
-<h5>💡 Solution:<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h5>
+<h5>💡 Solution:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h5>
 <div class="toggle docutils container">
 <p>Your exact solution will depend on the location of your home directory and where you saved and unzipped your <code class="docutils literal notranslate"><span class="pre">model_config_example</span></code> files.</p>
 <p>You may choose to enter individual commands such as <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">model_config_example</span></code> and then <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">run</span></code>. Or you can string your commands together to make a long path to your destination, e.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">model_config_example/run</span></code></p>
@@ -636,9 +669,9 @@ document.write(`
 </section>
 </section>
 <section id="copying-and-linking-files">
-<h3>Copying and Linking Files<a class="headerlink" href="#copying-and-linking-files" title="Permalink to this headline">#</a></h3>
+<h3>Copying and Linking Files<a class="headerlink" href="#copying-and-linking-files" title="Link to this heading">#</a></h3>
 <section id="copying-files">
-<h4>Copying Files<a class="headerlink" href="#copying-files" title="Permalink to this headline">#</a></h4>
+<h4>Copying Files<a class="headerlink" href="#copying-files" title="Link to this heading">#</a></h4>
 <p>Files can be copied with the <code class="docutils literal notranslate"><span class="pre">cp</span></code> command (short for <strong>c</strong>o<strong>p</strong>y). The syntax for the copy command is to first list the path of the file to copy and then the destination for that file. For example, suppose you are in the <code class="docutils literal notranslate"><span class="pre">run</span></code> directory and would like to copy the file <code class="docutils literal notranslate"><span class="pre">eedata</span></code> from folder <code class="docutils literal notranslate"><span class="pre">namelist</span></code>.  In this case, the copy can be completed with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">../</span><span class="n">namelist</span><span class="o">/</span><span class="n">eedata</span> <span class="n">eedata</span>
 </pre></div>
@@ -649,29 +682,29 @@ document.write(`
 </div>
 <p>Just like with file paths, wildcards can be used to copy multiple files at once that follow the same pattern.</p>
 <section id="id3">
-<h5>🤔 Try it for yourself:<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h5>
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h5>
 <p>Copy all files from <code class="docutils literal notranslate"><span class="pre">namelist</span></code> that start with <code class="docutils literal notranslate"><span class="pre">data</span></code> to the run directory:</p>
 </section>
 <section id="id4">
-<h5>💡 Solution:<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h5>
+<h5>💡 Solution:<a class="headerlink" href="#id4" title="Link to this heading">#</a></h5>
 <div class="toggle docutils container">
 <p>Top copy all of the files starting with the characters <code class="docutils literal notranslate"><span class="pre">data</span></code> from the <code class="docutils literal notranslate"><span class="pre">namelist</span></code> directory to the current directory, use <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">../namelist/data*</span> <span class="pre">.</span></code></p>
 </div>
 </section>
 </section>
 <section id="linking-files">
-<h4>Linking Files<a class="headerlink" href="#linking-files" title="Permalink to this headline">#</a></h4>
+<h4>Linking Files<a class="headerlink" href="#linking-files" title="Link to this heading">#</a></h4>
 <p>Often we would like files to be in multiple locations at the same time. For example, two different models may rely on the same underlying data. In this case, we don’t need two complete copies of the data - each model just needs to know where the data located. In these circumstances, a symbolic link is desirable.</p>
 <p>We can symbolicly link files with the <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span></code> command. For example, suppose we wanted to link the <code class="docutils literal notranslate"><span class="pre">bathymetry.bin</span></code> file from the <code class="docutils literal notranslate"><span class="pre">input</span></code> directory into the <code class="docutils literal notranslate"><span class="pre">run</span></code> directory. In this case, we could use</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="nb">input</span><span class="o">/</span><span class="n">bathymetry</span><span class="o">.</span><span class="n">bin</span> <span class="o">.</span>
 </pre></div>
 </div>
 <section id="id5">
-<h5>🤔 Try it for yourself:<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h5>
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id5" title="Link to this heading">#</a></h5>
 <p>Link the rest of the folders and files from the <code class="docutils literal notranslate"><span class="pre">input</span></code> directory into your <code class="docutils literal notranslate"><span class="pre">run</span></code> directory.</p>
 </section>
 <section id="id6">
-<h5>💡 Solution:<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h5>
+<h5>💡 Solution:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h5>
 <div class="toggle docutils container">
 <p>To see what other files are in the input directory, we can use the <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">../input</span></code> command.</p>
 <p>After discovering the names of the three other items, we can use</p>
@@ -685,9 +718,9 @@ document.write(`
 </section>
 </section>
 <section id="making-and-editing-files-and-directories">
-<h3>Making and Editing Files and Directories<a class="headerlink" href="#making-and-editing-files-and-directories" title="Permalink to this headline">#</a></h3>
+<h3>Making and Editing Files and Directories<a class="headerlink" href="#making-and-editing-files-and-directories" title="Link to this heading">#</a></h3>
 <section id="editing-files">
-<h4>Editing Files<a class="headerlink" href="#editing-files" title="Permalink to this headline">#</a></h4>
+<h4>Editing Files<a class="headerlink" href="#editing-files" title="Link to this heading">#</a></h4>
 <p>We can make and edit files with a variety of different editors that often come pre-installed on command line interfaces.</p>
 <p>One popular editor is the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor which can be opened with the <code class="docutils literal notranslate"><span class="pre">nano</span></code>  command. For example, we can create and edit a <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> file with the following call:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
@@ -709,7 +742,7 @@ document.write(`
 </pre></div>
 </div>
 <section id="id7">
-<h5>🤔 Try it for yourself:<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h5>
+<h5>🤔 Try it for yourself:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h5>
 <p>Create a file called <code class="docutils literal notranslate"><span class="pre">notes.txt</span></code> and add some notes to the file.</p>
 <p>To see the text that the file contains, you can use <code class="docutils literal notranslate"><span class="pre">cat</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="n">README</span><span class="o">.</span><span class="n">txt</span>
@@ -730,7 +763,7 @@ document.write(`
 </section>
 </section>
 <section id="creating-directories">
-<h4>Creating Directories<a class="headerlink" href="#creating-directories" title="Permalink to this headline">#</a></h4>
+<h4>Creating Directories<a class="headerlink" href="#creating-directories" title="Link to this heading">#</a></h4>
 <p>Directories can also be creates and removed using tools on the command line.</p>
 <p>To make a directory, we use use the <code class="docutils literal notranslate"><span class="pre">mkdir</span></code> command (short for <strong>m</strong>a<strong>k</strong>e <strong>dir</strong>ectory). For example, suppose you wanted to make a directory called <code class="docutils literal notranslate"><span class="pre">diags</span></code>. This can be achieved with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">diags</span>
@@ -739,7 +772,7 @@ document.write(`
 </section>
 </section>
 <section id="shell-profiles">
-<h3>Shell Profiles<a class="headerlink" href="#shell-profiles" title="Permalink to this headline">#</a></h3>
+<h3>Shell Profiles<a class="headerlink" href="#shell-profiles" title="Link to this heading">#</a></h3>
 <p>Each shell has a given profile - a script that is automatically run when you open a terminal. For example, the default terminal on MacOS is <em>zshell</em> which has the default shell profile in the <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file. Similarly, bash shells have profiles in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> and/or <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">.</span></code> in front of each file ensures that the file is hidden.</p>
 <p>All shell profiles should be placed in your home directory.</p>
 <p>You can see your hidden profile in your home directory using the <code class="docutils literal notranslate"><span class="pre">-a</span></code> flag on the <code class="docutils literal notranslate"><span class="pre">ls</span></code> command with:</p>
@@ -748,18 +781,18 @@ document.write(`
 </div>
 <p>To edit your profile, you can use the <code class="docutils literal notranslate"><span class="pre">nano</span></code> editor as described above.</p>
 <section id="id8">
-<h4>🤔 Try it for yourself:<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<h4>🤔 Try it for yourself:<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
 <p>Add a welcome message for yourself in your profile. Then, open a new terminal window to double check that your profile is working.</p>
 </section>
 <section id="id9">
-<h4>💡 Solution:<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h4>
+<h4>💡 Solution:<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
 <div class="toggle docutils container">
 <p>Use your favorite text editor to open your profile file. Then, use the <code class="docutils literal notranslate"><span class="pre">echo</span></code> command to print a message, e.g. <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">&quot;Welcome</span> <span class="pre">Mike&quot;</span></code>.</p>
 </div>
 </section>
 </section>
 <section id="deleting-files-and-directories">
-<h3>Deleting Files and Directories<a class="headerlink" href="#deleting-files-and-directories" title="Permalink to this headline">#</a></h3>
+<h3>Deleting Files and Directories<a class="headerlink" href="#deleting-files-and-directories" title="Link to this heading">#</a></h3>
 <p>We can delete files with the <code class="docutils literal notranslate"><span class="pre">rm</span></code> command - short for remove. For example, if we no longer wanted the temporary note that we made before, we could remove it with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="n">tmp_note</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
@@ -778,11 +811,11 @@ document.write(`
 </div>
 <p>Again, caution should be used with deleting directories because the contents cannot be recovered after they are gone.</p>
 <section id="id10">
-<h4>🤔 Try it for yourself:<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
+<h4>🤔 Try it for yourself:<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
 <p>Suppose you made some changes to the <code class="docutils literal notranslate"><span class="pre">exf</span></code> package and need to recompile the model to reflect these changes. Remove all <code class="docutils literal notranslate"><span class="pre">exf</span></code> files from the build directory.</p>
 </section>
 <section id="id11">
-<h4>💡 Solution:<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h4>
+<h4>💡 Solution:<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <div class="toggle docutils container">
 <p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">../build/exf*</span></code></p>
 </div>
@@ -816,11 +849,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer d-print-none">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="installing_compiler_and_mpi.html"
@@ -840,10 +872,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -851,6 +880,7 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -929,9 +959,10 @@ By Mike Wood
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -955,8 +986,8 @@ By Mike Wood
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

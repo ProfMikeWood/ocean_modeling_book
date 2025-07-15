@@ -1,3 +1,10 @@
 jupyter-book
 matplotlib
-numpy
+netcdf4
+xarray
+jupyter
+cartopy
+git
+ffmpeg
+moviepy
+cmocean

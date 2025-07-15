@@ -25,6 +25,11 @@ parts:
     - file: modeling/model_grids
     - file: modeling/difference_methods
 #    - file: modeling/subgridscale_parameterizations
+  - caption: ECCO
+    chapters:
+    - file: ecco/ecco_overview
+    - file: ecco/visualizing_ecco_output
+    - file: ecco/computing_ecco_trends
   - caption: MITgcm
     chapters:
     - file: mitgcm/getting_started_with_MITgcm
@@ -40,12 +45,6 @@ parts:
     - file: HPC/navigating_an_HPC
     - file: HPC/running_jobs_on_an_HPC
     - file: HPC/conda_environments_on_an_HPC
-  - caption: MITgcm Special Topics
-    chapters:
-    - file: special_topics/diagnostics_vec
-    - file: special_topics/volume_budget
-    - file: special_topics/heat_budget
-    - file: special_topics/salt_budget
   - caption: A Regional Model Example
     chapters:
     - file: regional_example/model_description
@@ -57,6 +56,12 @@ parts:
     - file: regional_example/choosing_packages
     - file: regional_example/running_the_model
 #    - file: regional_example/assessing_results
+  - caption: MITgcm Special Topics
+    chapters:
+    - file: special_topics/diagnostics_vec
+    - file: special_topics/volume_budget
+    - file: special_topics/heat_budget
+    - file: special_topics/salt_budget
   - caption: State Estimation
     chapters:
     - file: state_estimation/greens_function
