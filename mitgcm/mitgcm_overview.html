@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Salt Budgets &#8212; Numerical Ocean Modeling</title>
+    <title>Overview &#8212; Numerical Ocean Modeling</title>
   
   
   
@@ -57,13 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'special_topics/salt_budget';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mitgcm/mitgcm_overview';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Green’s Functions" href="../state_estimation/greens_function.html" />
-    <link rel="prev" title="Heat Budgets" href="heat_budget.html" />
+    <link rel="next" title="Getting Started with MITgcm" href="getting_started_with_MITgcm.html" />
+    <link rel="prev" title="Understanding the ECCO Lat-Lon-Cap grid" href="../ecco/ecco_llc_grid.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -212,16 +210,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/mitgcm_overview.html">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnosing_issues.html">Diagnosing Issues</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
 <ul class="nav bd-sidenav">
@@ -230,11 +228,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="diagnostics_vec.html">Diagnostics_vec</a></li>
-<li class="toctree-l1"><a class="reference internal" href="volume_budget.html">Volume Budgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="heat_budget.html">Heat Budgets</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Salt Budgets</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
 <ul class="nav bd-sidenav">
@@ -315,7 +313,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fspecial_topics/salt_budget.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmitgcm/mitgcm_overview.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -345,7 +343,7 @@
       
       
       
-      <li><a href="../_sources/special_topics/salt_budget.ipynb" target="_blank"
+      <li><a href="../_sources/mitgcm/mitgcm_overview.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -355,7 +353,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -429,7 +427,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Salt Budgets</h1>
+    <h1>Overview</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -439,10 +437,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-fields">Required Fields</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-diagnostics-organization">Suggested Diagnostics Organization</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-description">Model Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-development">Model Development</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">“Downloading” MITgcm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-your-machine-to-compile-code">Prepping your machine to compile code</a></li>
 </ul>
             </nav>
         </div>
@@ -454,94 +452,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="salt-budgets">
-<h1>Salt Budgets<a class="headerlink" href="#salt-budgets" title="Link to this heading">#</a></h1>
-<p>This page outlines the pertinent files and methodology to compute a salt budget using output from an MITgcm model.</p>
-<section id="required-fields">
-<h2>Required Fields<a class="headerlink" href="#required-fields" title="Link to this heading">#</a></h2>
-<p>The following fields are required for the salt budget:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Field</p></th>
-<th class="head"><p>Variable Name</p></th>
-<th class="head"><p>Units</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Zonal Advective Flux of Salinity</p></td>
-<td><p>ADVx_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>Meridional Advective Flux of Salinity</p></td>
-<td><p>ADVy_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-even"><td><p>Vertical Advective Flux of Salinity</p></td>
-<td><p>ADVr_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>Zonal Diffusive Flux of Salinity</p></td>
-<td><p>DFxE_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-even"><td><p>Meridional Diffusive Flux of Salinity</p></td>
-<td><p>DFyE_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>Vertical Diffusive Flux of Salinity (Explicit part)</p></td>
-<td><p>DFrE_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-even"><td><p>Vertical Diffusive Flux of Salinity (Implicit part)</p></td>
-<td><p>DFrI_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>Net surface freshwater flux</p></td>
-<td><p>oceFWflx</p></td>
-<td><p>kg/m<span class="math notranslate nohighlight">\(^2\)</span>/s</p></td>
-</tr>
-<tr class="row-even"><td><p>Vertical mass-weighted transport of Potential Temperature</p></td>
-<td><p>WSLTMASS</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-<tr class="row-odd"><td><p>Total surface salt flux</p></td>
-<td><p>SFLUX</p></td>
-<td><p>g/m<span class="math notranslate nohighlight">\(^2\)</span>/s</p></td>
-</tr>
-<tr class="row-even"><td><p>Vertical Diffusive Flux (KPP Scheme)</p></td>
-<td><p>KPPg_SLT</p></td>
-<td><p>g/kg m<span class="math notranslate nohighlight">\(^3\)</span>/s</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">KPPg_SLT</span></code> variable is only required when using the <code class="docutils literal notranslate"><span class="pre">kpp</span></code> package.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">implicitDiffusion=.TRUE.</span></code>, then the diffusive flux terms <code class="docutils literal notranslate"><span class="pre">DFxE_SLT</span></code>, <code class="docutils literal notranslate"><span class="pre">DFyE_SLT</span></code>, and <code class="docutils literal notranslate"><span class="pre">DFrE_SLT</span></code> are not required to close the budget.</p>
-</div>
-<section id="suggested-diagnostics-organization">
-<h3>Suggested Diagnostics Organization<a class="headerlink" href="#suggested-diagnostics-organization" title="Link to this heading">#</a></h3>
-<p>The following entries to the <code class="docutils literal notranslate"><span class="pre">data.diagnostics</span></code> file would yield the terms above.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#---</span>
-<span class="n">frequency</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
-<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;ADVx_SLT&#39;</span><span class="p">,</span><span class="s1">&#39;ADVy_SLT&#39;</span><span class="p">,</span><span class="s1">&#39;ADVr_SLT&#39;</span><span class="p">,</span>
-<span class="n">filename</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/salt_flux_adv/salt_flux_adv&#39;</span><span class="p">,</span>
-
-<span class="c1">#---</span>
-<span class="n">frequency</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
-<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;DFxE_SLT&#39;</span><span class="p">,</span><span class="s1">&#39;DFyE_SLT&#39;</span><span class="p">,</span><span class="s1">&#39;DFrE_SLT&#39;</span><span class="p">,</span><span class="s1">&#39;DFrI_SLT&#39;</span><span class="p">,</span><span class="s1">&#39;KPPg_SLT&#39;</span><span class="p">,</span>
-<span class="n">filename</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/salt_flux_diff/salt_flux_diff&#39;</span><span class="p">,</span>
-
-<span class="c1">#---</span>
-<span class="n">frequency</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="o">=</span> <span class="mf">86400.0</span><span class="p">,</span>
-<span class="n">fields</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;oceFWflx&#39;</span><span class="p">,</span><span class="s1">&#39;WSLTMASS&#39;</span><span class="p">,</span><span class="s1">&#39;SFLUX   &#39;</span><span class="p">,</span>
-<span class="n">filename</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>   <span class="o">=</span> <span class="s1">&#39;diags/salt_flux_surf/salt_flux_surf&#39;</span><span class="p">,</span>
-<span class="n">levels</span><span class="p">(:,</span><span class="mi">3</span><span class="p">)</span>     <span class="o">=</span> <span class="mi">1</span>
-
+  <section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
+<section id="model-description">
+<h2>Model Description<a class="headerlink" href="#model-description" title="Link to this heading">#</a></h2>
+<p>The MIT General Circulation Model (MITgcm) is a numerical modeling framework developed at the Massachusetts Institute of Technology to simulate ocean and atmosphere dynamics. It solves the three-dimensional <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/oceanography/primitive_equations.html">primitive equations</a> that govern fluid motion on a rotating sphere, enabling the study of both small- and large-scale dynamics. The model is “ultra” versatile (as referenced in the name of its executable, as we will see) and can be configured to represent a wide range of physical domains, from idealized process studies to realistic simulations of the global ocean or atmosphere. It can also handle nonhydrostatic dynamics, allowing it to resolve fine-scale processes such as convection and mixing.</p>
+<p>MITgcm can be used on a variety of coordinate systems, including Cartesian and spherical geometries, and uses an Arakawa C-grid for numerical accuracy and conservation properties. It includes both implicit and explicit time-stepping schemes. It is designed for parallel computing on computing clusters, making it suitable for high-performance simulations on large-scale computing systems. The model is widely used in the scientific community for oceanographic and climate research, including studies on ocean circulation, sea ice dynamics, and coupled ocean-atmosphere interactions.</p>
+</section>
+<section id="model-development">
+<h2>Model Development<a class="headerlink" href="#model-development" title="Link to this heading">#</a></h2>
+<p>The development of MITgcm began in the 1990s - you can even look back at the <a class="reference external" href="https://github.com/MITgcm/MITgcm/commits/master/">commit list</a> on Github to see some of the early development at this time! As indicated above, MITgcm was originally created as a research tool to study ocean dynamics and large-scale circulation using a flexible, high-resolution model framework. Early versions focused on ocean-only configurations, with an emphasis on numerical accuracy and the ability to handle realistic boundary conditions and complex geometries. However, early on, the model was designed to support simulations constrained by observational data, particularly for ocean state estimation efforts (that later become <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/ecco/ecco_overview.html">ECCO</a>). Even today, MITgcm is undergoing constant improvements with new features and packages added all the time. If you’re using MITgcm consistently, be sure to stay up-to-date on the latest commits - they come quick!</p>
+</section>
+<section id="downloading-mitgcm">
+<h2>“Downloading” MITgcm<a class="headerlink" href="#downloading-mitgcm" title="Link to this heading">#</a></h2>
+<p>To use MITgcm, begin by opening up a terminal window and navigating to a location on your computer where you will keep a copy of the model. For example, <code class="docutils literal notranslate"><span class="pre">~/Documents/Projects/Ocean_Modeling</span></code>.</p>
+<p>Then, clone the MITgcm source code from the Github repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MITgcm</span><span class="o">/</span><span class="n">MITgcm</span>
 </pre></div>
 </div>
 </section>
+<section id="prepping-your-machine-to-compile-code">
+<h2>Prepping your machine to compile code<a class="headerlink" href="#prepping-your-machine-to-compile-code" title="Link to this heading">#</a></h2>
+<p>Once you have MITgcm on your machine, there’s a few steps required to get your machine set up.</p>
+<p>At the least, you’ll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, I’ve provided walk-throughs for possible installations on a variety of systems. These steps worked in my test cases but you may choose to install differently depending on your system.</p>
+<p>Once your installations are complete, you’ll need to identify an “optfile” that passes information to your compiler. Details for selecting an optfile are available <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/mitgcm/choosing_an_optfile.html">HERE</a>. For example, on my system (MacOS with gfortran), I will use the <code class="docutils literal notranslate"><span class="pre">darwin_amd64_gfortran</span></code> optfile.</p>
+<p>After these steps are tackled, you’re ready to start modeling! We’ll see how to compile code and run a model using a tutorial experiment provided with MITgcm in the next notebook. Let’s go!</p>
 </section>
 </section>
 
@@ -554,16 +489,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "cs185c"
+            mode: "python"
         },
         kernelOptions: {
-            name: "cs185c",
-            path: "./special_topics"
+            name: "python3",
+            path: "./mitgcm"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'cs185c'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -576,20 +511,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="heat_budget.html"
+       href="../ecco/ecco_llc_grid.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Heat Budgets</p>
+        <p class="prev-next-title">Understanding the ECCO Lat-Lon-Cap grid</p>
       </div>
     </a>
     <a class="right-next"
-       href="../state_estimation/greens_function.html"
+       href="getting_started_with_MITgcm.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Green’s Functions</p>
+        <p class="prev-next-title">Getting Started with MITgcm</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -609,10 +544,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#required-fields">Required Fields</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-diagnostics-organization">Suggested Diagnostics Organization</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-description">Model Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-development">Model Development</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">“Downloading” MITgcm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-your-machine-to-compile-code">Prepping your machine to compile code</a></li>
 </ul>
   </nav></div>
 
