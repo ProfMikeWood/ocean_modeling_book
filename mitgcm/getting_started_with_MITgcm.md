@@ -1,22 +1,5 @@
 # Getting Started with MITgcm
 
-
-### Downloading MITgcm
-To use MITgcm, begin by opening up a terminal window and navigating to a location on your computer where you will keep a copy of the model. For example, `~/Documents/Projects/Ocean_Modeling`.
-
-Then, clone the MITgcm source code from the Github repository:
-```
-git clone https://github.com/MITgcm/MITgcm
-```
-
-## Prepping your machine to compile code
-Once you have MITgcm on your machine, there's a few steps required to get your machine set up.
-
-At the least, you'll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. [HERE](https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html), I've provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.
-
-Once your installations are complete, you'll need to identify an "optfile" that passes information to your compiler. Details for selecting an optfile are available [HERE](https://profmikewood.github.io/ocean_modeling_book/mitgcm/choosing_an_optfile.html). For example, on my system (MacOS with gfortran), I will use the `darwin_amd64_gfortran` optfile.
-
-
 ## Compiling and Running: A test with a verification experiment
 
 MITgcm comes with a series of verification experiments that serve two purposes. On one hand, the experiments are used to test model codes on a nightly basis to ensure any new updates to the model source code maintain the expected functionality of the model. On the other, the verification experiments serve as a set of tutorials that can be used to familiarize yourself with various aspects of the model. 

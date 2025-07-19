@@ -6,9 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
-data
-regional_example/eccoseas
-_build/html/regional_example/eccoseas
+data/ECCO
 
 # Mac file
 .DS_Store

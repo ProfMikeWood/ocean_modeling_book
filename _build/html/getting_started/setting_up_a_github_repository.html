@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -42,7 +42,7 @@
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -206,9 +206,12 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/computing_ecco_trends.html">Computing Trends in ECCO Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/mitgcm_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
@@ -223,17 +226,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_grid.html">Model Grid</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/bathymetry.html">Bathymetry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/initial_conditions.html">Initial Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/external_conditions.html">External Forcing Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -467,14 +459,14 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="setting-up-a-github-repository">
 <h1>Setting up a Github Repository<a class="headerlink" href="#setting-up-a-github-repository" title="Link to this heading">#</a></h1>
-<p>Github is a platform used to store, manage, and share code online. It has a variety of uses across many different coding languages - infact, these course notes are stored on Github. A Github repository will be used during the CS 185C course of Fall 2024 to manage code and submit assignments. An example repository will be maintained throughout the course for reference, which you can access at <a class="reference external" href="https://github.com/ProfMikeWood/cs185c_fall2024">ProfMikeWood/cs185c_fall2024</a>.</p>
+<p>Github is a platform used to store, manage, and share code online. It has a variety of uses across many different coding languages - infact, these course notes are stored on Github. A Github repository will be used during the MS 274 course of Fall 2025 to manage code and submit assignments. An example repository will be maintained throughout the course for reference, which you can access at <a class="reference external" href="https://github.com/ProfMikeWood/ms274_fall2025">ProfMikeWood/ms274_fall2025</a>.</p>
 <p>To get started, create a Github account at <a class="reference external" href="https://github.com/">github.com/</a>, if you haven’t already done so.</p>
 <section id="setting-up-a-repository">
 <h2>Setting up a Repository<a class="headerlink" href="#setting-up-a-repository" title="Link to this heading">#</a></h2>
 <p>A repository is used to store a certain selection of code and documentation, such as for a project or a course. To set up a Github repository, log in to your Github account click on the green New Repository button on the homepage.</p>
 <section id="repository-name">
 <h3>Repository Name<a class="headerlink" href="#repository-name" title="Link to this heading">#</a></h3>
-<p>Begin by selecting a name for your repository. The name should be descriptive of the contents of the repository. If you are using the repository for the CS 185C course, you may choose a name such as <code class="docutils literal notranslate"><span class="pre">cs185c_fall2024</span></code> or something similar. Note that the repository name does not need to include your name or username as your account will be associated with your repository.</p>
+<p>Begin by selecting a name for your repository. The name should be descriptive of the contents of the repository. If you are using the repository for the MS 274 course, you may choose a name such as <code class="docutils literal notranslate"><span class="pre">ms274_fall2025</span></code> or something similar. Note that the repository name does not need to include your name or username as your account will be associated with your repository.</p>
 </section>
 <section id="public-vs-private">
 <h3>Public vs Private<a class="headerlink" href="#public-vs-private" title="Link to this heading">#</a></h3>
@@ -497,7 +489,7 @@ document.write(`
 <p>After choosing your configuration options, click Create Repository. Woohoo! We’re ready to being coding.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are following these notes for CS 185C and you elect to keep your repository public, be sure to add Mike as a collaborator. Navigate to the Settings tab and click on Collaborators on the left menu. Then, search for Mike Wood - his username is <strong>ProfMikeWood</strong>.</p>
+<p>If you are following these notes for MS 274 and you elect to keep your repository private, be sure to add Mike as a collaborator so he can see your work. Navigate to the Settings tab and click on Collaborators on the left menu. Then, search for Mike Wood - his username is <strong>ProfMikeWood</strong>.</p>
 </div>
 </section>
 </section>

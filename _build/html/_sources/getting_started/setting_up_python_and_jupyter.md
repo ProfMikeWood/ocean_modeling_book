@@ -9,10 +9,10 @@ To download Miniconda, navigate to https://docs.conda.io/en/latest/miniconda.htm
 ## Set up a conda environment
 After you have downloaded miniconda, set up a conda environment. Begin by opening up a terminal of your choice. On Windows, you can open the "Anaconda Prompt" application by searching for it in the start menu. On Mac, you can open a standard Terminal in the Applications/Utilities directory. 
 
-With your terminal open, create a conda environment called cs185c with Python version 3.11 using the following command:
+With your terminal open, create a conda environment called ms274 with Python version 3.12 using the following command:
 
 ```
-conda create --name cs185c python=3.11
+conda create --name ms274 python=3.12
 ```
 By default, conda will automatically activate a "base" environment on your machine. To disable this behavior, you may want to run the following:
 ```
@@ -21,7 +21,7 @@ conda config --set auto_activate_base false
 
 Now, activate your environment as follows:
 ```
-conda activate cs185c
+conda activate ms274
 ```
 
 Every time you use your environment, you will need to activate it from the command line.
@@ -53,12 +53,12 @@ Finally, configure your environment to use in a jupyter notebook.
 On MacOS, use:
 
 ```
-python3 -m ipykernel install --user --name=cs185c
+python3 -m ipykernel install --user --name=ms274
 ```
 
 On Windows, use:
 ```
-python -m ipykernel install --user --name=cs185c
+python -m ipykernel install --user --name=ms274
 ```
 
 

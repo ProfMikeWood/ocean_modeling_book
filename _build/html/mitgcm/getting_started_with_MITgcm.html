@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -42,7 +42,7 @@
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="File Layout" href="file_layout.html" />
-    <link rel="prev" title="Visualizing ECCO Model Output" href="../ecco/visualizing_ecco_output.html" />
+    <link rel="prev" title="Overview" href="mitgcm_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -206,9 +206,12 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/computing_ecco_trends.html">Computing Trends in ECCO Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mitgcm_overview.html">Overview</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting Started with MITgcm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="file_layout.html">File Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="choosing_an_optfile.html">Choosing an optfile</a></li>
@@ -223,17 +226,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_grid.html">Model Grid</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/bathymetry.html">Bathymetry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/initial_conditions.html">Initial Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/external_conditions.html">External Forcing Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -445,8 +437,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">Downloading MITgcm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-your-machine-to-compile-code">Prepping your machine to compile code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-test-with-a-verification-experiment">Compiling and Running: A test with a verification experiment</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-without-mpi">Compiling and Running without MPI</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-without-mpi">Compiling without MPI</a></li>
@@ -473,20 +463,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-mitgcm">
 <h1>Getting Started with MITgcm<a class="headerlink" href="#getting-started-with-mitgcm" title="Link to this heading">#</a></h1>
-<section id="downloading-mitgcm">
-<h2>Downloading MITgcm<a class="headerlink" href="#downloading-mitgcm" title="Link to this heading">#</a></h2>
-<p>To use MITgcm, begin by opening up a terminal window and navigating to a location on your computer where you will keep a copy of the model. For example, <code class="docutils literal notranslate"><span class="pre">~/Documents/Projects/Ocean_Modeling</span></code>.</p>
-<p>Then, clone the MITgcm source code from the Github repository:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">MITgcm</span><span class="o">/</span><span class="n">MITgcm</span>
-</pre></div>
-</div>
-</section>
-<section id="prepping-your-machine-to-compile-code">
-<h2>Prepping your machine to compile code<a class="headerlink" href="#prepping-your-machine-to-compile-code" title="Link to this heading">#</a></h2>
-<p>Once you have MITgcm on your machine, there’s a few steps required to get your machine set up.</p>
-<p>At the least, you’ll need to have a fortran compiler to compile the model code. In addition, you will likely want to install MPI to parallelize your model across CPUs and a netcdf library for storing output into netCDF files. The set up for each of these components will depend on your system. <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/getting_started/installing_compiler_and_mpi.html">HERE</a>, I’ve provided two walk-throughs for possible installations for MacOS and Windows. These steps worked in my test cases but you may choose to install differently depending on your system.</p>
-<p>Once your installations are complete, you’ll need to identify an “optfile” that passes information to your compiler. Details for selecting an optfile are available <a class="reference external" href="https://profmikewood.github.io/ocean_modeling_book/mitgcm/choosing_an_optfile.html">HERE</a>. For example, on my system (MacOS with gfortran), I will use the <code class="docutils literal notranslate"><span class="pre">darwin_amd64_gfortran</span></code> optfile.</p>
-</section>
 <section id="compiling-and-running-a-test-with-a-verification-experiment">
 <h2>Compiling and Running: A test with a verification experiment<a class="headerlink" href="#compiling-and-running-a-test-with-a-verification-experiment" title="Link to this heading">#</a></h2>
 <p>MITgcm comes with a series of verification experiments that serve two purposes. On one hand, the experiments are used to test model codes on a nightly basis to ensure any new updates to the model source code maintain the expected functionality of the model. On the other, the verification experiments serve as a set of tutorials that can be used to familiarize yourself with various aspects of the model.</p>
@@ -650,12 +626,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../ecco/visualizing_ecco_output.html"
+       href="mitgcm_overview.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Visualizing ECCO Model Output</p>
+        <p class="prev-next-title">Overview</p>
       </div>
     </a>
     <a class="right-next"
@@ -683,8 +659,6 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-mitgcm">Downloading MITgcm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepping-your-machine-to-compile-code">Prepping your machine to compile code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-a-test-with-a-verification-experiment">Compiling and Running: A test with a verification experiment</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-and-running-without-mpi">Compiling and Running without MPI</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compiling-without-mpi">Compiling without MPI</a></li>

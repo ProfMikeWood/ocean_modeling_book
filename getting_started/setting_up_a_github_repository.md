@@ -1,6 +1,6 @@
 # Setting up a Github Repository
 
-Github is a platform used to store, manage, and share code online. It has a variety of uses across many different coding languages - infact, these course notes are stored on Github. A Github repository will be used during the CS 185C course of Fall 2024 to manage code and submit assignments. An example repository will be maintained throughout the course for reference, which you can access at [ProfMikeWood/cs185c_fall2024](https://github.com/ProfMikeWood/cs185c_fall2024).
+Github is a platform used to store, manage, and share code online. It has a variety of uses across many different coding languages - infact, these course notes are stored on Github. A Github repository will be used during the MS 274 course of Fall 2025 to manage code and submit assignments. An example repository will be maintained throughout the course for reference, which you can access at [ProfMikeWood/ms274_fall2025](https://github.com/ProfMikeWood/ms274_fall2025).
 
 To get started, create a Github account at [github.com/](https://github.com/), if you haven't already done so.
 
@@ -8,7 +8,7 @@ To get started, create a Github account at [github.com/](https://github.com/), i
 A repository is used to store a certain selection of code and documentation, such as for a project or a course. To set up a Github repository, log in to your Github account click on the green New Repository button on the homepage. 
 
 ### Repository Name
-Begin by selecting a name for your repository. The name should be descriptive of the contents of the repository. If you are using the repository for the CS 185C course, you may choose a name such as `cs185c_fall2024` or something similar. Note that the repository name does not need to include your name or username as your account will be associated with your repository.
+Begin by selecting a name for your repository. The name should be descriptive of the contents of the repository. If you are using the repository for the MS 274 course, you may choose a name such as `ms274_fall2025` or something similar. Note that the repository name does not need to include your name or username as your account will be associated with your repository.
 
 ### Public vs Private
 Next, select whether you would like your repository to public or private. Some people like to keep all of their repositories public for a variety of reasons - for example, to maintain open-source code or to attract potential collaborators working on similar topics. Other prefer to keep their repositories private, sharing coding only with approved collaborators. Often, developers will work on a private repository until they are ready to release a version of their code in the wild. 
@@ -26,7 +26,7 @@ Finally, choose a license. There are lots of different licenses available, each 
 After choosing your configuration options, click Create Repository. Woohoo! We're ready to being coding.
 
 ```{note}
-If you are following these notes for CS 185C and you elect to keep your repository public, be sure to add Mike as a collaborator. Navigate to the Settings tab and click on Collaborators on the left menu. Then, search for Mike Wood - his username is **ProfMikeWood**.
+If you are following these notes for MS 274 and you elect to keep your repository private, be sure to add Mike as a collaborator so he can see your work. Navigate to the Settings tab and click on Collaborators on the left menu. Then, search for Mike Wood - his username is **ProfMikeWood**.
 ```
 
 

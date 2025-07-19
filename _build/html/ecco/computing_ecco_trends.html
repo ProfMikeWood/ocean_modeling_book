@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -42,7 +42,7 @@
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'ecco/computing_ecco_trends';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Started with MITgcm" href="../mitgcm/getting_started_with_MITgcm.html" />
+    <link rel="next" title="Understanding the ECCO Lat-Lon-Cap grid" href="ecco_llc_grid.html" />
     <link rel="prev" title="Visualizing ECCO Model Output" href="visualizing_ecco_output.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -209,9 +209,11 @@
 <li class="toctree-l1"><a class="reference internal" href="ecco_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Computing Trends in ECCO Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/mitgcm_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
@@ -226,17 +228,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_grid.html">Model Grid</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/bathymetry.html">Bathymetry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/initial_conditions.html">Initial Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/external_conditions.html">External Forcing Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -497,7 +488,7 @@ document.write(`
 </section>
 <section id="data-for-this-notebook">
 <h2>Data for this notebook<a class="headerlink" href="#data-for-this-notebook" title="Link to this heading">#</a></h2>
-<p>In this notebook, we will use sea ice data from the Versions 4 state estimate. To download the data, you can use the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/tools/Downloading%20ECCO%20Data.ipynb">Downloading ECCO Data</a> notebook available on the Github for this book. Use the following settings to download the pertinent data:</p>
+<p>In this notebook, we will use sea ice data from the Versions 4 state estimate. To download the data, you can use the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/tools/Downloading%20ECCO%20V4%20Data.ipynb">Downloading ECCO V4 Data</a> notebook available on the Github for this book. Use the following settings to download the pertinent data:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;Version4&#39;</span>
 <span class="n">release</span> <span class="o">=</span> <span class="s1">&#39;Release4&#39;</span>
 <span class="n">subset</span> <span class="o">=</span> <span class="s1">&#39;interp_monthly&#39;</span>
@@ -510,7 +501,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a path to a data folder</span>
-<span class="n">data_folder</span> <span class="o">=</span> <span class="s1">&#39;../../ocean_modeling_book_data/data&#39;</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="s1">&#39;../data&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -869,11 +860,11 @@ A_{patch} = R^2 (\phi_1 - \phi_0) (\sin (\theta_1) - \sin (\theta_0))
       </div>
     </a>
     <a class="right-next"
-       href="../mitgcm/getting_started_with_MITgcm.html"
+       href="ecco_llc_grid.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started with MITgcm</p>
+        <p class="prev-next-title">Understanding the ECCO Lat-Lon-Cap grid</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -10,7 +10,7 @@ logo: logo.png
 execute:
   execute_notebooks: force
   timeout: -1
-  exclude_patterns: [regional_example/initial_conditions.ipynb, regional_example/external_conditions.ipynb, regional_example/boundary_conditions.ipynb, regional_example/eccoseas/docs/*, regional_example/eccoseas/README.md, regional_example/bathymetry.ipynb, tools/*]
+  exclude_patterns: [tools/*]
   only_build_toc_files: true
 
 # Define the name of the latex output file for PDF builds

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -42,7 +42,7 @@
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'ecco/visualizing_ecco_output';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Started with MITgcm" href="../mitgcm/getting_started_with_MITgcm.html" />
+    <link rel="next" title="Computing Trends in ECCO Output" href="computing_ecco_trends.html" />
     <link rel="prev" title="Overview" href="ecco_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -208,9 +208,12 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ecco_overview.html">Overview</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Visualizing ECCO Model Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="computing_ecco_trends.html">Computing Trends in ECCO Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/mitgcm_overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
@@ -225,17 +228,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">A Regional Model Example</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_description.html">Configuration Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/model_grid.html">Model Grid</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/bathymetry.html">Bathymetry</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/initial_conditions.html">Initial Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/external_conditions.html">External Forcing Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/boundary_conditions.html">Boundary Conditions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/choosing_packages.html">Choosing Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../regional_example/running_the_model.html">Running the Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
 <ul class="nav bd-sidenav">
@@ -487,7 +479,7 @@ document.write(`
 </div>
 <section id="data-for-this-notebook">
 <h2>Data for this notebook<a class="headerlink" href="#data-for-this-notebook" title="Link to this heading">#</a></h2>
-<p>In this notebook, we will use temperature data from the Versions 4 state estimate. To download the data, you can use the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/tools/Downloading%20ECCO%20Data.ipynb">Downloading ECCO Data</a> notebook available on the Github for this book. Use the following settings to download the pertinent data:</p>
+<p>In this notebook, we will use temperature data from the Versions 4 state estimate. To download the data, you can use the <a class="reference external" href="https://github.com/ProfMikeWood/ocean_modeling_book/blob/main/tools/Downloading%20ECCO%20V4%20Data.ipynb">Downloading ECCO V4 Data</a> notebook available on the Github for this book. Use the following settings to download the pertinent data:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;Version4&#39;</span>
 <span class="n">release</span> <span class="o">=</span> <span class="s1">&#39;Release4&#39;</span>
 <span class="n">subset</span> <span class="o">=</span> <span class="s1">&#39;interp_monthly&#39;</span>
@@ -500,7 +492,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a path to a data folder</span>
-<span class="n">data_folder</span> <span class="o">=</span> <span class="s1">&#39;../../ocean_modeling_book_data/data&#39;</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="s1">&#39;../data&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -590,7 +582,7 @@ The latitude at index 294 is 57.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02c5e8a066a90229f3a01a4b9b079d4b15e0420a5ff9271cf729627de34754e1.png" src="../_images/02c5e8a066a90229f3a01a4b9b079d4b15e0420a5ff9271cf729627de34754e1.png" />
+<img alt="../_images/26b6a2fac9febbbd5967b05624f5459ef89eed2585c3a0323b9ed2d4d6638ee1.png" src="../_images/26b6a2fac9febbbd5967b05624f5459ef89eed2585c3a0323b9ed2d4d6638ee1.png" />
 </div>
 </div>
 <p>Next, we can use these indices to sample our data:</p>
@@ -634,7 +626,7 @@ The latitude at index 294 is 57.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f179bb57b234a4ca97e4eb5e0f28d0fc97860f9ff36041738ea939b9abf6bdc4.png" src="../_images/f179bb57b234a4ca97e4eb5e0f28d0fc97860f9ff36041738ea939b9abf6bdc4.png" />
+<img alt="../_images/78ae49c394a02cb223c3b1093f06ad71f3c698cee1c6935cd92b971aa3b85996.png" src="../_images/78ae49c394a02cb223c3b1093f06ad71f3c698cee1c6935cd92b971aa3b85996.png" />
 </div>
 </div>
 </section>
@@ -721,7 +713,7 @@ The latitude at index 294 is 57.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3ebaf0b2ad9f9872933ad90049b200159ebd282038ecf52aed8d574f2aff58df.png" src="../_images/3ebaf0b2ad9f9872933ad90049b200159ebd282038ecf52aed8d574f2aff58df.png" />
+<img alt="../_images/bd76ef4187b7cc6449e651ea6d7b21a8fb8d59eab5c039630f24ba37fb2bb141.png" src="../_images/bd76ef4187b7cc6449e651ea6d7b21a8fb8d59eab5c039630f24ba37fb2bb141.png" />
 </div>
 </div>
 </section>
@@ -781,7 +773,7 @@ The latitude at index 294 is 57.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0a4fd55d9e821540612ddb5d3e6d3b0e18eb5aa2a1926e27a2b7aa9b3100ea7a.png" src="../_images/0a4fd55d9e821540612ddb5d3e6d3b0e18eb5aa2a1926e27a2b7aa9b3100ea7a.png" />
+<img alt="../_images/9c81b245a97b1a24fe175f28da6f439b573bc9ccaab04e974463b3e0338f111a.png" src="../_images/9c81b245a97b1a24fe175f28da6f439b573bc9ccaab04e974463b3e0338f111a.png" />
 </div>
 </div>
 <p>This type of plot gives us much more information than either of two above since we have both time and depth information.</p>
@@ -808,7 +800,7 @@ The latitude at index 294 is 57.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e2e8b2523c181d72f5a11d44bcb4f96d39b9c50f28c225a169e20e4b1f671871.png" src="../_images/e2e8b2523c181d72f5a11d44bcb4f96d39b9c50f28c225a169e20e4b1f671871.png" />
+<img alt="../_images/b4125519e192e81c1ca0cb825c50002b4cf5fea88753de8cc7dd71796f28352a.png" src="../_images/b4125519e192e81c1ca0cb825c50002b4cf5fea88753de8cc7dd71796f28352a.png" />
 </div>
 </div>
 <p>In looking at the plot above, there’s at least two things that are dissatisfying. First, the world is very distorted at the poles. Second, the continents are filled in with a default value of 0, which is a possible temperature value - kinda confusing. We can remedy both of these using <code class="docutils literal notranslate"><span class="pre">cartopy</span></code> by choosing a better projection for our data and adding polygons that cover the coastline.</p>
@@ -835,7 +827,7 @@ The latitude at index 294 is 57.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d67b911e2beb3976d6112712e9440f0a8d00d5d508f23218661a493165816696.png" src="../_images/d67b911e2beb3976d6112712e9440f0a8d00d5d508f23218661a493165816696.png" />
+<img alt="../_images/f3015274e72bcf8b2965ac6af5e3e52f2361c400d8ee8f22e4bd782eb2bfc471.png" src="../_images/f3015274e72bcf8b2965ac6af5e3e52f2361c400d8ee8f22e4bd782eb2bfc471.png" />
 </div>
 </div>
 <section id="spot-the-differences">
@@ -921,11 +913,11 @@ The latitude at index 294 is 57.25
       </div>
     </a>
     <a class="right-next"
-       href="../mitgcm/getting_started_with_MITgcm.html"
+       href="computing_ecco_trends.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started with MITgcm</p>
+        <p class="prev-next-title">Computing Trends in ECCO Output</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
