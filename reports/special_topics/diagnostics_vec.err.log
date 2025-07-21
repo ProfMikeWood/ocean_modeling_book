@@ -29,5 +29,5 @@ Cell [0;32mIn[3], line 4[0m
 [1;32m      3[0m n_cols [38;5;241m=[39m [38;5;241m90[39m
 [0;32m----> 4[0m bathy [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mfromfile[49m[43m([49m[43mos[49m[38;5;241;43m.[39;49m[43mpath[49m[38;5;241;43m.[39;49m[43mjoin[49m[43m([49m[43mmodel_path[49m[43m,[49m[38;5;124;43m'[39;49m[38;5;124;43minput[39;49m[38;5;124;43m'[39;49m[43m,[49m[38;5;124;43m'[39;49m[38;5;124;43mbathymetry.bin[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m,[49m[38;5;124;43m'[39;49m[38;5;124;43m>f4[39;49m[38;5;124;43m'[39;49m[43m)[49m[38;5;241m.[39mreshape((n_rows,n_cols))
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/efs_ecco/mwood/dv_example/MITgcm/verification/tutorial_global_oce_latlon/input/bathymetry.bin'
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '../data/dv_example/MITgcm/verification/tutorial_global_oce_latlon/input/bathymetry.bin'
 

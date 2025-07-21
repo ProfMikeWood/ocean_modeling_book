@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -199,8 +199,11 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/exploring_timestepping.html">Exploring Time Stepping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/timestepping_schemes_odes.html">Time Stepping Schemes for ODEs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../modeling/difference_methods.html">Difference Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/pdes_introduction_example.html">From ODEs to PDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modeling/model_grids.html">Model Grids</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
 <ul class="nav bd-sidenav">
@@ -509,10 +512,15 @@ document.write(`
 <p>Next, let’s add <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> to the list of packages for this model:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="n">packages</span><span class="o">.</span><span class="n">conf</span>
 <span class="c1"># add a line for diagnostics_vec</span>
+<span class="c1"># remove lines for ptracers, timeave, mnc</span>
+</pre></div>
+</div>
+<p>Now that we’ve removed the ptracers package, also remove the scripts in the code directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="n">ptracers</span><span class="o">*</span>
 </pre></div>
 </div>
 <p>Finally, let’s change the model to run with MPI:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="o">../</span><span class="n">code</span><span class="o">/</span><span class="n">SIZE</span><span class="o">.</span><span class="n">h</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="n">SIZE</span><span class="o">.</span><span class="n">h</span>
 </pre></div>
 </div>
 <p>And update with the following:</p>
@@ -529,16 +537,8 @@ document.write(`
      <span class="o">&amp;</span>           <span class="n">Nr</span>  <span class="o">=</span>  <span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Next, let’s build the model by loading in some modules</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">purge</span>
-<span class="n">source</span> <span class="o">/</span><span class="n">shared</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">module</span> <span class="n">add</span> <span class="n">openmpi</span><span class="o">-</span><span class="mf">4.1.1</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">9.4.0</span><span class="o">-</span><span class="n">jgsdvep</span>
-<span class="n">module</span> <span class="n">add</span> <span class="n">netcdf</span><span class="o">-</span><span class="n">fortran</span><span class="o">-</span><span class="mf">4.5.3</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">11.1.0</span><span class="o">-</span><span class="n">d35hzyr</span>
-</pre></div>
-</div>
-<p>and the running the typical compile commands:</p>
+<p>Next, let’s build the model by running the typical compile commands:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">../</span><span class="n">build</span>
-<span class="n">export</span> <span class="n">MPI_HOME</span><span class="o">=/</span><span class="n">efs_ecco</span><span class="o">/</span><span class="n">ECCO</span><span class="o">/</span><span class="n">EMU2</span><span class="o">/</span><span class="n">emu_dir</span><span class="o">/</span><span class="n">ompi</span>
 <span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">genmake2</span> <span class="o">-</span><span class="n">of</span> <span class="o">../../../</span><span class="n">tools</span><span class="o">/</span><span class="n">build_options</span><span class="o">/</span><span class="n">darwin_amd64_gfortran</span> <span class="o">-</span><span class="n">mods</span> <span class="o">../</span><span class="n">code</span> <span class="o">-</span><span class="n">mpi</span>
 <span class="n">make</span> <span class="n">depend</span>
 <span class="n">make</span>
@@ -551,7 +551,7 @@ document.write(`
 <p>Begin by modifying the model path and reading in the bathymetry:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;/efs_ecco/mwood/dv_example/MITgcm/verification/tutorial_global_oce_latlon&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;../data/dv_example/MITgcm/verification/tutorial_global_oce_latlon&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -562,18 +562,6 @@ document.write(`
 <span class="n">n_rows</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="n">n_cols</span> <span class="o">=</span> <span class="mi">90</span>
 <span class="n">bathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="s1">&#39;bathymetry.bin&#39;</span><span class="p">),</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span><span class="n">n_cols</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">n_rows</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="mi">90</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">bathy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="s1">&#39;bathymetry.bin&#39;</span><span class="p">),</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_rows</span><span class="p">,</span><span class="n">n_cols</span><span class="p">))</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/efs_ecco/mwood/dv_example/MITgcm/verification/tutorial_global_oce_latlon/input/bathymetry.bin&#39;
 </pre></div>
 </div>
 </div>
@@ -604,7 +592,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/699d481f663bc45fef59fbe4ae40281b1538c0845e795487bb8aa6a4d1a4a3d5.png" src="../_images/699d481f663bc45fef59fbe4ae40281b1538c0845e795487bb8aa6a4d1a4a3d5.png" />
+<img alt="../_images/1c94ed82b503aa4d45ea8bcc919cb5e424856bac03937a0afd7d874af17ede0d.png" src="../_images/1c94ed82b503aa4d45ea8bcc919cb5e424856bac03937a0afd7d874af17ede0d.png" />
 </div>
 </div>
 <p>Given this domain, we can make masks for <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> that can be used to generate outputs from the global model along our boundary. In turn, these outputs could be used to generate the subdomain boundary conditions (perhaps via interpolation).</p>
@@ -700,7 +688,7 @@ The west mask has 11 points
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e189f2f9eae77ce6ae99aa874ed81b4e7a83fea6a8988bffc8dac63baf29c540.png" src="../_images/e189f2f9eae77ce6ae99aa874ed81b4e7a83fea6a8988bffc8dac63baf29c540.png" />
+<img alt="../_images/5909c42c6c5d59ced2aa7d51efae856b1ce4f72a271bf8229c53cb6f8868c4ca.png" src="../_images/5909c42c6c5d59ced2aa7d51efae856b1ce4f72a271bf8229c53cb6f8868c4ca.png" />
 </div>
 </div>
 <p>After you’re happy with your masks, you can output them to your run directory</p>
@@ -768,33 +756,18 @@ The west mask has 11 points
 <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">../</span><span class="nb">input</span><span class="o">/*</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>Before running, we will edit 2 files. First let’s edit the <code class="docutils literal notranslate"><span class="pre">data.pkg</span></code> file to include a line for <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code>:</p>
+<p>Before running, we will edit 2 files. First let’s edit the <code class="docutils literal notranslate"><span class="pre">data.pkg</span></code> file to remove the line for <code class="docutils literal notranslate"><span class="pre">ptracers</span></code> and include a line for <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> .</p>
 <p><code class="docutils literal notranslate"> <span class="pre">useDiagnostics_vec</span> <span class="pre">=</span> <span class="pre">.TRUE.,</span></code></p>
-<p>Next, let’s edit the <code class="docutils literal notranslate"><span class="pre">data</span></code> file to run for one year by changing <code class="docutils literal notranslate"><span class="pre">nTimeSteps</span></code> to 365. You may also like to change the <code class="docutils literal notranslate"><span class="pre">dumpFreq</span></code> to 31536000 since we don’t care about the typical output for this example.</p>
-<p>To run the model, we can use a job script, e.g. <code class="docutils literal notranslate"><span class="pre">dv_test.slm</span></code> as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#SBATCH --ntasks=2</span>
-<span class="c1">#SBATCH --ntasks-per-node=2</span>
-<span class="c1">#SBATCH --exclusive</span>
-<span class="c1">#SBATCH --partition=sealevel-c5xl-demand</span>
-<span class="c1">#SBATCH --mem-per-cpu=1GB</span>
-<span class="c1">#SBATCH --time=1:00:00</span>
-
-<span class="n">module</span> <span class="n">purge</span>
-<span class="n">source</span> <span class="o">/</span><span class="n">shared</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">spack</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">env</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">module</span> <span class="n">add</span> <span class="n">openmpi</span><span class="o">-</span><span class="mf">4.1.1</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">9.4.0</span><span class="o">-</span><span class="n">jgsdvep</span>
-<span class="n">module</span> <span class="n">add</span> <span class="n">netcdf</span><span class="o">-</span><span class="n">fortran</span><span class="o">-</span><span class="mf">4.5.3</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="mf">11.1.0</span><span class="o">-</span><span class="n">d35hzyr</span>
-
-<span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">2</span> <span class="o">./</span><span class="n">mitgcmuv</span>
+<p>Next, let’s edit the <code class="docutils literal notranslate"><span class="pre">data</span></code> file to run for one year by changing <code class="docutils literal notranslate"><span class="pre">nTimeSteps</span></code> to 365 and comment out the line for <code class="docutils literal notranslate"><span class="pre">taveFreq</span></code>. You may also like to change the <code class="docutils literal notranslate"><span class="pre">dumpFreq</span></code> to 31536000 since we don’t care about the typical output for this example.</p>
+<p>To run the model, we use the run command with 2 procs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpirun</span> <span class="o">-</span><span class="n">np</span> <span class="mi">2</span> <span class="o">./</span><span class="n">mitgcmuv</span>
 </pre></div>
 </div>
-<p>Put this script in your run directory and run with the following command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">dv_test.slm</span></code></p>
 </section>
 <section id="assessing-the-diagnostic-vec-output">
 <h2>Assessing the diagnostic_vec output<a class="headerlink" href="#assessing-the-diagnostic-vec-output" title="Link to this heading">#</a></h2>
 <p>The output of the <code class="docutils literal notranslate"><span class="pre">diagnostics_vec</span></code> files will be organized in the <code class="docutils literal notranslate"><span class="pre">dv</span></code> directory - one file for each variable. Each file will contain 365 timesteps with output for each depth and each point along the mask. Let’s take a look at an example</p>
-<p>Consider <code class="docutils literal notranslate"><span class="pre">THETA</span></code> along the eastern boundary. From above, we know there are 11 poitns in the east mask and from our model’s <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file, we know there are 15 depth levels. Thus, the shape of this file is (365, 15, 11):</p>
+<p>Consider <code class="docutils literal notranslate"><span class="pre">THETA</span></code> along the eastern boundary. From above, we know there are 11 points in the east mask and from our model’s <code class="docutils literal notranslate"><span class="pre">SIZE.h</span></code> file, we know there are 15 depth levels. Thus, the shape of this file is (365, 15, 11):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read in the theta file</span>
@@ -828,14 +801,13 @@ The west mask has 11 points
 <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">theta_dv_east</span><span class="p">[</span><span class="mi">270</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">29</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Timestep &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">270</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Timestep 270&#39;)
-</pre></div>
-</div>
-<img alt="../_images/06900a156c75e5bef0f208ec4028cc78a35eaef036091a10958924141a85979c.png" src="../_images/06900a156c75e5bef0f208ec4028cc78a35eaef036091a10958924141a85979c.png" />
+<img alt="../_images/ccddc7a983c124ccd896a35939dba152de573d4feb12a51e8d3e21e4384e515f.png" src="../_images/ccddc7a983c124ccd896a35939dba152de573d4feb12a51e8d3e21e4384e515f.png" />
 </div>
 </div>
 </section>

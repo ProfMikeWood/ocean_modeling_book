@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/mike/opt/anaconda3/envs/ms274/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+fig = plt.figure(figsize=(8,4))
+plt.loglog(timesteps, forward_euler_errors, label='Forward Euler')
+plt.loglog(timesteps, backward_euler_errors, label='Backward Euler')
+plt.loglog(timesteps, crank_nicolson_errors, label='Crank-Nicolson')
+plt.loglog(timesteps, adams_bashforth_errors, label='Adams-Bashforth')
+plt.loglog(timesteps, runga_kutta_errors, label='Runge-Kutta')
+plt.ylabel('Root Mean Square Error')
+plt.xlabel('Timestep Size (s)')
+plt.legend()
+plt.title('Numerical Solution Errors relative to Analytical Solution')
+plt.grid(linestyle='--', linewidth=0.5, alpha=0.5)
+plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[22], line 6[0m
+[1;32m      4[0m plt[38;5;241m.[39mloglog(timesteps, crank_nicolson_errors, label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mCrank-Nicolson[39m[38;5;124m'[39m)
+[1;32m      5[0m plt[38;5;241m.[39mloglog(timesteps, adams_bashforth_errors, label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mAdams-Bashforth[39m[38;5;124m'[39m)
+[0;32m----> 6[0m plt[38;5;241m.[39mloglog(timesteps, [43mrunga_kutta_errors[49m, label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mRunge-Kutta[39m[38;5;124m'[39m)
+[1;32m      7[0m plt[38;5;241m.[39mylabel([38;5;124m'[39m[38;5;124mRoot Mean Square Error[39m[38;5;124m'[39m)
+[1;32m      8[0m plt[38;5;241m.[39mxlabel([38;5;124m'[39m[38;5;124mTimestep Size (s)[39m[38;5;124m'[39m)
+
+[0;31mNameError[0m: name 'runga_kutta_errors' is not defined
+
