@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Time Stepping Schemes for ODEs &#8212; Numerical Ocean Modeling</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modeling/timestepping_schemes_odes';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Difference Methods" href="difference_methods.html" />
+    <link rel="prev" title="Exploring Time Stepping" href="exploring_timestepping.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Numerical Ocean Modeling
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="exploring_timestepping.html">Exploring Time Stepping</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Time Stepping Schemes for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="difference_methods.html">Difference Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pdes_introduction_example.html">From ODEs to PDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_grids.html">Model Grids</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/computing_ecco_trends.html">Computing Trends in ECCO Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/mitgcm_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../state_estimation/greens_function.html">Green’s Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmodeling/timestepping_schemes_odes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/modeling/timestepping_schemes_odes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Time Stepping Schemes for ODEs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-example">Model Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-solution">Analytical Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solutions">Numerical Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-methods">Euler’s Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-euler">Forward Euler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-euler">Backward Euler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicolson-scheme">Crank-Nicolson Scheme</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adams-bashforth-schemes">Adams-Bashforth Schemes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-kutta-schemes">Runge-Kutta Schemes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-errors">Assessing Errors</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="time-stepping-schemes-for-odes">
+<h1>Time Stepping Schemes for ODEs<a class="headerlink" href="#time-stepping-schemes-for-odes" title="Link to this heading">#</a></h1>
+<p>To simulate ocean circulation through time, we use time stepping schemes to determine the next model state given the current state. In this notebook, we’ll look at a few approaches to implementing time stepping on a simple differential equation. Here, the goal will be to introduce several common schemes and take a look at their investigation rather than deriving the scheme from scratch along with the associated errors and stability.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Time stepping refers to the process of predicting the state of a model at a time in the future given a function of the state at another time (which could be in  the past, present, future, or some combination of these states).</p>
+<p><strong>Import the modules for this notebook</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="model-example">
+<h2>Model Example<a class="headerlink" href="#model-example" title="Link to this heading">#</a></h2>
+<p><strong>Differential Equation</strong></p>
+<p>In this example, we’ll be investigating the Logistic Differential Equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{dP}{dt} = rP\left(1-\frac{P}{K}\right)
+\]</div>
+<p>This equation is used to model population growth in a setting where the total population <span class="math notranslate nohighlight">\(P\)</span> is limited by a carrying capacity <span class="math notranslate nohighlight">\(K\)</span>. In this equation <span class="math notranslate nohighlight">\(r\)</span> is a growth rate that would hold if there were no constraints on growth. Here, we might consider <span class="math notranslate nohighlight">\(P\)</span> the number of cells in a culture and <span class="math notranslate nohighlight">\(K\)</span> the total number of cells that permissible in a given culture given nutrient availability, physical space, or some other constraint.</p>
+<p><strong>Initial Conditions</strong></p>
+<p>When modeling populations, we always start with an initial number of individuals <span class="math notranslate nohighlight">\(P_0\)</span> i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+P(0) = P_0
+\]</div>
+<p><strong>Intuitive Explanation</strong></p>
+<p>In the absence of any constraints on growth, the growth rate of the population <span class="math notranslate nohighlight">\(dP/dt\)</span> will grow exponentially with a growth rate <span class="math notranslate nohighlight">\(r\)</span>. We can see this in the equation by considering a small population <span class="math notranslate nohighlight">\(P\)</span> relative to the carrying capacity. In this case, the term <span class="math notranslate nohighlight">\(\left(1-\frac{P}{K}\right)\)</span> is close to 1 and we have a simple exponential growth equation <span class="math notranslate nohighlight">\(P'(t) = rP(t)\)</span>.</p>
+<p>However, as <span class="math notranslate nohighlight">\(P\)</span> start to approach the carrying capacity the <span class="math notranslate nohighlight">\(\left(1-\frac{P}{K}\right)\)</span> approaches 0, and there is no further growth i.e. <span class="math notranslate nohighlight">\(P'(t) = 0\)</span>.</p>
+<p>This type of equation is known as an <strong>ordinary differential equation</strong>. The <em>differential equation</em> part indicates that it is an equation that relates a function to one or more of its own derivatives. The <em>ordinary</em> part indicates that the derivatives are all with respect to the same variable. The previous example with the ball toss can also be thought of as a differential equation.</p>
+<section id="analytical-solution">
+<h3>Analytical Solution<a class="headerlink" href="#analytical-solution" title="Link to this heading">#</a></h3>
+<p>It can be shown that analytical solution to this equation is</p>
+<div class="math notranslate nohighlight">
+\[
+P(t) = \dfrac{P_0 K e^{rt}}{(K-P_0) + P_0 e^{rt}}
+\]</div>
+<p>Try differentiating this function and plugging it into differential equation to ensure that this function is indeed a solution.</p>
+<p>Let’s put some numbers on our equation and have a look at the solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># estimate initial conditions</span>
+<span class="n">P_0</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># starting and ending times (seconds)</span>
+<span class="n">t_min</span> <span class="o">=</span> <span class="mf">0.0</span> 
+<span class="n">t_max</span> <span class="o">=</span> <span class="mf">100.0</span>
+
+<span class="c1"># define the carrying capacity</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="c1"># define the growth rate</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.1</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a time array for the analytical solution</span>
+<span class="n">t_analytical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="c1"># make a function to compute the analytical solution</span>
+<span class="k">def</span> <span class="nf">P_analytical</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">P_0</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">t_analytical</span><span class="p">))</span><span class="o">/</span><span class="p">((</span><span class="n">K</span><span class="o">-</span><span class="n">P_0</span><span class="p">)</span> <span class="o">+</span> <span class="n">P_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">t_analytical</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">,</span> <span class="n">K</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">K</span><span class="o">*</span><span class="mf">0.98</span><span class="p">,</span><span class="s1">&#39;Carrying Capacity (K)&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">,</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t_analytical</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Total Number of Cells&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Days&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/220b00bb2a8f48eef43db31df1ff6b24f50535530fba08c00f630eb3894cbd11.png" src="../_images/220b00bb2a8f48eef43db31df1ff6b24f50535530fba08c00f630eb3894cbd11.png" />
+</div>
+</div>
+<p>As we can see, the population grows quickly from its initial value and then starts to taper-off as it approaches the carrying capacity.</p>
+<p>In the subsequent sections, we’ll see how we can approximate this solution numerically.</p>
+</section>
+</section>
+<section id="numerical-solutions">
+<h2>Numerical Solutions<a class="headerlink" href="#numerical-solutions" title="Link to this heading">#</a></h2>
+<p>All solutions to the differential equation derived numerically will follow series of discrete steps. Since we often think about these discrete steps in time, we can refer to these as <em>time stepping</em> schemes. Below, we will see 5 differnent implementations of time stepping schemes. They will all follow the same general formula as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx P(t) + \Delta t f(\cdots)
+\]</div>
+<p>Here, we estimate a future population value <span class="math notranslate nohighlight">\(P(t+\Delta t)\)</span> as a function of the current population values <span class="math notranslate nohighlight">\(P(t)\)</span> and a small difference estimated by the time step <span class="math notranslate nohighlight">\(\Delta t\)</span> and <span class="math notranslate nohighlight">\(f\)</span>,  a function that will depend on values of <span class="math notranslate nohighlight">\(P\)</span> at various time steps. In each of the cases below, the function <span class="math notranslate nohighlight">\(f\)</span> is formulated a little different. Let’s take a look.</p>
+</section>
+<section id="euler-s-methods">
+<h2>Euler’s Methods<a class="headerlink" href="#euler-s-methods" title="Link to this heading">#</a></h2>
+<p>Euler’s method is one of the simplest implementations of a numerical method for solving</p>
+<section id="forward-euler">
+<h3>Forward Euler<a class="headerlink" href="#forward-euler" title="Link to this heading">#</a></h3>
+<p>In the <em>Forward Euler</em> method, we express the population time <span class="math notranslate nohighlight">\(\Delta t\)</span> in the future as a function of the temperature at the time <span class="math notranslate nohighlight">\(t\)</span> and the rate of change at the time <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx P(t) +\Delta t \frac{dP(t)}{dt}
+\]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+f(P(t)) = \frac{dP(t)}{dt}
+\]</div>
+<p>Using our differential equation, we can fill in this derivative as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx P(t) +\Delta t \frac{dP(t)}{dt} = P(t) +\Delta t \left[rP(t)\left(1-\frac{P(t)}{K}\right)\right]
+\]</div>
+<p>Not too bad! Let’s code it up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_euler</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    
+    <span class="c1"># compute number of timesteps</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+
+    <span class="c1"># make a time array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
+
+    <span class="c1"># establish the P grid</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,))</span>
+    
+    <span class="c1"># establish initial conditions</span>
+    <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_0</span>
+    
+    <span class="c1"># loop through each time step up until the last one</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">))</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we can apply our function with a given timestep:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_forward_euler</span><span class="p">,</span> <span class="n">P_forward_euler</span> <span class="o">=</span> <span class="n">forward_euler</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also generate a function to see how our scheme worked out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_model_solution_vs_analytical</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">P_analytical</span><span class="p">,</span> <span class="n">model_name</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">K</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">K</span><span class="o">*</span><span class="mf">0.98</span><span class="p">,</span><span class="s1">&#39;Carrying Capacity (K)&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span><span class="n">va</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Model Solution&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical Solution&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Total Number of Cells&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Days&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Analytical Solution vs Solution with &#39;</span><span class="o">+</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model_solution_vs_analytical</span><span class="p">(</span><span class="n">t_forward_euler</span><span class="p">,</span> <span class="n">P_forward_euler</span><span class="p">,</span>
+                                  <span class="n">P_analytical</span><span class="p">,</span> <span class="s2">&quot;Forward Euler&#39;s Method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/aa4d1dfedf5f13049408e5af6b03b563c0b05487d1ebda3af865b0ebb1b7a0e3.png" src="../_images/aa4d1dfedf5f13049408e5af6b03b563c0b05487d1ebda3af865b0ebb1b7a0e3.png" />
+</div>
+</div>
+<p>Ok, it’s not terrible, but the modeled curve seems to be lagging behind the true solution. If only we could strategically guess what way the curve was going to go - we’ll see this in the next approach.</p>
+</section>
+<section id="backward-euler">
+<h3>Backward Euler<a class="headerlink" href="#backward-euler" title="Link to this heading">#</a></h3>
+<p>In the <em>Backward Euler</em> method, we express the population at a time <span class="math notranslate nohighlight">\(\Delta t\)</span> in the future as a function of the temperature at the time <span class="math notranslate nohighlight">\(t\)</span> and the rate of change at the time <span class="math notranslate nohighlight">\(t+\Delta t\)</span> i.e. <em>in the future</em>.</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx P(t) +\Delta t \frac{dP(t+\Delta t)}{dt}
+\]</div>
+<p>In other words,</p>
+<div class="math notranslate nohighlight">
+\[
+f(P(t)) = \frac{dP(t+\Delta t)}{dt}
+\]</div>
+<p>Using our differential equation, we can fill in this derivative as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx P(t) +\Delta t \frac{dP(t+\Delta t)}{dt} = P(t) +\Delta t \left[rP(t+\Delta t)\left(1-\frac{P(t+\Delta t)}{K}\right)\right]
+\]</div>
+<p>Ok, this is a little trickier than the last approach. In the forward method, we have all of the information we need at a given time step to predict the next one. However, this model uses information from the future to predict the future - this type of scheme is known as an <strong>implicit</strong> scheme.</p>
+<p>Not to worry, we can generate a scheme - we just need to ensure that there is a <span class="math notranslate nohighlight">\(P(t+\Delta t)\)</span> term on the left hand side of the equation. With a little rearranging, we can write the problem like so:</p>
+<div class="math notranslate nohighlight">
+\[
+0 \approx P(t) + (\Delta t r - 1)P(t+\Delta t) - \left(\frac{\Delta t r}{K}\right)(P(t+\Delta t))^2
+\]</div>
+<p>Turns out, this is just a quadratic equation, which we solve with the quadratic formula:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+a &amp;= -\frac{\Delta t r}{K}\\
+b &amp;= \Delta t r - 1 \\
+c &amp;= P(t)
+\end{align*}
+\end{split}\]</div>
+<p>Thats a few more lines than the last scheme, but fundamentally, it’s a very similar approrach. Let’s code it up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backward_euler</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    
+    <span class="c1"># compute number of timesteps</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+
+    <span class="c1"># make a time array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
+
+    <span class="c1"># establish the P grid</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,))</span>
+    
+    <span class="c1"># establish initial conditions</span>
+    <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_0</span>
+    
+    <span class="c1"># loop through each time step up until the last one</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">dt</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="n">K</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can test out scheme like before with the same time step and plotting function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_backward_euler</span><span class="p">,</span> <span class="n">P_backward_euler</span> <span class="o">=</span> <span class="n">backward_euler</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model_solution_vs_analytical</span><span class="p">(</span><span class="n">t_backward_euler</span><span class="p">,</span> <span class="n">P_backward_euler</span><span class="p">,</span>
+                                  <span class="n">P_analytical</span><span class="p">,</span> <span class="s2">&quot;Backward Euler&#39;s Method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/015c68835f64ac7fbae8d553f48915d19c275c1efe3a372365a4c8e326addfe1.png" src="../_images/015c68835f64ac7fbae8d553f48915d19c275c1efe3a372365a4c8e326addfe1.png" />
+</div>
+</div>
+<p>Here, we see similar results as before, but now we have the opposite problem. Our numerical solution seems to be outpacing the analytical solution. If only we could split the difference…</p>
+</section>
+<section id="crank-nicolson-scheme">
+<h3>Crank-Nicolson Scheme<a class="headerlink" href="#crank-nicolson-scheme" title="Link to this heading">#</a></h3>
+<p>In the Crank-Nicolson scheme, we express the population at a time <span class="math notranslate nohighlight">\(\Delta t\)</span> in the future as a function of the temperature at the time <span class="math notranslate nohighlight">\(t\)</span> and a combination of the rates of change at the time <span class="math notranslate nohighlight">\(t\)</span> <em>and</em> the time time <span class="math notranslate nohighlight">\(t+\Delta t\)</span>. Specifically, the combination is done as an average of the two. Borrowing the notation from above, we can express the scheme with</p>
+<div class="math notranslate nohighlight">
+\[
+f(P(t), P(t+\Delta t)) = \frac{1}{2}\left[\frac{dP(t)}{dt} + \frac{dP(t+\Delta t)}{dt}\right]
+\]</div>
+<p>This method can be thought of as a combination of the forward and backward Euler methods.</p>
+<p>Using our differential equation, we again find that we need to do a little rearranging of our equation:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx  P(t) +\frac{\Delta t}{2} \left[rP(t)\left(1-\frac{P(t)}{K}\right) + rP(t+\Delta t)\left(1-\frac{P(t+\Delta t)}{K}\right)\right]
+\]</div>
+<p>And we find that this is another quadratic equation situation with:</p>
+<div class="math notranslate nohighlight">
+\[
+0 \approx  \left[P(t) +\frac{\Delta t}{2} rP(t)\left(1-\frac{P(t)}{K}\right)\right] + \left[\frac{\Delta t}{2} r - 1\right]P(t+\Delta t) - \left(\frac{\Delta t r}{2 K}\right)(P(t+\Delta t))^2
+\]</div>
+<p>This is a very similar situation as the last method and we can again solve with the quadratic formula:</p>
+<div class="math notranslate nohighlight">
+\[
+P(t+\Delta t) \approx \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+a &amp;= -\frac{\Delta t r}{2 K}\\
+b &amp;= \frac{\Delta t}{2} r - 1\\
+c &amp;= P(t) +\frac{\Delta t}{2} rP(t)\left(1-\frac{P(t)}{K}\right)
+\end{align*}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">crank_nicolson</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    
+    <span class="c1"># compute number of timesteps</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+
+    <span class="c1"># make a time array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
+
+    <span class="c1"># establish the P grid</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,))</span>
+    
+    <span class="c1"># establish initial conditions</span>
+    <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_0</span>
+    
+    <span class="c1"># loop through each time step up until the last one</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="n">K</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">((</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">)</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how this looks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_crank_nicolson</span><span class="p">,</span> <span class="n">P_crank_nicolson</span> <span class="o">=</span> <span class="n">crank_nicolson</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model_solution_vs_analytical</span><span class="p">(</span><span class="n">t_crank_nicolson</span><span class="p">,</span> <span class="n">P_crank_nicolson</span><span class="p">,</span>
+                                  <span class="n">P_analytical</span><span class="p">,</span> <span class="s2">&quot;Crank-Nicolson Method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3aed8d52699b7ae10f4067fe010039631df61347cfedcc212bfc99087bd10717.png" src="../_images/3aed8d52699b7ae10f4067fe010039631df61347cfedcc212bfc99087bd10717.png" />
+</div>
+</div>
+<p>Whoa! Much better! Turns out the Crank-Nicolson method is quite an improvement over the Forward and Backward Euler’s method. We’ll quantify just how much better below. But before we do, we need to address one of the drawbacks of this method - the implicit component. Here, we needed to know how to solve for the next time step and we used our differential equation to do so. Even in this simple scenario, we had to use the quadratic formula to solve for our scheme. But that approach is certainly not going to work for any old differential equation. Thus, we’d like to develop a scheme that only depends on the information we already have. We’ll explore some options in the following two examples.</p>
+</section>
+</section>
+<section id="adams-bashforth-schemes">
+<h2>Adams-Bashforth Schemes<a class="headerlink" href="#adams-bashforth-schemes" title="Link to this heading">#</a></h2>
+<p>The Adams-Bashforth method is similar to the schemes above but instead uses multiple past time steps to infer the predictive function. Here, we’ll examine the Adams-Bashforth 2-step method which uses two past time steps as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+f(P(t), P(t-\Delta t)) = \frac{1}{2} \left[ 3P(t) - P(t-\Delta t)\right]
+\]</div>
+<p>This method is faily easy to code up, as we’ll see. The only catch is what happens at the first time step - since we need <em>two</em> time steps for the scheme to work, we don’t have enought information at the beginning. To circumvent this issue, we’ll use the basic Forward Euler’s method for the first step, and then the Adams-Bashforth after that:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adams_bashforth_2</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    
+    <span class="c1"># compute number of timesteps</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+
+    <span class="c1"># make a time array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
+
+    <span class="c1"># establish the P grid</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,))</span>
+    
+    <span class="c1"># establish initial conditions</span>
+    <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_0</span>
+    
+    <span class="c1"># loop through each time step up until the last one</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># first timestep is a forward Euler timestep</span>
+            <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># all the others are AB2 timeseries</span>
+            <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>  <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">K</span><span class="p">))</span> <span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how it performs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_AB2</span><span class="p">,</span> <span class="n">P_AB2</span> <span class="o">=</span> <span class="n">adams_bashforth_2</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model_solution_vs_analytical</span><span class="p">(</span><span class="n">t_AB2</span><span class="p">,</span> <span class="n">P_AB2</span><span class="p">,</span>
+                                  <span class="n">P_analytical</span><span class="p">,</span> <span class="s2">&quot;Adams-Bashforth Method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/601df665b0d234f127e9826e4f46bbc392dbbc873ffefdb7c47d02b95e9de129.png" src="../_images/601df665b0d234f127e9826e4f46bbc392dbbc873ffefdb7c47d02b95e9de129.png" />
+</div>
+</div>
+<p>Looking at the solution, it doesn’t seem as accurate as the Crank-Nicolson method. But the real upshot here is that we never needed any implicit information. In this case, it’s much easier to implement. The method can easily be extended to include additional steps from the past for enhanced numerical accuracy, but at higher numerical costs.</p>
+<p>Let’s take a look at one final approach.</p>
+</section>
+<section id="runge-kutta-schemes">
+<h2>Runge-Kutta Schemes<a class="headerlink" href="#runge-kutta-schemes" title="Link to this heading">#</a></h2>
+<p>The final example we’ll examine is one used commonly for solving ODEs - the Runge-Kutta method. The Runge-Kutta method is a “family” of schemes with different orders pertaining to the number of terms in the scheme. A very common scheme is the 4th-order scheme, which we’ll show here.</p>
+<p>To keep the notation clean(ish), let’s express the right-hand side of our differential equation as a function <span class="math notranslate nohighlight">\(\mathcal{F}(P)\)</span> i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{F}(P) = rP\left(1-\frac{P}{K}\right)
+\]</div>
+<p>Then, the 4th-order Runge-Kutta scheme is given by</p>
+<div class="math notranslate nohighlight">
+\[
+f = \frac{1}{6} (k_1 + 2k_2 + 2k_3 + k_4) 
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+k_1 &amp;= \mathcal{F}(P(t))\\
+k_2 &amp;= \mathcal{F}\left(P(t)+\frac{\Delta t}{2}k_1\right)\\
+k_3 &amp;= \mathcal{F}\left(P(t)+\frac{\Delta t}{2}k_2\right)\\
+k_4 &amp;= \mathcal{F}\left(P(t)+\Delta t k_3\right)\\
+\end{align*}
+\end{split}\]</div>
+<p>It is important to note that the <span class="math notranslate nohighlight">\(P\)</span>’s are always evaluated at the current time step and do not depend on properties in the future.</p>
+<p>Now that we’ve gotten the scheme out of the way, we can write the 4 <span class="math notranslate nohighlight">\(k\)</span> terms with our specific differential equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+k_1 &amp;= rP(t)\left(1-\frac{P(t)}{K}\right)\\
+k_2 &amp;= r\left(P(t)+\frac{\Delta t}{2}k_1\right)\left(1-\frac{P(t)+\frac{\Delta t}{2}k_1}{K}\right)\\
+k_3 &amp;= r\left(P(t)+\frac{\Delta t}{2}k_2\right)\left(1-\frac{P(t)+\frac{\Delta t}{2}k_2}{K}\right)\\
+k_4 &amp;= r\left(P(t)+\Delta tk_3\right)\left(1-\frac{P(t)+\Delta tk_3}{K}\right)\\
+\end{align*}
+\end{split}\]</div>
+<p>Not so bad - let’s code it up:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">runge_kutta_4</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    
+    <span class="c1"># compute number of timesteps</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+
+    <span class="c1"># make a time array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t_min</span><span class="p">,</span><span class="n">t_max</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
+
+    <span class="c1"># establish the P grid</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,))</span>
+    
+    <span class="c1"># establish initial conditions</span>
+    <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_0</span>
+    
+    <span class="c1"># loop through each time step up until the last one</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k1</span><span class="p">)</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">k3</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k2</span><span class="p">)</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">k4</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k3</span><span class="p">)</span> <span class="o">/</span> <span class="n">K</span><span class="p">)</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">dt</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">k4</span><span class="p">)</span>
+    
+    <span class="k">return</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how it peforms:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">t_RK4</span><span class="p">,</span> <span class="n">P_RK4</span> <span class="o">=</span> <span class="n">runge_kutta_4</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model_solution_vs_analytical</span><span class="p">(</span><span class="n">t_RK4</span><span class="p">,</span> <span class="n">P_RK4</span><span class="p">,</span>
+                                  <span class="n">P_analytical</span><span class="p">,</span> <span class="s2">&quot;Runge-Kutta Method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2353bb600d32df350fa4aece09d7e365d89d0e7d2259a926da4c986b99c6dee1.png" src="../_images/2353bb600d32df350fa4aece09d7e365d89d0e7d2259a926da4c986b99c6dee1.png" />
+</div>
+</div>
+<p>As we can see, the numerical solution matches quite well with the analytical solution! No wonder this scheme is so popular! It does come with some downsides though - notice that we needed to run 4 calculations to predict our next step which is much more than the other schemes. Here, we’re encountering a trade-off between computations and accuracy. But just how accurate are all these methods? Let’s test this numerically.</p>
+</section>
+<section id="assessing-errors">
+<h2>Assessing Errors<a class="headerlink" href="#assessing-errors" title="Link to this heading">#</a></h2>
+<p>A good textbook on numerical methods will give a derivation on the expected errors induced when using each of the schemes above. Here, we’ll use the functions we’ve already define above to compute the errors for our example. Let’s see how the errors compare across different timesteps:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a set of different time steps across orders of magnitude</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># make empy arrays to store errors in the model as a function of time step</span>
+<span class="n">forward_euler_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
+<span class="n">backward_euler_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
+<span class="n">crank_nicolson_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
+<span class="n">adams_bashforth_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
+<span class="n">runge_kutta_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">timesteps</span><span class="p">)</span>
+
+<span class="c1"># loop through and compute the errors for each scheme</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">timesteps</span><span class="p">):</span>
+
+    <span class="c1"># compute errors in forward Euler routine</span>
+    <span class="n">t_forward_euler</span><span class="p">,</span> <span class="n">P_forward_euler</span> <span class="o">=</span> <span class="n">forward_euler</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">forward_euler_errors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">P_forward_euler</span> <span class="o">-</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t_forward_euler</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># compute errors in backward Euler routine</span>
+    <span class="n">t_backward_euler</span><span class="p">,</span> <span class="n">P_backward_euler</span> <span class="o">=</span> <span class="n">backward_euler</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">backward_euler_errors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">P_backward_euler</span> <span class="o">-</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t_backward_euler</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># compute errors in Crank-Nicolson routine</span>
+    <span class="n">t_crank_nicolson</span><span class="p">,</span> <span class="n">P_crank_nicolson</span> <span class="o">=</span> <span class="n">crank_nicolson</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">crank_nicolson_errors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">P_crank_nicolson</span> <span class="o">-</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t_crank_nicolson</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># compute errors in Adams Bashforth routine</span>
+    <span class="n">t_adams_bashforth</span><span class="p">,</span> <span class="n">P_adams_bashforth</span> <span class="o">=</span> <span class="n">adams_bashforth_2</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">adams_bashforth_errors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">P_adams_bashforth</span> <span class="o">-</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t_adams_bashforth</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># compute errors in Runge Kutta routine</span>
+    <span class="n">t_runge_kutta</span><span class="p">,</span> <span class="n">P_runge_kutta</span> <span class="o">=</span> <span class="n">runge_kutta_4</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">t_min</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">P_0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">runge_kutta_errors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">P_runge_kutta</span> <span class="o">-</span> <span class="n">P_analytical</span><span class="p">(</span><span class="n">t_runge_kutta</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how they compare:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">forward_euler_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Euler&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">backward_euler_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Euler&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">crank_nicolson_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Crank-Nicolson&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">adams_bashforth_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Adams-Bashforth&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">runga_kutta_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Runge-Kutta&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Root Mean Square Error&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Timestep Size (s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Numerical Solution Errors relative to Analytical Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">crank_nicolson_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Crank-Nicolson&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">adams_bashforth_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Adams-Bashforth&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span> <span class="n">runga_kutta_errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Runge-Kutta&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Root Mean Square Error&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Timestep Size (s)&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;runga_kutta_errors&#39; is not defined
+</pre></div>
+</div>
+<img alt="../_images/abbb869e446e8d0c389182c1a2d09cd5748b821b742c5f86d1eb587331c0398e.png" src="../_images/abbb869e446e8d0c389182c1a2d09cd5748b821b742c5f86d1eb587331c0398e.png" />
+</div>
+</div>
+<p>Ok, there’s a lot to unpack here. First things first, it’s important to note that the scales on both axes are logarithmic. This is important when comparing the errors - clearly we see that the Runge-Kutta-4 method has the smallest errors, followed by Crank-Nicolson and then Adams-Bashforth-. However, the differences in errors span <em>orders of magnitude</em>. Furthermore, as the time step decreases, the Runge-Kutta method gets <em>exponentially</em> bette compared to the other methods, as a result of it being a 4th-order scheme. The Crank-Nicolson and Adams-Bashforth-2 schemes are both 2nd-order schemes, and their performance increases at similar rates with declining timesteps. Finally, the Euler schemes are worth in terms of accuracy improvements as a function of declining timestep.
+}
+Looking at this plot, we might be wondering - why we would use any of the other schemes when clearly Runge-Kutta-4 is most accurate? Well, the other consideration is computational cost, and Runga-Kutta-4 is the most expensive. If cost was your concern, then we can also see that the Crank-Nicolson scheme, say, can have the same accuracy as the Runge-Kutta scheme, just at a smaller timestep. For a simple ODE like the one we used here, it’s not a big computational cost. But for more complex equations with lots of terms, this extra cost can add up.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "ms274"
+        },
+        kernelOptions: {
+            name: "ms274",
+            path: "./modeling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ms274'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="exploring_timestepping.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exploring Time Stepping</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="difference_methods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Difference Methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-example">Model Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-solution">Analytical Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solutions">Numerical Solutions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euler-s-methods">Euler’s Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-euler">Forward Euler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-euler">Backward Euler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicolson-scheme">Crank-Nicolson Scheme</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adams-bashforth-schemes">Adams-Bashforth Schemes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runge-kutta-schemes">Runge-Kutta Schemes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-errors">Assessing Errors</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Wood
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

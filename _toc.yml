@@ -22,8 +22,12 @@ parts:
     - file: oceanography/equation_of_state
   - caption: Numerical Modeling
     chapters:
-    - file: modeling/model_grids
+    - file: modeling/exploring_timestepping
+    - file: modeling/timestepping_schemes_odes
     - file: modeling/difference_methods
+    - file: modeling/pdes_introduction_example
+    # - file: modeling/timestepping_schemes_pdes
+    - file: modeling/model_grids
 #    - file: modeling/subgridscale_parameterizations
   - caption: ECCO
     chapters:

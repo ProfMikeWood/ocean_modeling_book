@@ -335,3 +335,51 @@ ECCO/
             input_init/
                 bathy_eccollc_90x50_min2pts.bin
 
+dv_example files:
+
+dv_example/
+    MITgcm/
+        verification/
+            tutorial_global_oce_latlon/
+                README
+                code/
+                    SIZE.h
+                    SIZE.h_mpi
+                    packages.conf
+                    DIAGNOSTICS_VEC_SIZE.h
+                input/
+                    bathymetry.bin
+                    data
+                    data.gmredi
+                    data.pkg
+                    data.ptracers
+                    eedata
+                    eedata.mth
+                    data.diagnostics_vec
+                run/
+                    dv/
+                        north_mask.bin
+                        south_mask.bin
+                        west_mask.bin
+                        east_mask.bin
+                        north_mask_ETAN.0000000001.bin
+                        north_mask_THETA.0000000001.bin
+                        north_mask_SALT.0000000001.bin
+                        north_mask_VVEL.0000000001.bin
+                        north_mask_UVEL.0000000001.bin
+                        south_mask_ETAN.0000000001.bin
+                        south_mask_THETA.0000000001.bin
+                        south_mask_SALT.0000000001.bin
+                        south_mask_VVEL.0000000001.bin
+                        south_mask_UVEL.0000000001.bin
+                        east_mask_ETAN.0000000001.bin
+                        east_mask_THETA.0000000001.bin
+                        east_mask_SALT.0000000001.bin
+                        east_mask_VVEL.0000000001.bin
+                        east_mask_UVEL.0000000001.bin
+                        west_mask_ETAN.0000000001.bin
+                        west_mask_THETA.0000000001.bin
+                        west_mask_SALT.0000000001.bin
+                        west_mask_VVEL.0000000001.bin
+                        west_mask_UVEL.0000000001.bin
+    diagnostics_vec/

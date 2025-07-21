@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 data/ECCO
+data/dv_example
 
 # Mac file
 .DS_Store

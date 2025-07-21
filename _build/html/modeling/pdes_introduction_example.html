@@ -1,0 +1,1010 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>From ODEs to PDEs &#8212; Numerical Ocean Modeling</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modeling/pdes_introduction_example';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Model Grids" href="model_grids.html" />
+    <link rel="prev" title="Difference Methods" href="difference_methods.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Numerical Ocean Modeling - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Numerical Ocean Modeling - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Numerical Ocean Modeling
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_python_and_jupyter.html">Installing Python and Jupyter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/setting_up_a_github_repository.html">Setting up a Github Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_jupyter_notebooks.html">Getting Familiar with Jupyter Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installing_compiler_and_mpi.html">Installing a compiler with MPI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/getting_familiar_with_unix_environments.html">Getting Familiar with Unix Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Oceanography</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/oceanography_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/wind_driven_circulation.html">Wind-Driven Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermohaline_circulation.html">Thermohaline Circulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/primitive_equations.html">Primitive Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/momentum.html">Momentum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/thermodynamics.html">Thermodynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oceanography/equation_of_state.html">Equation of State</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Modeling</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="exploring_timestepping.html">Exploring Time Stepping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timestepping_schemes_odes.html">Time Stepping Schemes for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="difference_methods.html">Difference Methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">From ODEs to PDEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_grids.html">Model Grids</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">ECCO</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/visualizing_ecco_output.html">Visualizing ECCO Model Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/computing_ecco_trends.html">Computing Trends in ECCO Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ecco/ecco_llc_grid.html">Understanding the ECCO Lat-Lon-Cap grid</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/mitgcm_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/getting_started_with_MITgcm.html">Getting Started with MITgcm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/file_layout.html">File Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/choosing_an_optfile.html">Choosing an optfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/defining_the_grid.html">Defining the Model Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/initial_conditions.html">Initial Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/external_forcing.html">External Forcing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/boundary_conditions.html">Boundary Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mitgcm/diagnosing_issues.html">Diagnosing Issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computing Clusters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HPC/navigating_an_HPC.html">Navigating an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/running_jobs_on_an_HPC.html">Running jobs on an HPC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HPC/conda_environments_on_an_HPC.html">conda Environments</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MITgcm Special Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/diagnostics_vec.html">Diagnostics_vec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/volume_budget.html">Volume Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/heat_budget.html">Heat Budgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../special_topics/salt_budget.html">Salt Budgets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">State Estimation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../state_estimation/greens_function.html">Green’s Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../contributions.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fmodeling/pdes_introduction_example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/modeling/pdes_introduction_example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>From ODEs to PDEs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-heat-equation">The Heat Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-equation">Differential Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-for-consideration">🤔 Questions for consideration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary Conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dirichlet-boundary-conditions">Dirichlet Boundary Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neumann-boundary-conditions">Neumann Boundary Conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretizing-the-solution">Discretizing the solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-up-the-solution">Coding up the solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-for-consideration">🤔 Question for consideration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-courant-friedrichs-lewy-condition">The Courant-Friedrichs-Lewy Condition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🤔 Questions for consideration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-heat-equation-as-a-diffusion-equation">The Heat Equation as a Diffusion Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🤔 Question for consideration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-there-s-interest">If there’s interest:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="from-odes-to-pdes">
+<h1>From ODEs to PDEs<a class="headerlink" href="#from-odes-to-pdes" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview:<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>In this notebook, we will continue our discussion on constructing numerical algorithms that can be used to solve differential equations. Here, we will consider the heat/diffusion equation - a fundamental <em>partial</em> differential equation and a key part of numerical ocean models.</p>
+</section>
+<section id="import-modules">
+<h2>Import modules<a class="headerlink" href="#import-modules" title="Link to this heading">#</a></h2>
+<p>Begin by importing modules to conduct calculations and make plots.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-heat-equation">
+<h2>The Heat Equation<a class="headerlink" href="#the-heat-equation" title="Link to this heading">#</a></h2>
+<section id="differential-equation">
+<h3>Differential Equation<a class="headerlink" href="#differential-equation" title="Link to this heading">#</a></h3>
+<p>Consider the function <span class="math notranslate nohighlight">\(f(x,t)\)</span> which describes temperature as a function of both space (<span class="math notranslate nohighlight">\(x\)</span>) and time (<span class="math notranslate nohighlight">\(t\)</span>). The differential equation that describes the evolution of temperature through space and time is:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial f}{\partial t} = \kappa \frac{\partial^2 f}{\partial x^2}
+\)</span>$</p>
+<p>In this equation, we see that the derivative in time (<span class="math notranslate nohighlight">\(\partial f/\partial t\)</span>) is related to the second derivative in space (<span class="math notranslate nohighlight">\(\partial^2 f/\partial x^2\)</span>). This is an example of a <em>partial differential equation</em>. By contrast, an <em>ordinary</em> differential equation is one which considers derivatives in one dimension, such as space or time.</p>
+<p>It’s important to note that we’ve used calculus symbols to reflect the physics, but they reflect the intuitive explanation that the total change in heat must be equal to the heat that enters minus the heat that goes out. In this sense, when viewing the equation above, it’s helpful to consider what the symbols mean from a physical standpoint to help guide intuition about what the solution may look like.</p>
+</section>
+<section id="initial-conditions">
+<h3>Initial Conditions<a class="headerlink" href="#initial-conditions" title="Link to this heading">#</a></h3>
+<p>Just as for ordinary differential equations, we also need to have an initial condition to solve partial differential equations. In the case of the heat equation, this condition is the full profile of temperature through the rod.</p>
+<p>Let’s consider a scenario where we use a blow torch to heat up a rod of temperature <span class="math notranslate nohighlight">\(10^{\circ}\)</span>C the middle of a rod by <span class="math notranslate nohighlight">\(2^{\circ}\)</span>C. We can visualize this by defining an <span class="math notranslate nohighlight">\(x\)</span> grid for ourselves and estimating this with a bell curve-like shape:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a 10 m grid between -5 and 5</span>
+<span class="n">x_min</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span> 
+<span class="n">x_max</span> <span class="o">=</span> <span class="mf">5.0</span> 
+
+<span class="c1"># define a spatial step</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># compute the number of points on the x grid</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">x_max</span><span class="o">-</span><span class="n">x_min</span><span class="p">)</span><span class="o">/</span><span class="n">dx</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> 
+
+<span class="c1"># define the x grid</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">nx</span><span class="p">)</span>
+
+<span class="c1"># estimate initial conditions</span>
+<span class="n">T_0</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mf">0.25</span><span class="p">)</span> <span class="o">+</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s make a plot of the initial conditions to visualize:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a plot of the initial conditions</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># enter plotting line here</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+
+<span class="c1"># format axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature ($^{\circ}$C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance along rod (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10b50589468892757e25abf6f18d1030ac422a14e082d9db901fef0f89d0a310.png" src="../_images/10b50589468892757e25abf6f18d1030ac422a14e082d9db901fef0f89d0a310.png" />
+</div>
+</div>
+</section>
+<section id="questions-for-consideration">
+<h3>🤔 Questions for consideration:<a class="headerlink" href="#questions-for-consideration" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>How do we expect the temperature of the rod to evolve through time?</p></li>
+<li><p>What happens when excess heat gets to the end of the rod?</p></li>
+</ol>
+</section>
+<section id="boundary-conditions">
+<h3>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h3>
+<p>When solving PDEs, we are often working in a regional domain. In this case, the rod has a finite length - 10 meters. Since there are edges in our solution, we additionally need to consider the conditions at the boundary. This can be done in several ways.</p>
+<section id="dirichlet-boundary-conditions">
+<h4>Dirichlet Boundary Conditions<a class="headerlink" href="#dirichlet-boundary-conditions" title="Link to this heading">#</a></h4>
+<p>One options for the boundary is that it is kept at a constant temperature - maybe there are 10<span class="math notranslate nohighlight">\(^{\circ}\)</span>C temperature plates that ensure the edges are always kept at 10<span class="math notranslate nohighlight">\(^{\circ}\)</span>C. In this case, the boundary conditions are:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x=-5, t) = f(x=5, t) = 10^{\circ}\text{C}
+\]</div>
+</section>
+<section id="neumann-boundary-conditions">
+<h4>Neumann Boundary Conditions<a class="headerlink" href="#neumann-boundary-conditions" title="Link to this heading">#</a></h4>
+<p>Another options for the boundary is that the flux is kept constant - maybe there are perfectly insulated end caps that don’t allow heat to escape. In this case, the boundary conditions are:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial x}f(x=-5, t) = \frac{\partial}{\partial x}f(x=5, t) = 0
+\]</div>
+<p>These are two of the more common boundary conditions but others could be considered. When we solve for our temperature evolution through time, we will see where we need the boundary conditions.</p>
+</section>
+</section>
+</section>
+<section id="discretizing-the-solution">
+<h2>Discretizing the solution<a class="headerlink" href="#discretizing-the-solution" title="Link to this heading">#</a></h2>
+<p>It turns out that the general solution to the heat equation is quite “involved” and most solutions turn toward approximating it with Fourier series. In other words, writing an analytical expression to solve the heat equation is a messy affair.</p>
+<p>Here, we will use our finite difference methods to find a way to model the evolution of heat in our rod. Recall that the forward difference for the first derivative is</p>
+<div class="math notranslate nohighlight">
+\[
+y'(t) \approx \frac{y(t+\Delta t) - y(t)}{\Delta t}
+\]</div>
+<p>Similarly, a finite difference for the second derivative is:</p>
+<div class="math notranslate nohighlight">
+\[
+y''(t) \approx \frac{y(t+\Delta t) - 2y(t) + y(t-\Delta t)}{\Delta t^2}
+\]</div>
+<p>Putting this together, we can <strong>discretize</strong> the heat equation</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f}{\partial t} = \kappa \frac{\partial^2 f}{\partial x^2}
+\]</div>
+<p>as:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{f(t+\Delta t,x) - f(t,x)}{\Delta t} = \kappa \frac{f(t,x+\Delta x) - 2 f(t,x) + f(t,x-\Delta x)}{\Delta x^2}
+\]</div>
+<p>This gives us a way to look into the future and model the evolution by solving for next time step:</p>
+<div class="math notranslate nohighlight">
+\[
+f(t+\Delta t,x) =  f(t,x) +\Delta t \kappa \frac{f(t,x+\Delta x) - 2 f(t,x) + f(t,x-\Delta x)}{\Delta x^2}
+\]</div>
+<p>In words: the profile of temperature in the rod at a time in the future (<span class="math notranslate nohighlight">\(f(t+\Delta t,x)\)</span>) is the temperature of the rod now (<span class="math notranslate nohighlight">\(f(t,x)\)</span>) plus some changes associated with how temperature has changed spatially in the rod over this time.</p>
+<p>It is important to note that we have implemented the <em>Forward Euler Method</em> introduced previously. Other options are available and shown in the notebook following this one.</p>
+</section>
+<section id="coding-up-the-solution">
+<h2>Coding up the solution<a class="headerlink" href="#coding-up-the-solution" title="Link to this heading">#</a></h2>
+<p>To code up the solution, we’ll first need to set up a time array for ourselves, similar to the spatial array we constructed above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># starting and ending times (seconds)</span>
+<span class="n">t_min</span> <span class="o">=</span> <span class="mf">0.0</span> 
+<span class="n">t_max</span> <span class="o">=</span> <span class="mf">100.0</span>
+
+<span class="c1"># time step</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.025</span>
+
+<span class="c1"># compute number of timesteps</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can work on coding up the numerical model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a grid to store the solution</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,</span> <span class="n">nx</span><span class="p">))</span>
+
+<span class="c1"># define kappa</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="mf">0.1</span> 
+
+<span class="c1"># establish initial conditions</span>
+<span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">T_0</span>
+
+<span class="c1">#### build and run the numerical model here:</span>
+
+<span class="c1"># loop through each time step up until the last one</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># loop through each space step to update the temperature</span>
+    <span class="c1"># dont include the boundaries</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> 
+        <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># now, address the boundary conditions</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we’ve got a solution, let’s take a look at the solution at a few time steps. Since there are lots of timesteps, let’s choose to plot at only a few snapshots</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a plot of the initial conditions</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># plot initial conditions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;0 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 2 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 10 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;10 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 20 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;20 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 10 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">50</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;50 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 20 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;100 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># format axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature ($^{\circ}$C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance along rod (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f8237cbb17d8900c2aa29bb46f71806ab43274b74123b876fb7e626bb4149612.png" src="../_images/f8237cbb17d8900c2aa29bb46f71806ab43274b74123b876fb7e626bb4149612.png" />
+</div>
+</div>
+<section id="question-for-consideration">
+<h3>🤔 Question for consideration:<a class="headerlink" href="#question-for-consideration" title="Link to this heading">#</a></h3>
+<p>What happens if we take longer timesteps?</p>
+</section>
+<section id="the-courant-friedrichs-lewy-condition">
+<h3>The Courant-Friedrichs-Lewy Condition<a class="headerlink" href="#the-courant-friedrichs-lewy-condition" title="Link to this heading">#</a></h3>
+<p>The Courant-Friedrichs-Lewy condition, or the “CFL condition” for short, describes how your time-stepping and spatial discretation but must related in order to maintain a stable solution.</p>
+<p>For the diffusion scheme in use here, the CFL condition is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\kappa \Delta t}{\Delta x^2} &lt; \frac{1}{2}
+\]</div>
+<section id="id1">
+<h4>🤔 Questions for consideration:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Is CFL condtion satisfied when <span class="math notranslate nohighlight">\(\Delta t = 0.025\)</span> s? <span class="math notranslate nohighlight">\(0.25\)</span> s?</p></li>
+<li><p>Suppose you construct an ocean model and determine the spatial resolution is not sufficient to capture the diffusive processes you are interested in. You decide to increase your spatial resolution by a factor of 2. How must your time step change to accomodate this difference?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the CFL condition for the timesteps here</span>
+<span class="c1"># keep kappa and delta x the same as in the example above</span>
+
+<span class="c1"># delta t = 0.025</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kappa</span><span class="o">*</span><span class="mf">0.025</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># delta t = 0.25</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">kappa</span><span class="o">*</span><span class="mf">0.25</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25
+2.4999999999999996
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, but what happens when the CFL condition is violated? Let’s try the solution one more time, but with a time step of 0.25 seconds, which we see above will definitely violate the condition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time step</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.25</span>
+
+<span class="c1"># compute number of timesteps</span>
+<span class="n">nt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">t_max</span><span class="o">-</span><span class="n">t_min</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#number of points on t grid</span>
+
+<span class="c1"># make a grid to store the solution</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nt</span><span class="p">,</span> <span class="n">nx</span><span class="p">))</span>
+
+<span class="c1"># establish initial conditions</span>
+<span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">T_0</span>
+
+<span class="c1">#### build and run the numerical model here:</span>
+
+<span class="c1"># loop through each time step up until the last one</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="c1"># loop through each space step to update the temperature</span>
+    <span class="c1"># dont include the boundaries</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> 
+        <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">kappa</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># now, address the boundary conditions</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_58474/28518505.py:21: RuntimeWarning: overflow encountered in scalar divide
+  T[j+1,i] = T[j,i] + dt*kappa * (T[j,i-1] - 2*T[j,i] + T[j,i+1] )/(dx**2)
+/tmp/ipykernel_58474/28518505.py:21: RuntimeWarning: overflow encountered in scalar add
+  T[j+1,i] = T[j,i] + dt*kappa * (T[j,i-1] - 2*T[j,i] + T[j,i+1] )/(dx**2)
+/tmp/ipykernel_58474/28518505.py:21: RuntimeWarning: overflow encountered in scalar subtract
+  T[j+1,i] = T[j,i] + dt*kappa * (T[j,i-1] - 2*T[j,i] + T[j,i+1] )/(dx**2)
+/tmp/ipykernel_58474/28518505.py:21: RuntimeWarning: overflow encountered in scalar multiply
+  T[j+1,i] = T[j,i] + dt*kappa * (T[j,i-1] - 2*T[j,i] + T[j,i+1] )/(dx**2)
+/tmp/ipykernel_58474/28518505.py:21: RuntimeWarning: invalid value encountered in scalar add
+  T[j+1,i] = T[j,i] + dt*kappa * (T[j,i-1] - 2*T[j,i] + T[j,i+1] )/(dx**2)
+/tmp/ipykernel_58474/28518505.py:21: RuntimeWarning: invalid value encountered in scalar subtract
+  T[j+1,i] = T[j,i] + dt*kappa * (T[j,i-1] - 2*T[j,i] + T[j,i+1] )/(dx**2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oooh, those warnings don’t look good. Let’s see what the plot looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a plot of the initial conditions</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># plot initial conditions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;0 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 2 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 10 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;10 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 20 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;20 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 10 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">50</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;50 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot conditions at 20 seconds</span>
+<span class="n">time_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">time_index</span><span class="p">,:],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;100 seconds&#39;</span><span class="p">)</span>
+
+<span class="c1"># format axes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature ($^{\circ}$C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance along rod (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ac2c6e79fb4e2ae43af7ccf0c9c05911d8e12efddd113a4401648cf940475cfc.png" src="../_images/ac2c6e79fb4e2ae43af7ccf0c9c05911d8e12efddd113a4401648cf940475cfc.png" />
+</div>
+</div>
+<p>Agh! Our solution has estimated the temperature in the rod to be more than <span class="math notranslate nohighlight">\(10^{174}\)</span> degrees… Clearly that’s not right. In the modeling world, we say that our model has “blown up” in this scenario. And there’s only one fix - decrease your time step to comply with the CFL condition.</p>
+</section>
+</section>
+</section>
+<section id="the-heat-equation-as-a-diffusion-equation">
+<h2>The Heat Equation as a Diffusion Equation<a class="headerlink" href="#the-heat-equation-as-a-diffusion-equation" title="Link to this heading">#</a></h2>
+<p>Fundamentally, diffusion of particles in a fluid follow similar physical principles as the diffusion of heat in a medium. In this sense, the “heat” equation can also be considered a “diffusion” equation.</p>
+<p>This will be important when we start to consider how salinity varies in the ocean. We could similarly consider the same problem as above with salty water in the middle of a pipe. The evolution of salt <span class="math notranslate nohighlight">\(S\)</span> would similarly be given by</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial S}{\partial t} = \kappa \frac{\partial^2 S}{\partial x^2}
+\]</div>
+<p>For temperature, <span class="math notranslate nohighlight">\(\kappa\)</span> is a ratio of heat capacity coefficient relative to coefficient for heat conduction. The can be consider a thermal diffusivity coefficient describing how fast heat diffuses in water. For salinity, <span class="math notranslate nohighlight">\(\kappa\)</span> is a diffusion coefficent describing how fast salt diffuses in water.</p>
+<section id="id2">
+<h3>🤔 Question for consideration:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>In water, the heat diffusion coefficient is <span class="math notranslate nohighlight">\(O(10^{-3}\)</span>) while the salt diffusion coefficient is <span class="math notranslate nohighlight">\(O(10^{-9}\)</span>). Which diffuses faster - heat or salt?</p>
+</section>
+<section id="if-there-s-interest">
+<h3>If there’s interest:<a class="headerlink" href="#if-there-s-interest" title="Link to this heading">#</a></h3>
+<p>Three options:</p>
+<ol class="arabic simple">
+<li><p>Change the boundary conditions in the solution above</p></li>
+<li><p>Change the initial conditions in the solution above</p></li>
+<li><p>Solutions to equations that evolve in time are always better to visualize in a movie. Using the code above, design above movie to visualize the evolution of heat in the rod over time.</p></li>
+</ol>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "cs185c"
+        },
+        kernelOptions: {
+            name: "cs185c",
+            path: "./modeling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'cs185c'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="difference_methods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Difference Methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="model_grids.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Model Grids</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">Import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-heat-equation">The Heat Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differential-equation">Differential Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-conditions">Initial Conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-for-consideration">🤔 Questions for consideration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary Conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dirichlet-boundary-conditions">Dirichlet Boundary Conditions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#neumann-boundary-conditions">Neumann Boundary Conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretizing-the-solution">Discretizing the solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-up-the-solution">Coding up the solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-for-consideration">🤔 Question for consideration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-courant-friedrichs-lewy-condition">The Courant-Friedrichs-Lewy Condition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">🤔 Questions for consideration:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-heat-equation-as-a-diffusion-equation">The Heat Equation as a Diffusion Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">🤔 Question for consideration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-there-s-interest">If there’s interest:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mike Wood
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
